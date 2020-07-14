@@ -1,0 +1,56 @@
+#include "main.h"
+#include "manager.h"
+#include "renderer.h"
+#include "input.h"
+#include "Scene.h"
+#include "ClassDictionary.h"
+
+Scene* g_scene;
+
+void CManager::Init()
+{
+	ClassDictionary::Initialize();
+	CRenderer::Init();
+	CInput::Init();
+
+	g_scene = new Scene();
+	g_scene->Initialize();
+}
+
+void CManager::Uninit()
+{
+	g_scene->Finalize();
+	delete g_scene;
+
+	CInput::Uninit();
+	CRenderer::Uninit();
+}
+
+void CManager::Update()
+{
+	CInput::Update();
+	g_scene->Update();
+	
+}
+
+void CManager::Draw()
+{
+	CRenderer::Begin();
+
+	LIGHT light;
+	light.Enable = false;
+	light.Direction = D3DXVECTOR4(1.0f, -1.0f, 1.0f, 0.0f);
+	D3DXVec4Normalize(&light.Direction, &light.Direction);
+	light.Ambient = D3DXCOLOR(0.1f, 0.1f, 0.1f, 1.0f);
+	light.Diffuse = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
+	CRenderer::SetLight(light);
+
+	g_scene->Draw();
+
+	CRenderer::End();
+}
+
+Scene* CManager::GetScene()
+{
+	return g_scene;
+}

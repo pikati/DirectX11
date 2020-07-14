@@ -1,0 +1,73 @@
+name: MainCamera
+tag: MainCamera
+activeSelf: 1
+isDestroy: 0
+layer: 0
+x: 0
+y: 5
+z: -5
+Camera
+
+name: Field
+tag: untagged
+activeSelf: 1
+isDestroy: 0
+layer: 1
+x: 0
+y: 0
+z: 0
+Field
+
+name: Player
+tag: Player
+activeSelf: 1
+isDestroy: 0
+layer: 1
+x: 0.3
+y: 1
+z: -3.2
+Player
+
+name: Enemy
+tag: Enemy
+activeSelf: 1
+isDestroy: 0
+layer: 1
+x: 3
+y: 1
+z: 1
+Enemy
+SphereCollider
+
+name: Enemy
+tag: Enemy
+activeSelf: 1
+isDestroy: 0
+layer: 1
+x: -3
+y: 1
+z: 1
+Enemy
+SphereCollider
+
+name: Bullet
+tag: Bullet
+activeSelf: 1
+isDestroy: 0
+layer: 1
+x: 0.3
+y: 1
+z: 3.8
+Bullet
+SphereCollider
+
+name: 2DPolygon
+tag: untagged
+activeSelf: 1
+isDestroy: 0
+layer: 2
+x: 0
+y: 0
+z: 0
+CPolygon
+

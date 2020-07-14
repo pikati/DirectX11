@@ -1,0 +1,32 @@
+﻿  compilation object save succeeded; see D:\HAL\3\DirectX11\GM-1\pixelShader.cso
+  compilation object save succeeded; see D:\HAL\3\DirectX11\GM-1\vertexShader.cso
+  Bullet.cpp
+D:\HAL\3\DirectX11\GM-1\main.h(14,10): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  Camera.cpp
+D:\HAL\3\DirectX11\GM-1\main.h(14,10): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  Component.cpp
+  Enemy.cpp
+D:\HAL\3\DirectX11\GM-1\main.h(14,10): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  Engine.cpp
+  Field.cpp
+D:\HAL\3\DirectX11\GM-1\main.h(14,10): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  GameObject.cpp
+  input.cpp
+D:\HAL\3\DirectX11\GM-1\main.h(14,10): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  main.cpp
+D:\HAL\3\DirectX11\GM-1\main.h(14,10): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  manager.cpp
+D:\HAL\3\DirectX11\GM-1\main.h(14,10): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  model.cpp
+D:\HAL\3\DirectX11\GM-1\main.h(14,10): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  Player.cpp
+D:\HAL\3\DirectX11\GM-1\main.h(14,10): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  Polygon.cpp
+D:\HAL\3\DirectX11\GM-1\main.h(14,10): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  renderer.cpp
+D:\HAL\3\DirectX11\GM-1\main.h(14,10): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  SaveLoadManager.cpp
+  Scene.cpp
+D:\HAL\3\DirectX11\GM-1\main.h(14,10): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  Transform.cpp
+  コードを生成中...

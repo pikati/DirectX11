@@ -1,0 +1,54 @@
+name: MainCamera
+tag: MainCamera
+activeSelf: 1
+isDestroy: 0
+x: 0
+y: 2
+z: -5
+Camera
+
+name: unname
+tag: untagged
+activeSelf: 1
+isDestroy: 0
+x: -11.8
+y: 1
+z: 0
+Player
+
+name: unname
+tag: untagged
+activeSelf: 1
+isDestroy: 0
+x: -11.8
+y: 1
+z: 0
+Player
+
+name: unname
+tag: untagged
+activeSelf: 1
+isDestroy: 0
+x: -11.8
+y: 1
+z: 0
+Player
+
+name: unname
+tag: untagged
+activeSelf: 1
+isDestroy: 0
+x: -11.8
+y: 1
+z: 0
+Player
+
+name: unname
+tag: untagged
+activeSelf: 1
+isDestroy: 0
+x: -10.5
+y: 1
+z: 0
+Player
+
