@@ -5,6 +5,8 @@
 #include "Camera.h"
 #include "Transform.h"
 
+static D3DMATRIX m;
+
 Camera::Camera()
 {
 
@@ -50,7 +52,7 @@ void Camera::Draw()
 	//ビューマトリクス設定
 	D3DXMatrixLookAtLH(&m_viewMatrix, &D3DXVECTOR3(gameObject->transform->position.x, gameObject->transform->position.y, gameObject->transform->position.z), &D3DXVECTOR3(m_target.x, m_target.y, m_target.z), &D3DXVECTOR3(0.0f, 1.0f, 0.0f));
 	CRenderer::SetViewMatrix(&m_viewMatrix);
-
+	m = m_viewMatrix;
 	//プロジェクションマトリクス設定
 	D3DXMATRIX projctionMatrix;
 	D3DXMatrixPerspectiveFovLH(&projctionMatrix, 1.0f, (float)SCREEN_WIDTH / SCREEN_HEIGHT, 1.0f, 1000.0f);
@@ -69,5 +71,5 @@ Vector3 Camera::GetTarget()
 
 D3DXMATRIX Camera::GetViewMatrix()
 {
-	return m_viewMatrix;
+	return m;
 }

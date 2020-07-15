@@ -65,7 +65,8 @@ void Bullet::Update()
 		if (tag == "Enemy")
 		{
 			gameObject->Destroy();
-			g_scene->CreatePrefab(g_effect);
+			GameObject* g = g_scene->CreatePrefab(g_effect);
+			g->transform->position.Set(gameObject->transform->position.x, gameObject->transform->position.y, gameObject->transform->position.z);
 		}
 	}
 }

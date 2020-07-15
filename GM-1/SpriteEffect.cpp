@@ -8,7 +8,7 @@
 
 SpriteEffect::SpriteEffect()
 {
-
+	m_maxCount = 16;
 }
 
 SpriteEffect::~SpriteEffect()
@@ -91,22 +91,22 @@ void SpriteEffect::Draw()
 	CRenderer::GetDeviceContext()->Map(m_vertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &msr);
 	VERTEX_3D* vertex = (VERTEX_3D*)msr.pData;
 
-	vertex[0].Position = D3DXVECTOR3(-1.0f, 1.0f, 0.0f);
+	vertex[0].Position = D3DXVECTOR3(0.5f, 0.0f, 0.0f);
 	vertex[0].Normal = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
 	vertex[0].Diffuse = D3DXVECTOR4(1.0f, 1.0f, 1.0f, 1.0f);
 	vertex[0].TexCoord = D3DXVECTOR2(x, y);
 
-	vertex[1].Position = D3DXVECTOR3(1.0f, 1.0f, 0.0f);
+	vertex[1].Position = D3DXVECTOR3(-0.5f, 0.0f, 0.0f);
 	vertex[1].Normal = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	vertex[1].Diffuse = D3DXVECTOR4(1.0f, 1.0f, 1.0f, 1.0f);
 	vertex[1].TexCoord = D3DXVECTOR2(x + (1.0f / 4), y);
 
-	vertex[2].Position = D3DXVECTOR3(-1.0f, -1.0f, 0.0f);
+	vertex[2].Position = D3DXVECTOR3(0.5f, 1.0f, 0.0f);
 	vertex[2].Normal = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	vertex[2].Diffuse = D3DXVECTOR4(1.0f, 1.0f, 1.0f, 1.0f);
 	vertex[2].TexCoord = D3DXVECTOR2(x, y + (1.0f / 4));
 
-	vertex[3].Position = D3DXVECTOR3(1.0f, -1.0f, 0.0f);
+	vertex[3].Position = D3DXVECTOR3(-0.5f, 1.0f, 0.0f);
 	vertex[3].Normal = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 	vertex[3].Diffuse = D3DXVECTOR4(1.0f, 1.0f, 1.0f, 1.0f);
 	vertex[3].TexCoord = D3DXVECTOR2(x + (1.0f / 4), y + (1.0f / 4));
@@ -125,6 +125,7 @@ void SpriteEffect::Draw()
 	D3DXMATRIX world, scale, trans;
 	D3DXMatrixScaling(&scale, gameObject->transform->scale.x, gameObject->transform->scale.y, gameObject->transform->scale.z);
 	D3DXMatrixTranslation(&trans, gameObject->transform->position.x, gameObject->transform->position.y, gameObject->transform->position.z);
+	world = scale * invView * trans;
 	CRenderer::SetWorldMatrix(&world);
 
 	//頂点バッファ設定

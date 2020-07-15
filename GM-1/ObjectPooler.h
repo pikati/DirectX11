@@ -20,7 +20,7 @@ public:
 				return m_objects[i];
 			}
 		}
+		return nullptr;
 	}
-	return nullptr;
 };
 
