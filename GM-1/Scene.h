@@ -25,15 +25,18 @@ public:
 	GameObject* Find(std::string name);
 
 	template <typename T>
-	T* Find()
+	GameObject* Find()
 	{
 		for (int i = 0; i < LAYER_MAX; i++)
 		{
 			for (GameObject* object : m_gameObject[i])
 			{
-				if (typeid(*object) == typeid(T))
+				for (Component* component : object->GetComponents())
 				{
-					return (T*)object;
+					if (typeid(*component) == typeid(T))
+					{
+						return object;
+					}
 				}
 			}
 		}

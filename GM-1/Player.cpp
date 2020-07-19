@@ -9,6 +9,7 @@
 #include "manager.h"
 #include "Scene.h"
 #include "SphereCollider.h"
+#include "FPS.h"
 #include <DirectXMath.h>
 
 static GameObject* g_bullet;
@@ -30,7 +31,7 @@ void Player::Initialize()
 	m_model = new CModel();
 	m_model->Load("Asset\\Model\\Girl.obj");
 
-	gameObject->transform->rotation = Vector3(0.0f, 180.0f, 0.0f);
+	gameObject->transform->rotation = Vector3(0.0f, 0.0f, 0.0f);
 	gameObject->transform->scale    = Vector3(10.0f, 10.0f, 10.0f);
 	g_scene = CManager::GetScene();
 	g_bullet = g_scene->LoadPrefab("Asset/Prefabs/Bullet.txt");
@@ -41,22 +42,26 @@ void Player::Initialize()
 
 void Player::Update()
 {
-	
+	Vector3 forward = gameObject->GetForward();
 	if (CInput::GetKeyPress('A'))
 	{
-		gameObject->transform->position += Vector3(-0.1f, 0.0f, 0.0f);
+		//gameObject->transform->position += Vector3(-0.1f, 0.0f, 0.0f);
+		gameObject->transform->rotation.y += -180.0f * FPS::deltaTime;
 	}
 	if (CInput::GetKeyPress('D'))
 	{
-		gameObject->transform->position += Vector3(0.1f, 0.0f, 0.0f);
+		//gameObject->transform->position += Vector3(0.1f, 0.0f, 0.0f);
+		gameObject->transform->rotation.y += 180.0f * FPS::deltaTime;
 	}
 	if (CInput::GetKeyPress('W'))
 	{
-		gameObject->transform->position += Vector3(0.0f, 0.0f, 0.1f);
+		//gameObject->transform->position += Vector3(0.0f, 0.0f, 0.1f);
+		gameObject->transform->position += forward * 10.0f * FPS::deltaTime * -1;
 	}
 	if (CInput::GetKeyPress('S'))
 	{
-		gameObject->transform->position += Vector3(0.0f, 0.0f, -0.1f);
+		//gameObject->transform->position += Vector3(0.0f, 0.0f, -0.1f);
+		gameObject->transform->position += forward * 10.0f * FPS::deltaTime;
 	}
 
 	if (CInput::GetKeyTrigger('P'))

@@ -85,7 +85,7 @@ void SpriteEffect::Draw()
 {
 	float x = m_count % 4 * (1.0f / 4);
 	float y = m_count / 4 * (1.0f / 4);
-	Camera* camera = CManager::GetScene()->Find<Camera>();
+	Camera* camera = CManager::GetScene()->Find<Camera>()->GetComponent<Camera>();
 
 	D3D11_MAPPED_SUBRESOURCE msr;
 	CRenderer::GetDeviceContext()->Map(m_vertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &msr);
@@ -112,7 +112,6 @@ void SpriteEffect::Draw()
 	vertex[3].TexCoord = D3DXVECTOR2(x + (1.0f / 4), y + (1.0f / 4));
 
 	CRenderer::GetDeviceContext()->Unmap(m_vertexBuffer, 0);
-
 
 	D3DXMATRIX view = camera->GetViewMatrix();
 	D3DXMATRIX invView;

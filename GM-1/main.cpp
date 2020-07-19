@@ -2,7 +2,9 @@
 
 #include "main.h"
 #include "manager.h"
-
+#include "FPS.h"
+#include "imGui/imgui.h"
+#include "imGui/imgui_impl_win32.h"
 
 const char* CLASS_NAME = "AppClass";
 const char* WINDOW_NAME = "DX11ゲーム";
@@ -66,11 +68,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
 
 	//フレームカウント初期化
-	DWORD dwExecLastTime;
-	DWORD dwCurrentTime;
-	timeBeginPeriod(1);
-	dwExecLastTime = timeGetTime();
-	dwCurrentTime = 0;
+	FPS::Initialize();
 
 
 	// メッセージループ
@@ -92,22 +90,19 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
         }
 		else
 		{
-			dwCurrentTime = timeGetTime();
-
-			if((dwCurrentTime - dwExecLastTime) >= (1000 / 60))
+			if(FPS::Update())
 			{
-				dwExecLastTime = dwCurrentTime;
-
 				// 更新処理
 				CManager::Update();
 
 				// 描画処理
+				FPS::Draw();
 				CManager::Draw();
 			}
 		}
 	}
 
-	timeEndPeriod(1);				// 分解能を戻す
+	FPS::Finalize();				// 分解能を戻す
 
 	// ウィンドウクラスの登録を解除
 	UnregisterClass(CLASS_NAME, wcex.hInstance);
@@ -118,13 +113,15 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	return (int)msg.wParam;
 }
 
+extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 //=============================================================================
 // ウインドウプロシージャ
 //=============================================================================
 LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-
+	if (ImGui_ImplWin32_WndProcHandler(hWnd, uMsg, wParam, lParam))
+		return true;
 	switch(uMsg)
 	{
 	case WM_DESTROY:

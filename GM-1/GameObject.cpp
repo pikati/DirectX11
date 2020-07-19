@@ -3,6 +3,9 @@
 #include "Component.h"
 #include "ClassDictionary.h"
 #include <sstream>
+#include "main.h"
+#include <DirectXMath.h>
+#include "LevelLoder.h"
 
 GameObject::GameObject()
 {
@@ -77,6 +80,19 @@ void GameObject::Finalize()
 	}
 }
 
+Vector3 GameObject::GetForward()
+{
+	using namespace DirectX;
+	D3DXMATRIX rot;
+	//ワールドマトリクスとっとけばそっからとりだせばおｋ
+	D3DXMatrixRotationYawPitchRoll(&rot, XMConvertToRadians(transform->rotation.y), XMConvertToRadians(transform->rotation.x), XMConvertToRadians(transform->rotation.z));
+	Vector3 forward;
+	forward.x = rot._31;
+	forward.y = rot._32;
+	forward.z = rot._33;
+	return forward;
+}
+
 Component* GameObject::AddComponent(Component* component)
 {
 	components.push_back(component);
@@ -118,4 +134,16 @@ bool GameObject::DeleteComponent(Component* component)
 	component->Finalize();
 	delete component;
 	return true;
+}
+
+void  GameObject::LoadProperties(const rapidjson::Value& inObj)
+{
+	JsonHelper::GetVector3(inObj, "position", transform->position);
+	JsonHelper::GetVector3(inObj, "rotation", transform->rotation);
+	JsonHelper::GetVector3(inObj, "scale", transform->scale);
+	JsonHelper::GetString(inObj, "name", name);
+	JsonHelper::GetString(inObj, "tag", tag);
+	JsonHelper::GetBool(inObj, "activeSelf", activeSelf);
+	JsonHelper::GetBool(inObj, "isDestroy", isDestroy);
+	JsonHelper::GetInt(inObj, "layer", layer);
 }

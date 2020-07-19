@@ -4,6 +4,9 @@
 #include "input.h"
 #include "Camera.h"
 #include "Transform.h"
+#include "GameObject.h"
+#include "Player.h"
+#include "Scene.h"
 
 static D3DMATRIX m;
 
@@ -21,10 +24,27 @@ void Camera::Initialize()
 {
 	gameObject->transform->position = Vector3(0.0f, 5.0f, -5.0f);
 	m_target = Vector3(0.0f, 0.0f, 0.0f);
+
 }
 
 void Camera::Update()
 {
+	if (!m_inisialized)
+	{
+		Scene* s = CManager::GetScene();
+		m_player = s->Find<Player>();
+		m_inisialized = true;
+	}
+	m_target = m_player->transform->position;
+
+	//トップビュー
+	//gameObject->transform->position = m_target + Vector3(0.0f, 5.0f, -5.0f);
+
+	//サードパーソンビュー
+	Vector3 forward = m_player->GetForward();
+	gameObject->transform->position = m_target + forward * 5.0f + Vector3(0.0f, 3.0f, 0.0f);
+
+
 	if (CInput::GetKeyPress('J'))
 	{
 		gameObject->transform->position += Vector3(-0.1f, 0.0f, 0.0f);

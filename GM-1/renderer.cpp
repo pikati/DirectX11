@@ -1,6 +1,7 @@
 #include "main.h"
 #include "renderer.h"
 #include <io.h>
+#include "ImguiManager.h"
 
 
 D3D_FEATURE_LEVEL       CRenderer::m_FeatureLevel = D3D_FEATURE_LEVEL_11_0;
@@ -301,7 +302,7 @@ void CRenderer::Init()
 	SetMaterial(material);
 
 
-
+	ImguiManager::Initialize(GetWindow(), m_D3DDevice, m_ImmediateContext);
 
 }
 
@@ -336,7 +337,6 @@ void CRenderer::Begin()
 	float ClearColor[4] = { 0.0f, 0.5f, 0.0f, 1.0f };
 	m_ImmediateContext->ClearRenderTargetView( m_RenderTargetView, ClearColor );
 	m_ImmediateContext->ClearDepthStencilView( m_DepthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
-
 }
 
 

@@ -4,6 +4,7 @@
 #include "input.h"
 #include "Scene.h"
 #include "ClassDictionary.h"
+#include "ImguiManager.h"
 
 Scene* g_scene;
 
@@ -19,6 +20,7 @@ void CManager::Init()
 
 void CManager::Uninit()
 {
+	ImguiManager::Finalize();
 	g_scene->Finalize();
 	delete g_scene;
 
@@ -30,7 +32,7 @@ void CManager::Update()
 {
 	CInput::Update();
 	g_scene->Update();
-	
+	ImguiManager::Update();
 }
 
 void CManager::Draw()
@@ -47,6 +49,7 @@ void CManager::Draw()
 
 	g_scene->Draw();
 
+	ImguiManager::Draw();
 	CRenderer::End();
 }
 

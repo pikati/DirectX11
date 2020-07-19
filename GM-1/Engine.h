@@ -8,7 +8,14 @@ public:
 	Vector2();
 	Vector2(float x, float y);
 	float x, y;
+
 	void Set(float x, float y);
+	float Length();
+	float LengthSquared();
+	void Normalize();
+	Vector2 Normalize(Vector2 vec);
+	float Dot(Vector2 vec1, Vector2 vec2);
+
 	const Vector2 operator+(const Vector2& vec) const;
 	const Vector2 operator-(const Vector2& vec) const;
 	Vector2& operator+=(const Vector2& vec);
@@ -33,13 +40,19 @@ public:
 	static Vector3 zero;
 
 	void Set(float x, float y, float z);
+	float Length();
+	float LengthSquared();
+	void Normalize();
+	Vector3 Normalize(Vector3 vec);
+	float Dot(Vector3 vec1, Vector3 vec2);
+	Vector3 Cross(Vector3 vec1, Vector3 vec2);
 
 	//関数のケツのconstはメンバを変更できなくするやつだよ
 	const Vector3 operator+(const Vector3& vec) const;
 	const Vector3 operator-(const Vector3& vec) const;
-	//*と/はクラス外に実装すべき 引数で同じクラス型を取らない場合だよ
-	/*const Vector3 operator*(const float n) const;
-	const Vector3 operator/(const float n) const;*/
+	friend Vector3 operator*(const float n, Vector3 vec);
+	friend Vector3 operator*(Vector3 vec, const float n);
+	/*const Vector3 operator/(const float n) const;*/
 	Vector3& operator+=(const Vector3& vec);
 };
 

@@ -3,6 +3,7 @@
 #include <string>
 #include <list>
 #include <typeinfo>
+#include "rapidjson/document.h"
 
 class Component;
 class Transform;
@@ -31,6 +32,10 @@ public:
 	void Finalize();
 
 	void Destroy();
+
+	Vector3 GetForward();
+
+	void LoadProperties(const rapidjson::Value& inObj);
 
 	std::list<Component*> GetComponents() const;
 	void SetComponents(std::list<Component*> component);

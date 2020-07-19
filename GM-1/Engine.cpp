@@ -1,4 +1,5 @@
 #include "Engine.h"
+#include <math.h>
 
 #pragma region Vector2
 Vector2::Vector2()
@@ -17,6 +18,36 @@ void Vector2::Set(float x, float y)
 {
 	this->x = x;
 	this->y = y;
+}
+
+float Vector2::Length()
+{
+	return sqrtf(powf(x, 2) + powf(y, 2));
+}
+
+float Vector2::LengthSquared()
+{
+	return powf(x, 2) + powf(y, 2);
+}
+
+void Vector2::Normalize()
+{
+	float length = Length();
+	x /= length;
+	y /= length;
+}
+
+Vector2 Vector2::Normalize(Vector2 vec)
+{
+	float length = vec.Length();
+	vec.x /= length;
+	vec.y /= length;
+	return vec;
+}
+
+float Vector2::Dot(Vector2 vec1, Vector2 vec2)
+{
+	return vec1.x * vec2.x + vec1.y * vec2.y;
 }
 
 const Vector2 Vector2::operator+(const Vector2& vec) const
@@ -65,6 +96,44 @@ void Vector3::Set(float x, float y, float z)
 	this->y = y;
 	this->z = z;
 }
+
+float Vector3::Length()
+{
+	return sqrtf(powf(x, 2) + powf(y, 2) + powf(z, 2));
+}
+
+float Vector3::LengthSquared()
+{
+	return powf(x, 2) + powf(y, 2) + powf(z, 2);
+}
+
+void Vector3::Normalize()
+{
+	float length = Length();
+	x /= length;
+	y /= length;
+	z /= length;
+}
+
+Vector3 Vector3::Normalize(Vector3 vec)
+{
+	float length = vec.Length();
+	vec.x /= length;
+	vec.y /= length;
+	vec.z /= length;
+	return vec;
+}
+
+float Vector3::Dot(Vector3 vec1, Vector3 vec2)
+{
+	return vec1.x * vec2.x + vec1.y * vec2.y + vec1.z + vec2.z;
+}
+
+Vector3 Vector3::Cross(Vector3 vec1, Vector3 vec2)
+{
+	return Vector3(vec1.y * vec2.z - vec1.z * vec2.y, vec1.z * vec2.x - vec1.x * vec2.z, vec1.x * vec2.y - vec1.y * vec2.x);
+}
+
 const Vector3 Vector3::operator+(const Vector3& vec) const
 {
 	return Vector3(this->x + vec.x, this->y + vec.y, this->z + vec.z);
@@ -72,6 +141,14 @@ const Vector3 Vector3::operator+(const Vector3& vec) const
 const Vector3 Vector3::operator-(const Vector3& vec) const
 {
 	return Vector3(this->x - vec.x, this->y - vec.y, this->z - vec.z);
+}
+Vector3 operator*(float n, const Vector3 vec)
+{
+	return Vector3(n * vec.x, n * vec.y, n * vec.z);
+}
+Vector3 operator*(const Vector3 vec, float n)
+{
+	return Vector3(n * vec.x, n * vec.y, n * vec.z);
 }
 //const Vector3 Vector3::operator*(const float n) const
 //{
