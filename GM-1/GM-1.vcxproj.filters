@@ -144,7 +144,7 @@
     <ClCompile Include="ImguiManager.cpp">
       <Filter>ソース ファイル\Engine\Other</Filter>
     </ClCompile>
-    <ClCompile Include="LevelLoder.cpp">
+    <ClCompile Include="LevelLoader.cpp">
       <Filter>ソース ファイル\Engine\Other</Filter>
     </ClCompile>
   </ItemGroup>
@@ -245,10 +245,10 @@
     <ClInclude Include="ImguiManager.h">
       <Filter>ヘッダー ファイル\Engine\Other</Filter>
     </ClInclude>
-    <ClInclude Include="LevelLoder.h">
+    <ClInclude Include="Constants.h">
       <Filter>ヘッダー ファイル\Engine\Other</Filter>
     </ClInclude>
-    <ClInclude Include="Constants.h">
+    <ClInclude Include="LevelLoader.h">
       <Filter>ヘッダー ファイル\Engine\Other</Filter>
     </ClInclude>
   </ItemGroup>

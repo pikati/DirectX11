@@ -35,6 +35,10 @@ void Player::Initialize()
 	gameObject->transform->scale    = Vector3(10.0f, 10.0f, 10.0f);
 	g_scene = CManager::GetScene();
 	g_bullet = g_scene->LoadPrefab("Asset/Prefabs/Bullet.txt");
+
+	//quaternion‚Ì‰Šú‰»
+	//D3DXQuaternionIdentity(&m_quaternion);
+
 	/*m_collider = gameObject->GetComponent<SphereCollider>();
 	m_collider->SetCenter(Vector3::zero);
 	m_collider->SetRadius(0);*/
@@ -47,11 +51,17 @@ void Player::Update()
 	{
 		//gameObject->transform->position += Vector3(-0.1f, 0.0f, 0.0f);
 		gameObject->transform->rotation.y += -180.0f * FPS::deltaTime;
+		/*D3DXQUATERNION quat;
+		D3DXQuaternionRotationAxis(&quat, &D3DXVECTOR3(0, 1.0f, 0), 0.1f);
+		m_quaternion *= quat;*/
 	}
 	if (CInput::GetKeyPress('D'))
 	{
 		//gameObject->transform->position += Vector3(0.1f, 0.0f, 0.0f);
 		gameObject->transform->rotation.y += 180.0f * FPS::deltaTime;
+		/*D3DXQUATERNION quat;
+		D3DXQuaternionRotationAxis(&quat, &D3DXVECTOR3(0, 1.0f, 0), -0.1f);
+		m_quaternion *= quat;*/
 	}
 	if (CInput::GetKeyPress('W'))
 	{
@@ -68,6 +78,8 @@ void Player::Update()
 	{
 		g_scene->CreatePrefab(g_bullet);
 	}
+
+	//D3DXQuaternionNormalize(&m_quaternion, &m_quaternion);
 }
 
 void Player::Draw()
@@ -75,6 +87,7 @@ void Player::Draw()
 	using namespace DirectX;
 	D3DXMATRIX world, rotation;
 	D3DXMatrixRotationYawPitchRoll(&rotation, XMConvertToRadians(gameObject->transform->rotation.y), XMConvertToRadians(gameObject->transform->rotation.x), XMConvertToRadians(gameObject->transform->rotation.z));
+	//D3DXMatrixRotationQuaternion(&rotation, &m_quaternion);
 	world._11 = gameObject->transform->scale.x * rotation._11;
 	world._12 = gameObject->transform->scale.x * rotation._12;
 	world._13 = gameObject->transform->scale.x * rotation._13;

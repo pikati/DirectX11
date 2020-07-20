@@ -5,7 +5,7 @@
 #include <sstream>
 #include "main.h"
 #include <DirectXMath.h>
-#include "LevelLoder.h"
+#include "LevelLoader.h"
 
 GameObject::GameObject()
 {
@@ -134,16 +134,4 @@ bool GameObject::DeleteComponent(Component* component)
 	component->Finalize();
 	delete component;
 	return true;
-}
-
-void  GameObject::LoadProperties(const rapidjson::Value& inObj)
-{
-	JsonHelper::GetVector3(inObj, "position", transform->position);
-	JsonHelper::GetVector3(inObj, "rotation", transform->rotation);
-	JsonHelper::GetVector3(inObj, "scale", transform->scale);
-	JsonHelper::GetString(inObj, "name", name);
-	JsonHelper::GetString(inObj, "tag", tag);
-	JsonHelper::GetBool(inObj, "activeSelf", activeSelf);
-	JsonHelper::GetBool(inObj, "isDestroy", isDestroy);
-	JsonHelper::GetInt(inObj, "layer", layer);
 }

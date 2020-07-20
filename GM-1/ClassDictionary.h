@@ -1,3 +1,4 @@
+Todoくん mapの片方をテンプレートにすればいいのではッてことでおうちまでできましぇーん
 #pragma once
 #include <map>
 #include <string>

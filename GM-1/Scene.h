@@ -20,6 +20,7 @@ public:
 	virtual void Finalize();
 
 	GameObject* CreateGameObject();
+	void AddGameObject(GameObject* obj);
 	GameObject* CreatePrefab(GameObject* obj);
 	GameObject* LoadPrefab(std::string path);
 	GameObject* Find(std::string name);

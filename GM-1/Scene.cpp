@@ -130,6 +130,11 @@ GameObject* Scene::CreateGameObject()
 	return obj;
 }
 
+void Scene::AddGameObject(GameObject* obj)
+{
+	m_gameObject[obj->layer].push_back(obj);
+}
+
 GameObject* Scene::CreatePrefab(GameObject* obj)
 {
 	GameObject* object = new GameObject(*obj);

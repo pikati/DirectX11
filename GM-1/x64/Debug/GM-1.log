@@ -1,34 +1,44 @@
-﻿  compilation object save succeeded; see D:\HAL\3\GM\DX11\GM-1\pixelShader.cso
-  compilation object save succeeded; see D:\HAL\3\GM\DX11\GM-1\vertexShader.cso
-  Bullet.cpp
-  Camera.cpp
-  ClassDictionary.cpp
-  Collider.cpp
-D:\HAL\3\GM\DX11\GM-1\Collider.cpp(14,31): warning C4267: 'return': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
-D:\HAL\3\GM\DX11\GM-1\Collider.cpp(28,32): warning C4267: '初期化中': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
-  Component.cpp
-  Enemy.cpp
-  Engine.cpp
-  Field.cpp
-  GameObject.cpp
-  input.cpp
+﻿  GameObject.cpp
+  LevelLoder.cpp
+D:\HAL\3\DirectX11\GM-1\LevelLoder.cpp(13,3): warning C4002: 関数に似たマクロ呼び出し 'assert' の引数が多すぎます
+D:\HAL\3\DirectX11\GM-1\LevelLoder.cpp(29,3): warning C4002: 関数に似たマクロ呼び出し 'assert' の引数が多すぎます
+D:\HAL\3\DirectX11\GM-1\LevelLoder.cpp(45,3): warning C4002: 関数に似たマクロ呼び出し 'assert' の引数が多すぎます
+D:\HAL\3\DirectX11\GM-1\LevelLoder.cpp(159,35): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+D:\HAL\3\DirectX11\GM-1\LevelLoder.cpp(160,35): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+D:\HAL\3\DirectX11\GM-1\LevelLoder.cpp(161,35): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
   main.cpp
-  manager.cpp
-  model.cpp
-  ObjectPooler.cpp
-D:\HAL\3\GM\DX11\GM-1\ObjectPooler.h(24,2): error C2059: 構文エラー: 'return'
-D:\HAL\3\GM\DX11\GM-1\ObjectPooler.h(24,16): error C2238: ';' の前に無効なトークンがあります。
-  Player.cpp
-  Polygon.cpp
-  renderer.cpp
-  SaveLoadManager.cpp
-D:\HAL\3\GM\DX11\GM-1\SaveLoadManager.cpp(129,36): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
-D:\HAL\3\GM\DX11\GM-1\SaveLoadManager.cpp(132,36): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
-D:\HAL\3\GM\DX11\GM-1\SaveLoadManager.cpp(135,36): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
-  Scene.cpp
-  SphereCollider.cpp
-  コードを生成中...
-  コンパイル中...
-  SpriteEffect.cpp
   Transform.cpp
   コードを生成中...
+D:\HAL\3\DirectX11\GM-1\LevelLoder.cpp(22): warning C4715: 'LevelLoder::LoadLevel': 値を返さないコントロール パスがあります。
+Player.obj : error LNK2001: 外部シンボル "D3DXMatrixRotationYawPitchRoll" は未解決です。
+Bullet.obj : error LNK2001: 外部シンボル "D3DXMatrixRotationYawPitchRoll" は未解決です。
+Enemy.obj : error LNK2001: 外部シンボル "D3DXMatrixRotationYawPitchRoll" は未解決です。
+Field.obj : error LNK2001: 外部シンボル "D3DXMatrixRotationYawPitchRoll" は未解決です。
+GameObject.obj : error LNK2001: 外部シンボル "D3DXMatrixRotationYawPitchRoll" は未解決です。
+Bullet.obj : error LNK2019: 未解決の外部シンボル D3DXMatrixLookAtLH が関数 "public: virtual void __cdecl Bullet::Draw(void)" (?Draw@Bullet@@UEAAXXZ) で参照されました。
+Camera.obj : error LNK2001: 外部シンボル "D3DXMatrixLookAtLH" は未解決です。
+Bullet.obj : error LNK2019: 未解決の外部シンボル D3DXMatrixPerspectiveFovLH が関数 "public: virtual void __cdecl Bullet::Draw(void)" (?Draw@Bullet@@UEAAXXZ) で参照されました。
+Camera.obj : error LNK2001: 外部シンボル "D3DXMatrixPerspectiveFovLH" は未解決です。
+Field.obj : error LNK2019: 未解決の外部シンボル D3DX11CreateShaderResourceViewFromFileA が関数 "public: virtual void __cdecl Field::Initialize(void)" (?Initialize@Field@@UEAAXXZ) で参照されました。
+model.obj : error LNK2001: 外部シンボル "D3DX11CreateShaderResourceViewFromFileA" は未解決です。
+Polygon.obj : error LNK2001: 外部シンボル "D3DX11CreateShaderResourceViewFromFileA" は未解決です。
+SpriteEffect.obj : error LNK2001: 外部シンボル "D3DX11CreateShaderResourceViewFromFileA" は未解決です。
+imgui_impl_dx11.obj : error LNK2019: 未解決の外部シンボル D3DCompile が関数 "bool __cdecl ImGui_ImplDX11_CreateDeviceObjects(void)" (?ImGui_ImplDX11_CreateDeviceObjects@@YA_NXZ) で参照されました。
+imgui_impl_win32.obj : error LNK2019: 未解決の外部シンボル XInputGetState が関数 "void __cdecl ImGui_ImplWin32_UpdateGamepads(void)" (?ImGui_ImplWin32_UpdateGamepads@@YAXXZ) で参照されました。
+imgui_impl_win32.obj : error LNK2019: 未解決の外部シンボル XInputGetCapabilities が関数 "void __cdecl ImGui_ImplWin32_UpdateGamepads(void)" (?ImGui_ImplWin32_UpdateGamepads@@YAXXZ) で参照されました。
+manager.obj : error LNK2019: 未解決の外部シンボル D3DXVec4Normalize が関数 "public: static void __cdecl CManager::Draw(void)" (?Draw@CManager@@SAXXZ) で参照されました。
+Player.obj : error LNK2019: 未解決の外部シンボル D3DXQuaternionRotationAxis が関数 "public: virtual void __cdecl Player::Update(void)" (?Update@Player@@UEAAXXZ) で参照されました。
+Player.obj : error LNK2019: 未解決の外部シンボル D3DXQuaternionMultiply が関数 "public: struct D3DXQUATERNION & __cdecl D3DXQUATERNION::operator*=(struct D3DXQUATERNION const &)" (??XD3DXQUATERNION@@QEAAAEAU0@AEBU0@@Z) で参照されました。
+renderer.obj : error LNK2019: 未解決の外部シンボル D3D11CreateDeviceAndSwapChain が関数 "public: static void __cdecl CRenderer::Init(void)" (?Init@CRenderer@@SAXXZ) で参照されました。
+renderer.obj : error LNK2019: 未解決の外部シンボル D3DXMatrixTranspose が関数 "public: static void __cdecl CRenderer::SetProjectionMatrix(struct D3DXMATRIX *)" (?SetProjectionMatrix@CRenderer@@SAXPEAUD3DXMATRIX@@@Z) で参照されました。
+renderer.obj : error LNK2019: 未解決の外部シンボル D3DXMatrixOrthoOffCenterLH が関数 "public: static void __cdecl CRenderer::SetWorldViewProjection2D(void)" (?SetWorldViewProjection2D@CRenderer@@SAXXZ) で参照されました。
+SpriteEffect.obj : error LNK2019: 未解決の外部シンボル D3DXMatrixMultiply が関数 "public: struct D3DXMATRIX __cdecl D3DXMATRIX::operator*(struct D3DXMATRIX const &)const " (??DD3DXMATRIX@@QEBA?AU0@AEBU0@@Z) で参照されました。
+SpriteEffect.obj : error LNK2019: 未解決の外部シンボル D3DXMatrixInverse が関数 "public: virtual void __cdecl SpriteEffect::Draw(void)" (?Draw@SpriteEffect@@UEAAXXZ) で参照されました。
+SpriteEffect.obj : error LNK2019: 未解決の外部シンボル D3DXMatrixScaling が関数 "public: virtual void __cdecl SpriteEffect::Draw(void)" (?Draw@SpriteEffect@@UEAAXXZ) で参照されました。
+SpriteEffect.obj : error LNK2019: 未解決の外部シンボル D3DXMatrixTranslation が関数 "public: virtual void __cdecl SpriteEffect::Draw(void)" (?Draw@SpriteEffect@@UEAAXXZ) で参照されました。
+D:\ProgramFiles\DirectX9 June\lib\x86\d3d11.lib : warning LNK4272: ライブラリのコンピューターの種類 'x86' がターゲットのコンピューターの種類' x64' と競合しています
+D:\ProgramFiles\DirectX9 June\lib\x86\d3dx9.lib : warning LNK4272: ライブラリのコンピューターの種類 'x86' がターゲットのコンピューターの種類' x64' と競合しています
+D:\ProgramFiles\DirectX9 June\lib\x86\d3dx11.lib : warning LNK4272: ライブラリのコンピューターの種類 'x86' がターゲットのコンピューターの種類' x64' と競合しています
+D:\ProgramFiles\DirectX9 June\lib\x86\d3dcompiler.lib : warning LNK4272: ライブラリのコンピューターの種類 'x86' がターゲットのコンピューターの種類' x64' と競合しています
+D:\ProgramFiles\DirectX9 June\lib\x86\xinput.lib : warning LNK4272: ライブラリのコンピューターの種類 'x86' がターゲットのコンピューターの種類' x64' と競合しています
+D:\HAL\3\DirectX11\x64\Debug\GM-1.exe : fatal error LNK1120: 17 件の未解決の外部参照

@@ -35,8 +35,6 @@ public:
 
 	Vector3 GetForward();
 
-	void LoadProperties(const rapidjson::Value& inObj);
-
 	std::list<Component*> GetComponents() const;
 	void SetComponents(std::list<Component*> component);
 
