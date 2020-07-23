@@ -62,7 +62,7 @@ public:
 	template <typename T>
 	T* GetComponent()
 	{
-		T* component = new T();
+		T* component = nullptr;
 		for (Component* c : components)
 		{
 			if (typeid(*c) == typeid(T))

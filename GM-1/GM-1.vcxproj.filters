@@ -114,9 +114,6 @@
     <ClCompile Include="SphereCollider.cpp">
       <Filter>ソース ファイル\Engine\Component\Collider</Filter>
     </ClCompile>
-    <ClCompile Include="SpriteEffect.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="ObjectPooler.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -146,6 +143,9 @@
     </ClCompile>
     <ClCompile Include="LevelLoader.cpp">
       <Filter>ソース ファイル\Engine\Other</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteEffect.cpp">
+      <Filter>ヘッダー ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

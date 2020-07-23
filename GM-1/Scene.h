@@ -24,6 +24,7 @@ public:
 	GameObject* CreatePrefab(GameObject* obj);
 	GameObject* LoadPrefab(std::string path);
 	GameObject* Find(std::string name);
+	std::list<GameObject*>* GetAllGameObject();
 
 	template <typename T>
 	GameObject* Find()

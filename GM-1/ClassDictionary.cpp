@@ -36,10 +36,9 @@ void ClassDictionary::Register(const std::string& ty_name, Component* component)
 	dictionary.insert(std::make_pair(ty_name, component));
 }
 
-bool ClassDictionary::AddComponent(const std::string& name, GameObject* obj)
+Component* ClassDictionary::AddComponent(const std::string& name, GameObject* obj)
 {
-	obj->AddComponent(builderfromstring.Create(name));
-	return true;
+	return obj->AddComponent(builderfromstring.Create(name));
 }
 
 Component* ClassDictionary::SetComponent(const std::string& name, Component* component)

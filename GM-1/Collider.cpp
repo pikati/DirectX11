@@ -1,5 +1,6 @@
 #include "Collider.h"
 #include "GameObject.h"
+#include "SphereCollider.h"
 
 std::vector<Collider*> Collider::m_colliders;
 
@@ -79,4 +80,14 @@ float Collider::GetRadius()
 GameObject* Collider::GetHitGameObject()
 {
 	return hitObject;
+}
+
+void Collider::LoadProperties(const rapidjson::Value& inProp)
+{
+	return;
+}
+
+void Collider::SavePropaties(rapidjson::Document::AllocatorType& alloc, rapidjson::Value& inProp)
+{
+	return;
 }

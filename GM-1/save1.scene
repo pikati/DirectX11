@@ -1,0 +1,173 @@
+{
+    "GameObject": [
+        {
+            "properties": {
+                "name": "MainCamera",
+                "tag": "MainCamera",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 0,
+                "position": [
+                    0.30000001192092898,
+                    4.0,
+                    1.7999999523162842
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Camera"
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "Field",
+                "tag": "untagged",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Field"
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "Player",
+                "tag": "Player",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    0.30000001192092898,
+                    1.0,
+                    -3.200000047683716
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    10.0,
+                    10.0,
+                    10.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Player"
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "Enemy",
+                "tag": "Enemy",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    -3.0,
+                    1.0,
+                    1.0
+                ],
+                "rotation": [
+                    0.0,
+                    100.0,
+                    0.0
+                ],
+                "scale": [
+                    0.6000000238418579,
+                    0.6000000238418579,
+                    0.6000000238418579
+                ]
+            },
+            "component": [
+                {
+                    "type": "Enemy"
+                },
+                {
+                    "type": "SphereCollider",
+                    "center": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "radius": 0.5,
+                    "position": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "rotation": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "scale": [
+                        1.0,
+                        1.0,
+                        1.0
+                    ]
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "2DPolygon",
+                "tag": "untagged",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 2,
+                "position": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "CPolygon"
+                }
+            ]
+        }
+    ]
+}

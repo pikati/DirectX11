@@ -1,5 +1,5 @@
 #include "Component.h"
-
+#include "LevelLoader.h"
 
 
 Component* Component::GetComponent()
@@ -16,4 +16,17 @@ void Component::SetGameObject(GameObject* obj)
 GameObject* Component::GetGameObject()
 {
 	return gameObject;
+}
+
+//ここではプロパティを読み込むだけなのでユーザー定義のcomponentの場合はreturnでおｋだよ
+void Component::LoadProperties(const rapidjson::Value& inProp)
+{
+	return;
+}
+
+void Component::SaveProperties(rapidjson::Document::AllocatorType& alloc, rapidjson::Value& inProp)
+{
+	std::string name = typeid(*this).name();
+	JsonHelper::AddString(alloc, inProp, "type", name.substr(6).c_str());
+	return;
 }

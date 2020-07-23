@@ -7,6 +7,7 @@
 #include <typeinfo>
 #include <sstream>
 #include "Constants.h"
+#include "LevelLoader.h"
 
 #include <Stdio.h>
 #ifdef _DEBUG
@@ -32,15 +33,7 @@ Scene::~Scene()
 
 void Scene::Initialize()
 {
-	*m_gameObject = SaveLoadManager::Load(m_gameObject);
-	for (int i = 0; i < LAYER_MAX; i++)
-	{
-		for (GameObject* obj : m_gameObject[i])
-		{
-			obj->Initialize();
-		}
-	}
-	
+	LevelLoader::LoadLevel(this, "save1.scene");
 }
 
 void Scene::Update()
@@ -53,6 +46,8 @@ void Scene::Update()
 		}
 	}
 
+
+	//todo::この機能に問題あるの草
 	for (int i = 0; i < LAYER_MAX; i++)
 	{
 		//レイヤ番号と管理レイヤが異なった場合に入れ替える
@@ -70,7 +65,17 @@ void Scene::Update()
 		}
 	}
 	
-
+	if (CInput::GetKeyTrigger('O'))
+	{
+		for (int i = 0; i < LAYER_MAX; i++)
+		{
+			for (GameObject* obj : m_gameObject[i])
+			{
+				obj->Destroy();
+			}
+		}
+		LevelLoader::LoadLevel(this, "save1.scene");
+	}
 	//リストに関数を実行させてtureならリストから削除される
 	//[]をつけると名前のない関数にできる
 	for (int i = 0; i < LAYER_MAX; i++)
@@ -91,8 +96,10 @@ void Scene::Update()
 
 	if (CInput::GetKeyTrigger('X'))
 	{
-		SaveLoadManager::Save(m_gameObject);
+		LevelLoader::SaveLevel(this, "save1.scene");
 	}
+
+	
 
 	Collider::UpdateCollision();
 }
@@ -162,4 +169,9 @@ GameObject* Scene::Find(std::string name)
 	}
 	
 	return nullptr;
+}
+
+std::list<GameObject*>* Scene::GetAllGameObject()
+{
+	return m_gameObject;
 }

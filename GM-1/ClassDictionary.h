@@ -1,4 +1,3 @@
-Todoくん mapの片方をテンプレートにすればいいのではッてことでおうちまでできましぇーん
 #pragma once
 #include <map>
 #include <string>
@@ -47,6 +46,6 @@ private:
 public:
 	static void Initialize();
 	static void Register(const std::string& ty_name, Component* component);
-	static bool AddComponent(const std::string& name, GameObject* obj);
+	static Component* AddComponent(const std::string& name, GameObject* obj);
 	static Component* SetComponent(const std::string& name, Component* component);
 };

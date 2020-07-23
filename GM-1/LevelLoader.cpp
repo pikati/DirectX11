@@ -1,11 +1,18 @@
 #include "LevelLoader.h"
 #include "Scene.h"
 #include "Engine.h"
+#include "Component.h"
+#include "Transform.h"
+#include "ClassDictionary.h"
 #include <fstream>
 #include <ios>
 #include <vector>
+#include <memory>
+#include "rapidjson/stringbuffer.h"
+#include "rapidjson/prettywriter.h"
+static Component* com;
 
-bool LevelLoader::LoadLevel(Scene* scene, std::string& fileName)
+bool LevelLoader::LoadLevel(Scene* scene, const char* fileName)
 {
 	rapidjson::Document doc;
 	if (!LoadJSON(fileName, doc))
@@ -14,14 +21,14 @@ bool LevelLoader::LoadLevel(Scene* scene, std::string& fileName)
 		return false;
 	}
 
-	const rapidjson::Value& objects = doc["GameObjects"];
-	if (objects.IsObject())
+	const rapidjson::Value& objects = doc["GameObject"];
+	if (objects.IsArray())
 	{
 		LoadGameObject(scene, objects);
 	}
 }
 
-bool LevelLoader::LoadJSON(std::string& fileName, rapidjson::Document& outDoc)
+bool LevelLoader::LoadJSON(const char* fileName, rapidjson::Document& outDoc)
 {
 	std::ifstream file(fileName, std::ios::in | std::ios::binary | std::ios::ate);
 	if (!file.is_open())
@@ -57,51 +64,169 @@ void LevelLoader::LoadGameObject(Scene* scene, const rapidjson::Value& inObj)
 		if (jObject.IsObject())
 		{
 			GameObject* obj = new GameObject();
-			scene->AddGameObject(obj);
 
-			if (jObject.HasMember("Propertys"))
+			if (jObject.HasMember("properties"))
 			{
-				const rapidjson::Value& propertys = jObject["Propertys"];
-				if (propertys.IsArray())
+				const rapidjson::Value& propertys = jObject["properties"];
+				if (propertys.IsObject())
 				{
-					LoadPropertys(obj, inObj["Propertys"]);
+					LoadProperties(obj, propertys);
 				}
 			}
-			if (jObject.HasMember("Components"))
+			if (jObject.HasMember("component"))
 			{
-				const rapidjson::Value& components = jObject["Components"];
+				const rapidjson::Value& components = jObject["component"];
 				if (components.IsArray())
 				{
-					LoadComponent(obj, inObj["Component"]);
+					LoadComponent(obj, components);
 				}
 			}
+			scene->AddGameObject(obj);
 		}	
 	}
 	
 }
 
-void LevelLoader::LoadPropertys(GameObject* obj, const rapidjson::Value& inObj)
+void LevelLoader::LoadProperties(GameObject* obj, const rapidjson::Value& inObj)
 {
 	JsonHelper::GetString(inObj, "name", obj->name);
 	JsonHelper::GetString(inObj, "tag", obj->tag);
 	JsonHelper::GetBool(inObj, "activeSelf", obj->activeSelf);
 	JsonHelper::GetBool(inObj, "isDestroy", obj->isDestroy);
 	JsonHelper::GetInt(inObj, "layer", obj->layer);
-
+	JsonHelper::GetVector3(inObj, "position", obj->transform->position);
+	JsonHelper::GetVector3(inObj, "rotation", obj->transform->rotation);
+	JsonHelper::GetVector3(inObj, "scale", obj->transform->scale);
 }
 
 void LevelLoader::LoadComponent(GameObject* obj, const rapidjson::Value& inObj)
 {
+	for (rapidjson::SizeType i = 0; i < inObj.Size(); i++)
+	{
+		const rapidjson::Value& compObj = inObj[i];
+		if (compObj.IsObject())
+		{
+			std::string type;
+			if (JsonHelper::GetString(compObj, "type", type))
+			{
+				Component* component = ClassDictionary::AddComponent(type, obj);
+				component->LoadProperties(compObj);
+			}
+		}
+	}
+	std::list<Component*> comp = obj->GetComponents();
+	if (comp.size() <= 1)
+	{
+		for (Component* c : comp)
+		{
+			c->Initialize();
+		}
+		return;
+	}
+	std::list<Component*>::iterator i1 = comp.begin();
+	std::list<Component*>::iterator i2 = i1;
+	int* sortingOrders = new int[inObj.Size()];
+	int count = 0;
+	for (Component* c : comp)
+	{
+		sortingOrders[count++] = c->m_sortingOrder;
+	}
+	
+	for (int i = 0; i < inObj.Size() - 1; i++)
+	{
+		for (int j = inObj.Size() - 1; j >= i + 1; j--)
+		{
+			if (sortingOrders[j] < sortingOrders[j - 1])
+			{
+				std::advance(i1, j);
+				std::advance(i2, j - 1);
+				std::iter_swap(i1, i2);
+			}
+		}
+	}
+	delete sortingOrders;
+	for (Component* c : comp)
+	{
+		c->Initialize();
+	}
+}
 
+void LevelLoader::SaveLevel(Scene* scene, const char* fileName)
+{
+	rapidjson::Document doc;
+	doc.SetObject();
+	rapidjson::Value object(rapidjson::kArrayType);
+
+	SaveGameObjects(doc.GetAllocator(), scene, object);
+	doc.AddMember("GameObject", object, doc.GetAllocator());
+
+	//JSONを文字列バッファに保存
+	rapidjson::StringBuffer buffer;
+	//成形出力用にPrettytWriterを使う
+	rapidjson::PrettyWriter<rapidjson::StringBuffer> writer(buffer);
+	doc.Accept(writer);
+	const char* output = buffer.GetString();
+
+	//output文字列をファイルに書く
+	std::ofstream outFile(fileName);
+	if (outFile.is_open())
+	{
+		outFile << output;
+	}
+}
+
+void LevelLoader::SaveGameObjects(rapidjson::Document::AllocatorType& alloc, Scene* scene, 
+	rapidjson::Value& inArray)
+{
+	const std::list<GameObject*>* objects = scene->GetAllGameObject();
+	for (int i = 0; i < LAYER_MAX; i++)
+	{
+		for (GameObject* obj : objects[i])
+		{
+			//GameObject用のJSONオブジェクト
+			rapidjson::Value jObj(rapidjson::kObjectType);
+			//プロパティ用のJSOnオブジェクト
+			rapidjson::Value props(rapidjson::kObjectType);
+			SaveGameObject(alloc, obj, props);
+			//プロパティをGameObjectのJSONオブジェクトに追加
+			jObj.AddMember("properties", props, alloc);
+
+			rapidjson::Value jComponents(rapidjson::kArrayType);
+			SaveComponents(alloc, obj, jComponents);
+			jObj.AddMember("component", jComponents, alloc);
+
+			inArray.PushBack(jObj, alloc);
+		}
+	}
+}
+
+void LevelLoader::SaveGameObject(rapidjson::Document::AllocatorType& alloc, GameObject* obj, 
+	rapidjson::Value& inObj)
+{
+	JsonHelper::AddString(alloc, inObj, "name", obj->name);
+	JsonHelper::AddString(alloc, inObj, "tag", obj->tag);
+	JsonHelper::AddBool(alloc, inObj, "activeSelf", obj->activeSelf);
+	JsonHelper::AddBool(alloc, inObj, "isDestroy", obj->isDestroy);
+	JsonHelper::AddInt(alloc, inObj, "layer", obj->layer);
+	JsonHelper::AddVector3(alloc, inObj, "position", obj->transform->position);
+	JsonHelper::AddVector3(alloc, inObj, "rotation", obj->transform->rotation);
+	JsonHelper::AddVector3(alloc, inObj, "scale", obj->transform->scale);
+}
+
+void LevelLoader::SaveComponents(rapidjson::Document::AllocatorType& alloc, GameObject* obj, 
+	rapidjson::Value& inArray)
+{
+	const std::list<Component*> components = obj->GetComponents();
+	for (Component* comp : components)
+	{
+		rapidjson::Value jObj(rapidjson::kObjectType);
+		comp->SaveProperties(alloc, jObj);
+		inArray.PushBack(jObj, alloc);
+	}
 }
 
 
-
-
-
-
-
-
+#pragma region Helper
 bool JsonHelper::GetInt(const rapidjson::Value& inObject, const char* inProperty, int& outInt)
 {
 	auto itr = inObject.FindMember(inProperty);
@@ -203,3 +328,47 @@ bool JsonHelper::GetVector3(const rapidjson::Value& inObject, const char* inProp
 
 	return true;
 }
+
+void JsonHelper::AddInt(rapidjson::Document::AllocatorType& alloc, 
+	rapidjson::Value& inObject, const char* name, int value)
+{
+	rapidjson::Value v(value);
+	inObject.AddMember(rapidjson::StringRef(name), v, alloc);
+}
+
+void JsonHelper::AddFloat(rapidjson::Document::AllocatorType& alloc, 
+	rapidjson::Value& inObject, const char* name, float value)
+{
+	rapidjson::Value v(value);
+	inObject.AddMember(rapidjson::StringRef(name), v, alloc);
+}
+
+void JsonHelper::AddString(rapidjson::Document::AllocatorType& alloc, 
+	rapidjson::Value& inObject, const char* name, std::string value)
+{
+	rapidjson::Value v;
+	v.SetString(value.c_str(), static_cast<rapidjson::SizeType>(value.length()), alloc);
+	inObject.AddMember(rapidjson::StringRef(name), v, alloc);
+}
+
+void JsonHelper::AddBool(rapidjson::Document::AllocatorType& alloc,
+	rapidjson::Value& inObject, const char* name, bool value)
+{
+	rapidjson::Value v(value);
+	inObject.AddMember(rapidjson::StringRef(name), v, alloc);
+}
+
+void JsonHelper::AddVector3(rapidjson::Document::AllocatorType& alloc,
+	rapidjson::Value& inObject, const char* name, const Vector3& value)
+{
+	// Create an array
+	rapidjson::Value v(rapidjson::kArrayType);
+	// Push back elements
+	v.PushBack(rapidjson::Value(value.x).Move(), alloc);
+	v.PushBack(rapidjson::Value(value.y).Move(), alloc);
+	v.PushBack(rapidjson::Value(value.z).Move(), alloc);
+
+	// Add array to inObject
+	inObject.AddMember(rapidjson::StringRef(name), v, alloc);
+}
+#pragma endregion

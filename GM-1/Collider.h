@@ -27,6 +27,8 @@ public:
 	virtual void Finalize() = 0;
 	virtual Vector3 GetPosition() = 0;
 	virtual float GetRadius();
+	virtual void LoadProperties(const rapidjson::Value& inProp);
+	virtual void SavePropaties(rapidjson::Document::AllocatorType& alloc, rapidjson::Value& inProp);
 	GameObject* GetHitGameObject();
 	bool IsCollision();
 	static void UpdateCollision();
