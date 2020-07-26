@@ -53,7 +53,6 @@ public:
 		T* component = new T();
 		components.push_back(component);
 		component->SetGameObject(this);
-		component->Initialize();
 		return component;
 	}
 

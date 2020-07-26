@@ -8,9 +8,9 @@
                 "isDestroy": false,
                 "layer": 0,
                 "position": [
-                    0.30000001192092898,
+                    -2.7507169246673586,
                     4.0,
-                    1.7999999523162842
+                    -1.7482757568359376
                 ],
                 "rotation": [
                     0.0,
@@ -31,44 +31,15 @@
         },
         {
             "properties": {
-                "name": "Field",
-                "tag": "untagged",
-                "activeSelf": true,
-                "isDestroy": false,
-                "layer": 1,
-                "position": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "rotation": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "component": [
-                {
-                    "type": "Field"
-                }
-            ]
-        },
-        {
-            "properties": {
                 "name": "Player",
                 "tag": "Player",
                 "activeSelf": true,
                 "isDestroy": false,
                 "layer": 1,
                 "position": [
-                    0.30000001192092898,
+                    -2.7507169246673586,
                     1.0,
-                    -3.200000047683716
+                    -6.7482757568359379
                 ],
                 "rotation": [
                     0.0,
@@ -137,6 +108,74 @@
                         1.0,
                         1.0
                     ]
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "unname",
+                "tag": "untagged",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Texture",
+                    "fileName": "Asset\\Texture\\koyorichan.jpg",
+                    "id": 0
+                },
+                {
+                    "type": "Field"
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "unname",
+                "tag": "untagged",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Texture",
+                    "fileName": "Asset\\Texture\\koyorichan.jpg",
+                    "id": 1
+                },
+                {
+                    "type": "Field"
                 }
             ]
         },

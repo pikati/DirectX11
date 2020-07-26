@@ -1,22 +1,12 @@
+#include "billborad.h"
 #include "main.h"
 #include "renderer.h"
-#include "SpriteEffect.h"
 #include "Transform.h"
 #include "Camera.h"
 #include "manager.h"
 #include "Scene.h"
 
-SpriteEffect::SpriteEffect()
-{
-	m_maxCount = 16;
-}
-
-SpriteEffect::~SpriteEffect()
-{
-
-}
-
-void SpriteEffect::Initialize()
+void billborad::Initialize()
 {
 	VERTEX_3D vertex[4];
 
@@ -57,7 +47,7 @@ void SpriteEffect::Initialize()
 
 	//テクスチャ読み込み
 	D3DX11CreateShaderResourceViewFromFile(CRenderer::GetDevice(),
-		"Asset/Texture/explosion.png",
+		"Asset/Texture/Tree.png",
 		NULL,
 		NULL,
 		&m_texture,
@@ -71,47 +61,13 @@ void SpriteEffect::Initialize()
 	gameObject->transform->scale = Vector3(1.0f, 1.0f, 1.0f);
 }
 
-void SpriteEffect::Update()
+void billborad::Update()
 {
-	m_count++;
-	if (m_count >= m_maxCount)
-	{
-		gameObject->Destroy();
-		return;
-	}
 }
 
-void SpriteEffect::Draw()
+void billborad::Draw()
 {
-	float x = m_count % 4 * (1.0f / 4);
-	float y = m_count / 4 * (1.0f / 4);
 	Camera* camera = CManager::GetScene()->Find<Camera>()->GetComponent<Camera>();
-
-	D3D11_MAPPED_SUBRESOURCE msr;
-	CRenderer::GetDeviceContext()->Map(m_vertexBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &msr);
-	VERTEX_3D* vertex = (VERTEX_3D*)msr.pData;
-
-	vertex[0].Position = D3DXVECTOR3(0.5f, 0.0f, 0.0f);
-	vertex[0].Normal = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
-	vertex[0].Diffuse = D3DXVECTOR4(1.0f, 1.0f, 1.0f, 1.0f);
-	vertex[0].TexCoord = D3DXVECTOR2(x, y);
-
-	vertex[1].Position = D3DXVECTOR3(-0.5f, 0.0f, 0.0f);
-	vertex[1].Normal = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-	vertex[1].Diffuse = D3DXVECTOR4(1.0f, 1.0f, 1.0f, 1.0f);
-	vertex[1].TexCoord = D3DXVECTOR2(x + (1.0f / 4), y);
-
-	vertex[2].Position = D3DXVECTOR3(0.5f, 1.0f, 0.0f);
-	vertex[2].Normal = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-	vertex[2].Diffuse = D3DXVECTOR4(1.0f, 1.0f, 1.0f, 1.0f);
-	vertex[2].TexCoord = D3DXVECTOR2(x, y + (1.0f / 4));
-
-	vertex[3].Position = D3DXVECTOR3(-0.5f, 1.0f, 0.0f);
-	vertex[3].Normal = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-	vertex[3].Diffuse = D3DXVECTOR4(1.0f, 1.0f, 1.0f, 1.0f);
-	vertex[3].TexCoord = D3DXVECTOR2(x + (1.0f / 4), y + (1.0f / 4));
-
-	CRenderer::GetDeviceContext()->Unmap(m_vertexBuffer, 0);
 
 	D3DXMATRIX view = camera->GetViewMatrix();
 	D3DXMATRIX invView;
@@ -147,13 +103,8 @@ void SpriteEffect::Draw()
 	CRenderer::GetDeviceContext()->Draw(4, 0);
 }
 
-void SpriteEffect::Finalize()
+void billborad::Finalize()
 {
 	SAFE_RELEASE(m_vertexBuffer);
 	SAFE_RELEASE(m_texture);
-}
-
-void SpriteEffect::SetMaxCount(int count)
-{
-	m_maxCount = count;
 }

@@ -9,6 +9,8 @@
 #include "Transform.h"
 #include "SphereCollider.h"
 #include "SpriteEffect.h"
+#include "billborad.h"
+#include "Texture.h"
 
 std::map<std::string, Component*> ClassDictionary::dictionary;
 BuilderFromString ClassDictionary::builderfromstring;
@@ -29,6 +31,8 @@ void ClassDictionary::Initialize()
 	builderfromstring.Register(REGISTER_ARGS(Transform));
 	builderfromstring.Register(REGISTER_ARGS(SphereCollider));
 	builderfromstring.Register(REGISTER_ARGS(SpriteEffect));
+	builderfromstring.Register(REGISTER_ARGS(billborad));
+	builderfromstring.Register(REGISTER_ARGS(Texture));
 }
 
 void ClassDictionary::Register(const std::string& ty_name, Component* component)

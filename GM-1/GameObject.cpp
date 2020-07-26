@@ -97,7 +97,6 @@ Component* GameObject::AddComponent(Component* component)
 {
 	components.push_back(component);
 	component->SetGameObject(this);
-	//component->Initialize();
 	return component;
 }
 

@@ -1,24 +1,39 @@
 #pragma once
 #include <vector>
 #include <string>
-#include "GameObject.h"
+#include "Texture.h"
+#include <memory>
 class ObjectPooler
 {
 private:
-	std::vector<GameObject*> m_objects;
+	static std::vector<Texture*> m_texture;
+
 public:
-	void SetObject(GameObject* obj);
-	GameObject* GetObject(std::string name);
+	template <typename T>
+	static T* SetComponent(T* component)
+	{
+		std::string a = typeid(T).name();
+		std::string b = typeid(Texture).name();
+		if (a == b)
+		{
+			m_texture.push_back(component);
+		}
+		return component;
+	}
 
 	template <typename T>
-	GameObject* GetObject()
+	static T* GetComponent(int id)
 	{
-		for (int i = 0; i < m_objects.size(); i++)
+		if (id == -1) return nullptr;
+		int i = m_texture.size() - 1;
+		if (i < id) return nullptr;
+		
+		std::string a = typeid(T).name();
+		std::string b = typeid(Texture).name();
+		if (a == b)
 		{
-			if (typeid(*m_objects[i]) == typeid(*T))
-			{
-				return m_objects[i];
-			}
+			
+			return m_texture[id];
 		}
 		return nullptr;
 	}

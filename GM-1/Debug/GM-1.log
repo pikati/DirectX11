@@ -1,10 +1,2 @@
-﻿  LevelLoader.cpp
-D:\HAL\3\GM\DX11\GM-1\LevelLoader.cpp(20,3): warning C4002: 関数に似たマクロ呼び出し 'assert' の引数が多すぎます
-D:\HAL\3\GM\DX11\GM-1\LevelLoader.cpp(36,3): warning C4002: 関数に似たマクロ呼び出し 'assert' の引数が多すぎます
-D:\HAL\3\GM\DX11\GM-1\LevelLoader.cpp(52,3): warning C4002: 関数に似たマクロ呼び出し 'assert' の引数が多すぎます
-D:\HAL\3\GM\DX11\GM-1\LevelLoader.cpp(135,20): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
-D:\HAL\3\GM\DX11\GM-1\LevelLoader.cpp(325,35): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
-D:\HAL\3\GM\DX11\GM-1\LevelLoader.cpp(326,35): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
-D:\HAL\3\GM\DX11\GM-1\LevelLoader.cpp(327,35): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
-D:\HAL\3\GM\DX11\GM-1\LevelLoader.cpp(29): warning C4715: 'LevelLoader::LoadLevel': 値を返さないコントロール パスがあります。
+﻿  Texture.cpp
   GM-1.vcxproj -> D:\HAL\3\GM\DX11\Debug\GM-1.exe

@@ -26,6 +26,7 @@ bool LevelLoader::LoadLevel(Scene* scene, const char* fileName)
 	{
 		LoadGameObject(scene, objects);
 	}
+	return true;
 }
 
 bool LevelLoader::LoadJSON(const char* fileName, rapidjson::Document& outDoc)
@@ -101,6 +102,7 @@ void LevelLoader::LoadProperties(GameObject* obj, const rapidjson::Value& inObj)
 
 void LevelLoader::LoadComponent(GameObject* obj, const rapidjson::Value& inObj)
 {
+	int a = inObj.Size();
 	for (rapidjson::SizeType i = 0; i < inObj.Size(); i++)
 	{
 		const rapidjson::Value& compObj = inObj[i];
@@ -123,6 +125,8 @@ void LevelLoader::LoadComponent(GameObject* obj, const rapidjson::Value& inObj)
 		}
 		return;
 	}
+
+	//ˆÈ‰º•À‚Ñ•Ï‚¦‚Ä‚©‚ç‰Šú‰»
 	std::list<Component*>::iterator i1 = comp.begin();
 	std::list<Component*>::iterator i2 = i1;
 	int* sortingOrders = new int[inObj.Size()];

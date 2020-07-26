@@ -8,6 +8,9 @@
 #include <sstream>
 #include "Constants.h"
 #include "LevelLoader.h"
+#include "Field.h"
+#include "Texture.h"
+#include "Transform.h"
 
 #include <Stdio.h>
 #ifdef _DEBUG
@@ -34,10 +37,13 @@ Scene::~Scene()
 void Scene::Initialize()
 {
 	LevelLoader::LoadLevel(this, "save1.scene");
+	
 }
 
 void Scene::Update()
 {
+	static int a = 0;
+	a++;
 	for (int i = 0; i < LAYER_MAX; i++)
 	{
 		for (GameObject* object : m_gameObject[i])
@@ -98,8 +104,6 @@ void Scene::Update()
 	{
 		LevelLoader::SaveLevel(this, "save1.scene");
 	}
-
-	
 
 	Collider::UpdateCollision();
 }

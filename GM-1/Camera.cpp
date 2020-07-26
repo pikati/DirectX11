@@ -45,7 +45,7 @@ void Camera::Update()
 	gameObject->transform->position = m_target + forward * 5.0f + Vector3(0.0f, 3.0f, 0.0f);
 
 
-	if (CInput::GetKeyPress('J'))
+	/*if (CInput::GetKeyPress('J'))
 	{
 		gameObject->transform->position += Vector3(-0.1f, 0.0f, 0.0f);
 		m_target += Vector3(-0.1f, 0.0f, 0.0f);
@@ -64,7 +64,7 @@ void Camera::Update()
 	{
 		gameObject->transform->position += Vector3(0.0f, 0.0f, -0.1f);
 		m_target += Vector3(0.0f, 0.0f, -0.1f);
-	}
+	}*/
 }
 
 void Camera::Draw()
