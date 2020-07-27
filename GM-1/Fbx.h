@@ -1,3 +1,4 @@
+//CreateBuffer系のbdはメンバにしておくと早くなりそう
 #pragma once
 #include "Component.h"
 #include "main.h"
@@ -14,19 +15,19 @@ struct MeshInfo
 	//頂点インデックスの数
 	int							indexCount;
 	//頂点
-	VERTEX_3D* vertex;
+	VERTEX_3D*					vertex;
 	//頂点インデックスの順番
-	int* indexBuffer;
+	int*						index;
 	//UVSetの数
 	int							uvSetCount;
 	//UVSetの名前
-	std::string* uvSetName;
+	std::string*				uvSetName;
 	//頂点バッファ
-	ID3D11Buffer*		pVB;
+	ID3D11Buffer*				pVB;
 	//インデックスバッファ
-	ID3D11Buffer*		pIB;
+	ID3D11Buffer*				pIB;
 	//テクスチャ
-	LPDIRECT3DTEXTURE9* texture;
+	ID3D11ShaderResourceView*	texture;
 	//テクスチャパス
 	std::vector<std::string>	texturePath;
 };
@@ -44,9 +45,9 @@ struct FbxInfo
 	//UVSetの数
 	int								 uvSetCount;
 	//UVSetの名前
-	std::string* uvSetName;
+	std::string*					 uvSetName;
 	//マテリアルの色
-	D3DXCOLOR* color;
+	Vector4* color;
 
 };
 class Fbx : public Component
@@ -73,10 +74,38 @@ private:
 
 	ID3D11Device* m_device;
 
+	//各メッシュの各フレームの各頂点配列のVector3だよ
+	std::vector<std::vector<std::vector<D3DXVECTOR3>>> m_animVertex;
+	//アニメーションの配列作成時に使用
+	int m_count;
+	//アニメーション管理に使用
+	int m_frame;
+
 	void LoadFBX(const char* fileName);
 	void InitializeFBX();
 	void MeshTrianglate();
-	std::vector<FbxMesh*> GetMesh();
+	void InitializeUnit();
+	void GetMesh();
+	void SetInfomation();
+	int  GetUVSetNum();
+	void GetMaterial();
+	int  GetPolygonCount(int meshIndex);
+	int  GetVertexCount(int meshIndex);
+	int	 GetIndexCount(int meshIndex);
+	void GetVertex(int meshIndex);
+	void GetNormal(int meshIndex);
+	void GetUVSetName(int meshIndex);
+	void GetUV(int meshIndex);
+	void CreateVertexBuffer(int meshIndex);
+	void CreateIndexBuffer(int meshIndex);
+	void SetVertexBuffer(int meshIndex);
+	void SetIndexBuffer(int meshIndex);
+	void TextureMemoryAllocate(int meshIndex);
+	void InitializeAnimation();
+	void SetAnimationVertex();
+
+	void DrawAnimation();
+	void UpdateTime();
 public:
 	void Initialize();
 	void Update();
