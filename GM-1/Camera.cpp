@@ -9,6 +9,7 @@
 #include "Scene.h"
 
 static D3DMATRIX m;
+static Vector3 v;
 
 Camera::Camera()
 {
@@ -35,7 +36,7 @@ void Camera::Update()
 		m_player = s->Find<Player>();
 		m_inisialized = true;
 	}
-	m_target = m_player->transform->position;
+	m_target = m_player->transform->position + v;
 
 	//トップビュー
 	//gameObject->transform->position = m_target + Vector3(0.0f, 5.0f, -5.0f);
@@ -45,26 +46,32 @@ void Camera::Update()
 	gameObject->transform->position = m_target + forward * 5.0f + Vector3(0.0f, 3.0f, 0.0f);
 
 
-	/*if (CInput::GetKeyPress('J'))
+	if (CInput::GetKeyPress('J'))
 	{
-		gameObject->transform->position += Vector3(-0.1f, 0.0f, 0.0f);
-		m_target += Vector3(-0.1f, 0.0f, 0.0f);
+		/*gameObject->transform->position += Vector3(-0.1f, 0.0f, 0.0f);
+		m_target += Vector3(-0.1f, 0.0f, 0.0f);*/
+		v += Vector3(-0.1f, 0.0f, 0.0f);
 	}
 	if (CInput::GetKeyPress('L'))
 	{
-		gameObject->transform->position += Vector3(0.1f, 0.0f, 0.0f);
-		m_target += Vector3(0.1f, 0.0f, 0.0f);
+		/*gameObject->transform->position += Vector3(0.1f, 0.0f, 0.0f);
+		m_target += Vector3(0.1f, 0.0f, 0.0f);*/
+		v += Vector3(-0.1f, 0.0f, 0.0f);
 	}
 	if (CInput::GetKeyPress('I'))
 	{
-		gameObject->transform->position += Vector3(0.0f, 0.0f, 0.1f);
-		m_target += Vector3(0.0f, 0.0f, 0.1f);
+		/*gameObject->transform->position += Vector3(0.0f, 0.0f, 0.1f);
+		m_target += Vector3(0.0f, 0.0f, 0.1f);*/
+		v += Vector3(0, 0.1f, 0.0f);
+
 	}
-	if (CInput::GetKeyPress('K'))
+	if (CInput::GetKeyPress('M'))
 	{
-		gameObject->transform->position += Vector3(0.0f, 0.0f, -0.1f);
-		m_target += Vector3(0.0f, 0.0f, -0.1f);
-	}*/
+		/*gameObject->transform->position += Vector3(0.0f, 0.0f, -0.1f);
+		m_target += Vector3(0.0f, 0.0f, -0.1f);*/
+		v += Vector3(0.0f, -0.1f, 0.0f);
+
+	}
 }
 
 void Camera::Draw()

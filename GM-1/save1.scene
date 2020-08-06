@@ -8,9 +8,9 @@
                 "isDestroy": false,
                 "layer": 0,
                 "position": [
-                    -2.7507169246673586,
+                    1.4236257076263428,
                     4.0,
-                    -1.7482757568359376
+                    -5.154925346374512
                 ],
                 "rotation": [
                     0.0,
@@ -37,13 +37,13 @@
                 "isDestroy": false,
                 "layer": 1,
                 "position": [
-                    -2.7507169246673586,
+                    1.2037785053253174,
                     1.0,
-                    -6.7482757568359379
+                    -0.1597611904144287
                 ],
                 "rotation": [
                     0.0,
-                    0.0,
+                    177.47991943359376,
                     0.0
                 ],
                 "scale": [
@@ -115,7 +115,7 @@
             "properties": {
                 "name": "unname",
                 "tag": "untagged",
-                "activeSelf": true,
+                "activeSelf": false,
                 "isDestroy": false,
                 "layer": 1,
                 "position": [
@@ -170,12 +170,43 @@
             },
             "component": [
                 {
-                    "type": "Texture",
-                    "fileName": "Asset\\Texture\\koyorichan.jpg",
-                    "id": 1
+                    "type": "Animation",
+                    "dataNum": 6,
+                    "loop1": true,
+                    "start1": 0,
+                    "end1": 62,
+                    "lstart1": 20,
+                    "lend1": 60,
+                    "loop2": false,
+                    "start2": 63,
+                    "end2": 94,
+                    "lstart2": -1,
+                    "lend2": -1,
+                    "loop3": false,
+                    "start3": 95,
+                    "end3": 135,
+                    "lstart3": -1,
+                    "lend3": -1,
+                    "loop4": false,
+                    "start4": 136,
+                    "end4": 171,
+                    "lstart4": -1,
+                    "lend4": -1,
+                    "loop5": false,
+                    "start5": 172,
+                    "end5": 212,
+                    "lstart5": -1,
+                    "lend5": -1,
+                    "loop6": false,
+                    "start6": 0,
+                    "end6": 0,
+                    "lstart6": -1,
+                    "lend6": -1
                 },
                 {
-                    "type": "Field"
+                    "type": "Fbx",
+                    "fileName": "Asset/Models/Player/eatmanV3.fbx",
+                    "textureName": "Asset//Texture//Player//eatman.png"
                 }
             ]
         },

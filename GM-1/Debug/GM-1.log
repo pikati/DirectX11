@@ -1,2 +1,12 @@
-﻿  Texture.cpp
+﻿  Fbx.cpp
+D:\HAL\3\GM\DX11\GM-1\Fbx.cpp(383,93): warning C4244: '=': 'T' から 'FLOAT' への変換です。データが失われる可能性があります。
+          with
+          [
+              T=fbxsdk::FbxDouble
+          ]
+D:\HAL\3\GM\DX11\GM-1\Fbx.cpp(384,87): warning C4244: '=': 'T' から 'FLOAT' への変換です。データが失われる可能性があります。
+          with
+          [
+              T=fbxsdk::FbxDouble
+          ]
   GM-1.vcxproj -> D:\HAL\3\GM\DX11\Debug\GM-1.exe

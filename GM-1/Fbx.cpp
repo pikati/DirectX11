@@ -1,43 +1,73 @@
 #include "Fbx.h"
 #include "GameObject.h"
 #include "Transform.h"
-
+#include <iostream>
+#include <fstream>
+#include <string>
+#include "ImguiManager.h"
+#include "Animation.h"
+#include "LevelLoader.h"
 #define FRAME 0.0166666666666667
+
 
 void Fbx::Initialize()
 {
 	m_device = CRenderer::GetDevice();
 	m_manager = FbxManager::Create();
 	m_fbxInfo.uvSetCount = 0;
+	m_textureName = "Asset//Texture//Player//eatman.png";
 }
 
 void Fbx::Update()
 {
-
+	if (m_animation == nullptr)
+	{
+		m_animation = gameObject->GetComponent<Animation>();
+	}
+	m_frame = m_animation->GetTime();
+	UpdateAnimationVertex();
 }
 
 void Fbx::Draw()
 {
-
+	DrawAnimationFrame();
+	DrawAnimation();
 }
 
 void Fbx::Finalize()
 {
-	for (int i = m_fbxInfo.meshCount - 1; i >= 0; i--)
+	/*for (int i = m_fbxInfo.meshCount - 1; i >= 0; i--)
 	{
+		if(m_meshInfo[i].uvSetName != nullptr)
 		delete 	m_meshInfo[i].uvSetName;
+	}*/
+	for (int i = m_fbxInfo.meshCount - 1; i >= 0; i--)
+	{
+		if (m_meshInfo[i].vertex != nullptr)
+			delete m_meshInfo[i].vertex;
 	}
 	for (int i = m_fbxInfo.meshCount - 1; i >= 0; i--)
 	{
-		delete m_meshInfo[i].vertex;
+		delete m_meshInfo[i].index;
 	}
-	delete m_meshInfo;
-	delete m_fbxInfo.uvSetName;
+	/*if (m_meshInfo != nullptr)
+		delete m_meshInfo;
+	if (m_fbxInfo.uvSetName != nullptr)
+		delete m_fbxInfo.uvSetName;*/
 }
 
 void Fbx::Load(const char* fileName)
 {
+	m_fileName = fileName;
 	LoadFBX(fileName);
+	InitializeFBX();
+	InitializeAnimation();
+	SetAnimationVertex();
+}
+
+void Fbx::Load()
+{
+	LoadFBX(m_fileName.c_str());
 	InitializeFBX();
 	InitializeAnimation();
 	SetAnimationVertex();
@@ -78,8 +108,8 @@ void Fbx::LoadFBX(const char* fileName)
 
 void Fbx::InitializeFBX()
 {
-	MeshTrianglate();
-	InitializeUnit();
+	//MeshTrianglate();
+	//InitializeUnit();
 	GetMesh();
 	SetInfomation();
 }
@@ -124,10 +154,25 @@ void Fbx::SetInfomation()
 		m_meshInfo[meshIndex].vertexCount = GetVertexCount(meshIndex);
 		m_meshInfo[meshIndex].indexCount = GetIndexCount(meshIndex);
 
+		m_meshInfo[meshIndex].index = new int[m_meshInfo[meshIndex].indexCount];
+		// ポリゴン数の取得
+		int polygon_count = m_fbxInfo.meshes[meshIndex]->GetPolygonCount();
+		// ポリゴンの数だけ連番として保存する
+		for (int i = 0; i < polygon_count; i++)
+		{
+			m_meshInfo[meshIndex].index[i * 3] = i * 3 + 2;
+			m_meshInfo[meshIndex].index[i * 3 + 1] = i * 3 + 1;
+			m_meshInfo[meshIndex].index[i * 3 + 2] = i * 3;
+		}
+
+		/*int* idx = m_fbxInfo.meshes[meshIndex]->GetPolygonVertices();
+		for (int i = 0; i < m_meshInfo[meshIndex].indexCount; i++) {
+			m_meshInfo[meshIndex].index[i] = idx[i];
+		}*/
 		m_meshInfo[meshIndex].vertex = new VERTEX_3D[m_meshInfo[meshIndex].vertexCount];
 		GetVertex(meshIndex);
-		m_meshInfo[meshIndex].index = m_fbxInfo.meshes[meshIndex]->GetPolygonVertices();
 		GetNormal(meshIndex);
+		GetColor(meshIndex);
 		GetUVSetName(meshIndex);
 		GetUV(meshIndex);
 
@@ -135,9 +180,9 @@ void Fbx::SetInfomation()
 		//LoadTexture(meshIndex);
 		CreateVertexBuffer(meshIndex);
 		CreateIndexBuffer(meshIndex);
-		//SetVertexBuffer(meshIndex);
-		SetIndexBuffer(meshIndex);
 	}
+	//PrintFile();
+	LoadTextureSimple();
 }
 
 int Fbx::GetUVSetNum()
@@ -155,11 +200,28 @@ void Fbx::GetMaterial()
 {
 	//マテリアルの数を取得
 	m_fbxInfo.materialCount = m_scene->GetMaterialCount();
+	m_fbxInfo.materialInfo = new MATERIAL[m_fbxInfo.materialCount];
 	m_fbxInfo.material.reserve(m_fbxInfo.materialCount);
 	for (int i = 0; i < m_fbxInfo.materialCount; i++)
 	{
 		//マテリアルを取得
 		m_fbxInfo.material.emplace_back(m_scene->GetMaterial(i));
+		FbxProperty prop =  m_fbxInfo.material[i]->FindProperty(FbxSurfaceMaterial::sAmbient);
+		if (prop.IsValid())
+		{
+			FbxDouble3 color = prop.Get<FbxDouble3>();
+			m_fbxInfo.materialInfo[i].Diffuse.r = 1.0f;
+			m_fbxInfo.materialInfo[i].Diffuse.g = 1.0f;
+			m_fbxInfo.materialInfo[i].Diffuse.b = 1.0f;
+			m_fbxInfo.materialInfo[i].Diffuse.a = 1.0f;
+			m_fbxInfo.materialInfo[i].Ambient = D3DXCOLOR(0.3f, 0.3f, 0.3f, 0.3f);
+			m_fbxInfo.materialInfo[i].Specular = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
+			m_fbxInfo.materialInfo[i].Emission = D3DXCOLOR(0.0f, 0.0f, 0.0f, 0.0f);
+			m_fbxInfo.materialInfo[i].Shininess = 0.0f;
+			m_fbxInfo.materialInfo[i].Dummy[0] = 0.0f;
+			m_fbxInfo.materialInfo[i].Dummy[1] = 0.0f;
+			m_fbxInfo.materialInfo[i].Dummy[2] = 0.0f;
+		}
 	}
 }
 
@@ -170,39 +232,123 @@ int Fbx::GetPolygonCount(int meshIndex)
 
 int Fbx::GetVertexCount(int meshIndex)
 {
-	return m_fbxInfo.meshes[meshIndex]->GetControlPointsCount();
+	//vertexCounts
+	int a = m_fbxInfo.meshes[meshIndex]->GetControlPointsCount();
+	int b = m_fbxInfo.meshes[meshIndex]->GetPolygonVertexCount();
+	//indexCounts
+	int c = m_fbxInfo.meshes[meshIndex]->GetPolygonCount() * 3;
+	int d = m_fbxInfo.meshes[meshIndex]->GetPolygonVertexCount();
+	return /*m_fbxInfo.meshes[meshIndex]->GetControlPointsCount()*/b;
 }
 
 int Fbx::GetIndexCount(int meshIndex)
 {
-	return m_fbxInfo.meshes[meshIndex]->GetPolygonVertexCount();
+	return m_fbxInfo.meshes[meshIndex]->GetPolygonCount() * 3;
 }
 
 void Fbx::GetVertex(int meshIndex)
 {
-	//メッシュに含まれる頂点座標を取得
-	FbxVector4* vtx = m_fbxInfo.meshes[meshIndex]->GetControlPoints();
-	for (int vIdx = 0; vIdx < m_meshInfo[meshIndex].vertexCount; vIdx++)
+	int i = 0;
+	//メッシュに含まれる頂点座標を取得ピカタん龍こっちの方法だと頂点座標はおｋだけどUVが崩れる
+	/*FbxVector4* vtx = m_fbxInfo.meshes[meshIndex]->GetControlPoints();
+	for (; i < m_meshInfo[meshIndex].vertexCount; i++)
 	{
-		m_meshInfo[meshIndex].vertex[vIdx].Position.x = (float)vtx[vIdx][0];
-		m_meshInfo[meshIndex].vertex[vIdx].Position.y = (float)vtx[vIdx][1];
-		m_meshInfo[meshIndex].vertex[vIdx].Position.z = (float)vtx[vIdx][2];
+		FbxVector4 point = m_fbxInfo.meshes[meshIndex]->GetControlPointAt(i);
+		m_meshInfo[meshIndex].vertex[i].Position.x = -(float)point[0];
+		m_meshInfo[meshIndex].vertex[i].Position.y = (float)point[1];
+		m_meshInfo[meshIndex].vertex[i].Position.z = (float)point[2];
+	}*/
+	//こっちの方法だと頂点座標は崩れるけどUVはおｋ
+	// 頂点バッファの取得
+	FbxVector4* vertices = m_fbxInfo.meshes[meshIndex]->GetControlPoints();
+	// インデックスバッファの取得
+	int* indices = m_fbxInfo.meshes[meshIndex]->GetPolygonVertices();
+	// 頂点座標の数の取得
+	int polygon_vertex_count = m_fbxInfo.meshes[meshIndex]->GetPolygonVertexCount();
+	// GetPolygonVertexCount => 頂点数
+	for (; i < polygon_vertex_count; i++)
+	{
+		// インデックスバッファから頂点番号を取得
+		int index = indices[i];
+
+		// 頂点座標リストから座標を取得する
+		m_meshInfo[meshIndex].vertex[i].Position.x = (float)-vertices[index][0];
+		m_meshInfo[meshIndex].vertex[i].Position.y = (float)vertices[index][1];
+		m_meshInfo[meshIndex].vertex[i].Position.z = (float)vertices[index][2];
 	}
 }
 
 void Fbx::GetNormal(int meshIndex)
 {
-	FbxArray<FbxVector4> normals;
-	//法線を取得
-	m_fbxInfo.meshes[meshIndex]->GetPolygonVertexNormals(normals);
-	//法線の数を取得
-	int normalCount = normals.Size();
-	for (int i = 0; i < normalCount; i++)
+	//ピカタん龍
+	//FbxArray<FbxVector4> normals;
+	////法線を取得
+	//m_fbxInfo.meshes[meshIndex]->GetPolygonVertexNormals(normals);
+	////法線の数を取得
+	//int normalCount = normals.Size();
+	//for (int i = 0; i < normalCount; i++)
+	//{
+	//	//頂点インデックスに対応した頂点に値を代入
+	//	m_meshInfo[meshIndex].vertex[m_meshInfo[meshIndex].index[i]].Normal.x = -normals[i][0];
+	//	m_meshInfo[meshIndex].vertex[m_meshInfo[meshIndex].index[i]].Normal.y = normals[i][1];
+	//	m_meshInfo[meshIndex].vertex[m_meshInfo[meshIndex].index[i]].Normal.z = normals[i][2];
+	//}
+	//--- 法線セット数を取得 ---//
+	int normalLayerCount = m_fbxInfo.meshes[meshIndex]->GetElementNormalCount();
+
+	//--- レイヤー数だけ回る ---//
+	for (int i = 0; normalLayerCount > i; i++) {
+		//--- 法線セットを取得 ---//
+		FbxGeometryElementNormal* normal = m_fbxInfo.meshes[meshIndex]->GetElementNormal(i);
+
+		//--- マッピングモードの取得
+		FbxGeometryElement::EMappingMode mapping = normal->GetMappingMode();
+		//--- リファレンスモードの取得 ---//
+		FbxGeometryElement::EReferenceMode reference = normal->GetReferenceMode();
+
+		//--- マッピングモードの判別 ---//
+		switch (mapping) {
+		case FbxGeometryElement::eByControlPoint:
+			//--- リファレンスモードの判別 ---//
+			switch (reference) {
+			case FbxGeometryElement::eDirect:
+			{
+				//--- 法線数を取得 ---//
+				int normalCount = normal->GetDirectArray().GetCount();
+
+				//-----------------------------------------------------------------------
+				// eDirect の場合データは順番に格納されているのでそのまま保持
+				//-----------------------------------------------------------------------
+				for (int i = 0; normalCount > i; i++) {
+					//--- 法線の取得 ---//
+					m_meshInfo[meshIndex].vertex[i].Normal.x = -(float)normal->GetDirectArray().GetAt(i)[0];
+					m_meshInfo[meshIndex].vertex[i].Normal.y = (float)normal->GetDirectArray().GetAt(i)[1];
+					m_meshInfo[meshIndex].vertex[i].Normal.z = (float)normal->GetDirectArray().GetAt(i)[2];
+				}
+			}
+			break;
+
+			case FbxGeometryElement::eIndexToDirect:
+				break;
+
+			default:
+				break;
+			}
+
+			break;
+		case FbxGeometryElement::eByPolygonVertex:
+			break;
+		default:
+			break;
+		}
+	}
+}
+
+void Fbx::GetColor(int meshIndex) 
+{
+	for (int vIdx = 0; vIdx < m_meshInfo[meshIndex].vertexCount; vIdx++)
 	{
-		//頂点インデックスに対応した頂点に値を代入
-		m_meshInfo[meshIndex].vertex[m_meshInfo[meshIndex].index[i]].Normal.x = normals[i][0];
-		m_meshInfo[meshIndex].vertex[m_meshInfo[meshIndex].index[i]].Normal.y = normals[i][1];
-		m_meshInfo[meshIndex].vertex[m_meshInfo[meshIndex].index[i]].Normal.z = normals[i][2];
+		m_meshInfo[meshIndex].vertex[vIdx].Diffuse = D3DXVECTOR4(1.0f, 1.0f, 1.0f, 1.0f);
 	}
 }
 
@@ -231,12 +377,147 @@ void Fbx::GetUV(int meshIndex)
 	m_fbxInfo.meshes[meshIndex]->GetPolygonVertexUVs(uvsetName.GetStringAt(0), uvsets);
 	//UVの数を取得
 	int uvsetCount = uvsets.Size();
-	for (int i = 0; i < uvsetCount; i++)
+	for (int i = 0; i < m_meshInfo[meshIndex].vertexCount; i++)
 	{
 		//頂点インデックスに対応した頂点に値を代入
-		m_meshInfo[meshIndex].vertex[m_meshInfo[meshIndex].index[i]].TexCoord.x = uvsets[i][0];
-		m_meshInfo[meshIndex].vertex[m_meshInfo[meshIndex].index[i]].TexCoord.y = 1.0f - uvsets[i][1];
+		m_meshInfo[meshIndex].vertex[/*m_meshInfo[meshIndex].index[i]*/i].TexCoord.x = uvsets[i][0];
+		m_meshInfo[meshIndex].vertex[/*m_meshInfo[meshIndex].index[i]*/i].TexCoord.y = 1.0f - uvsets[i][1];
 	}
+}
+
+void Fbx::GetTextureInfo(int meshIndex)
+{
+	int uvIndex = 0;
+	int currentIndex = m_fbxInfo.uvSetCount;
+	for (int matIndex = 0; matIndex < m_fbxInfo.materialCount; matIndex++)
+	{
+		//diffuseの情報を取得
+		FbxProperty prop = m_fbxInfo.material[matIndex]->FindProperty(FbxSurfaceMaterial::sDiffuse);
+		//レイヤテクスチャの数を取得する
+		int layeredTextureCount = prop.GetSrcObjectCount<FbxLayeredTexture>();
+
+		//レイヤテクスチャを利用している場合
+		if (0 < layeredTextureCount)
+		{
+			for (int j = 0; layeredTextureCount > j; j++)
+			{
+
+				//レイヤテクスチャを取得する
+				FbxLayeredTexture* layeredTexture = prop.GetSrcObject<FbxLayeredTexture>(j);
+				//テクスチャの数を取得する
+				int textureCount = layeredTexture->GetSrcObjectCount<FbxFileTexture>();
+
+				for (int k = 0; textureCount > k; k++)
+				{
+					//テクスチャを取得する
+					FbxFileTexture* texture = prop.GetSrcObject<FbxFileTexture>(k);
+
+					if (texture)
+					{
+						//テクスチャ名を取得する
+						std::string textureName = texture->GetRelativeFileName();
+
+						//UVSet名を取得する
+						std::string UVSetName = texture->UVSet.Get().Buffer();
+
+						//UVSet名を比較し対応しているテクスチャなら保持する
+						for (int i = 0; i < m_meshInfo[meshIndex].uvSetCount; i++)
+						{
+							if (m_meshInfo[meshIndex].uvSetName[i] == UVSetName)
+							{
+								//ちゃんと設定していないのでファイルまでのパスを追加しています
+								std::string a = "Models/test/";
+								m_meshInfo[meshIndex].texturePath.emplace_back(a + textureName);
+								//テクスチャのUVSet名を取得する
+								m_fbxInfo.uvSetName[uvIndex + currentIndex] = UVSetName;
+								uvIndex++;
+							}
+						}
+
+					}
+				}
+			}
+		}
+		//レイヤテクスチャを利用していない場合
+		else
+		{
+			//テクスチャ数を取得する
+			int fileTextureCount = prop.GetSrcObjectCount<FbxFileTexture>();
+
+			if (0 < fileTextureCount)
+			{
+				for (int j = 0; fileTextureCount > j; j++)
+				{
+					//テクスチャを取得する
+					FbxFileTexture* texture = prop.GetSrcObject<FbxFileTexture>(j);
+					if (texture)
+					{
+						//テクスチャ名を取得する
+						std::string textureName = texture->GetFileName();
+						textureName = textureName.substr(textureName.find_last_of('/') + 1);
+						textureName = "Asset/Texture/" + textureName;
+						//std::string textureName = texture->GetRelativeFileName();
+
+						//UVSet名を取得する
+						std::string UVSetName = texture->UVSet.Get().Buffer();
+
+						//UVSet名を比較し対応しているテクスチャなら保持する
+						for (int i = 0; i < m_meshInfo[meshIndex].uvSetCount; i++)
+						{
+							int count = 0;
+							if (m_meshInfo[meshIndex].uvSetName[i] == UVSetName)
+							{
+								count++;
+								int j;
+								for (j = 0; j < currentIndex + count; j++)
+								{
+									if (m_fbxInfo.uvSetName[j] == UVSetName)
+									{
+										break;
+									}
+								}
+								if (j == currentIndex + count)
+								{
+									m_meshInfo[meshIndex].texturePath.emplace_back(textureName);
+									m_fbxInfo.uvSetName[uvIndex + currentIndex] = UVSetName;
+									uvIndex++;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	//UVSetの数を取得する
+	m_fbxInfo.uvSetCount += uvIndex;
+}
+
+void Fbx::LoadTexture(int meshIndex)
+{
+	for (int i = 0; i < m_meshInfo[meshIndex].uvSetCount; i++)
+	{
+		if (m_meshInfo[meshIndex].texturePath.size() > 0)
+		{
+			D3DX11CreateShaderResourceViewFromFile(CRenderer::GetDevice(),
+				m_meshInfo[meshIndex].texturePath[i].c_str(),
+				NULL,
+				NULL,
+				&m_meshInfo[meshIndex].texture,
+				NULL);
+
+			assert(m_meshInfo[meshIndex].texture);
+		}
+	}
+}
+
+void Fbx::LoadTextureSimple() {
+	D3DX11CreateShaderResourceViewFromFile(CRenderer::GetDevice(),
+		m_textureName.c_str(),
+		NULL,
+		NULL,
+		&texture,
+		NULL);
 }
 
 void Fbx::TextureMemoryAllocate(int meshIndex)
@@ -251,14 +532,18 @@ void Fbx::CreateVertexBuffer(int meshIndex)
 	//メンバ化できそう
 	D3D11_BUFFER_DESC bd;
 	ZeroMemory(&bd, sizeof(bd));
-	bd.Usage = D3D11_USAGE_DEFAULT;
+	bd.Usage = D3D11_USAGE_DYNAMIC;
 	bd.ByteWidth = sizeof(VERTEX_3D) * m_meshInfo[meshIndex].vertexCount;
 	bd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-	bd.CPUAccessFlags = 0;
+	bd.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+	bd.MiscFlags = 0;
+	bd.StructureByteStride = 0;
 
 	D3D11_SUBRESOURCE_DATA sd;
 	ZeroMemory(&sd, sizeof(sd));
 	sd.pSysMem = m_meshInfo[meshIndex].vertex;
+	sd.SysMemPitch = 0;
+	sd.SysMemSlicePitch = 0;
 
 	CRenderer::GetDevice()->CreateBuffer(&bd, &sd, &m_meshInfo[meshIndex].pVB);
 }
@@ -272,12 +557,24 @@ void Fbx::CreateIndexBuffer(int meshIndex)
 	bd.ByteWidth = sizeof(unsigned int) * m_meshInfo[meshIndex].indexCount;
 	bd.BindFlags = D3D11_BIND_INDEX_BUFFER;
 	bd.CPUAccessFlags = 0;
+	bd.MiscFlags = 0;
+	bd.StructureByteStride = 0;
 
 	D3D11_SUBRESOURCE_DATA sd;
 	ZeroMemory(&sd, sizeof(sd));
 	sd.pSysMem = m_meshInfo[meshIndex].index;
+	sd.SysMemPitch = 0;
+	sd.SysMemSlicePitch = 0;
 
 	CRenderer::GetDevice()->CreateBuffer(&bd, &sd, &m_meshInfo[meshIndex].pIB);
+}
+
+void Fbx::SetVertexBuffer(int meshIndex)
+{
+	D3D11_MAPPED_SUBRESOURCE pdata;
+	CRenderer::GetDeviceContext()->Map(m_meshInfo[meshIndex].pVB, 0, D3D11_MAP_WRITE_DISCARD, 0, &pdata);
+	memcpy_s(pdata.pData, pdata.RowPitch, (void*)(m_meshInfo[meshIndex].vertex), sizeof(VERTEX_3D) * m_meshInfo[meshIndex].vertexCount);
+	CRenderer::GetDeviceContext()->Unmap(m_meshInfo[meshIndex].pVB, 0);
 }
 
 void Fbx::InitializeAnimation()
@@ -307,10 +604,16 @@ void Fbx::InitializeAnimation()
 	//アニメーション１コマが実行されていく時間情報を保持する 時間のカウント方法を設定
 	m_frameTime.SetTime(0, 0, 0, 1, 0, m_scene->GetGlobalSettings().GetTimeMode());
 	m_timeCount = m_start;
+
+	m_animation = gameObject->GetComponent<Animation>();
 }
 
 void Fbx::SetAnimationVertex()
 {
+	if (m_animationStackNumber == 0)
+	{
+		return;
+	}
 	double animationTime = m_start.GetSecondDouble();
 	double stopTime = m_stop.GetSecondDouble();
 	int count = 0;
@@ -350,8 +653,8 @@ void Fbx::SetAnimationVertex()
 
 			// <各頂点に掛けるための最終的な行列の配列>
 
-			FbxMatrix* clusterDeformation = new FbxMatrix[m_fbxInfo.meshes[i]->GetControlPointsCount()];//1.9053
-			memset(clusterDeformation, 0, sizeof(FbxMatrix) * m_fbxInfo.meshes[i]->GetControlPointsCount());//0.0167
+			FbxMatrix* clusterDeformation = new FbxMatrix[m_meshInfo[i].vertexCount];//1.9053
+			memset(clusterDeformation, 0, sizeof(FbxMatrix) * m_meshInfo[i].vertexCount);//0.0167
 			//全てのクラスタ情報が入る
 			FbxSkin* skinDeformer = (FbxSkin*)m_fbxInfo.meshes[i]->GetDeformer(0, FbxDeformer::eSkin);//0.0220
 			if (skinDeformer)
@@ -389,12 +692,29 @@ void Fbx::SetAnimationVertex()
 				// <最終的な頂点座標を計算しVERTEXに変換>
 				for (int cnt = 0; cnt < m_meshInfo[i].vertexCount; cnt++)
 				{
-					FbxVector4 outVertex = clusterDeformation[cnt].MultNormalize(m_fbxInfo.meshes[i]->GetControlPointAt(cnt));
-					float x = (FLOAT)outVertex[0];
-					float y = (FLOAT)outVertex[1];
-					float z = (FLOAT)outVertex[2];
+					//何も考えずにやると並び変える前の頂点座標に対して変換するので、並び替えた後の頂点座標に対応させるための処理
+					for (int n = 0; n < m_fbxInfo.meshes[i]->GetControlPointsCount(); n++)
+					{
+						FbxVector4 pos = m_fbxInfo.meshes[i]->GetControlPointAt(n);
+						Vector3 a;
+						a.Set(float(pos[0]), float(pos[1]), float(pos[2]));
+						Vector3 vPos;
+						vPos.Set(m_meshInfo[i].vertex[cnt].Position.x, m_meshInfo[i].vertex[cnt].Position.y, m_meshInfo[i].vertex[cnt].Position.z);
+						if (fabs(float(pos[0]) + vPos.x) < 0.01f  && fabs(float(pos[1]) - vPos.y) < 0.01f && fabs(float(pos[2]) - vPos.z) < 0.01f)
+						{
+							FbxVector4 v;
+							v.Set(-m_meshInfo[i].vertex[cnt].Position.x, m_meshInfo[i].vertex[cnt].Position.y, m_meshInfo[i].vertex[cnt].Position.z);
+							FbxVector4 outVertex = clusterDeformation[n].MultNormalize(v);
+							float x = (FLOAT)outVertex[0];
+							float y = (FLOAT)outVertex[1];
+							float z = (FLOAT)outVertex[2];
 
-					m_animVertex[i][animCount][cnt] = (D3DXVECTOR3(x, y, z));
+							m_animVertex[i][animCount][cnt] = (D3DXVECTOR3(-x, y, z));
+							break;
+						}
+						
+					}
+					
 				}
 				delete[] clusterDeformation;
 			}
@@ -409,36 +729,59 @@ void Fbx::SetAnimationVertex()
 void Fbx::DrawAnimation()
 {
 
-	UpdateTime();
+	//UpdateTime();
+	D3DXMATRIX world, rotation;
+	D3DXMatrixRotationYawPitchRoll(&rotation, gameObject->transform->rotation.y, gameObject->transform->rotation.x, gameObject->transform->rotation.z);
+	world._11 = gameObject->transform->scale.x * rotation._11;
+	world._12 = gameObject->transform->scale.x * rotation._12;
+	world._13 = gameObject->transform->scale.x * rotation._13;
+	world._21 = gameObject->transform->scale.y * rotation._21;
+	world._22 = gameObject->transform->scale.y * rotation._22;
+	world._23 = gameObject->transform->scale.y * rotation._23;
+	world._31 = gameObject->transform->scale.z * rotation._31;
+	world._32 = gameObject->transform->scale.z * rotation._32;
+	world._33 = gameObject->transform->scale.z * rotation._33;
+	world._41 = gameObject->transform->position.x;
+	world._42 = gameObject->transform->position.y;
+	world._43 = gameObject->transform->position.z;
+	world._14 = 0;
+	world._24 = 0;
+	world._34 = 0;
+	world._44 = 1.0f;
+	CRenderer::SetWorldMatrix(&world);
+
 	for (int i = 0; i < m_fbxInfo.meshCount; i++)
 	{
-
 		SetVertexBuffer(i);
-		D3DXMATRIX world, rotation;
-		D3DXMatrixRotationYawPitchRoll(&rotation, gameObject->transform->rotation.y, gameObject->transform->rotation.x, gameObject->transform->rotation.z);
-		world._11 = gameObject->transform->scale.x * rotation._11;
-		world._12 = gameObject->transform->scale.x * rotation._12;
-		world._13 = gameObject->transform->scale.x * rotation._13;
-		world._21 = gameObject->transform->scale.y * rotation._21;
-		world._22 = gameObject->transform->scale.y * rotation._22;
-		world._23 = gameObject->transform->scale.y * rotation._23;
-		world._31 = gameObject->transform->scale.z * rotation._31;
-		world._32 = gameObject->transform->scale.z * rotation._32;
-		world._33 = gameObject->transform->scale.z * rotation._33;
-		world._41 = gameObject->transform->position.x;
-		world._42 = gameObject->transform->position.y;
-		world._43 = gameObject->transform->position.z;
-		world._14 = 0;
-		world._24 = 0;
-		world._34 = 0;
-		world._44 = 1.0f;
-		CRenderer::SetWorldMatrix(&world);
+		// 頂点バッファ設定
+		UINT stride = sizeof(VERTEX_3D);
+		UINT offset = 0;
+		CRenderer::GetDeviceContext()->IASetVertexBuffers(0, 1, &m_meshInfo[i].pVB, &stride, &offset);
+
+		// インデックスバッファ設定
+		CRenderer::GetDeviceContext()->IASetIndexBuffer(m_meshInfo[i].pIB, DXGI_FORMAT_R32_UINT, 0);
+
+		// プリミティブトポロジ設定
+		CRenderer::GetDeviceContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+		// マテリアル設定
+		CRenderer::SetMaterial(m_fbxInfo.materialInfo[i]);
+
+		// テクスチャ設定
+		CRenderer::GetDeviceContext()->PSSetShaderResources(0, 1, &texture);
+		
+		// ポリゴン描画
+		CRenderer::GetDeviceContext()->DrawIndexed(m_meshInfo[i].indexCount, 0, 0);
 	}
 }
 
 void Fbx::UpdateTime()
 {
-	if (true)
+	if (m_animationStackNumber == 0)
+	{
+		return;
+	}
+	if (isPlay)
 	{
 		//アニメーションの時間更新
 		m_timeCount += m_frameTime;
@@ -448,14 +791,112 @@ void Fbx::UpdateTime()
 			m_timeCount = m_stop * 3 / 28;
 		}
 		m_frame++;
-		if (m_frame >= m_count - 9)
+		if (m_frame >= m_count)
 		{
 			m_frame = 0;
 		}
 	}
-	else
+	/*else
 	{
 		m_timeCount = m_start;
 		m_frame = 0;
+	}*/
+	
+}
+
+void Fbx::UpdateAnimationVertex()
+{
+	for (int i = 0; i < m_fbxInfo.meshCount; i++)
+	{
+		for (int j = 0; j < m_meshInfo[i].vertexCount; j++)
+		{
+			m_meshInfo[i].vertex[j].Position = m_animVertex[i][m_frame][j];
+		}
 	}
+}
+
+void Fbx::PrintFile()
+{
+	std::string filename = "vertex.txt";
+	std::ofstream writing_file;
+	writing_file.open(filename, std::ios::out);
+	int count = 0;
+	
+	writing_file << "兆店多いほう" << std::endl;
+	for (int i = 0; i < m_meshInfo[0].vertexCount; i++)
+	{
+		writing_file << "x:" << m_meshInfo[0].vertex[i].Position.x << " y:" << m_meshInfo[0].vertex[i].Position.y << " z:" << m_meshInfo[0].vertex[i].Position.z << std::endl;
+		//writing_file << "x:" << m_meshInfo[0].index[i] << std::endl;
+	}
+	writing_file << "頂点少ないほう" << std::endl;
+	for (int i = 0; i < m_fbxInfo.meshes[0]->GetControlPointsCount(); i++)
+	{
+		FbxVector4 v = m_fbxInfo.meshes[0]->GetControlPointAt(i);
+		float x = float(v[0]);
+		float y = float(v[1]);
+		float z = float(v[2]);
+		writing_file << "x:" << x << " y:" << y << " z:" << z << std::endl;
+	}
+}
+
+
+void Fbx::UpFrame() 
+{
+	m_frame++;
+	if (m_frame >= m_count)
+	{
+		m_frame = 0;
+	}
+}
+
+void Fbx::DownFrame()
+{
+	m_frame--;
+	if (m_frame < 0)
+	{
+		m_frame = m_count - 1;
+	}
+}
+
+void Fbx::DrawAnimationFrame()
+{
+	ImGui::Begin("Animation Window");                          // Create a window called "Hello, world!" and append into it.
+	ImGui::Text("Animation Frame :%d", m_frame);
+	ImGui::Text("Animation Max Frame :%d", m_count);
+	//ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
+	//ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
+	//ImGui::Checkbox("Another Window", &show_another_window);
+
+	//ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
+	//ImGui::ColorEdit3("clear color", (float*)&clear_color); // Edit 3 floats representing a color
+
+	//if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
+	//	counter++;
+	//ImGui::SameLine();
+	//ImGui::Text("counter = %d", counter);
+	////ImGui::SameLine();
+	//ImGui::Text("fps = %f", FPS::deltaTime);
+	//ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+	ImGui::End();
+}
+
+void Fbx::PlayAnimation()
+{
+	isPlay = !isPlay;
+}
+
+void Fbx::LoadProperties(const rapidjson::Value& inProp)
+{
+	JsonHelper::GetString(inProp, "fileName", m_fileName);
+	JsonHelper::GetString(inProp, "textureName", m_textureName);
+	Initialize();
+	Load();
+}
+
+void Fbx::SaveProperties(rapidjson::Document::AllocatorType& alloc, rapidjson::Value& inProp)
+{
+	std::string name = typeid(*this).name();
+	JsonHelper::AddString(alloc, inProp, "type", name.substr(6).c_str());
+	JsonHelper::AddString(alloc, inProp, "fileName", m_fileName);
+	JsonHelper::AddString(alloc, inProp, "textureName", m_textureName);
 }

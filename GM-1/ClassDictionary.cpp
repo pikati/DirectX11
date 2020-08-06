@@ -11,6 +11,8 @@
 #include "SpriteEffect.h"
 #include "billborad.h"
 #include "Texture.h"
+#include "Fbx.h"
+#include "Animation.h"
 
 std::map<std::string, Component*> ClassDictionary::dictionary;
 BuilderFromString ClassDictionary::builderfromstring;
@@ -33,6 +35,8 @@ void ClassDictionary::Initialize()
 	builderfromstring.Register(REGISTER_ARGS(SpriteEffect));
 	builderfromstring.Register(REGISTER_ARGS(billborad));
 	builderfromstring.Register(REGISTER_ARGS(Texture));
+	builderfromstring.Register(REGISTER_ARGS(Fbx));
+	builderfromstring.Register(REGISTER_ARGS(Animation));
 }
 
 void ClassDictionary::Register(const std::string& ty_name, Component* component)

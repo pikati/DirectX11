@@ -29,7 +29,7 @@ Player::~Player()
 void Player::Initialize()
 {
 	m_model = new CModel();
-	m_model->Load("Asset\\Model\\Girl.obj");
+	m_model->Load("Asset\\Models\\Girl.obj");
 
 	gameObject->transform->rotation = Vector3(0.0f, 0.0f, 0.0f);
 	gameObject->transform->scale    = Vector3(10.0f, 10.0f, 10.0f);

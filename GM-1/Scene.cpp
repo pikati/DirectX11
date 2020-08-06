@@ -11,6 +11,8 @@
 #include "Field.h"
 #include "Texture.h"
 #include "Transform.h"
+#include "Fbx.h"
+#include "Animation.h"
 
 #include <Stdio.h>
 #ifdef _DEBUG
@@ -24,6 +26,19 @@
 #    define MyOutputDebugString( str, ... ) // ‹óŽÀ‘•
 #endif
 
+static Fbx* f;
+static Animation* anim;
+static int state;
+enum AnimationName
+{
+	WALK,
+	SLASH,
+	STAB,
+	SHOOT,
+	DAMAGE,
+	IDOL,
+	END
+};
 Scene::Scene()
 {
 
@@ -37,13 +52,55 @@ Scene::~Scene()
 void Scene::Initialize()
 {
 	LevelLoader::LoadLevel(this, "save1.scene");
+	/*GameObject* obj = CreateGameObject();
+	anim = obj->AddComponent<Animation>();
+	anim->SetAnimationNum(END);
+	anim->SetAnimationData(WALK, true, 0, 62, 20, 60);
+	anim->SetAnimationData(SLASH, false, 63, 94);
+	anim->SetAnimationData(STAB, false, 95, 135);
+	anim->SetAnimationData(SHOOT, false, 136, 171);
+	anim->SetAnimationData(DAMAGE, false, 172, 212);
+	anim->SetAnimationData(IDOL, false, 0, 0);
+	state = WALK;
+	anim->SetState(state);
+	f = obj->AddComponent<Fbx>();
+	f->Initialize();
+	f->Load("Asset/Models/Player/eatmanV3.fbx");*/
 	
 }
 
 void Scene::Update()
 {
-	static int a = 0;
-	a++;
+	/*if (CInput::GetKeyTrigger('T'))
+	{
+		f->UpFrame();
+	}
+	if (CInput::GetKeyTrigger('G'))
+	{
+		f->DownFrame();
+	}
+	if (CInput::GetKeyTrigger(VK_SPACE))
+	{
+		f->PlayAnimation();
+	}
+	if (CInput::GetKeyTrigger('R'))
+	{
+		state++;
+		if (state >= END)
+		{
+			state = WALK;
+		}
+		anim->SetState(state);
+	}
+	if (CInput::GetKeyTrigger('F'))
+	{
+		state--;
+		if (state < WALK)
+		{
+			state = IDOL;
+		}
+		anim->SetState(state);
+	}*/
 	for (int i = 0; i < LAYER_MAX; i++)
 	{
 		for (GameObject* object : m_gameObject[i])

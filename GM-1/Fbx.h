@@ -6,6 +6,8 @@
 #include <vector>
 #include <fbxsdk.h>
 
+class Animation;
+
 struct MeshInfo
 {
 	//ポリゴンの数
@@ -46,13 +48,14 @@ struct FbxInfo
 	int								 uvSetCount;
 	//UVSetの名前
 	std::string*					 uvSetName;
-	//マテリアルの色
-	Vector4* color;
+	//マテリアル情報
+	MATERIAL*						 materialInfo;
 
 };
 class Fbx : public Component
 {
 private:
+	Animation* m_animation;
 	//!fbxのマネージャ
 	FbxManager* m_manager = NULL;
 	//!fbxのシーン
@@ -74,13 +77,17 @@ private:
 
 	ID3D11Device* m_device;
 
-	//各メッシュの各フレームの各頂点配列のVector3だよ
+	//各メッシュの各フレームの頂点配列のVector3だよ
 	std::vector<std::vector<std::vector<D3DXVECTOR3>>> m_animVertex;
 	//アニメーションの配列作成時に使用
 	int m_count;
 	//アニメーション管理に使用
 	int m_frame;
+	bool isPlay = false;
 
+	std::string m_textureName;
+	std::string m_fileName;
+	ID3D11ShaderResourceView* texture;
 	void LoadFBX(const char* fileName);
 	void InitializeFBX();
 	void MeshTrianglate();
@@ -94,23 +101,38 @@ private:
 	int	 GetIndexCount(int meshIndex);
 	void GetVertex(int meshIndex);
 	void GetNormal(int meshIndex);
+	void GetColor(int meshIndex);
 	void GetUVSetName(int meshIndex);
 	void GetUV(int meshIndex);
+	void GetTextureInfo(int meshindex);
+	void LoadTexture(int meshIndex);
+	void LoadTextureSimple();
 	void CreateVertexBuffer(int meshIndex);
 	void CreateIndexBuffer(int meshIndex);
-	void SetVertexBuffer(int meshIndex);
-	void SetIndexBuffer(int meshIndex);
+	void SetVertexBuffer(int meshIndex);//bdメンバ化したら意味あるしなかったらCreateと同じ
 	void TextureMemoryAllocate(int meshIndex);
 	void InitializeAnimation();
 	void SetAnimationVertex();
+	void UpdateAnimationVertex();
 
 	void DrawAnimation();
 	void UpdateTime();
+
+	/*デバッグ用のファイル出力*/
+	void PrintFile();
+	void DrawAnimationFrame();
 public:
 	void Initialize();
 	void Update();
 	void Draw();
 	void Finalize();
 	void Load(const char* fileName);
+	void Load();
+	void UpFrame();
+	void DownFrame();
+	void PlayAnimation();
+
+	void LoadProperties(const rapidjson::Value& inProp) override;
+	void SaveProperties(rapidjson::Document::AllocatorType& alloc, rapidjson::Value& inProp) override;
 };
 

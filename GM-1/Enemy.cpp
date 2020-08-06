@@ -24,7 +24,7 @@ Enemy::~Enemy()
 void Enemy::Initialize()
 {
 	m_model = new CModel();
-	m_model->Load("Asset\\Model\\Ghost.obj");
+	m_model->Load("Asset\\Models\\Ghost.obj");
 
 	gameObject->transform->rotation = Vector3(0.0f, 100.0f, 0.0f);
 	gameObject->transform->scale = Vector3(0.6f, 0.6f, 0.6f);

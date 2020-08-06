@@ -53,6 +53,10 @@ void GameObject::Initialize()
 
 void GameObject::Update()
 {
+	if (!activeSelf)
+	{
+		return;
+	}
 	transform->Update();
 	for (Component* c : components)
 	{
@@ -62,6 +66,11 @@ void GameObject::Update()
 
 void GameObject::Draw()
 {
+	if (!activeSelf)
+	{
+		return;
+	}
+
 	transform->Draw();
 	for (Component* c : components)
 	{
