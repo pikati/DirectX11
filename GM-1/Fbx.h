@@ -5,6 +5,7 @@
 #include "renderer.h"
 #include <vector>
 #include <fbxsdk.h>
+#include <memory>
 
 class Animation;
 
@@ -78,16 +79,20 @@ private:
 	ID3D11Device* m_device;
 
 	//各メッシュの各フレームの頂点配列のVector3だよ
-	std::vector<std::vector<std::vector<D3DXVECTOR3>>> m_animVertex;
+	//std::vector<std::vector<std::vector<D3DXVECTOR3>>> m_animVertex;
+	Vector3*** m_animationVertex;
 	//アニメーションの配列作成時に使用
 	int m_count;
 	//アニメーション管理に使用
 	int m_frame;
 	bool isPlay = false;
+	static int m_maxID;
 
 	std::string m_textureName;
 	std::string m_fileName;
 	ID3D11ShaderResourceView* texture;
+	bool m_isCopy = false;
+
 	void LoadFBX(const char* fileName);
 	void InitializeFBX();
 	void MeshTrianglate();
@@ -128,9 +133,11 @@ public:
 	void Finalize();
 	void Load(const char* fileName);
 	void Load();
+	void SetTextureName(const char* fileName);
 	void UpFrame();
 	void DownFrame();
 	void PlayAnimation();
+	void SetFileName(const char* fileName);
 
 	void LoadProperties(const rapidjson::Value& inProp) override;
 	void SaveProperties(rapidjson::Document::AllocatorType& alloc, rapidjson::Value& inProp) override;

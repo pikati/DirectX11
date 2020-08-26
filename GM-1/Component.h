@@ -5,6 +5,7 @@ class Component
 {
 protected:
 	GameObject* gameObject = nullptr;
+	int m_id = -1;
 public:
 	int m_sortingOrder = 1;
 
@@ -15,6 +16,8 @@ public:
 	Component* GetComponent();
 	void SetGameObject(GameObject* obj);
 	GameObject* GetGameObject();
+	void SetID(int n);
+	int GetID();
 	virtual void LoadProperties(const rapidjson::Value& inProp);
 	virtual void SaveProperties(rapidjson::Document::AllocatorType& alloc, rapidjson::Value& inProp);
 

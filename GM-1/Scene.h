@@ -8,19 +8,20 @@
 
 class Scene
 {
-protected:
-	std::list<GameObject*> m_gameObject[LAYER_MAX];
+private:
+	static std::list<GameObject*> m_gameObject[LAYER_MAX];
+	static std::list<GameObject*> m_tempObject;
 public:
 	Scene();
-	virtual ~Scene();
+	~Scene();
 
-	virtual void Initialize();
-	virtual void Update();
-	virtual void Draw();
-	virtual void Finalize();
+	void Initialize();
+	void Update();
+	void Draw();
+	void Finalize();
 
 	GameObject* CreateGameObject();
-	void AddGameObject(GameObject* obj);
+	void AddGameObject(GameObject* obj, bool isTemp = true);
 	GameObject* CreatePrefab(GameObject* obj);
 	GameObject* LoadPrefab(std::string path);
 	GameObject* Find(std::string name);

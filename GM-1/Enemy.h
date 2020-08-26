@@ -2,13 +2,13 @@
 #include "Component.h"
 
 class CModel;
-class SphereCollider;
+class AABB;
 
 class Enemy : public Component
 {
 private:
     CModel* m_model;
-    SphereCollider* m_collider;
+    AABB* m_collider;
 public:
     Enemy();
     ~Enemy();

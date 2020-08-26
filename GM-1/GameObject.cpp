@@ -20,6 +20,7 @@ GameObject::GameObject(const GameObject& obj)
 	this->tag = obj.tag;
 	this->activeSelf = obj.activeSelf;
 	this->isDestroy = obj.isDestroy;
+	this->layer = obj.layer;
 	for (Component* component : obj.components)
 	{
 		std::string typeName = typeid(*component).name();
@@ -30,11 +31,12 @@ GameObject::GameObject(const GameObject& obj)
 		{
 			ss >> getStr;
 		}
-		component = ClassDictionary::SetComponent(getStr, component);
-		c2.push_back(component);
-		component->SetGameObject(this);
+		Component* c = ClassDictionary::SetComponent(getStr);
+		c2.push_back(c);
+		c->SetGameObject(this);
+		c->SetID(component->GetID());
 	}
-	components = c2;
+	this->components = c2;
 }
 
 GameObject::~GameObject()
@@ -45,9 +47,11 @@ GameObject::~GameObject()
 void GameObject::Initialize()
 {
 	transform->Initialize();
+	transform->SetGameObject(this);
 	for (Component* c : components)
 	{
 		c->Initialize();
+		c->SetGameObject(this);
 	}
 }
 
@@ -85,7 +89,7 @@ void GameObject::Finalize()
 	for (Component* c : components)
 	{
 		c->Finalize();
-		delete c;
+		//delete c;
 	}
 }
 

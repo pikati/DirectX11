@@ -1,6 +1,5 @@
 #pragma once
 #include "Component.h"
-
 #include <Vector>
 class Collider : public Component
 {
@@ -10,11 +9,23 @@ private:
 	bool m_isDestroy = false;
 
 	static void RunCollisionDetection(Collider* c1, Collider* c2);
+	static void Sphere2Sphere(Collider* c1, Collider* c2);
+	static void Sphere2Mesh(Collider* c1, Collider* c2);
+	static void Sphere2AABB(Collider* c1, Collider* c2);
+	static void AABB2AABB(Collider* c1, Collider* c2);
 	
 protected:
+	enum ColliderType
+	{
+		Sphere,
+		Mesh,
+		Aabb,
+		Max
+	};
 	bool m_isCollisionThisFrame = false;
 	int m_colliderID = -1;
 	GameObject* hitObject = nullptr;
+	ColliderType m_colliderType;
 
 	int SetCollider(Collider* collider);
 	void DeleteCollider(int colliderID);

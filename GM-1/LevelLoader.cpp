@@ -17,7 +17,7 @@ bool LevelLoader::LoadLevel(Scene* scene, const char* fileName)
 	rapidjson::Document doc;
 	if (!LoadJSON(fileName, doc))
 	{
-		assert("failed to load level %s", fileName.c_str());
+		MessageBox(NULL, "failed to load level", NULL, MB_OK);
 		return false;
 	}
 
@@ -34,7 +34,7 @@ bool LevelLoader::LoadJSON(const char* fileName, rapidjson::Document& outDoc)
 	std::ifstream file(fileName, std::ios::in | std::ios::binary | std::ios::ate);
 	if (!file.is_open())
 	{
-		assert("not open %s.", fileName.c_str());
+		MessageBox(NULL, "not open JSON file", NULL, MB_OK);
 		return false;
 	}
 
@@ -50,7 +50,7 @@ bool LevelLoader::LoadJSON(const char* fileName, rapidjson::Document& outDoc)
 	outDoc.Parse(bytes.data());
 	if (!outDoc.IsObject())
 	{
-		assert("not available JSON file %s.", fileName.c_str());
+		MessageBox(NULL, "not available JSON file", NULL, MB_OK);
 		return false;
 	}
 	return true;
@@ -82,7 +82,12 @@ void LevelLoader::LoadGameObject(Scene* scene, const rapidjson::Value& inObj)
 					LoadComponent(obj, components);
 				}
 			}
-			scene->AddGameObject(obj);
+			scene->AddGameObject(obj, false);
+			std::list<Component*> comp = obj->GetComponents();
+			for (Component* c : comp)
+			{
+				c->Initialize();
+			}
 		}	
 	}
 	
@@ -115,43 +120,6 @@ void LevelLoader::LoadComponent(GameObject* obj, const rapidjson::Value& inObj)
 				component->LoadProperties(compObj);
 			}
 		}
-	}
-	std::list<Component*> comp = obj->GetComponents();
-	if (comp.size() <= 1)
-	{
-		for (Component* c : comp)
-		{
-			c->Initialize();
-		}
-		return;
-	}
-
-	//以下並び変えてから初期化
-	std::list<Component*>::iterator i1 = comp.begin();
-	std::list<Component*>::iterator i2 = i1;
-	int* sortingOrders = new int[inObj.Size()];
-	int count = 0;
-	for (Component* c : comp)
-	{
-		sortingOrders[count++] = c->m_sortingOrder;
-	}
-	
-	for (int i = 0; i < inObj.Size() - 1; i++)
-	{
-		for (int j = inObj.Size() - 1; j >= i + 1; j--)
-		{
-			if (sortingOrders[j] < sortingOrders[j - 1])
-			{
-				std::advance(i1, j);
-				std::advance(i2, j - 1);
-				std::iter_swap(i1, i2);
-			}
-		}
-	}
-	delete sortingOrders;
-	for (Component* c : comp)
-	{
-		c->Initialize();
 	}
 }
 
@@ -229,6 +197,90 @@ void LevelLoader::SaveComponents(rapidjson::Document::AllocatorType& alloc, Game
 	}
 }
 
+GameObject* LevelLoader::LoadPrefab(const char* fileName)
+{
+	rapidjson::Document doc;
+	if (!LoadJSON(fileName, doc))
+	{
+		MessageBox(NULL, "failed to load level", NULL, MB_OK);
+		return nullptr;
+	}
+	GameObject* obj = new GameObject();
+
+	const rapidjson::Value& object = doc["GameObject"];
+	if (object.IsArray())
+	{
+		for (rapidjson::SizeType i = 0; i < object.Size(); i++)
+		{
+			const rapidjson::Value& jObject = object[i];
+			if (jObject.IsObject())
+			{
+
+				if (jObject.HasMember("properties"))
+				{
+					const rapidjson::Value& propertys = jObject["properties"];
+					if (propertys.IsObject())
+					{
+						LoadProperties(obj, propertys);
+					}
+				}
+				if (jObject.HasMember("component"))
+				{
+					const rapidjson::Value& components = jObject["component"];
+					if (components.IsArray())
+					{
+						LoadComponent(obj, components);
+					}
+				}
+			}
+		}
+	}
+	std::list<Component*> comp = obj->GetComponents();
+	for (Component* com : comp)
+	{
+		com->Initialize();
+	}
+	return obj;
+}
+
+void LevelLoader::SavePrefab(GameObject* gameObject, const char* fileName)
+{
+	rapidjson::Document doc;
+	doc.SetObject();
+	rapidjson::Value object(rapidjson::kArrayType);
+
+	//GameObject用のJSONオブジェクト
+	rapidjson::Value jObj(rapidjson::kObjectType);
+	//プロパティ用のJSOnオブジェクト
+	rapidjson::Value props(rapidjson::kObjectType);
+
+	SaveGameObject(doc.GetAllocator(), gameObject, props);
+
+	//プロパティをGameObjectのJSONオブジェクトに追加
+	jObj.AddMember("properties", props, doc.GetAllocator());
+
+	rapidjson::Value jComponents(rapidjson::kArrayType);
+	SaveComponents(doc.GetAllocator(), gameObject, jComponents);
+	jObj.AddMember("component", jComponents, doc.GetAllocator());
+
+	object.PushBack(jObj, doc.GetAllocator());
+
+	doc.AddMember("GameObject", object, doc.GetAllocator());
+
+	//JSONを文字列バッファに保存
+	rapidjson::StringBuffer buffer;
+	//成形出力用にPrettytWriterを使う
+	rapidjson::PrettyWriter<rapidjson::StringBuffer> writer(buffer);
+	doc.Accept(writer);
+	const char* output = buffer.GetString();
+
+	//output文字列をファイルに書く
+	std::ofstream outFile(fileName);
+	if (outFile.is_open())
+	{
+		outFile << output;
+	}
+}
 
 #pragma region Helper
 bool JsonHelper::GetInt(const rapidjson::Value& inObject, const char* inProperty, int& outInt)
@@ -326,9 +378,9 @@ bool JsonHelper::GetVector3(const rapidjson::Value& inObject, const char* inProp
 		}
 	}
 
-	outVec3.x = property[0].GetDouble();
-	outVec3.y = property[1].GetDouble();
-	outVec3.z = property[2].GetDouble();
+	outVec3.x = (float)property[0].GetDouble();
+	outVec3.y = (float)property[1].GetDouble();
+	outVec3.z = (float)property[2].GetDouble();
 
 	return true;
 }

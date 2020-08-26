@@ -7,25 +7,32 @@
 #include "ImguiManager.h"
 #include "Animation.h"
 #include "LevelLoader.h"
+#include <DirectXMath.h>
+#include "ObjectPooler.h"
 #define FRAME 0.0166666666666667
+
+int Fbx::m_maxID = -1;
 
 
 void Fbx::Initialize()
 {
 	m_device = CRenderer::GetDevice();
-	m_manager = FbxManager::Create();
 	m_fbxInfo.uvSetCount = 0;
-	m_textureName = "Asset//Texture//Player//eatman.png";
+	m_sortingOrder = 0;	
+	Load();
 }
 
 void Fbx::Update()
 {
-	if (m_animation == nullptr)
+	if (m_animationStackNumber != 0)
 	{
-		m_animation = gameObject->GetComponent<Animation>();
+		if (m_animation == nullptr)
+		{
+			m_animation = gameObject->GetComponent<Animation>();
+		}
+		m_frame = m_animation->GetTime();
+		UpdateAnimationVertex();
 	}
-	m_frame = m_animation->GetTime();
-	UpdateAnimationVertex();
 }
 
 void Fbx::Draw()
@@ -41,6 +48,24 @@ void Fbx::Finalize()
 		if(m_meshInfo[i].uvSetName != nullptr)
 		delete 	m_meshInfo[i].uvSetName;
 	}*/
+	if (m_isCopy)
+	{
+		return;
+	}
+	if (m_animationStackNumber != 0)
+	{
+		for (int i = 0; i < m_fbxInfo.meshCount; i++)
+		{
+			for (int j = 0; j < m_count; j++)
+			{
+				delete[] m_animationVertex[i][j];
+			}
+			delete[] m_animationVertex[i];
+		}
+		delete[] m_animationVertex;
+	}
+	
+
 	for (int i = m_fbxInfo.meshCount - 1; i >= 0; i--)
 	{
 		if (m_meshInfo[i].vertex != nullptr)
@@ -67,14 +92,57 @@ void Fbx::Load(const char* fileName)
 
 void Fbx::Load()
 {
+	m_maxID++;
+	Fbx* t = new Fbx();
+	t = ObjectPooler::GetComponent(m_id, t);
+	if (t != nullptr)
+	{
+		if (t->m_id == m_id)
+		{
+			m_animationStackNumber = t->m_animationStackNumber;
+			if (m_animationStackNumber != 0)
+			{
+				m_animation = t->m_animation;
+				m_animation->SetState(5);
+				m_animationVertex = t->m_animationVertex;
+			}
+			m_count = t->m_count;
+			m_fbxInfo = t->m_fbxInfo;
+			m_fileName = t->m_fileName;
+			m_frame = 0;
+			m_frameTime = t->m_frameTime;
+			m_isAnim = t->m_isAnim;
+			m_link = t->m_link;
+			m_meshInfo = t->m_meshInfo;
+			m_sortingOrder = t->m_sortingOrder;
+			m_start = t->m_start;
+			m_stop = t->m_stop;
+			m_textureName = t->m_textureName;
+			m_timeCount = t->m_timeCount;
+			texture = t->texture;
+			m_maxID--;
+			m_isCopy = true;
+			return;
+		}
+	}
+
 	LoadFBX(m_fileName.c_str());
 	InitializeFBX();
 	InitializeAnimation();
 	SetAnimationVertex();
+	m_id = m_maxID;
+	ObjectPooler::SetComponent(this);
+}
+
+void Fbx::SetTextureName(const char* fileName)
+{
+	m_textureName = fileName;
 }
 
 void Fbx::LoadFBX(const char* fileName)
 {
+	m_manager = FbxManager::Create();
+
 	if (NULL != m_manager)
 	{
 		//インポーター作成
@@ -587,7 +655,7 @@ void Fbx::InitializeAnimation()
 	//m_animationStackNumber番目のアニメーション情報を取得
 	if (m_animationStackNumber == 0)
 	{
-		MessageBox(NULL, "アニメーションないんですけど", NULL, MB_OK);
+		//MessageBox(NULL, "アニメーションないんですけど", NULL, MB_OK);
 		return;
 	}
 	FbxAnimStack* AnimationStack = m_scene->FindMember<FbxAnimStack>(AnimStackNameArray[m_animationStackNumber - 1]->Buffer());
@@ -618,8 +686,8 @@ void Fbx::SetAnimationVertex()
 	double stopTime = m_stop.GetSecondDouble();
 	int count = 0;
 	m_timeCount = m_start;
-	m_animVertex.resize(m_fbxInfo.meshCount);
-
+	//m_animVertex.resize(m_fbxInfo.meshCount);
+	m_animationVertex = new Vector3 * *[m_fbxInfo.meshCount];
 	while (animationTime <= stopTime)
 	{
 		count++;
@@ -630,10 +698,12 @@ void Fbx::SetAnimationVertex()
 
 	for (int i = 0; i < m_fbxInfo.meshCount; i++)
 	{
-		m_animVertex[i].resize(count);
+		//m_animVertex[i].resize(count);
+		m_animationVertex[i] = new Vector3 * [count];
 		for (int j = 0; j < count; j++)
 		{
-			m_animVertex[i][j].resize(m_meshInfo[i].vertexCount);
+			//m_animVertex[i][j].resize(m_meshInfo[i].vertexCount);
+			m_animationVertex[i][j] = new Vector3[m_meshInfo[i].vertexCount];
 		}
 	}
 
@@ -709,7 +779,7 @@ void Fbx::SetAnimationVertex()
 							float y = (FLOAT)outVertex[1];
 							float z = (FLOAT)outVertex[2];
 
-							m_animVertex[i][animCount][cnt] = (D3DXVECTOR3(-x, y, z));
+							m_animationVertex[i][animCount][cnt] = (Vector3(-x, y, z));
 							break;
 						}
 						
@@ -730,8 +800,9 @@ void Fbx::DrawAnimation()
 {
 
 	//UpdateTime();
+	using namespace DirectX;
 	D3DXMATRIX world, rotation;
-	D3DXMatrixRotationYawPitchRoll(&rotation, gameObject->transform->rotation.y, gameObject->transform->rotation.x, gameObject->transform->rotation.z);
+	D3DXMatrixRotationYawPitchRoll(&rotation, XMConvertToRadians(gameObject->transform->rotation.y), XMConvertToRadians(gameObject->transform->rotation.x), XMConvertToRadians(gameObject->transform->rotation.z));
 	world._11 = gameObject->transform->scale.x * rotation._11;
 	world._12 = gameObject->transform->scale.x * rotation._12;
 	world._13 = gameObject->transform->scale.x * rotation._13;
@@ -810,7 +881,10 @@ void Fbx::UpdateAnimationVertex()
 	{
 		for (int j = 0; j < m_meshInfo[i].vertexCount; j++)
 		{
-			m_meshInfo[i].vertex[j].Position = m_animVertex[i][m_frame][j];
+			float x = m_animationVertex[i][m_frame][j].x;
+			float y = m_animationVertex[i][m_frame][j].y;
+			float z = m_animationVertex[i][m_frame][j].z;
+			m_meshInfo[i].vertex[j].Position = D3DXVECTOR3(x, y, z); 
 		}
 	}
 }
@@ -885,12 +959,17 @@ void Fbx::PlayAnimation()
 	isPlay = !isPlay;
 }
 
+void Fbx::SetFileName(const char* fileName)
+{
+	m_fileName = fileName;
+}
+
 void Fbx::LoadProperties(const rapidjson::Value& inProp)
 {
 	JsonHelper::GetString(inProp, "fileName", m_fileName);
 	JsonHelper::GetString(inProp, "textureName", m_textureName);
+	JsonHelper::GetInt(inProp, "id", m_id);
 	Initialize();
-	Load();
 }
 
 void Fbx::SaveProperties(rapidjson::Document::AllocatorType& alloc, rapidjson::Value& inProp)
@@ -899,4 +978,5 @@ void Fbx::SaveProperties(rapidjson::Document::AllocatorType& alloc, rapidjson::V
 	JsonHelper::AddString(alloc, inProp, "type", name.substr(6).c_str());
 	JsonHelper::AddString(alloc, inProp, "fileName", m_fileName);
 	JsonHelper::AddString(alloc, inProp, "textureName", m_textureName);
+	JsonHelper::AddInt(alloc, inProp, "id", m_id);
 }

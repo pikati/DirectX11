@@ -43,9 +43,9 @@ public:
 	float Length();
 	float LengthSquared();
 	void Normalize();
-	Vector3 Normalize(Vector3 vec);
-	float Dot(Vector3 vec1, Vector3 vec2);
-	Vector3 Cross(Vector3 vec1, Vector3 vec2);
+	static Vector3 Normalize(Vector3 vec);
+	static float Dot(Vector3 vec1, Vector3 vec2);
+	static Vector3 Cross(Vector3 vec1, Vector3 vec2);
 
 	//関数のケツのconstはメンバを変更できなくするやつだよ
 	const Vector3 operator+(const Vector3& vec) const;

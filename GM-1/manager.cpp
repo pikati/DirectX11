@@ -31,8 +31,8 @@ void CManager::Uninit()
 void CManager::Update()
 {
 	CInput::Update();
-	g_scene->Update();
 	ImguiManager::Update();
+	g_scene->Update();
 }
 
 void CManager::Draw()

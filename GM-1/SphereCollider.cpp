@@ -5,6 +5,7 @@
 
 SphereCollider::SphereCollider()
 {
+	m_colliderType = Sphere;
 	if (m_transform == nullptr)
 	{
 		m_transform = new Transform();
@@ -24,7 +25,7 @@ void SphereCollider::Initialize()
 void SphereCollider::Update()
 {
 	m_isCollisionThisFrame = false;
-	hitObject = nullptr;
+	//hitObject = nullptr;
 }
 
 void SphereCollider::Draw()

@@ -8,11 +8,13 @@
 #include "Polygon.h"
 #include "Transform.h"
 #include "SphereCollider.h"
+#include "AABB.h"
 #include "SpriteEffect.h"
 #include "billborad.h"
 #include "Texture.h"
 #include "Fbx.h"
 #include "Animation.h"
+#include "Plane.h"
 
 std::map<std::string, Component*> ClassDictionary::dictionary;
 BuilderFromString ClassDictionary::builderfromstring;
@@ -37,6 +39,8 @@ void ClassDictionary::Initialize()
 	builderfromstring.Register(REGISTER_ARGS(Texture));
 	builderfromstring.Register(REGISTER_ARGS(Fbx));
 	builderfromstring.Register(REGISTER_ARGS(Animation));
+	builderfromstring.Register(REGISTER_ARGS(Plane));
+	builderfromstring.Register(REGISTER_ARGS(AABB));
 }
 
 void ClassDictionary::Register(const std::string& ty_name, Component* component)
@@ -49,9 +53,8 @@ Component* ClassDictionary::AddComponent(const std::string& name, GameObject* ob
 	return obj->AddComponent(builderfromstring.Create(name));
 }
 
-Component* ClassDictionary::SetComponent(const std::string& name, Component* component)
+Component* ClassDictionary::SetComponent(const std::string& name)
 {
 	Component* c = builderfromstring.Create(name);
-	component = c;
 	return c;
 }

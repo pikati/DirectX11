@@ -3,18 +3,20 @@
 #include "SaveLoadManager.h"
 #include "ClassDictionary.h"
 #include "input.h"
-#include "Collider.h"
 #include <typeinfo>
 #include <sstream>
 #include "Constants.h"
 #include "LevelLoader.h"
-#include "Field.h"
 #include "Texture.h"
 #include "Transform.h"
+#include "Collider.h"
+
+#include "GameObject.h"
+#include "AABB.h"
 #include "Fbx.h"
-#include "Animation.h"
 
 #include <Stdio.h>
+
 #ifdef _DEBUG
 #   define MyOutputDebugString( str, ... ) \
       { \
@@ -26,9 +28,10 @@
 #    define MyOutputDebugString( str, ... ) // 空実装
 #endif
 
-static Fbx* f;
-static Animation* anim;
-static int state;
+std::list<GameObject*> Scene::m_gameObject[LAYER_MAX];
+std::list<GameObject*> Scene::m_tempObject;
+static std::list<GameObject*> tempObj;
+
 enum AnimationName
 {
 	WALK,
@@ -52,20 +55,6 @@ Scene::~Scene()
 void Scene::Initialize()
 {
 	LevelLoader::LoadLevel(this, "save1.scene");
-	/*GameObject* obj = CreateGameObject();
-	anim = obj->AddComponent<Animation>();
-	anim->SetAnimationNum(END);
-	anim->SetAnimationData(WALK, true, 0, 62, 20, 60);
-	anim->SetAnimationData(SLASH, false, 63, 94);
-	anim->SetAnimationData(STAB, false, 95, 135);
-	anim->SetAnimationData(SHOOT, false, 136, 171);
-	anim->SetAnimationData(DAMAGE, false, 172, 212);
-	anim->SetAnimationData(IDOL, false, 0, 0);
-	state = WALK;
-	anim->SetState(state);
-	f = obj->AddComponent<Fbx>();
-	f->Initialize();
-	f->Load("Asset/Models/Player/eatmanV3.fbx");*/
 	
 }
 
@@ -101,6 +90,7 @@ void Scene::Update()
 		}
 		anim->SetState(state);
 	}*/
+	
 	for (int i = 0; i < LAYER_MAX; i++)
 	{
 		for (GameObject* object : m_gameObject[i])
@@ -109,6 +99,13 @@ void Scene::Update()
 		}
 	}
 
+	for (GameObject* object : tempObj)
+	{
+		m_gameObject[object->layer].emplace_back(object);
+		object->Update();
+	}
+	tempObj.clear();
+	
 
 	//todo::この機能に問題あるの草
 	for (int i = 0; i < LAYER_MAX; i++)
@@ -120,7 +117,7 @@ void Scene::Update()
 			if (object->layer != i)
 			{
 				m_gameObject[i].erase(itr);
-				m_gameObject[object->layer].push_back(object);
+				m_gameObject[object->layer].emplace_back(object);
 				itr--;
 				itr = m_gameObject[i].begin();
 			}
@@ -139,6 +136,7 @@ void Scene::Update()
 		}
 		LevelLoader::LoadLevel(this, "save1.scene");
 	}
+
 	//リストに関数を実行させてtureならリストから削除される
 	//[]をつけると名前のない関数にできる
 	for (int i = 0; i < LAYER_MAX; i++)
@@ -155,12 +153,16 @@ void Scene::Update()
 			}
 		);
 	}
+
+
 	
 
 	if (CInput::GetKeyTrigger('X'))
 	{
 		LevelLoader::SaveLevel(this, "save1.scene");
 	}
+
+	
 
 	Collider::UpdateCollision();
 }
@@ -187,6 +189,12 @@ void Scene::Finalize()
 			delete object;
 		}
 		m_gameObject[i].clear();
+		for (GameObject* object : tempObj)
+		{
+			object->Finalize();
+			delete object;
+		}
+		tempObj.clear();
 	}
 	
 }
@@ -194,19 +202,26 @@ void Scene::Finalize()
 GameObject* Scene::CreateGameObject()
 {
 	GameObject* obj = new GameObject();
-	m_gameObject[obj->layer].push_back(obj);
+	tempObj.emplace_back(obj);
 	return obj;
 }
 
-void Scene::AddGameObject(GameObject* obj)
+void Scene::AddGameObject(GameObject* obj, bool isTemp)
 {
-	m_gameObject[obj->layer].push_back(obj);
+	if (isTemp)
+	{
+		tempObj.emplace_back(obj);
+	}
+	else
+	{
+		m_gameObject[obj->layer].emplace_back(obj);
+	}
 }
 
 GameObject* Scene::CreatePrefab(GameObject* obj)
 {
 	GameObject* object = new GameObject(*obj);
-	m_gameObject[obj->layer].push_back(object);
+	tempObj.emplace_back(object);
 	object->Initialize();
 	return object;
 }

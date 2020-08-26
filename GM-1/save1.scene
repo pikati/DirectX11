@@ -8,9 +8,9 @@
                 "isDestroy": false,
                 "layer": 0,
                 "position": [
-                    1.4236257076263428,
-                    4.0,
-                    -5.154925346374512
+                    2.2000010013580324,
+                    10.0,
+                    -10.0
                 ],
                 "rotation": [
                     0.0,
@@ -25,7 +25,8 @@
             },
             "component": [
                 {
-                    "type": "Camera"
+                    "type": "Camera",
+                    "id": -1
                 }
             ]
         },
@@ -37,24 +38,85 @@
                 "isDestroy": false,
                 "layer": 1,
                 "position": [
-                    1.2037785053253174,
-                    1.0,
-                    -0.1597611904144287
+                    2.2000010013580324,
+                    -5.960464477539063e-8,
+                    4.7400007247924809
                 ],
                 "rotation": [
                     0.0,
-                    177.47991943359376,
+                    0.0,
                     0.0
                 ],
                 "scale": [
-                    10.0,
-                    10.0,
-                    10.0
+                    1.0,
+                    1.0,
+                    1.0
                 ]
             },
             "component": [
                 {
-                    "type": "Player"
+                    "type": "Player",
+                    "id": -1
+                },
+                {
+                    "type": "Animation",
+                    "dataNum": 6,
+                    "loop1": true,
+                    "start1": 0,
+                    "end1": 62,
+                    "lstart1": 20,
+                    "lend1": 60,
+                    "speed1": 2,
+                    "loop2": false,
+                    "start2": 63,
+                    "end2": 94,
+                    "lstart2": -1,
+                    "lend2": -1,
+                    "speed2": 1,
+                    "loop3": false,
+                    "start3": 95,
+                    "end3": 135,
+                    "lstart3": -1,
+                    "lend3": -1,
+                    "speed3": 1,
+                    "loop4": false,
+                    "start4": 136,
+                    "end4": 171,
+                    "lstart4": -1,
+                    "lend4": -1,
+                    "speed4": 1,
+                    "loop5": false,
+                    "start5": 172,
+                    "end5": 212,
+                    "lstart5": -1,
+                    "lend5": -1,
+                    "speed5": 1,
+                    "loop6": false,
+                    "start6": 0,
+                    "end6": 0,
+                    "lstart6": -1,
+                    "lend6": -1,
+                    "speed6": 1375327884
+                },
+                {
+                    "type": "Fbx",
+                    "fileName": "Asset/Models/Player/eatmanV3.fbx",
+                    "textureName": "Asset/Texture/Player/eatman.png",
+                    "id": 0
+                },
+                {
+                    "type": "AABB",
+                    "max": [
+                        1.0,
+                        1.0,
+                        1.0
+                    ],
+                    "min": [
+                        -1.0,
+                        -1.0,
+                        -1.0
+                    ],
+                    "kinematic": false
                 }
             ]
         },
@@ -83,71 +145,28 @@
             },
             "component": [
                 {
-                    "type": "Enemy"
-                },
-                {
-                    "type": "SphereCollider",
-                    "center": [
-                        0.0,
-                        0.0,
-                        0.0
-                    ],
-                    "radius": 0.5,
-                    "position": [
-                        0.0,
-                        0.0,
-                        0.0
-                    ],
-                    "rotation": [
-                        0.0,
-                        0.0,
-                        0.0
-                    ],
-                    "scale": [
+                    "type": "AABB",
+                    "max": [
                         1.0,
                         1.0,
                         1.0
-                    ]
-                }
-            ]
-        },
-        {
-            "properties": {
-                "name": "unname",
-                "tag": "untagged",
-                "activeSelf": false,
-                "isDestroy": false,
-                "layer": 1,
-                "position": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "rotation": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "component": [
-                {
-                    "type": "Texture",
-                    "fileName": "Asset\\Texture\\koyorichan.jpg",
-                    "id": 0
+                    ],
+                    "min": [
+                        -1.0,
+                        -1.0,
+                        -1.0
+                    ],
+                    "kinematic": false
                 },
                 {
-                    "type": "Field"
+                    "type": "Enemy",
+                    "id": -1
                 }
             ]
         },
         {
             "properties": {
-                "name": "unname",
+                "name": "Field",
                 "tag": "untagged",
                 "activeSelf": true,
                 "isDestroy": false,
@@ -170,43 +189,133 @@
             },
             "component": [
                 {
-                    "type": "Animation",
-                    "dataNum": 6,
-                    "loop1": true,
-                    "start1": 0,
-                    "end1": 62,
-                    "lstart1": 20,
-                    "lend1": 60,
-                    "loop2": false,
-                    "start2": 63,
-                    "end2": 94,
-                    "lstart2": -1,
-                    "lend2": -1,
-                    "loop3": false,
-                    "start3": 95,
-                    "end3": 135,
-                    "lstart3": -1,
-                    "lend3": -1,
-                    "loop4": false,
-                    "start4": 136,
-                    "end4": 171,
-                    "lstart4": -1,
-                    "lend4": -1,
-                    "loop5": false,
-                    "start5": 172,
-                    "end5": 212,
-                    "lstart5": -1,
-                    "lend5": -1,
-                    "loop6": false,
-                    "start6": 0,
-                    "end6": 0,
-                    "lstart6": -1,
-                    "lend6": -1
-                },
+                    "type": "Plane",
+                    "fileName": "Asset/Texture/koyorichan.jpg",
+                    "id": -1
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "ground1x1_1",
+                "tag": "Ground",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    6.0,
+                    -2.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
                 {
                     "type": "Fbx",
-                    "fileName": "Asset/Models/Player/eatmanV3.fbx",
-                    "textureName": "Asset//Texture//Player//eatman.png"
+                    "fileName": "Asset/Models/Stage/ground1x1.fbx",
+                    "textureName": "Asset/Texture/Stage/ground1x1.png",
+                    "id": 2
+                },
+                {
+                    "type": "AABB",
+                    "max": [
+                        1.0,
+                        1.0,
+                        1.0
+                    ],
+                    "min": [
+                        -1.0,
+                        -1.0,
+                        -1.0
+                    ],
+                    "kinematic": true
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "ground10x10_1",
+                "tag": "Ground",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    0.0,
+                    -2.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Fbx",
+                    "fileName": "Asset/Models/Stage/ground10x10.fbx",
+                    "textureName": "Asset/Texture/Stage/ground1x1.png",
+                    "id": 3
+                },
+                {
+                    "type": "AABB",
+                    "max": [
+                        5.0,
+                        1.0,
+                        5.0
+                    ],
+                    "min": [
+                        -5.0,
+                        -1.0,
+                        -5.0
+                    ],
+                    "kinematic": true
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "backGround",
+                "tag": "untagged",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    0.0,
+                    0.0,
+                    100.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    10.0,
+                    10.0,
+                    10.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Fbx",
+                    "fileName": "Asset/Models/Stage/backGround.fbx",
+                    "textureName": "Asset/Texture/Stage/backGround.png",
+                    "id": 4
                 }
             ]
         },
@@ -235,7 +344,8 @@
             },
             "component": [
                 {
-                    "type": "CPolygon"
+                    "type": "CPolygon",
+                    "id": -1
                 }
             ]
         }

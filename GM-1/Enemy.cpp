@@ -6,7 +6,7 @@
 #include "model.h"
 #include "Enemy.h"
 #include "Transform.h"
-#include "SphereCollider.h"
+#include "AABB.h"
 #include <DirectXMath.h>
 
 Enemy::Enemy()
@@ -29,16 +29,19 @@ void Enemy::Initialize()
 	gameObject->transform->rotation = Vector3(0.0f, 100.0f, 0.0f);
 	gameObject->transform->scale = Vector3(0.6f, 0.6f, 0.6f);
 
-	m_collider = gameObject->GetComponent<SphereCollider>();
-	m_collider->SetCenter(Vector3::zero);
-	m_collider->SetRadius(0.5f);
+	m_collider = gameObject->GetComponent<AABB>();
+
 }
 
 void Enemy::Update()
 {
+	if (m_collider == nullptr) return;
 	if (m_collider->IsCollision())
 	{
-		gameObject->Destroy();
+		if (m_collider->GetHitGameObject()->tag == "Bullet")
+		{
+			gameObject->Destroy();
+		}
 	}
 }
 

@@ -23,7 +23,7 @@ Camera::~Camera()
 
 void Camera::Initialize()
 {
-	gameObject->transform->position = Vector3(0.0f, 5.0f, -5.0f);
+	gameObject->transform->position = v = Vector3(0.0f, 10.0f, -10.0f);
 	m_target = Vector3(0.0f, 0.0f, 0.0f);
 
 }
@@ -36,42 +36,51 @@ void Camera::Update()
 		m_player = s->Find<Player>();
 		m_inisialized = true;
 	}
-	m_target = m_player->transform->position + v;
-
+	m_target = m_player->transform->position;
+	float pZ = m_player->transform->position.z;
+	if (pZ > 5.0f)
+	{
+		v.z = pZ - 15.0f;
+	}
+	else
+	{
+		v.z = -10.0f;
+	}
+	gameObject->transform->position.Set(m_player->transform->position.x, v.y, v.z);
 	//トップビュー
 	//gameObject->transform->position = m_target + Vector3(0.0f, 5.0f, -5.0f);
 
 	//サードパーソンビュー
-	Vector3 forward = m_player->GetForward();
-	gameObject->transform->position = m_target + forward * 5.0f + Vector3(0.0f, 3.0f, 0.0f);
+	//Vector3 forward = m_player->GetForward();
+	//gameObject->transform->position = m_target + forward * 5.0f + Vector3(0.0f, 3.0f, 0.0f);
 
 
-	if (CInput::GetKeyPress('J'))
-	{
-		/*gameObject->transform->position += Vector3(-0.1f, 0.0f, 0.0f);
-		m_target += Vector3(-0.1f, 0.0f, 0.0f);*/
-		v += Vector3(-0.1f, 0.0f, 0.0f);
-	}
-	if (CInput::GetKeyPress('L'))
-	{
-		/*gameObject->transform->position += Vector3(0.1f, 0.0f, 0.0f);
-		m_target += Vector3(0.1f, 0.0f, 0.0f);*/
-		v += Vector3(-0.1f, 0.0f, 0.0f);
-	}
-	if (CInput::GetKeyPress('I'))
-	{
-		/*gameObject->transform->position += Vector3(0.0f, 0.0f, 0.1f);
-		m_target += Vector3(0.0f, 0.0f, 0.1f);*/
-		v += Vector3(0, 0.1f, 0.0f);
+	//if (CInput::GetKeyPress('J'))
+	//{
+	//	/*gameObject->transform->position += Vector3(-0.1f, 0.0f, 0.0f);
+	//	m_target += Vector3(-0.1f, 0.0f, 0.0f);*/
+	//	v += Vector3(-0.1f, 0.0f, 0.0f);
+	//}
+	//if (CInput::GetKeyPress('L'))
+	//{
+	//	/*gameObject->transform->position += Vector3(0.1f, 0.0f, 0.0f);
+	//	m_target += Vector3(0.1f, 0.0f, 0.0f);*/
+	//	v += Vector3(-0.1f, 0.0f, 0.0f);
+	//}
+	//if (CInput::GetKeyPress('I'))
+	//{
+	//	/*gameObject->transform->position += Vector3(0.0f, 0.0f, 0.1f);
+	//	m_target += Vector3(0.0f, 0.0f, 0.1f);*/
+	//	v += Vector3(0, 0.1f, 0.0f);
 
-	}
-	if (CInput::GetKeyPress('M'))
-	{
-		/*gameObject->transform->position += Vector3(0.0f, 0.0f, -0.1f);
-		m_target += Vector3(0.0f, 0.0f, -0.1f);*/
-		v += Vector3(0.0f, -0.1f, 0.0f);
+	//}
+	//if (CInput::GetKeyPress('M'))
+	//{
+	//	/*gameObject->transform->position += Vector3(0.0f, 0.0f, -0.1f);
+	//	m_target += Vector3(0.0f, 0.0f, -0.1f);*/
+	//	v += Vector3(0.0f, -0.1f, 0.0f);
 
-	}
+	//}
 }
 
 void Camera::Draw()

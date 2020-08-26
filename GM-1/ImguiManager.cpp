@@ -7,6 +7,7 @@
 #include "Engine.h"
 #include "Transform.h"
 #include "Player.h"
+#include "AABB.h"
 
 bool ImguiManager::show_demo_window = false;
 bool ImguiManager::show_another_window = false;
@@ -27,7 +28,8 @@ void ImguiManager::Initialize(void* hwnd, ID3D11Device* device, ID3D11DeviceCont
 void ImguiManager::Update()
 {
 	Vector3 rotation = CManager::GetScene()->Find<Camera>()->transform->position;
-	Vector3 forward = CManager::GetScene()->Find<Player>()->GetForward();
+	Vector3 forward = CManager::GetScene()->Find<Player>()->transform->position;
+	Vector3 cpos = CManager::GetScene()->Find<Player>()->GetComponent<AABB>()->GetMax();
 	Camera* camera = CManager::GetScene()->Find<Camera>()->GetComponent<Camera>();
 	Vector3 target = camera->GetTarget();
 	ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
@@ -47,7 +49,8 @@ void ImguiManager::Update()
 		ImGui::Begin("Debug Window");                          // Create a window called "Hello, world!" and append into it.
 		ImGui::Text("Camera rotation x:%f, y:%f, z:%f", rotation.x, rotation.y, rotation.z);
 		ImGui::Text("Camera target   x:%f, y:%f, z:%f", target.x, target.y, target.z);
-		ImGui::Text("Player forward  x:%f, y:%f, z:%f", forward.x, forward.y, forward.z);
+		ImGui::Text("Player pos  x:%f, y:%f, z:%f", forward.x, forward.y, forward.z);
+		ImGui::Text("pcol   pos  x:%f, y:%f, z:%f", cpos.x, cpos.y, cpos.z);
 		//ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
 		//ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
 		//ImGui::Checkbox("Another Window", &show_another_window);

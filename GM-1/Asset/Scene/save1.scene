@@ -1,0 +1,227 @@
+{
+    "GameObject": [
+        {
+            "properties": {
+                "name": "MainCamera",
+                "tag": "MainCamera",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 0,
+                "position": [
+                    2.2000010013580324,
+                    10.0,
+                    -10.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Camera",
+                    "id": -1
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "Player",
+                "tag": "Player",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    2.2000010013580324,
+                    1.0,
+                    4.7400007247924809
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Player",
+                    "id": -1
+                },
+                {
+                    "type": "Animation",
+                    "dataNum": 6,
+                    "loop1": true,
+                    "start1": 0,
+                    "end1": 62,
+                    "lstart1": 20,
+                    "lend1": 60,
+                    "speed1": 2,
+                    "loop2": false,
+                    "start2": 63,
+                    "end2": 94,
+                    "lstart2": -1,
+                    "lend2": -1,
+                    "speed2": 1,
+                    "loop3": false,
+                    "start3": 95,
+                    "end3": 135,
+                    "lstart3": -1,
+                    "lend3": -1,
+                    "speed3": 1,
+                    "loop4": false,
+                    "start4": 136,
+                    "end4": 171,
+                    "lstart4": -1,
+                    "lend4": -1,
+                    "speed4": 1,
+                    "loop5": false,
+                    "start5": 172,
+                    "end5": 212,
+                    "lstart5": -1,
+                    "lend5": -1,
+                    "speed5": 1,
+                    "loop6": false,
+                    "start6": 0,
+                    "end6": 0,
+                    "lstart6": -1,
+                    "lend6": -1,
+                    "speed6": 222846448
+                },
+                {
+                    "type": "Fbx",
+                    "fileName": "Asset/Models/Player/eatmanV3.fbx",
+                    "textureName": "Asset/Texture/Player/eatman.png",
+                    "id": 0
+                },
+                {
+                    "type": "AABB",
+                    "max": [
+                        1.0,
+                        1.0,
+                        1.0
+                    ],
+                    "min": [
+                        -1.0,
+                        -1.0,
+                        -1.0
+                    ]
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "Enemy",
+                "tag": "Enemy",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    -3.0,
+                    1.0,
+                    1.0
+                ],
+                "rotation": [
+                    0.0,
+                    100.0,
+                    0.0
+                ],
+                "scale": [
+                    0.6000000238418579,
+                    0.6000000238418579,
+                    0.6000000238418579
+                ]
+            },
+            "component": [
+                {
+                    "type": "AABB",
+                    "max": [
+                        1.0,
+                        1.0,
+                        1.0
+                    ],
+                    "min": [
+                        -1.0,
+                        -1.0,
+                        -1.0
+                    ]
+                },
+                {
+                    "type": "Enemy",
+                    "id": -1
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "Field",
+                "tag": "untagged",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Plane",
+                    "fileName": "Asset/Texture/koyorichan.jpg",
+                    "id": -1
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "2DPolygon",
+                "tag": "untagged",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 2,
+                "position": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "CPolygon",
+                    "id": -1
+                }
+            ]
+        }
+    ]
+}

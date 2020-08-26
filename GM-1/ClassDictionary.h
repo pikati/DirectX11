@@ -47,5 +47,5 @@ public:
 	static void Initialize();
 	static void Register(const std::string& ty_name, Component* component);
 	static Component* AddComponent(const std::string& name, GameObject* obj);
-	static Component* SetComponent(const std::string& name, Component* component);
+	static Component* SetComponent(const std::string& name);
 };

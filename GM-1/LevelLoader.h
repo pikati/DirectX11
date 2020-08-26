@@ -19,6 +19,8 @@ private:
 public:
 	static bool LoadLevel(Scene* scene, const char* fileName);
 	static void SaveLevel(Scene* scene, const char* fileName);
+	static GameObject* LoadPrefab(const char* fileName);
+	static void SavePrefab(GameObject* gameObject, const char* fileName);
 };
 
 class JsonHelper
