@@ -55,10 +55,6 @@
             },
             "component": [
                 {
-                    "type": "Player",
-                    "id": -1
-                },
-                {
                     "type": "Animation",
                     "dataNum": 6,
                     "loop1": true,
@@ -107,16 +103,20 @@
                 {
                     "type": "AABB",
                     "max": [
+                        0.4,
                         1.0,
-                        1.0,
-                        1.0
+                        0.4
                     ],
                     "min": [
-                        -1.0,
-                        -1.0,
-                        -1.0
+                        -0.4,
+                        0.0,
+                        -0.4
                     ],
                     "kinematic": false
+                },
+                {
+                    "type": "Player",
+                    "id": -1
                 }
             ]
         },
@@ -145,22 +145,22 @@
             },
             "component": [
                 {
-                    "type": "AABB",
-                    "max": [
-                        1.0,
-                        1.0,
-                        1.0
-                    ],
-                    "min": [
-                        -1.0,
-                        -1.0,
-                        -1.0
-                    ],
-                    "kinematic": false
-                },
-                {
                     "type": "Enemy",
                     "id": -1
+                },
+                {
+                    "type": "AABB",
+                    "max": [
+                        0.3,
+                        0.6,
+                        0.3
+                    ],
+                    "min": [
+                        -0.3,
+                        -0.8,
+                        -0.3
+                    ],
+                    "kinematic": false
                 }
             ]
         },
@@ -192,52 +192,6 @@
                     "type": "Plane",
                     "fileName": "Asset/Texture/koyorichan.jpg",
                     "id": -1
-                }
-            ]
-        },
-        {
-            "properties": {
-                "name": "ground1x1_1",
-                "tag": "Ground",
-                "activeSelf": true,
-                "isDestroy": false,
-                "layer": 1,
-                "position": [
-                    6.0,
-                    -2.0,
-                    0.0
-                ],
-                "rotation": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "component": [
-                {
-                    "type": "Fbx",
-                    "fileName": "Asset/Models/Stage/ground1x1.fbx",
-                    "textureName": "Asset/Texture/Stage/ground1x1.png",
-                    "id": 2
-                },
-                {
-                    "type": "AABB",
-                    "max": [
-                        1.0,
-                        1.0,
-                        1.0
-                    ],
-                    "min": [
-                        -1.0,
-                        -1.0,
-                        -1.0
-                    ],
-                    "kinematic": true
                 }
             ]
         },

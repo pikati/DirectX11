@@ -1,7 +1,5 @@
-﻿  Bullet.cpp
-  Camera.cpp
-  ClassDictionary.cpp
-  ImguiManager.cpp
-  Player.cpp
-  コードを生成中...
+﻿  Collider.cpp
+D:\HAL\3\GM\DX11\GM-1\Collider.cpp(25,29): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
+D:\HAL\3\GM\DX11\GM-1\Collider.cpp(33,20): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
+D:\HAL\3\GM\DX11\GM-1\Collider.cpp(47,20): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
   GM-1.vcxproj -> D:\HAL\3\GM\DX11\Debug\GM-1.exe

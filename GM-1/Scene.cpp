@@ -55,7 +55,6 @@ Scene::~Scene()
 void Scene::Initialize()
 {
 	LevelLoader::LoadLevel(this, "save1.scene");
-	
 }
 
 void Scene::Update()

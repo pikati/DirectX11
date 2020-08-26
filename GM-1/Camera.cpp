@@ -23,7 +23,7 @@ Camera::~Camera()
 
 void Camera::Initialize()
 {
-	gameObject->transform->position = v = Vector3(0.0f, 10.0f, -10.0f);
+	gameObject->transform->position = v = Vector3(0.0f, 0, -10.0f);
 	m_target = Vector3(0.0f, 0.0f, 0.0f);
 
 }

@@ -235,11 +235,11 @@ GameObject* LevelLoader::LoadPrefab(const char* fileName)
 			}
 		}
 	}
-	std::list<Component*> comp = obj->GetComponents();
+	/*std::list<Component*> comp = obj->GetComponents();
 	for (Component* com : comp)
 	{
 		com->Initialize();
-	}
+	}*/
 	return obj;
 }
 

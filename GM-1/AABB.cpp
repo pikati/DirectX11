@@ -113,6 +113,7 @@ void AABB::Initialize()
 
 void AABB::Update()
 {
+	//hitObject = nullptr;
 	m_pos = gameObject->transform->position;
 	m_isCollisionThisFrame = false;
 }

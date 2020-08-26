@@ -9,16 +9,16 @@ class Player : public Component
 private:
     AABB* m_collider;
     Animation* m_animation;
-    Vector3 m_velocity;
     const float SPEED = 10.0f;
     const float m_gravity = 9.8f;
-    bool m_isGrounded = true;
+    Vector3 m_velocity;
 
     void Move();
     void Shot();
     void Jump();
-    //D3DXQUATERNION m_quaternion;
 public: 
+    bool m_isGrounded = false;
+
     Player();
     ~Player();
     void Initialize();

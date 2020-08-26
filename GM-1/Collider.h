@@ -24,7 +24,8 @@ protected:
 	};
 	bool m_isCollisionThisFrame = false;
 	int m_colliderID = -1;
-	GameObject* hitObject = nullptr;
+	GameObject* m_hitObject = nullptr;
+	GameObject* m_exitObject = nullptr;
 	ColliderType m_colliderType;
 
 	int SetCollider(Collider* collider);
@@ -41,6 +42,7 @@ public:
 	virtual void LoadProperties(const rapidjson::Value& inProp);
 	virtual void SavePropaties(rapidjson::Document::AllocatorType& alloc, rapidjson::Value& inProp);
 	GameObject* GetHitGameObject();
+	GameObject* GetExittGameObject();
 	bool IsCollision();
 	static void UpdateCollision();
 	void Destroy();
