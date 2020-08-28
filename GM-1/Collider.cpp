@@ -16,6 +16,8 @@ bool Collider::IsCollision()
 int Collider::SetCollider(Collider* collider)
 {
 	m_colliders.push_back(collider);
+	collider->m_hitObject.resize(8);
+	collider->m_exitObject.resize(8);
 	return m_colliders.size() - 1;
 }
 
@@ -33,7 +35,6 @@ void Collider::UpdateCollision()
 	for (int i = 0; i < m_colliders.size(); i++)
 	{
 		m_colliders[i]->Update();
-		m_colliders[i]->m_exitObject = nullptr;
 	}
 	int a = m_colliders.size() - 1;
 	int b = a + 1;
@@ -49,9 +50,11 @@ void Collider::UpdateCollision()
 		if (!m_colliders[i]->m_isCollisionThisFrame)
 		{
 			m_colliders[i]->m_exitObject = m_colliders[i]->m_hitObject;
-			m_colliders[i]->m_hitObject = nullptr;
+			for (int j = 0; j < m_colliders[i]->m_hitObject.size(); j++)
+			{
+				m_colliders[i]->m_hitObject[j] = nullptr;
+			}
 		}
-		
 	}
 }
 
@@ -93,14 +96,26 @@ float Collider::GetRadius()
 	return 0;
 }
 
-GameObject* Collider::GetHitGameObject()
+std::vector<GameObject*> Collider::GetHitGameObject()
 {
 	return m_hitObject;
 }
 
-GameObject* Collider::GetExittGameObject()
+std::vector<GameObject*> Collider::GetExitGameObject()
 {
 	return m_exitObject;
+}
+
+void Collider::ResetExitCollision()
+{
+	for (int i = 0; i < m_colliders.size(); i++)
+	{
+		for (int j = 0; j < m_colliders[i]->m_exitObject.size(); j++)
+		{
+			m_colliders[i]->m_exitObject[j] = m_colliders[i]->m_hitObject[j];
+			m_colliders[i]->m_hitObject[j] = nullptr;
+		}
+	}
 }
 
 void Collider::Sphere2Sphere(Collider* c1, Collider* c2)
@@ -112,13 +127,24 @@ void Collider::Sphere2Sphere(Collider* c1, Collider* c2)
 
 	if (powf(c2Position.x - c1Position.x, 2.0f) + powf(c2Position.y - c1Position.y, 2.0f) + powf(c2Position.z - c1Position.z, 2.0f) <= powf(c1Radius + c2Radius, 2.0f))
 	{
-		if (c1->m_isCollisionThisFrame || c2->m_isCollisionThisFrame) return;
 		c1->m_isCollision = true;
 		c2->m_isCollision = true;
 		c1->m_isCollisionThisFrame = true;
 		c2->m_isCollisionThisFrame = true;
-		c1->m_hitObject = c2->GetGameObject();
-		c2->m_hitObject = c1->GetGameObject();
+		for (int i = 0; i < c1->m_hitObject.size(); i++)
+		{
+			if (c1->m_hitObject[i] == nullptr)
+			{
+				c1->m_hitObject[i] = c2->GetGameObject();
+			}
+		}
+		for (int i = 0; i < c2->m_hitObject.size(); i++)
+		{
+			if (c2->m_hitObject[i] == nullptr)
+			{
+				c2->m_hitObject[i] = c1->GetGameObject();
+			}
+		}
 	}
 	else
 	{
@@ -152,8 +178,6 @@ void Collider::Sphere2Mesh(Collider* c1, Collider* c2)
 
 void Collider::AABB2AABB(Collider* c1, Collider* c2)
 {
-	//if (c1->m_isCollisionThisFrame || c2->m_isCollisionThisFrame) return;
-
 	AABB* a1 = dynamic_cast<AABB*>(c1);
 	AABB* a2= dynamic_cast<AABB*>(c2);
 
@@ -243,8 +267,22 @@ void Collider::AABB2AABB(Collider* c1, Collider* c2)
 	c2->m_isCollision = true;
 	c1->m_isCollisionThisFrame = true;
 	c2->m_isCollisionThisFrame = true;
-	c1->m_hitObject = c2->GetGameObject();
-	c2->m_hitObject = c1->GetGameObject();
+	for (int i = 0; i < c1->m_hitObject.size(); i++)
+	{
+		if (c1->m_hitObject[i] == nullptr)
+		{
+			c1->m_hitObject[i] = c2->GetGameObject();
+			break;
+		}
+	}
+	for (int i = 0; i < c2->m_hitObject.size(); i++)
+	{
+		if (c2->m_hitObject[i] == nullptr)
+		{
+			c2->m_hitObject[i] = c1->GetGameObject();
+			
+		}
+	}
 
 	bool a1Kinematic = a1->IsKinematic();
 	bool a2Kinematic = a2->IsKinematic();
@@ -279,7 +317,7 @@ void Collider::AABB2AABB(Collider* c1, Collider* c2)
 		{
 			pos1.x += dx;
 		}
-		else
+		else if(!a1Kinematic && !a2Kinematic)
 		{
 			pos1.x += dx / 2.0f;
 			pos2.x -= dx / 2.0f;
@@ -295,7 +333,7 @@ void Collider::AABB2AABB(Collider* c1, Collider* c2)
 		{
 			pos1.y += dy;
 		}
-		else
+		else if (!a1Kinematic && !a2Kinematic)
 		{
 			pos1.y += dy / 2.0f;
 			pos2.y -= dy / 2.0f;
@@ -311,7 +349,7 @@ void Collider::AABB2AABB(Collider* c1, Collider* c2)
 		{
 			pos1.z += dz;
 		}
-		else
+		else if (!a1Kinematic && !a2Kinematic)
 		{
 			pos1.z += dz / 2.0f;
 			pos2.z -= dz / 2.0f;
@@ -323,8 +361,6 @@ void Collider::AABB2AABB(Collider* c1, Collider* c2)
 
 void Collider::Sphere2AABB(Collider* c1, Collider* c2)
 {
-	if (c1->m_isCollisionThisFrame || c2->m_isCollisionThisFrame) return;
-
 	SphereCollider* sc = dynamic_cast<SphereCollider*>(c1);
 	AABB* a = dynamic_cast<AABB*>(c2);
 	Vector3 center = sc->GetPosition();
@@ -346,8 +382,20 @@ void Collider::Sphere2AABB(Collider* c1, Collider* c2)
 		c2->m_isCollision = true;
 		c1->m_isCollisionThisFrame = true;
 		c2->m_isCollisionThisFrame = true;
-		c1->m_hitObject = c2->GetGameObject();
-		c2->m_hitObject = c1->GetGameObject();
+		for (int i = 0; i < c1->m_hitObject.size(); i++)
+		{
+			if (c1->m_hitObject[i] == nullptr)
+			{
+				c1->m_hitObject[i] = c2->GetGameObject();
+			}
+		}
+		for (int i = 0; i < c2->m_hitObject.size(); i++)
+		{
+			if (c2->m_hitObject[i] == nullptr)
+			{
+				c2->m_hitObject[i] = c1->GetGameObject();
+			}
+		}
 	}
 }
 

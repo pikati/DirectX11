@@ -18,8 +18,9 @@ enum AnimationName
 	SHOOT,
 	DAMAGE,
 	IDOL,
-	END
+	ANIMATION_END
 };
+
 
 Player::Player()
 {
@@ -50,33 +51,27 @@ void Player::Update()
 {
 	Vector3 forward = gameObject->GetForward();
 
-
-	if (m_collider->IsCollision())
-	{
-		if (m_collider->GetHitGameObject()->tag == "Ground")
-		{
-			m_isGrounded = true;
-		}
-	}
-	if (m_collider->GetExittGameObject() != nullptr)
-	{
-		if (m_collider->GetExittGameObject()->tag == "Ground")
-		{
-			m_isGrounded = false;
-		}
-	}
+	CheckGrounded();
 
 	if (CInput::GetKeyTrigger('K'))
 	{
 		Jump();
 
 	}
-	if (CInput::GetKeyTrigger('L'))
-	{
-		Shot();
-	}
+	//if (CInput::GetKeyTrigger('L'))
+	//{
+	//	Shot();
+	//}
+	//if (CInput::GetKeyPress('J'))
+	//{
+	//	//Slash();
+	//	gameObject->transform->position.y += 1.0f * FPS::deltaTime;
+	//}if (CInput::GetKeyPress('I'))
+	//{
+	//	//Slash();
+	//	gameObject->transform->position.y += -1.0f * FPS::deltaTime;
+	//}
 	Move();
-
 	if (m_isGrounded)
 	{
 		m_velocity.y = 0;
@@ -106,21 +101,25 @@ void Player::Move()
 	{
 		m_velocity.x += -SPEED * FPS::deltaTime;
 		gameObject->transform->rotation.y = 270.0f;
+		dir = LEFT;
 	}
 	if (CInput::GetKeyPress('D'))
 	{
 		m_velocity.x += SPEED * FPS::deltaTime;
 		gameObject->transform->rotation.y = 90.0f;
+		dir = RIGHT;
 	}
 	if (CInput::GetKeyPress('W'))
 	{
 		m_velocity.z += SPEED * FPS::deltaTime;
 		gameObject->transform->rotation.y = 0.0f;
+		dir = FORWARD;
 	}
 	if (CInput::GetKeyPress('S'))
 	{
 		m_velocity.z += -SPEED * FPS::deltaTime;
 		gameObject->transform->rotation.y = 180.0f;
+		dir = BACK;
 	}
 
 	m_velocity.y += -m_gravity * FPS::deltaTime * 0.25f;
@@ -151,4 +150,61 @@ void Player::Jump()
 		m_velocity.y += 0.5f;
 		m_isGrounded = false;
 	}
+}
+
+void Player::Slash()
+{
+	m_animation->SetState(SLASH);
+	m_isAttack = true;
+	m_attackFrame = m_attackTime;
+	switch (dir)
+	{
+	case Player::FORWARD:
+		m_collider->SetMax(Vector3(0.4f, 0.8f, 1.5f));
+		break;
+	case Player::BACK:
+		m_collider->SetMin(Vector3(-0.4f, 0.0f, -1.5f));
+		break;
+	case Player::LEFT:
+		m_collider->SetMin(Vector3(-1.5f, 0.0f, -0.4f));
+		break;
+	case Player::RIGHT:
+		m_collider->SetMax(Vector3(1.5f, 0.8f, 0.4f));
+		break;
+	case Player::NON:
+		break;
+	default:
+		break;
+	}
+}
+
+void Player::CheckGrounded()
+{
+	std::vector<GameObject*> hit = m_collider->GetHitGameObject();
+	for (int i = 0; i < hit.size(); i++)
+	{
+		if (hit[i] != nullptr)
+		{
+			if (hit[i]->tag == "Ground")
+			{
+				m_isGrounded = true;
+			}
+		}
+	}
+	std::vector<GameObject*> exit = m_collider->GetExitGameObject();
+	for (int i = 0; i < exit.size(); i++)
+	{
+		if (exit[i] != nullptr)
+		{
+			if (exit[i]->tag == "Ground")
+			{
+				m_isGrounded = false;
+			}
+		}
+	}
+}
+
+bool Player::IsAttack()
+{
+	return m_isAttack;
 }

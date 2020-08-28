@@ -9,7 +9,6 @@
 #include "Scene.h"
 
 static D3DMATRIX m;
-static Vector3 v;
 
 Camera::Camera()
 {
@@ -23,9 +22,8 @@ Camera::~Camera()
 
 void Camera::Initialize()
 {
-	gameObject->transform->position = v = Vector3(0.0f, 0, -10.0f);
+	gameObject->transform->position = Vector3(0.0f, 10.0f, -10.0f);
 	m_target = Vector3(0.0f, 0.0f, 0.0f);
-
 }
 
 void Camera::Update()
@@ -38,49 +36,26 @@ void Camera::Update()
 	}
 	m_target = m_player->transform->position;
 	float pZ = m_player->transform->position.z;
-	if (pZ > 5.0f)
+
+
+	if (CInput::GetKeyPress('J'))
 	{
-		v.z = pZ - 15.0f;
+		rotation -= m_rotationValue;
+		if (rotation < 0)
+		{
+			rotation += D3DX_PI * 2.0f;
+		}
 	}
-	else
+	if (CInput::GetKeyPress('L'))
 	{
-		v.z = -10.0f;
+		rotation += m_rotationValue;
+		if (rotation < D3DX_PI * 2.0f)
+		{
+			rotation -= D3DX_PI * 2.0f;
+		}
 	}
-	gameObject->transform->position.Set(m_player->transform->position.x, v.y, v.z);
-	//トップビュー
-	//gameObject->transform->position = m_target + Vector3(0.0f, 5.0f, -5.0f);
-
-	//サードパーソンビュー
-	//Vector3 forward = m_player->GetForward();
-	//gameObject->transform->position = m_target + forward * 5.0f + Vector3(0.0f, 3.0f, 0.0f);
-
-
-	//if (CInput::GetKeyPress('J'))
-	//{
-	//	/*gameObject->transform->position += Vector3(-0.1f, 0.0f, 0.0f);
-	//	m_target += Vector3(-0.1f, 0.0f, 0.0f);*/
-	//	v += Vector3(-0.1f, 0.0f, 0.0f);
-	//}
-	//if (CInput::GetKeyPress('L'))
-	//{
-	//	/*gameObject->transform->position += Vector3(0.1f, 0.0f, 0.0f);
-	//	m_target += Vector3(0.1f, 0.0f, 0.0f);*/
-	//	v += Vector3(-0.1f, 0.0f, 0.0f);
-	//}
-	//if (CInput::GetKeyPress('I'))
-	//{
-	//	/*gameObject->transform->position += Vector3(0.0f, 0.0f, 0.1f);
-	//	m_target += Vector3(0.0f, 0.0f, 0.1f);*/
-	//	v += Vector3(0, 0.1f, 0.0f);
-
-	//}
-	//if (CInput::GetKeyPress('M'))
-	//{
-	//	/*gameObject->transform->position += Vector3(0.0f, 0.0f, -0.1f);
-	//	m_target += Vector3(0.0f, 0.0f, -0.1f);*/
-	//	v += Vector3(0.0f, -0.1f, 0.0f);
-
-	//}
+	gameObject->transform->position.x = m_target.x - sinf(rotation) * m_distance;
+	gameObject->transform->position.z = m_target.z - cosf(rotation) * m_distance;
 }
 
 void Camera::Draw()

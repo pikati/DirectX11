@@ -341,11 +341,53 @@ void AABB::Finalize()
 void AABB::SetMax(Vector3 max)
 {
 	m_max = max;
+	m_v[0].pos = m_max;
+	m_v[1].pos = Vector3(m_min.x, m_max.y, m_max.z);
+	m_v[2].pos = Vector3(m_min.x, m_min.y, m_max.z);
+	m_v[3].pos = Vector3(m_max.x, m_min.y, m_max.z);
+	m_v[4].pos = Vector3(m_max.x, m_max.y, m_min.z);
+	m_v[5].pos = Vector3(m_min.x, m_max.y, m_min.z);
+	m_v[6].pos = m_min;
+	m_v[7].pos = Vector3(m_max.x, m_min.y, m_min.z);
 }
 
 void AABB::SetMin(Vector3 min)
 {
 	m_min = min;
+	m_v[0].pos = m_max;
+	m_v[1].pos = Vector3(m_min.x, m_max.y, m_max.z);
+	m_v[2].pos = Vector3(m_min.x, m_min.y, m_max.z);
+	m_v[3].pos = Vector3(m_max.x, m_min.y, m_max.z);
+	m_v[4].pos = Vector3(m_max.x, m_max.y, m_min.z);
+	m_v[5].pos = Vector3(m_min.x, m_max.y, m_min.z);
+	m_v[6].pos = m_min;
+	m_v[7].pos = Vector3(m_max.x, m_min.y, m_min.z);
+}
+
+void AABB::SetMax(float x, float y, float z)
+{
+	m_max.Set(x, y, z);
+	m_v[0].pos = m_max;
+	m_v[1].pos = Vector3(m_min.x, m_max.y, m_max.z);
+	m_v[2].pos = Vector3(m_min.x, m_min.y, m_max.z);
+	m_v[3].pos = Vector3(m_max.x, m_min.y, m_max.z);
+	m_v[4].pos = Vector3(m_max.x, m_max.y, m_min.z);
+	m_v[5].pos = Vector3(m_min.x, m_max.y, m_min.z);
+	m_v[6].pos = m_min;
+	m_v[7].pos = Vector3(m_max.x, m_min.y, m_min.z);
+}
+
+void AABB::SetMin(float x, float y, float z)
+{
+	m_min.Set(x, y, z);
+	m_v[0].pos = m_max;
+	m_v[1].pos = Vector3(m_min.x, m_max.y, m_max.z);
+	m_v[2].pos = Vector3(m_min.x, m_min.y, m_max.z);
+	m_v[3].pos = Vector3(m_max.x, m_min.y, m_max.z);
+	m_v[4].pos = Vector3(m_max.x, m_max.y, m_min.z);
+	m_v[5].pos = Vector3(m_min.x, m_max.y, m_min.z);
+	m_v[6].pos = m_min;
+	m_v[7].pos = Vector3(m_max.x, m_min.y, m_min.z);
 }
 
 void AABB::SetPosition(Vector3 pos)

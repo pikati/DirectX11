@@ -26,6 +26,8 @@ public:
 	void Finalize();
 	void SetMax(Vector3 max);
 	void SetMin(Vector3 min);
+	void SetMax(float x, float y, float z);
+	void SetMin(float x, float y, float z);
 	void SetPosition(Vector3 pos);
 	Vector3 GetMax();
 	Vector3 GetMin();

@@ -10,7 +10,7 @@
 #include "SphereCollider.h"
 #include "AABB.h"
 #include "SpriteEffect.h"
-#include "billborad.h"
+#include "Billboard.h"
 #include "Texture.h"
 #include "Fbx.h"
 #include "Animation.h"
@@ -35,7 +35,7 @@ void ClassDictionary::Initialize()
 	builderfromstring.Register(REGISTER_ARGS(Transform));
 	builderfromstring.Register(REGISTER_ARGS(SphereCollider));
 	builderfromstring.Register(REGISTER_ARGS(SpriteEffect));
-	builderfromstring.Register(REGISTER_ARGS(billborad));
+	builderfromstring.Register(REGISTER_ARGS(Billboard));
 	builderfromstring.Register(REGISTER_ARGS(Texture));
 	builderfromstring.Register(REGISTER_ARGS(Fbx));
 	builderfromstring.Register(REGISTER_ARGS(Animation));

@@ -11,6 +11,9 @@ private:
 	D3DXMATRIX m_viewMatrix;
 	GameObject* m_player;
 	bool m_inisialized = false;
+	float rotation = 0;
+	const float m_rotationValue = D3DX_PI * 0.01f;
+	const float m_distance = 10.0f;
 public:
 	Camera();
 	~Camera();

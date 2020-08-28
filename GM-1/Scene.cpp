@@ -7,13 +7,12 @@
 #include <sstream>
 #include "Constants.h"
 #include "LevelLoader.h"
-#include "Texture.h"
 #include "Transform.h"
-#include "Collider.h"
 
 #include "GameObject.h"
-#include "AABB.h"
-#include "Fbx.h"
+#include "Plane.h"
+#include "Billboard.h"
+#include "SphereCollider.h"
 
 #include <Stdio.h>
 
@@ -55,41 +54,25 @@ Scene::~Scene()
 void Scene::Initialize()
 {
 	LevelLoader::LoadLevel(this, "save1.scene");
+	GameObject* obj = CreateGameObject();
+	SphereCollider* s = obj->AddComponent<SphereCollider>();
+	s->SetCenter(0.0f, 0.0f, 0.0f);
+	s->SetRadius(0.5f);
+	s->Initialize();
+	Plane* p = obj->AddComponent<Plane>();
+	p->SetTextureName("Asset/Texture/Item/apple.png");
+	p->Initialize();
+	Billboard* b = obj->AddComponent<Billboard>();
+	b->Initialize();
+	//obj->transform->position.Set(-2.0f, 2.0f, 3.0f);
+	obj->name = "Apple";
+	obj->tag = "Item";
 }
 
 void Scene::Update()
 {
-	/*if (CInput::GetKeyTrigger('T'))
-	{
-		f->UpFrame();
-	}
-	if (CInput::GetKeyTrigger('G'))
-	{
-		f->DownFrame();
-	}
-	if (CInput::GetKeyTrigger(VK_SPACE))
-	{
-		f->PlayAnimation();
-	}
-	if (CInput::GetKeyTrigger('R'))
-	{
-		state++;
-		if (state >= END)
-		{
-			state = WALK;
-		}
-		anim->SetState(state);
-	}
-	if (CInput::GetKeyTrigger('F'))
-	{
-		state--;
-		if (state < WALK)
-		{
-			state = IDOL;
-		}
-		anim->SetState(state);
-	}*/
-	
+	Collider::UpdateCollision();
+
 	for (int i = 0; i < LAYER_MAX; i++)
 	{
 		for (GameObject* object : m_gameObject[i])
@@ -151,19 +134,17 @@ void Scene::Update()
 				return false;
 			}
 		);
-	}
-
-
-	
+	}	
 
 	if (CInput::GetKeyTrigger('X'))
 	{
 		LevelLoader::SaveLevel(this, "save1.scene");
 	}
-
-	
-
-	Collider::UpdateCollision();
+	if (CInput::GetKeyTrigger('Q'))
+	{
+		Finalize();
+		Initialize();
+	}
 }
 
 void Scene::Draw()

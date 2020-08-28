@@ -1,5 +1,11 @@
-﻿  Collider.cpp
-D:\HAL\3\GM\DX11\GM-1\Collider.cpp(25,29): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
-D:\HAL\3\GM\DX11\GM-1\Collider.cpp(33,20): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
-D:\HAL\3\GM\DX11\GM-1\Collider.cpp(47,20): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
+﻿  Billboard.cpp
+  Bullet.cpp
+D:\HAL\3\GM\DX11\GM-1\Bullet.cpp(81,20): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
+  Camera.cpp
+  ClassDictionary.cpp
+  ImguiManager.cpp
+D:\HAL\3\GM\DX11\GM-1\ImguiManager.cpp(51,21): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
+D:\HAL\3\GM\DX11\GM-1\ImguiManager.cpp(56,23): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
+  SpriteEffect.cpp
+  コードを生成中...
   GM-1.vcxproj -> D:\HAL\3\GM\DX11\Debug\GM-1.exe

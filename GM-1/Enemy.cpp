@@ -36,11 +36,15 @@ void Enemy::Initialize()
 void Enemy::Update()
 {
 	if (m_collider == nullptr) return;
-	if (m_collider->IsCollision())
+	std::vector<GameObject*> hit = m_collider->GetHitGameObject();
+	for (int i = 0; i < hit.size(); i++)
 	{
-		if (m_collider->GetHitGameObject()->tag == "Bullet")
+		if (hit[i] != nullptr)
 		{
-			gameObject->Destroy();
+			if (hit[i]->tag == "Bullet")
+			{
+				gameObject->Destroy();
+			}
 		}
 	}
 }

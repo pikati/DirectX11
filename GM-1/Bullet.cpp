@@ -76,13 +76,13 @@ void Bullet::Update()
 		return;
 	}
 	gameObject->transform->position += m_direction * FPS::deltaTime;
-	if (m_collider->IsCollision())
+
+	std::vector<GameObject*> hit = m_collider->GetHitGameObject();
+	for (int i = 0; i < hit.size(); i++)
 	{
-		GameObject* obj = m_collider->GetHitGameObject();
-		if (obj != nullptr)
+		if (hit[i] != nullptr)
 		{
-			std::string tag = obj->tag;
-			if (tag == "Enemy")
+			if (hit[i]->tag == "Enemy")
 			{
 				gameObject->Destroy();
 				GameObject* g = m_scene->CreatePrefab(m_effect);

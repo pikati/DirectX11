@@ -4,7 +4,6 @@
 class Collider : public Component
 {
 private:
-	static std::vector<Collider*> m_colliders;
 	bool m_isCollision = false;
 	bool m_isDestroy = false;
 
@@ -22,16 +21,19 @@ protected:
 		Aabb,
 		Max
 	};
-	bool m_isCollisionThisFrame = false;
 	int m_colliderID = -1;
-	GameObject* m_hitObject = nullptr;
-	GameObject* m_exitObject = nullptr;
+	bool m_isCollisionThisFrame = false;
+
+	std::vector<GameObject*> m_hitObject;
+	std::vector<GameObject*> m_exitObject;
 	ColliderType m_colliderType;
 
 	int SetCollider(Collider* collider);
 	void DeleteCollider(int colliderID);
 
 public:
+	static std::vector<Collider*> m_colliders;
+
 
 	virtual void Initialize() = 0;
 	virtual void Update() = 0;
@@ -41,10 +43,11 @@ public:
 	virtual float GetRadius();
 	virtual void LoadProperties(const rapidjson::Value& inProp);
 	virtual void SavePropaties(rapidjson::Document::AllocatorType& alloc, rapidjson::Value& inProp);
-	GameObject* GetHitGameObject();
-	GameObject* GetExittGameObject();
+	std::vector<GameObject*> GetHitGameObject();
+	std::vector<GameObject*> GetExitGameObject();
 	bool IsCollision();
 	static void UpdateCollision();
+	static void ResetExitCollision();
 	void Destroy();
 };
 

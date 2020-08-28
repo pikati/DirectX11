@@ -112,7 +112,7 @@ void Plane::Draw()
 	CRenderer::GetDeviceContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 
 	CRenderer::GetDeviceContext()->Draw(4, 0);
-	DrawNormal();
+	//DrawNormal();
 }
 
 void Plane::Finalize()

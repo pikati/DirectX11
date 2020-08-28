@@ -8,6 +8,7 @@
 #include "Transform.h"
 #include "Player.h"
 #include "AABB.h"
+#include "Collider.h"
 
 bool ImguiManager::show_demo_window = false;
 bool ImguiManager::show_another_window = false;
@@ -27,12 +28,12 @@ void ImguiManager::Initialize(void* hwnd, ID3D11Device* device, ID3D11DeviceCont
 
 void ImguiManager::Update()
 {
-	Vector3 rotation = CManager::GetScene()->Find<Camera>()->transform->position;
-	bool forward = CManager::GetScene()->Find<Player>()->GetComponent<Player>()->m_isGrounded;
-	Vector3 cpos = CManager::GetScene()->Find<Player>()->transform->position;
-	Camera* camera = CManager::GetScene()->Find<Camera>()->GetComponent<Camera>();
-	Vector3 target = camera->GetTarget();
-	ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
+	//Vector3 rotation = CManager::GetScene()->Find<Camera>()->transform->position;
+	////bool forward = CManager::GetScene()->Find<Player>()->GetComponent<Player>()->m_isGrounded;
+	//Vector3 cpos = CManager::GetScene()->Find<Player>()->transform->position;
+	//Camera* camera = CManager::GetScene()->Find<Camera>()->GetComponent<Camera>();
+	//Vector3 target = camera->GetTarget();
+	//ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 	ImGui_ImplDX11_NewFrame();
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
@@ -46,18 +47,26 @@ void ImguiManager::Update()
 		static float f = 0.0f;
 		static int counter = 0;
 
-		ImGui::Begin("Debug Window");                          // Create a window called "Hello, world!" and append into it.
-		ImGui::Text("Camera rotation x:%f, y:%f, z:%f", rotation.x, rotation.y, rotation.z);
+		ImGui::Begin("Debug Window");
+		for (int i = 0; i < Collider::m_colliders.size(); i++)
+		{
+			if (Collider::m_colliders[i]->GetGameObject()->tag == "Player")
+			{
+				std::vector<GameObject*> obj = Collider::m_colliders[i]->GetHitGameObject();
+				for (int j = 0; j < obj.size(); j++)
+				{
+					if (obj[i] != nullptr)
+					{
+						ImGui::Text("%s", obj[i]->name.c_str());
+					}
+				}
+			}
+
+		}
+		/*ImGui::Text("Camera rotation x:%f, y:%f, z:%f", rotation.x, rotation.y, rotation.z);
 		ImGui::Text("Camera target   x:%f, y:%f, z:%f", target.x, target.y, target.z);
-		if (forward)
-		{
-			ImGui::Text("Player IsGrounded  true");
-		}
-		else
-		{
-			ImGui::Text("Player IsGrounded  false");
-		}
-		ImGui::Text("player   pos  x:%f, y:%f, z:%f", cpos.x, cpos.y, cpos.z);
+		
+		ImGui::Text("player   pos  x:%f, y:%f, z:%f", cpos.x, cpos.y, cpos.z);*/
 		//ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
 		//ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
 		//ImGui::Checkbox("Another Window", &show_another_window);

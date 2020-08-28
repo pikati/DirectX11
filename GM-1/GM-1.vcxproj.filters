@@ -141,9 +141,6 @@
     <ClCompile Include="LevelLoader.cpp">
       <Filter>ソース ファイル\Engine\Other</Filter>
     </ClCompile>
-    <ClCompile Include="billborad.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="SpriteEffect.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -160,12 +157,15 @@
       <Filter>ソース ファイル\Engine\Component</Filter>
     </ClCompile>
     <ClCompile Include="Plane.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="LineSegment.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\Engine\Component</Filter>
     </ClCompile>
     <ClCompile Include="AABB.cpp">
+      <Filter>ソース ファイル\Engine\Component\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="LineSegment.cpp">
+      <Filter>ソース ファイル\Engine\Component\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="Billboard.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -269,9 +269,6 @@
     <ClInclude Include="LevelLoader.h">
       <Filter>ヘッダー ファイル\Engine\Other</Filter>
     </ClInclude>
-    <ClInclude Include="billborad.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Texture.h">
       <Filter>ヘッダー ファイル\Engine\Component</Filter>
     </ClInclude>
@@ -284,13 +281,16 @@
     <ClInclude Include="Fbx.h">
       <Filter>ヘッダー ファイル\Engine\Component</Filter>
     </ClInclude>
-    <ClInclude Include="Plane.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="AABB.h">
+      <Filter>ヘッダー ファイル\Engine\Component\Collider</Filter>
     </ClInclude>
     <ClInclude Include="LineSegment.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\Engine\Component\Collider</Filter>
     </ClInclude>
-    <ClInclude Include="AABB.h">
+    <ClInclude Include="Plane.h">
+      <Filter>ヘッダー ファイル\Engine\Component\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Billboard.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
@@ -301,5 +301,8 @@
     <FxCompile Include="vertexShader.hlsl">
       <Filter>リソース ファイル</Filter>
     </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="todo.txt" />
   </ItemGroup>
 </Project>
