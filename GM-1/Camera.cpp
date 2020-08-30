@@ -22,7 +22,7 @@ Camera::~Camera()
 
 void Camera::Initialize()
 {
-	gameObject->transform->position = Vector3(0.0f, 10.0f, -10.0f);
+	gameObject->transform->position = Vector3(0.0f, 5.0f, -10.0f);
 	m_target = Vector3(0.0f, 0.0f, 0.0f);
 }
 
@@ -40,22 +40,23 @@ void Camera::Update()
 
 	if (CInput::GetKeyPress('J'))
 	{
-		rotation -= m_rotationValue;
-		if (rotation < 0)
+		m_rotation -= m_rotationValue;
+		if (m_rotation < 0)
 		{
-			rotation += D3DX_PI * 2.0f;
+			m_rotation += D3DX_PI * 2.0f;
 		}
 	}
 	if (CInput::GetKeyPress('L'))
 	{
-		rotation += m_rotationValue;
-		if (rotation < D3DX_PI * 2.0f)
+		m_rotation += m_rotationValue;
+		if (m_rotation > D3DX_PI * 2.0f)
 		{
-			rotation -= D3DX_PI * 2.0f;
+			m_rotation -= D3DX_PI * 2.0f;
 		}
 	}
-	gameObject->transform->position.x = m_target.x - sinf(rotation) * m_distance;
-	gameObject->transform->position.z = m_target.z - cosf(rotation) * m_distance;
+	gameObject->transform->position.x = m_target.x - sinf(m_rotation) * m_distance;
+	gameObject->transform->position.y = m_player->transform->position.y + 5.0f;
+	gameObject->transform->position.z = m_target.z - cosf(m_rotation) * m_distance;
 }
 
 void Camera::Draw()
@@ -83,4 +84,9 @@ Vector3 Camera::GetTarget()
 D3DXMATRIX Camera::GetViewMatrix()
 {
 	return m;
+}
+
+float Camera::GetRotation()
+{
+	return m_rotation;
 }

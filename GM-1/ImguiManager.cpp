@@ -44,7 +44,7 @@ void ImguiManager::Update()
 
 	// 2. Show a simple window that we create ourselves. We use a Begin/End pair to created a named window.
 	{
-		static float f = 0.0f;
+		/*static float f = 0.0f;
 		static int counter = 0;
 
 		ImGui::Begin("Debug Window");
@@ -62,7 +62,7 @@ void ImguiManager::Update()
 				}
 			}
 
-		}
+		}*/
 		/*ImGui::Text("Camera rotation x:%f, y:%f, z:%f", rotation.x, rotation.y, rotation.z);
 		ImGui::Text("Camera target   x:%f, y:%f, z:%f", target.x, target.y, target.z);
 		
@@ -81,7 +81,7 @@ void ImguiManager::Update()
 		////ImGui::SameLine();
 		//ImGui::Text("fps = %f", FPS::deltaTime);
 		//ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-		ImGui::End();
+		//ImGui::End();
 	}
 
 	// 3. Show another simple window.

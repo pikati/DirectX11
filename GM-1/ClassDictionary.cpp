@@ -15,17 +15,19 @@
 #include "Fbx.h"
 #include "Animation.h"
 #include "Plane.h"
+#include "Item.h"
+#include "Image.h"
+#include "TitleText.h"
+#include "TitleManager.h"
+#include "Fade.h"
+#include "MainGameManager.h"
+#include "SkyDorm.h"
+#include "WoodBox.h"
 
 std::map<std::string, Component*> ClassDictionary::dictionary;
 BuilderFromString ClassDictionary::builderfromstring;
 void ClassDictionary::Initialize()
 {
-	/*Register("Bullet", new Bullet());
-	Register("Camera", new Camera());
-	Register("Enemy", new Enemy());
-	Register("Field", new Field());
-	Register("Player", new Player());
-	Register("Polygon", new CPolygon());*/
 	builderfromstring.Register(REGISTER_ARGS(Bullet));
 	builderfromstring.Register(REGISTER_ARGS(Camera));
 	builderfromstring.Register(REGISTER_ARGS(Enemy));
@@ -41,6 +43,14 @@ void ClassDictionary::Initialize()
 	builderfromstring.Register(REGISTER_ARGS(Animation));
 	builderfromstring.Register(REGISTER_ARGS(Plane));
 	builderfromstring.Register(REGISTER_ARGS(AABB));
+	builderfromstring.Register(REGISTER_ARGS(Item));
+	builderfromstring.Register(REGISTER_ARGS(Image));
+	builderfromstring.Register(REGISTER_ARGS(TitleText));
+	builderfromstring.Register(REGISTER_ARGS(TitleManager));
+	builderfromstring.Register(REGISTER_ARGS(Fade));
+	builderfromstring.Register(REGISTER_ARGS(MainGameManager));
+	builderfromstring.Register(REGISTER_ARGS(SkyDorm));
+	builderfromstring.Register(REGISTER_ARGS(WoodBox));
 }
 
 void ClassDictionary::Register(const std::string& ty_name, Component* component)

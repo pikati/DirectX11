@@ -9,8 +9,8 @@
                 "layer": 0,
                 "position": [
                     -1.2300021648406983,
-                    10.0,
-                    -10.0
+                    10.010000228881836,
+                    -9.34000015258789
                 ],
                 "rotation": [
                     0.0,
@@ -39,12 +39,12 @@
                 "layer": 1,
                 "position": [
                     -1.2300021648406983,
-                    -0.9162999987602234,
+                    -0.010825002565979958,
                     0.6599999666213989
                 ],
                 "rotation": [
                     0.0,
-                    270.0,
+                    0.0,
                     0.0
                 ],
                 "scale": [
@@ -92,7 +92,7 @@
                     "end6": 0,
                     "lstart6": -1,
                     "lend6": -1,
-                    "speed6": 81391624
+                    "speed6": 53251432
                 },
                 {
                     "type": "Fbx",
@@ -389,7 +389,7 @@
                 "layer": 1,
                 "position": [
                     -2.0,
-                    0.0,
+                    -0.009999999776482582,
                     -2.0
                 ],
                 "rotation": [
@@ -423,6 +423,195 @@
                         -1.0
                     ],
                     "kinematic": false
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "Apple",
+                "tag": "Item",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "rotation": [
+                    -400.30859375,
+                    7.5022125244140629,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "SphereCollider",
+                    "center": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "radius": 0.5,
+                    "position": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "rotation": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "scale": [
+                        1.0,
+                        1.0,
+                        1.0
+                    ]
+                },
+                {
+                    "type": "Plane",
+                    "fileName": "Asset/Texture/Item/apple.png",
+                    "id": -1
+                },
+                {
+                    "type": "Billboard",
+                    "id": -1
+                },
+                {
+                    "type": "Item",
+                    "itemType": 1
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "Starwberry",
+                "tag": "Item",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    -10.0,
+                    4.0,
+                    0.0
+                ],
+                "rotation": [
+                    -393.6900634765625,
+                    50.24968338012695,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "SphereCollider",
+                    "center": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "radius": 0.5,
+                    "position": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "rotation": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "scale": [
+                        1.0,
+                        1.0,
+                        1.0
+                    ]
+                },
+                {
+                    "type": "Plane",
+                    "fileName": "Asset/Texture/Item/strawberry.png",
+                    "id": -1
+                },
+                {
+                    "type": "Billboard",
+                    "id": -1
+                },
+                {
+                    "type": "Item",
+                    "itemType": 0
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "Banana",
+                "tag": "Item",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    10.0,
+                    -1.0,
+                    0.0
+                ],
+                "rotation": [
+                    -406.0302734375,
+                    -43.197235107421878,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "SphereCollider",
+                    "center": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "radius": 0.5,
+                    "position": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "rotation": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "scale": [
+                        1.0,
+                        1.0,
+                        1.0
+                    ]
+                },
+                {
+                    "type": "Plane",
+                    "fileName": "Asset/Texture/Item/banana.png",
+                    "id": -1
+                },
+                {
+                    "type": "Billboard",
+                    "id": -1
+                },
+                {
+                    "type": "Item",
+                    "itemType": 2
                 }
             ]
         },

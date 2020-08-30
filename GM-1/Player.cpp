@@ -9,6 +9,8 @@
 #include "FPS.h"
 #include "Animation.h"
 #include "ObjectPooler.h"
+#include "Scene.h"
+#include "Camera.h"
 
 enum AnimationName
 {
@@ -37,13 +39,12 @@ Player::~Player()
 
 void Player::Initialize()
 {
-	gameObject->transform->rotation = Vector3(0.0f, 0.0f, 0.0f);
-	gameObject->transform->scale = Vector3(1.0f, 1.0f, 1.0f);
 	ObjectPooler::LoadGameObject("Asset/Prefabs/Bullet.prefab");
 
 	m_collider = gameObject->GetComponent<AABB>();
-
 	m_animation = gameObject->GetComponent<Animation>();
+	m_camera = CManager::GetScene()->Find("MainCamera")->GetComponent<Camera>();
+
 	m_animation->SetSpeed(WALK, 2);
 }
 
@@ -58,20 +59,8 @@ void Player::Update()
 		Jump();
 
 	}
-	//if (CInput::GetKeyTrigger('L'))
-	//{
-	//	Shot();
-	//}
-	//if (CInput::GetKeyPress('J'))
-	//{
-	//	//Slash();
-	//	gameObject->transform->position.y += 1.0f * FPS::deltaTime;
-	//}if (CInput::GetKeyPress('I'))
-	//{
-	//	//Slash();
-	//	gameObject->transform->position.y += -1.0f * FPS::deltaTime;
-	//}
 	Move();
+
 	if (m_isGrounded)
 	{
 		m_velocity.y = 0;
@@ -79,7 +68,7 @@ void Player::Update()
 	gameObject->transform->position += m_velocity;
 	if (gameObject->transform->position.y < -20)
 	{
-		gameObject->transform->position.y = 2.0f;
+		gameObject->transform->position = m_startPosition;
 		m_velocity.y = 0;
 	}
 }
@@ -94,35 +83,78 @@ void Player::Finalize()
 
 void Player::Move()
 {
+	float rotation = m_camera->GetRotation();
 	m_velocity.x = 0;
 	m_velocity.z = 0;
 	
 	if (CInput::GetKeyPress('A'))
 	{
-		m_velocity.x += -SPEED * FPS::deltaTime;
-		gameObject->transform->rotation.y = 270.0f;
-		dir = LEFT;
+		if (CInput::GetKeyPress('W'))
+		{
+			m_velocity.x += sinf(-D3DX_PI * 0.75f - rotation) * SPEED * FPS::deltaTime;
+			m_velocity.z -= cosf(-D3DX_PI * 0.75f - rotation) * SPEED * FPS::deltaTime;
+			m_direction.y = rotation - D3DX_PI * 0.25f;
+		}
+		else if (CInput::GetKeyPress('S'))
+		{
+			m_velocity.x += sinf(-D3DX_PI * 0.25f - rotation) * SPEED * FPS::deltaTime;
+			m_velocity.z -= cosf(-D3DX_PI * 0.25f - rotation) * SPEED * FPS::deltaTime;
+			m_direction.y = rotation - D3DX_PI * 0.75f;
+		}
+		else
+		{
+			m_velocity.x += sinf(-D3DX_PI * 0.5f - rotation) * SPEED * FPS::deltaTime;
+			m_velocity.z -= cosf(-D3DX_PI * 0.5f - rotation) * SPEED * FPS::deltaTime;
+			m_direction.y = rotation + D3DX_PI * -0.5f;
+		}
 	}
-	if (CInput::GetKeyPress('D'))
+	else if (CInput::GetKeyPress('D'))
 	{
-		m_velocity.x += SPEED * FPS::deltaTime;
-		gameObject->transform->rotation.y = 90.0f;
-		dir = RIGHT;
+		if (CInput::GetKeyPress('W'))
+		{
+			m_velocity.x += sinf(D3DX_PI * 0.75f - rotation) * SPEED * FPS::deltaTime;
+			m_velocity.z -= cosf(D3DX_PI * 0.75f - rotation) * SPEED * FPS::deltaTime;
+			m_direction.y = rotation + D3DX_PI * 0.25f;
+		}
+		else if (CInput::GetKeyPress('S'))
+		{
+			m_velocity.x += sinf(D3DX_PI * 0.25f - rotation) * SPEED * FPS::deltaTime;
+			m_velocity.z -= cosf(D3DX_PI * 0.25f - rotation) * SPEED * FPS::deltaTime;
+			m_direction.y = rotation + D3DX_PI * 0.75f;
+		}
+		else
+		{
+			m_velocity.x += sinf(D3DX_PI * 0.5f - rotation) * SPEED * FPS::deltaTime;
+			m_velocity.z -= cosf(D3DX_PI * 0.5f - rotation) * SPEED * FPS::deltaTime;
+			m_direction.y = rotation - D3DX_PI * -0.5f;
+		}
 	}
-	if (CInput::GetKeyPress('W'))
+	else if (CInput::GetKeyPress('W'))
 	{
-		m_velocity.z += SPEED * FPS::deltaTime;
-		gameObject->transform->rotation.y = 0.0f;
-		dir = FORWARD;
+		m_velocity.x += sinf(D3DX_PI - rotation) * SPEED * FPS::deltaTime;
+		m_velocity.z -= cosf(D3DX_PI - rotation) * SPEED * FPS::deltaTime;
+		m_direction.y = rotation;
 	}
-	if (CInput::GetKeyPress('S'))
+	else if (CInput::GetKeyPress('S'))
 	{
-		m_velocity.z += -SPEED * FPS::deltaTime;
-		gameObject->transform->rotation.y = 180.0f;
-		dir = BACK;
+		m_velocity.x += sinf(-rotation) * SPEED * FPS::deltaTime;
+		m_velocity.z -= cosf(-rotation) * SPEED * FPS::deltaTime;
+		m_direction.y = rotation + D3DX_PI * 1.0f;
 	}
 
-	m_velocity.y += -m_gravity * FPS::deltaTime * 0.25f;
+	float diffRotationY = m_direction.y * (180.0f / D3DX_PI) - gameObject->transform->rotation.y;
+	if (diffRotationY > 360.0f)
+	{
+		diffRotationY -= 360.0f;
+	}
+	else if (diffRotationY < 0)
+	{
+		diffRotationY += 360.0f;
+	}
+	gameObject->transform->rotation.y += diffRotationY;
+
+	m_velocity.y += -m_gravity * FPS::deltaTime * 0.125f;
+	gameObject->transform->position += m_velocity;
 
 	if (m_velocity.x != 0 || m_velocity.z != 0)
 	{
@@ -140,41 +172,14 @@ void Player::Shot()
 	obj = ObjectPooler::CreatePrefab("Bullet");
 	obj->transform->position = gameObject->transform->position;
 	m_animation->SetState(SHOOT);
-
 }
 
 void Player::Jump()
 {
 	if (m_isGrounded)
 	{
-		m_velocity.y += 0.5f;
+		m_velocity.y += 0.25f;
 		m_isGrounded = false;
-	}
-}
-
-void Player::Slash()
-{
-	m_animation->SetState(SLASH);
-	m_isAttack = true;
-	m_attackFrame = m_attackTime;
-	switch (dir)
-	{
-	case Player::FORWARD:
-		m_collider->SetMax(Vector3(0.4f, 0.8f, 1.5f));
-		break;
-	case Player::BACK:
-		m_collider->SetMin(Vector3(-0.4f, 0.0f, -1.5f));
-		break;
-	case Player::LEFT:
-		m_collider->SetMin(Vector3(-1.5f, 0.0f, -0.4f));
-		break;
-	case Player::RIGHT:
-		m_collider->SetMax(Vector3(1.5f, 0.8f, 0.4f));
-		break;
-	case Player::NON:
-		break;
-	default:
-		break;
 	}
 }
 
@@ -202,9 +207,4 @@ void Player::CheckGrounded()
 			}
 		}
 	}
-}
-
-bool Player::IsAttack()
-{
-	return m_isAttack;
 }

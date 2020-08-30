@@ -6,6 +6,7 @@ DWORD FPS::m_dwCurrentTime = 0;
 DWORD FPS::m_dwExecLastTime = 0;
 DWORD FPS::m_dwOldCurrentTime = 0;
 float FPS::deltaTime = 0;
+bool FPS::m_isReset = false;
 
 void FPS::Initialize()
 {
@@ -20,6 +21,15 @@ bool FPS::Update()
 	if (m_dwCurrentTime - m_dwExecLastTime >= (1000 / m_frameRate))
 	{
 		deltaTime = (m_dwCurrentTime - m_dwExecLastTime) / 1000.0f;
+		if (deltaTime >= 1 / m_frameRate)
+		{
+			deltaTime = 1 / m_frameRate;
+		}
+		if (m_isReset)
+		{
+			deltaTime = 0;
+			m_isReset = false;
+		}
 		m_dwExecLastTime = m_dwCurrentTime;
 		return true;
 	}
@@ -33,4 +43,9 @@ void FPS::Draw()
 void FPS::Finalize()
 {
 	timeEndPeriod(1);
+}
+
+void FPS::ResetFPS()
+{
+	m_isReset = true;
 }

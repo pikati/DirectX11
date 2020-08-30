@@ -1,0 +1,141 @@
+{
+    "GameObject": [
+        {
+            "properties": {
+                "name": "unname",
+                "tag": "untagged",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Image",
+                    "fileName": "Asset/Texture/Title/title.png",
+                    "width": 960.0,
+                    "height": 540.0,
+                    "id": -1
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "unname",
+                "tag": "untagged",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    230.0,
+                    342.9344482421875,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Image",
+                    "fileName": "Asset/Texture/Title/titleStart.png",
+                    "width": 500.0,
+                    "height": 125.0,
+                    "id": -1
+                },
+                {
+                    "type": "TitleText",
+                    "id": -1
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "Fade",
+                "tag": "untagged",
+                "activeSelf": false,
+                "isDestroy": false,
+                "layer": 2,
+                "position": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Image",
+                    "fileName": "Asset/Texture/Fade.png",
+                    "width": 960.0,
+                    "height": 540.0,
+                    "id": -1
+                },
+                {
+                    "type": "Fade",
+                    "id": -1
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "unname",
+                "tag": "untagged",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "TitleManager",
+                    "id": -1
+                }
+            ]
+        }
+    ]
+}

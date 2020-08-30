@@ -1,3 +1,4 @@
+//•¶š—ñ‚©‚çComponent‚ğ“®“I‚É¶¬‚·‚é‚½‚ß‚ÌƒNƒ‰ƒX
 #pragma once
 #include <map>
 #include <string>

@@ -3,34 +3,25 @@
 
 class AABB;
 class Animation;
+class Camera;
 
 class Player : public Component
 {
 private:
-    enum Direction
-    {
-        FORWARD,
-        BACK,
-        LEFT,
-        RIGHT,
-        NON
-    };
 
     AABB* m_collider;
     Animation* m_animation;
-    const float SPEED = 10.0f;
+    Camera* m_camera;
+    const float SPEED = 5.0f;
     const float m_gravity = 9.8f;
     Vector3 m_velocity;
-    float m_attackFrame = 0;
-    const float m_attackTime = 0.5f;
+    Vector3 m_direction = Vector3::zero;
+    Vector3 m_startPosition = Vector3(-5.0f, 0.1f, 0.0f);
     bool m_isGrounded = false;
-    Direction dir = NON;
-    bool m_isAttack = false;
 
     void Move();
     void Shot();
     void Jump();
-    void Slash();
     void CheckGrounded();
 
 public: 
@@ -42,5 +33,4 @@ public:
     void Draw();
     void Finalize();
 
-    bool IsAttack();
 };

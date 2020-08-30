@@ -31,12 +31,6 @@
     <Filter Include="ヘッダー ファイル\Engine\Component">
       <UniqueIdentifier>{3bfa8e18-6715-4732-9d3a-1eae7098672b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Component">
-      <UniqueIdentifier>{9abce1f1-b224-4083-bfb5-9fd04f77e63c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Component">
-      <UniqueIdentifier>{d638162f-683c-4a2a-ad78-438c3f706fb7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Engine\Other">
       <UniqueIdentifier>{279cdedb-2d07-4b0c-86af-fc66475d7da2}</UniqueIdentifier>
     </Filter>
@@ -51,6 +45,18 @@
     </Filter>
     <Filter Include="imgui">
       <UniqueIdentifier>{529ea43d-44db-4be4-ac67-73edeb239095}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Script">
+      <UniqueIdentifier>{d638162f-683c-4a2a-ad78-438c3f706fb7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Script">
+      <UniqueIdentifier>{9abce1f1-b224-4083-bfb5-9fd04f77e63c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Script\Title">
+      <UniqueIdentifier>{aacf1612-99a5-4e33-9e54-23ed924d9172}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Script\Title">
+      <UniqueIdentifier>{e3df0203-9f60-4235-b0d1-93e04df2169a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -79,28 +85,28 @@
       <Filter>ソース ファイル\Engine</Filter>
     </ClCompile>
     <ClCompile Include="Polygon.cpp">
-      <Filter>ソース ファイル\Component</Filter>
+      <Filter>ソース ファイル\Script</Filter>
     </ClCompile>
     <ClCompile Include="Bullet.cpp">
-      <Filter>ソース ファイル\Component</Filter>
+      <Filter>ソース ファイル\Script</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
-      <Filter>ソース ファイル\Component</Filter>
+      <Filter>ソース ファイル\Script</Filter>
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
-      <Filter>ソース ファイル\Component</Filter>
+      <Filter>ソース ファイル\Script</Filter>
     </ClCompile>
     <ClCompile Include="Field.cpp">
-      <Filter>ソース ファイル\Component</Filter>
+      <Filter>ソース ファイル\Script</Filter>
     </ClCompile>
     <ClCompile Include="input.cpp">
-      <Filter>ソース ファイル\Component</Filter>
+      <Filter>ソース ファイル\Script</Filter>
     </ClCompile>
     <ClCompile Include="model.cpp">
-      <Filter>ソース ファイル\Component</Filter>
+      <Filter>ソース ファイル\Script</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>ソース ファイル\Component</Filter>
+      <Filter>ソース ファイル\Script</Filter>
     </ClCompile>
     <ClCompile Include="SaveLoadManager.cpp">
       <Filter>ソース ファイル\Engine\Other</Filter>
@@ -166,33 +172,63 @@
       <Filter>ソース ファイル\Engine\Component\Collider</Filter>
     </ClCompile>
     <ClCompile Include="Billboard.cpp">
+      <Filter>ソース ファイル\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>ソース ファイル\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="Image.cpp">
+      <Filter>ソース ファイル\Engine\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleText.cpp">
+      <Filter>ソース ファイル\Script\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>ソース ファイル\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleManager.cpp">
+      <Filter>ソース ファイル\Script\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Fade.cpp">
+      <Filter>ソース ファイル\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="MainGameManager.cpp">
+      <Filter>ソース ファイル\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="SkyDorm.cpp">
+      <Filter>ソース ファイル\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioManager.cpp">
+      <Filter>ソース ファイル\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="WoodBox.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Polygon.h">
-      <Filter>ヘッダー ファイル\Component</Filter>
+      <Filter>ヘッダー ファイル\Script</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
-      <Filter>ヘッダー ファイル\Component</Filter>
+      <Filter>ヘッダー ファイル\Script</Filter>
     </ClInclude>
     <ClInclude Include="Field.h">
-      <Filter>ヘッダー ファイル\Component</Filter>
+      <Filter>ヘッダー ファイル\Script</Filter>
     </ClInclude>
     <ClInclude Include="model.h">
-      <Filter>ヘッダー ファイル\Component</Filter>
+      <Filter>ヘッダー ファイル\Script</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>ヘッダー ファイル\Component</Filter>
+      <Filter>ヘッダー ファイル\Script</Filter>
     </ClInclude>
     <ClInclude Include="input.h">
-      <Filter>ヘッダー ファイル\Component</Filter>
+      <Filter>ヘッダー ファイル\Script</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
-      <Filter>ヘッダー ファイル\Component</Filter>
+      <Filter>ヘッダー ファイル\Script</Filter>
     </ClInclude>
     <ClInclude Include="Bullet.h">
-      <Filter>ヘッダー ファイル\Component</Filter>
+      <Filter>ヘッダー ファイル\Script</Filter>
     </ClInclude>
     <ClInclude Include="Scene.h">
       <Filter>ヘッダー ファイル\Scene</Filter>
@@ -291,6 +327,36 @@
       <Filter>ヘッダー ファイル\Engine\Component\Collider</Filter>
     </ClInclude>
     <ClInclude Include="Billboard.h">
+      <Filter>ヘッダー ファイル\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>ヘッダー ファイル\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="Image.h">
+      <Filter>ヘッダー ファイル\Engine\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleText.h">
+      <Filter>ヘッダー ファイル\Script\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>ヘッダー ファイル\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleManager.h">
+      <Filter>ヘッダー ファイル\Script\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Fade.h">
+      <Filter>ヘッダー ファイル\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="MainGameManager.h">
+      <Filter>ヘッダー ファイル\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="SkyDorm.h">
+      <Filter>ヘッダー ファイル\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioManager.h">
+      <Filter>ヘッダー ファイル\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="WoodBox.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

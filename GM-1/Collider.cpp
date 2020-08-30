@@ -311,48 +311,48 @@ void Collider::AABB2AABB(Collider* c1, Collider* c2)
 	{
 		if (a1Kinematic)
 		{
-			pos2.x -= dx;
+			pos2.x -= dx + 0.01f;
 		}
 		else if (a2Kinematic)
 		{
-			pos1.x += dx;
+			pos1.x += dx + 0.01f;
 		}
 		else if(!a1Kinematic && !a2Kinematic)
 		{
-			pos1.x += dx / 2.0f;
-			pos2.x -= dx / 2.0f;
+			pos1.x += dx / 2.0f + 0.01f;
+			pos2.x -= dx / 2.0f + 0.01f;
 		}
 	}
 	else if (fabsf(dy) <= fabsf(dx) && fabsf(dy) <= fabsf(dz))
 	{
 		if (a1Kinematic)
 		{
-			pos2.y -= dy;
+			pos2.y -= dy + 0.01f;
 		}
 		else if (a2Kinematic)
 		{
-			pos1.y += dy;
+			pos1.y += dy + 0.01f;
 		}
 		else if (!a1Kinematic && !a2Kinematic)
 		{
-			pos1.y += dy / 2.0f;
-			pos2.y -= dy / 2.0f;
+			pos1.y += dy / 2.0f + 0.01f;
+			pos2.y -= dy / 2.0f + 0.01f;
 		}
 	}
 	else
 	{
 		if (a1Kinematic)
 		{
-			pos2.z -= dz;
+			pos2.z -= dz + 0.01f;
 		}
 		else if (a2Kinematic)
 		{
-			pos1.z += dz;
+			pos1.z += dz + 0.01f;
 		}
 		else if (!a1Kinematic && !a2Kinematic)
 		{
-			pos1.z += dz / 2.0f;
-			pos2.z -= dz / 2.0f;
+			pos1.z += dz / 2.0f + 0.01f;
+			pos2.z -= dz / 2.0f + 0.01f;
 		}
 	}
 	c1->gameObject->transform->position = pos1;

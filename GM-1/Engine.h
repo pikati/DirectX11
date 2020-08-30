@@ -9,6 +9,9 @@ public:
 	Vector2(float x, float y);
 	float x, y;
 
+	static Vector2 zero;
+	static Vector2 one;
+
 	void Set(float x, float y);
 	float Length();
 	float LengthSquared();

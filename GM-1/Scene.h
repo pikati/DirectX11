@@ -11,6 +11,9 @@ class Scene
 private:
 	static std::list<GameObject*> m_gameObject[LAYER_MAX];
 	static std::list<GameObject*> m_tempObject;
+	static bool m_isChange;
+
+	GameObject* AddGameObject();
 public:
 	Scene();
 	~Scene();
@@ -26,6 +29,8 @@ public:
 	GameObject* LoadPrefab(std::string path);
 	GameObject* Find(std::string name);
 	std::list<GameObject*>* GetAllGameObject();
+
+	static void ChangeScene();
 
 	template <typename T>
 	GameObject* Find()

@@ -5,6 +5,7 @@
 #include "Scene.h"
 #include "ClassDictionary.h"
 #include "ImguiManager.h"
+#include "AudioManager.h"
 
 Scene* g_scene;
 
@@ -13,6 +14,7 @@ void CManager::Init()
 	ClassDictionary::Initialize();
 	CRenderer::Init();
 	CInput::Init();
+	AudioManager::Initialize();
 
 	g_scene = new Scene();
 	g_scene->Initialize();
@@ -23,7 +25,7 @@ void CManager::Uninit()
 	ImguiManager::Finalize();
 	g_scene->Finalize();
 	delete g_scene;
-
+	AudioManager::Finalize();
 	CInput::Uninit();
 	CRenderer::Uninit();
 }

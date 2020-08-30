@@ -8,28 +8,16 @@
 #include "Constants.h"
 #include "LevelLoader.h"
 #include "Transform.h"
+#include "Collider.h"
+#include "SceneManager.h"
 
 #include "GameObject.h"
-#include "Plane.h"
-#include "Billboard.h"
-#include "SphereCollider.h"
-
-#include <Stdio.h>
-
-#ifdef _DEBUG
-#   define MyOutputDebugString( str, ... ) \
-      { \
-        TCHAR c[256]; \
-        sprintf( c, str, __VA_ARGS__ ); \
-        OutputDebugString( c ); \
-      }
-#else
-#    define MyOutputDebugString( str, ... ) // 空実装
-#endif
+#include "SkyDorm.h"
+#include "Fbx.h"
 
 std::list<GameObject*> Scene::m_gameObject[LAYER_MAX];
 std::list<GameObject*> Scene::m_tempObject;
-static std::list<GameObject*> tempObj;
+bool Scene::m_isChange = false;
 
 enum AnimationName
 {
@@ -53,20 +41,7 @@ Scene::~Scene()
 
 void Scene::Initialize()
 {
-	LevelLoader::LoadLevel(this, "save1.scene");
-	GameObject* obj = CreateGameObject();
-	SphereCollider* s = obj->AddComponent<SphereCollider>();
-	s->SetCenter(0.0f, 0.0f, 0.0f);
-	s->SetRadius(0.5f);
-	s->Initialize();
-	Plane* p = obj->AddComponent<Plane>();
-	p->SetTextureName("Asset/Texture/Item/apple.png");
-	p->Initialize();
-	Billboard* b = obj->AddComponent<Billboard>();
-	b->Initialize();
-	//obj->transform->position.Set(-2.0f, 2.0f, 3.0f);
-	obj->name = "Apple";
-	obj->tag = "Item";
+	LevelLoader::LoadLevel(this, "Asset/Scene/stage1.scene");
 }
 
 void Scene::Update()
@@ -81,15 +56,14 @@ void Scene::Update()
 		}
 	}
 
-	for (GameObject* object : tempObj)
+	for (GameObject* object : m_tempObject)
 	{
 		m_gameObject[object->layer].emplace_back(object);
 		object->Update();
 	}
-	tempObj.clear();
+	m_tempObject.clear();
 	
 
-	//todo::この機能に問題あるの草
 	for (int i = 0; i < LAYER_MAX; i++)
 	{
 		//レイヤ番号と管理レイヤが異なった場合に入れ替える
@@ -105,18 +79,6 @@ void Scene::Update()
 			}
 			itr++;
 		}
-	}
-	
-	if (CInput::GetKeyTrigger('O'))
-	{
-		for (int i = 0; i < LAYER_MAX; i++)
-		{
-			for (GameObject* obj : m_gameObject[i])
-			{
-				obj->Destroy();
-			}
-		}
-		LevelLoader::LoadLevel(this, "save1.scene");
 	}
 
 	//リストに関数を実行させてtureならリストから削除される
@@ -138,8 +100,15 @@ void Scene::Update()
 
 	if (CInput::GetKeyTrigger('X'))
 	{
-		LevelLoader::SaveLevel(this, "save1.scene");
+		LevelLoader::SaveLevel(this, "Asset/Scene/stage1.scene");
 	}
+
+	if (m_isChange)
+	{
+		Finalize();
+		SceneManager::LoadScene();
+	}
+
 	if (CInput::GetKeyTrigger('Q'))
 	{
 		Finalize();
@@ -149,6 +118,12 @@ void Scene::Update()
 
 void Scene::Draw()
 {
+	if (m_isChange)
+	{
+		m_isChange = false;
+		return;
+	}
+
 	for (int i = 0; i < LAYER_MAX; i++)
 	{
 		for (GameObject* object : m_gameObject[i])
@@ -169,12 +144,12 @@ void Scene::Finalize()
 			delete object;
 		}
 		m_gameObject[i].clear();
-		for (GameObject* object : tempObj)
+		for (GameObject* object : m_tempObject)
 		{
 			object->Finalize();
 			delete object;
 		}
-		tempObj.clear();
+		m_tempObject.clear();
 	}
 	
 }
@@ -182,7 +157,7 @@ void Scene::Finalize()
 GameObject* Scene::CreateGameObject()
 {
 	GameObject* obj = new GameObject();
-	tempObj.emplace_back(obj);
+	m_tempObject.emplace_back(obj);
 	return obj;
 }
 
@@ -190,7 +165,7 @@ void Scene::AddGameObject(GameObject* obj, bool isTemp)
 {
 	if (isTemp)
 	{
-		tempObj.emplace_back(obj);
+		m_tempObject.emplace_back(obj);
 	}
 	else
 	{
@@ -201,7 +176,7 @@ void Scene::AddGameObject(GameObject* obj, bool isTemp)
 GameObject* Scene::CreatePrefab(GameObject* obj)
 {
 	GameObject* object = new GameObject(*obj);
-	tempObj.emplace_back(object);
+	m_tempObject.emplace_back(object);
 	object->Initialize();
 	return object;
 }
@@ -230,4 +205,16 @@ GameObject* Scene::Find(std::string name)
 std::list<GameObject*>* Scene::GetAllGameObject()
 {
 	return m_gameObject;
+}
+
+void Scene::ChangeScene()
+{
+	m_isChange = true;
+}
+
+GameObject* Scene::AddGameObject()
+{
+	GameObject* obj = new GameObject();
+	m_gameObject[obj->layer].emplace_back(obj);
+	return obj;
 }

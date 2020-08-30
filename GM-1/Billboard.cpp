@@ -10,43 +10,30 @@
 
 void Billboard::Initialize()
 {
-
-	gameObject->transform->position = Vector3(0.0f, 0.0f, 0.0f);
-	gameObject->transform->rotation = Vector3(0.0f, 0.0f, 0.0f);
-	gameObject->transform->scale = Vector3(1.0f, 1.0f, 1.0f);
+	gameObject->transform->rotation = Vector3(-90.0f, 0.0f, 0.0f);
 }
 
 void Billboard::Update()
 {
+	Vector3 cameraPosition = CManager::GetScene()->Find<Camera>()->transform->position;
+	float diffX = -cameraPosition.x + gameObject->transform->position.x;
+	float diffZ = -cameraPosition.z + gameObject->transform->position.z;
+	float rotationY = atan2f(diffZ, diffX);
+	
+	if (rotationY < 0)
+	{
+		rotationY += D3DX_PI * 2.0f;
+	}
+	else if (rotationY > D3DX_PI * 2.0f)
+	{
+		rotationY -= D3DX_PI * 2.0f;
+	}
+	gameObject->transform->rotation.y = -(rotationY * 180.0f / D3DX_PI - 90.0f);
 }
 
 void Billboard::Draw()
 {
-	/*Camera* camera = CManager::GetScene()->Find<Camera>()->GetComponent<Camera>();
-
-	D3DXMATRIX view = camera->GetViewMatrix();
-	D3DXMATRIX invView;
-	D3DXMatrixInverse(&invView, NULL, &view);
-	invView._41 = 0.0f;
-	invView._42 = 0.0f;
-	invView._43 = 0.0f;*/
-
-	Vector3 cameraPosition = CManager::GetScene()->Find<Camera>()->transform->position;
-	float diffX = cameraPosition.x - gameObject->transform->position.x;
-	float diffY = cameraPosition.y - gameObject->transform->position.y;
-	float diffZ = cameraPosition.z - gameObject->transform->position.z;
-	float rotationX = atan2f(diffY, diffZ);
-	float rotationY = atan2f(diffZ, diffX);
-	if (rotationX < 0)
-	{
-		rotationX += 2 * 3.14f;
-	}
-	if (rotationY < 0)
-	{
-		rotationY += 2 * 3.14f;
-	}
-	gameObject->transform->rotation.x = rotationX * 3.14f / 180.0f;
-	gameObject->transform->rotation.y = rotationY * 3.14f / 180.0f;
+	
 }
 
 void Billboard::Finalize()
