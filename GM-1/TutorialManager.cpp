@@ -1,4 +1,4 @@
-#include "TitleManager.h"
+#include "TutorialManager.h"
 #include "main.h"
 #include "SceneManager.h"
 #include "input.h"
@@ -7,15 +7,13 @@
 #include "Fade.h"
 #include "AudioManager.h"
 
-void TitleManager::Initialize()
+void TutorialManager::Initialize()
 {
-	AudioManager::StopSound();
-	AudioManager::PlaySound(BGM_TITLE);
 	m_fade = CManager::GetScene()->Find("Fade")->GetComponent<Fade>();
 	m_fade->FadeOut();
 }
 
-void TitleManager::Update()
+void TutorialManager::Update()
 {
 	if (CInput::GetKeyTrigger(VK_SPACE))
 	{
@@ -25,16 +23,16 @@ void TitleManager::Update()
 	}
 	if (m_isChangeScene && !m_fade->IsFading())
 	{
-		SceneManager::LoadScene("Asset/Scene/tutorial.scene");
+		SceneManager::LoadScene("Asset/Scene/stage1.scene");
 	}
 }
 
-void TitleManager::Draw()
+void TutorialManager::Draw()
 {
 
 }
 
-void TitleManager::Finalize()
+void TutorialManager::Finalize()
 {
 
 }

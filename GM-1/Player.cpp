@@ -11,6 +11,9 @@
 #include "ObjectPooler.h"
 #include "Scene.h"
 #include "Camera.h"
+#include "Item.h"
+#include "ItemController.h"
+#include "AudioManager.h"
 
 enum AnimationName
 {
@@ -28,6 +31,8 @@ Player::Player()
 {
 	m_collider = nullptr;
 	m_animation = nullptr;
+	m_camera = nullptr;
+	m_itemController = nullptr;
 	m_velocity = Vector3::zero;
 }
 
@@ -43,6 +48,7 @@ void Player::Initialize()
 
 	m_collider = gameObject->GetComponent<AABB>();
 	m_animation = gameObject->GetComponent<Animation>();
+	m_itemController = gameObject->GetComponent<ItemController>();
 	m_camera = CManager::GetScene()->Find("MainCamera")->GetComponent<Camera>();
 
 	m_animation->SetSpeed(WALK, 2);
@@ -52,12 +58,11 @@ void Player::Update()
 {
 	Vector3 forward = gameObject->GetForward();
 
-	CheckGrounded();
+	CheckCollision();
 
 	if (CInput::GetKeyTrigger('K'))
 	{
 		Jump();
-
 	}
 	Move();
 
@@ -178,12 +183,13 @@ void Player::Jump()
 {
 	if (m_isGrounded)
 	{
+		AudioManager::PlaySound(SE_JUMP);
 		m_velocity.y += 0.25f;
 		m_isGrounded = false;
 	}
 }
 
-void Player::CheckGrounded()
+void Player::CheckCollision()
 {
 	std::vector<GameObject*> hit = m_collider->GetHitGameObject();
 	for (int i = 0; i < hit.size(); i++)
@@ -193,6 +199,24 @@ void Player::CheckGrounded()
 			if (hit[i]->tag == "Ground")
 			{
 				m_isGrounded = true;
+			}
+			else if (hit[i]->tag == "Item")
+			{
+				AudioManager::PlaySound(SE_GET);
+				switch (hit[i]->GetComponent<Item>()->GetItemType())
+				{
+				case ItemType::Apple:
+					m_itemController->GetApple();
+					break;
+				case ItemType::Strawberry:
+					m_itemController->GetStrawberry();
+					break;
+				case ItemType::Banana:
+					m_itemController->GetBanana();
+					break;
+				default:
+					break;
+				}
 			}
 		}
 	}

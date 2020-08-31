@@ -12,8 +12,9 @@
 #include "SceneManager.h"
 
 #include "GameObject.h"
-#include "SkyDorm.h"
-#include "Fbx.h"
+#include "Image.h"
+#include "Fade.h"
+#include "ResultManager.h"
 
 std::list<GameObject*> Scene::m_gameObject[LAYER_MAX];
 std::list<GameObject*> Scene::m_tempObject;
@@ -29,6 +30,7 @@ enum AnimationName
 	IDOL,
 	END
 };
+
 Scene::Scene()
 {
 
@@ -97,23 +99,6 @@ void Scene::Update()
 			}
 		);
 	}	
-
-	if (CInput::GetKeyTrigger('X'))
-	{
-		LevelLoader::SaveLevel(this, "Asset/Scene/stage1.scene");
-	}
-
-	if (m_isChange)
-	{
-		Finalize();
-		SceneManager::LoadScene();
-	}
-
-	if (CInput::GetKeyTrigger('Q'))
-	{
-		Finalize();
-		Initialize();
-	}
 }
 
 void Scene::Draw()

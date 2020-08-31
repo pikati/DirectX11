@@ -32,6 +32,73 @@
         },
         {
             "properties": {
+                "name": "Fade",
+                "tag": "untagged",
+                "activeSelf": false,
+                "isDestroy": false,
+                "layer": 2,
+                "position": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Image",
+                    "fileName": "Asset/Texture/Fade.png",
+                    "width": 960.0,
+                    "height": 540.0,
+                    "id": -1
+                },
+                {
+                    "type": "Fade",
+                    "id": -1
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "unname",
+                "tag": "untagged",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "MainGameManager",
+                    "id": -1
+                }
+            ]
+        },
+        {
+            "properties": {
                 "name": "Player",
                 "tag": "Player",
                 "activeSelf": true,
@@ -116,6 +183,10 @@
                 },
                 {
                     "type": "Player",
+                    "id": -1
+                },
+                {
+                    "type": "ItemController",
                     "id": -1
                 }
             ]
@@ -1423,7 +1494,7 @@
                 "layer": 1,
                 "position": [
                     36.0,
-                    -1.0,
+                    1.0,
                     0.0
                 ],
                 "rotation": [
@@ -1486,7 +1557,7 @@
                 "layer": 1,
                 "position": [
                     50.0,
-                    4.5,
+                    6.0,
                     -12.0
                 ],
                 "rotation": [
@@ -1549,7 +1620,7 @@
                 "layer": 1,
                 "position": [
                     57.0,
-                    4.0,
+                    6.5,
                     -27.0
                 ],
                 "rotation": [
@@ -1600,73 +1671,6 @@
                 {
                     "type": "Item",
                     "itemType": 2
-                }
-            ]
-        },
-        {
-            "properties": {
-                "name": "Fade",
-                "tag": "untagged",
-                "activeSelf": false,
-                "isDestroy": false,
-                "layer": 1,
-                "position": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "rotation": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "component": [
-                {
-                    "type": "Image",
-                    "fileName": "Asset/Texture/Fade.png",
-                    "width": 960.0,
-                    "height": 540.0,
-                    "id": -1
-                },
-                {
-                    "type": "Fade",
-                    "id": -1
-                }
-            ]
-        },
-        {
-            "properties": {
-                "name": "unname",
-                "tag": "untagged",
-                "activeSelf": true,
-                "isDestroy": false,
-                "layer": 1,
-                "position": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "rotation": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "component": [
-                {
-                    "type": "MainGameManager",
-                    "id": -1
                 }
             ]
         }

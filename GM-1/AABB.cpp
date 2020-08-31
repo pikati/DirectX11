@@ -12,7 +12,7 @@ AABB::AABB()
 	m_max.Set(-10000, 10000, 10000);
 	m_min.Set(10000, 10000, 10000);
 	m_texture = new Texture();
-	m_texture->SetTextureName("Asset/Texture/Enemy/Ghost.png");
+	m_texture->SetTextureName("Asset/Texture//fade.png");
 	m_texture->Initialize();
 }
 
@@ -118,9 +118,10 @@ void AABB::Update()
 	m_isCollisionThisFrame = false;
 }
 
+//“–‚½‚è”»’è•`‰æ—p
 void AABB::Draw()
 {
-	using namespace DirectX;
+	/*using namespace DirectX;
 	D3DXMATRIX world, rotation;
 	D3DXMatrixRotationYawPitchRoll(&rotation, XMConvertToRadians(0), XMConvertToRadians(0), XMConvertToRadians(0));
 	world._11 = 1 * rotation._11;
@@ -330,7 +331,7 @@ void AABB::Draw()
 	CRenderer::GetDeviceContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_LINELIST);
 	CRenderer::GetDeviceContext()->PSSetShaderResources(0, 1, &t);
 
-	CRenderer::GetDeviceContext()->Draw(2, 0);
+	CRenderer::GetDeviceContext()->Draw(2, 0);*/
 }
 
 void AABB::Finalize()

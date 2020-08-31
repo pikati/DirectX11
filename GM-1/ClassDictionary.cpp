@@ -23,9 +23,13 @@
 #include "MainGameManager.h"
 #include "SkyDorm.h"
 #include "WoodBox.h"
+#include "ItemController.h"
+#include "TutorialManager.h"
+#include "ResultManager.h"
 
 std::map<std::string, Component*> ClassDictionary::dictionary;
 BuilderFromString ClassDictionary::builderfromstring;
+
 void ClassDictionary::Initialize()
 {
 	builderfromstring.Register(REGISTER_ARGS(Bullet));
@@ -51,6 +55,9 @@ void ClassDictionary::Initialize()
 	builderfromstring.Register(REGISTER_ARGS(MainGameManager));
 	builderfromstring.Register(REGISTER_ARGS(SkyDorm));
 	builderfromstring.Register(REGISTER_ARGS(WoodBox));
+	builderfromstring.Register(REGISTER_ARGS(ItemController));
+	builderfromstring.Register(REGISTER_ARGS(TutorialManager));
+	builderfromstring.Register(REGISTER_ARGS(ResultManager));
 }
 
 void ClassDictionary::Register(const std::string& ty_name, Component* component)

@@ -4,6 +4,7 @@
 class AABB;
 class Animation;
 class Camera;
+class ItemController;
 
 class Player : public Component
 {
@@ -12,6 +13,7 @@ private:
     AABB* m_collider;
     Animation* m_animation;
     Camera* m_camera;
+    ItemController* m_itemController;
     const float SPEED = 5.0f;
     const float m_gravity = 9.8f;
     Vector3 m_velocity;
@@ -22,7 +24,7 @@ private:
     void Move();
     void Shot();
     void Jump();
-    void CheckGrounded();
+    void CheckCollision();
 
 public: 
 
