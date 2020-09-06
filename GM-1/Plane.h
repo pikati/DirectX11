@@ -17,7 +17,6 @@ private:
 	void DrawNormal();
 public:
 	void Initialize();
-	void Update();
 	void Draw();
 	void Finalize();
 	void SetTextureName(std::string name);

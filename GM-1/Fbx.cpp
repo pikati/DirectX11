@@ -48,32 +48,54 @@ void Fbx::Finalize()
 		if(m_meshInfo[i].uvSetName != nullptr)
 		delete 	m_meshInfo[i].uvSetName;
 	}*/
-	if (m_isCopy)
-	{
-		return;
-	}
 	if (m_animationStackNumber != 0)
 	{
-		for (int i = 0; i < m_fbxInfo.meshCount; i++)
+		if (m_animationVertex != nullptr)
 		{
-			for (int j = 0; j < m_count; j++)
+			for (int i = 0; i < m_fbxInfo.meshCount; i++)
 			{
-				delete[] m_animationVertex[i][j];
+				if(m_animationVertex[i] != nullptr)
+				for (int j = 0; j < m_count; j++)
+				{
+					if (m_animationVertex[i][j] != nullptr)
+					{
+						delete[] m_animationVertex[i][j];
+						m_animationVertex[i][j] = nullptr;
+					}
+				}
+				delete[] m_animationVertex[i];
+				m_animationVertex[i] = nullptr;
 			}
-			delete[] m_animationVertex[i];
+			delete[] m_animationVertex;
+			m_animationVertex = nullptr;
 		}
-		delete[] m_animationVertex;
+		
 	}
 	
 
 	for (int i = m_fbxInfo.meshCount - 1; i >= 0; i--)
 	{
 		if (m_meshInfo[i].vertex != nullptr)
+		{
 			delete m_meshInfo[i].vertex;
+			m_meshInfo[i].vertex = nullptr;
+		}
+
 	}
 	for (int i = m_fbxInfo.meshCount - 1; i >= 0; i--)
 	{
-		delete m_meshInfo[i].index;
+		if (m_meshInfo[i].index != nullptr)
+		{
+			delete m_meshInfo[i].index;
+			m_meshInfo[i].index = nullptr;
+		}
+	}
+	for (int i = m_fbxInfo.meshCount - 1; i >= 0; i--)
+	{
+		SAFE_RELEASE(m_meshInfo[i].pVB);
+		m_meshInfo[i].pVB = nullptr;
+		SAFE_RELEASE(m_meshInfo[i].pIB);
+		m_meshInfo[i].pIB = nullptr;
 	}
 	/*if (m_meshInfo != nullptr)
 		delete m_meshInfo;
@@ -121,7 +143,6 @@ void Fbx::Load()
 			m_timeCount = t->m_timeCount;
 			texture = t->texture;
 			m_maxID--;
-			m_isCopy = true;
 			return;
 		}
 	}

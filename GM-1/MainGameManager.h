@@ -9,8 +9,5 @@ private:
 	bool m_isChangeScene = false;
 public:
 	void Initialize();
-	void Update();
-	void Draw();
-	void Finalize();
 };
 

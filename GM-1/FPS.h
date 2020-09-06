@@ -14,7 +14,6 @@ public:
 
 	static void Initialize();
 	static bool Update();
-	static void Draw();
 	static void Finalize();
 	static void ResetFPS();
 };

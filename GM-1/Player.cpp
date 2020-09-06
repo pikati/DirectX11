@@ -44,8 +44,6 @@ Player::~Player()
 
 void Player::Initialize()
 {
-	ObjectPooler::LoadGameObject("Asset/Prefabs/Bullet.prefab");
-
 	m_collider = gameObject->GetComponent<AABB>();
 	m_animation = gameObject->GetComponent<Animation>();
 	m_itemController = gameObject->GetComponent<ItemController>();
@@ -76,14 +74,6 @@ void Player::Update()
 		gameObject->transform->position = m_startPosition;
 		m_velocity.y = 0;
 	}
-}
-
-void Player::Draw()
-{
-}
-
-void Player::Finalize()
-{
 }
 
 void Player::Move()

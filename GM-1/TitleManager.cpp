@@ -28,13 +28,3 @@ void TitleManager::Update()
 		SceneManager::LoadScene("Asset/Scene/tutorial.scene");
 	}
 }
-
-void TitleManager::Draw()
-{
-
-}
-
-void TitleManager::Finalize()
-{
-
-}

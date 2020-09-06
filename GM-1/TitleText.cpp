@@ -4,11 +4,6 @@
 #include "GameObject.h"
 #include "Transform.h"
 
-void TitleText::Initialize()
-{
-
-}
-
 void TitleText::Update()
 {
 	m_num += FPS::deltaTime * 5.0f;
@@ -18,14 +13,4 @@ void TitleText::Update()
 	}
 	float y = sinf(m_num);
 	gameObject->transform->position.y += y;
-}
-
-void TitleText::Draw()
-{
-
-}
-
-void TitleText::Finalize()
-{
-
 }

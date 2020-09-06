@@ -25,16 +25,6 @@ void ItemController::Update()
 	}
 }
 
-void ItemController::Draw()
-{
-
-}
-
-void ItemController::Finalize()
-{
-
-}
-
 void ItemController::GetApple()
 {
 	m_isGetApple = true;

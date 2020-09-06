@@ -91,7 +91,6 @@ private:
 	std::string m_textureName;
 	std::string m_fileName;
 	ID3D11ShaderResourceView* texture;
-	bool m_isCopy = false;
 
 	void LoadFBX(const char* fileName);
 	void InitializeFBX();

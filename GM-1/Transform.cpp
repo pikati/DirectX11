@@ -15,25 +15,6 @@ Transform::~Transform()
 
 }
 
-void Transform::Initialize()
-{
-}
-
-void Transform::Update()
-{
-
-}
-
-void Transform::Draw()
-{
-
-}
-
-void Transform::Finalize()
-{
-
-}
-
 void Transform::LoadProperties(const rapidjson::Value& inProp)
 {
 	JsonHelper::GetVector3(inProp, "position", position);

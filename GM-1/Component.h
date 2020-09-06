@@ -9,10 +9,10 @@ protected:
 public:
 	int m_sortingOrder = 1;
 
-	virtual void Initialize() = 0;
-	virtual void Update() = 0;
-	virtual void Draw() = 0;
-	virtual void Finalize() = 0;
+	virtual void Initialize();
+	virtual void Update();
+	virtual void Draw();
+	virtual void Finalize();
 	Component* GetComponent();
 	void SetGameObject(GameObject* obj);
 	GameObject* GetGameObject();

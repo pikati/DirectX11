@@ -20,7 +20,6 @@ public:
 	void Initialize();
 	void Update();
 	void Draw();
-	void Finalize();
 	Vector3 GetTarget();
 	D3DXMATRIX GetViewMatrix();
 	float GetRotation();

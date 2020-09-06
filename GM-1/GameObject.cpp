@@ -89,7 +89,6 @@ void GameObject::Finalize()
 	for (Component* c : components)
 	{
 		c->Finalize();
-		//delete c;
 	}
 }
 
@@ -97,7 +96,6 @@ Vector3 GameObject::GetForward()
 {
 	using namespace DirectX;
 	D3DXMATRIX rot;
-	//ワールドマトリクスとっとけばそっからとりだせばおｋ
 	D3DXMatrixRotationYawPitchRoll(&rot, XMConvertToRadians(transform->rotation.y), XMConvertToRadians(transform->rotation.x), XMConvertToRadians(transform->rotation.z));
 	Vector3 forward;
 	forward.x = rot._31;

@@ -48,16 +48,6 @@ void WoodBox::Update()
 	}
 }
 
-void WoodBox::Draw()
-{
-
-}
-
-void WoodBox::Finalize()
-{
-
-}
-
 void WoodBox::LoadProperties(const rapidjson::Value& inProp)
 {
 	JsonHelper::GetVector3(inProp, "startPosition", m_startPosition);

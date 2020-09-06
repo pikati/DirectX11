@@ -35,10 +35,10 @@ public:
 	static std::vector<Collider*> m_colliders;
 
 
-	virtual void Initialize() = 0;
-	virtual void Update() = 0;
-	virtual void Draw() = 0;
-	virtual void Finalize() = 0;
+	virtual void Initialize();
+	virtual void Update();
+	virtual void Draw();
+	virtual void Finalize();
 	virtual Vector3 GetPosition() = 0;
 	virtual float GetRadius();
 	virtual void LoadProperties(const rapidjson::Value& inProp);

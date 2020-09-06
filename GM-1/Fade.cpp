@@ -14,16 +14,6 @@ void Fade::Update()
 	else if (m_isFadeOut) UpdateFadeOut();
 }
 
-void Fade::Draw()
-{
-
-}
-
-void Fade::Finalize()
-{
-
-}
-
 void Fade::SetFadeTime(float time)
 {
 	m_fadeTime = time;
@@ -45,7 +35,7 @@ void Fade::FadeOut()
 
 void Fade::UpdateFadeIn()
 {
-	m_alpha += FPS::deltaTime * m_fadeTime;
+	m_alpha += FPS::deltaTime / m_fadeTime;
 	
 	if (m_alpha >= 1.0f)
 	{
@@ -58,7 +48,7 @@ void Fade::UpdateFadeIn()
 
 void Fade::UpdateFadeOut()
 {
-	m_alpha -= FPS::deltaTime * m_fadeTime;
+	m_alpha -= FPS::deltaTime / m_fadeTime;
 
 	if (m_alpha <= 0)
 	{

@@ -2,9 +2,28 @@
 #include "LevelLoader.h"
 
 
+void Component::Initialize()
+{
+
+}
+
+void Component::Update()
+{
+
+}
+
+void Component::Draw()
+{
+
+}
+
+void Component::Finalize()
+{
+
+}
+
 Component* Component::GetComponent()
 {
-	//Component* c = new decltype(*this)();
 	return this;
 }
 
@@ -18,7 +37,6 @@ GameObject* Component::GetGameObject()
 	return gameObject;
 }
 
-//ここではプロパティを読み込むだけなのでユーザー定義のcomponentの場合はreturnでおｋだよ
 void Component::LoadProperties(const rapidjson::Value& inProp)
 {
 	JsonHelper::GetInt(inProp, "id", m_id);

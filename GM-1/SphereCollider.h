@@ -12,7 +12,6 @@ public:
 	~SphereCollider();
 	void Initialize();
 	void Update();
-	void Draw();
 	void Finalize();
 
 	void SetCenter(Vector3 center);

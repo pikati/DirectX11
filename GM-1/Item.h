@@ -20,8 +20,6 @@ private:
 public:
 	void Initialize();
 	void Update();
-	void Draw();
-	void Finalize();
 	ItemType GetItemType();
 	void SetItemType(ItemType type);
 

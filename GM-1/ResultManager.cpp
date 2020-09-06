@@ -28,13 +28,3 @@ void ResultManager::Update()
 		SceneManager::LoadScene("Asset/Scene/title.scene");
 	}
 }
-
-void ResultManager::Draw()
-{
-
-}
-
-void ResultManager::Finalize()
-{
-
-}

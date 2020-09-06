@@ -8,6 +8,26 @@
 
 std::vector<Collider*> Collider::m_colliders;
 
+void Collider::Initialize()
+{
+
+}
+
+void Collider::Update()
+{
+
+}
+
+void Collider::Draw()
+{
+
+}
+
+void Collider::Finalize()
+{
+
+}
+
 bool Collider::IsCollision()
 {
 	return m_isCollision;

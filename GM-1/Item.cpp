@@ -24,16 +24,6 @@ void Item::Update()
 	}
 }
 
-void Item::Draw()
-{
-
-}
-
-void Item::Finalize()
-{
-
-}
-
 ItemType Item::GetItemType()
 {
 	return m_itemType;

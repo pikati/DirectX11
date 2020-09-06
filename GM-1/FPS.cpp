@@ -36,10 +36,6 @@ bool FPS::Update()
 	else return false;
 }
 
-void FPS::Draw()
-{
-}
-
 void FPS::Finalize()
 {
 	timeEndPeriod(1);

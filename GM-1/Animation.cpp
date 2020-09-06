@@ -19,11 +19,6 @@ void Animation::Update()
 	UpdateFrame();
 }
 
-void Animation::Draw()
-{
-
-}
-
 void Animation::Finalize()
 {
 	if (m_animationData != nullptr)

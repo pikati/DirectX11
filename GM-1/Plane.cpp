@@ -43,7 +43,6 @@ void Plane::Initialize()
 		Vector3(vertex[2].Position.x, vertex[2].Position.y, vertex[2].Position.z),
 		Vector3(vertex[3].Position.x, vertex[3].Position.y, vertex[3].Position.z));
 
-	//頂点バッファの設定
 	D3D11_BUFFER_DESC bd;
 	ZeroMemory(&bd, sizeof(bd));
 	bd.Usage = D3D11_USAGE_DEFAULT;
@@ -51,7 +50,6 @@ void Plane::Initialize()
 	bd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 	bd.CPUAccessFlags = 0;
 
-	//頂点バッファを入れる
 	D3D11_SUBRESOURCE_DATA sd;
 	ZeroMemory(&sd, sizeof(sd));
 	sd.pSysMem = vertex;
@@ -65,11 +63,6 @@ void Plane::Initialize()
 		tex->Initialize();
 		m_tex = tex->GetTexture();
 	}
-}
-
-void Plane::Update()
-{
-
 }
 
 void Plane::Draw()
@@ -168,15 +161,13 @@ void Plane::DrawNormal()
 	vertex[1].Diffuse = D3DXVECTOR4(1.0f, 1.0f, 1.0f, 1.0f);
 	vertex[1].TexCoord = D3DXVECTOR2(1.0f, 0.0f);
 
-	//頂点バッファの設定
 	D3D11_BUFFER_DESC bd;
 	ZeroMemory(&bd, sizeof(bd));
-	bd.Usage = D3D11_USAGE_DEFAULT;//ここかえるとマップアンマップできるらしい
+	bd.Usage = D3D11_USAGE_DEFAULT;
 	bd.ByteWidth = sizeof(VERTEX_3D) * 2;
 	bd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-	bd.CPUAccessFlags = 0;//ここかえるとマップアンマップできるらしい
+	bd.CPUAccessFlags = 0;
 
-	//頂点バッファを入れる
 	D3D11_SUBRESOURCE_DATA sd;
 	ZeroMemory(&sd, sizeof(sd));
 	sd.pSysMem = vertex;

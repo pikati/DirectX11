@@ -3,6 +3,7 @@
 #include "manager.h"
 #include "Scene.h"
 #include "FPS.h"
+#include "ObjectPooler.h"
 
 std::string SceneManager::m_currentSceneName = "";
 
@@ -14,6 +15,7 @@ void SceneManager::LoadScene(std::string sceneName)
 
 void SceneManager::LoadScene()
 {
+	ObjectPooler::Clear();
 	LevelLoader::LoadLevel(CManager::GetScene(), m_currentSceneName.c_str());
 	FPS::ResetFPS();
 }

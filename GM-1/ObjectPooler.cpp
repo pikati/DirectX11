@@ -79,7 +79,36 @@ Fbx* ObjectPooler::GetComponent(int id, Fbx* tex)
 
 void ObjectPooler::Clear()
 {
+	for (int i = m_texture.size() - 1; i >= 0; i--)
+	{
+		m_texture[i]->Finalize();
+	}
 	m_texture.clear();
+	for (int i = m_texture.size() - 1; i >= 0; i--)
+	{
+		delete m_texture[i];
+	}
+
+
+	for (int i = m_fbx.size() - 1; i >= 0; i--)
+	{
+		m_fbx[i]->Finalize();
+	}
 	m_fbx.clear();
+	for (int i = m_fbx.size() - 1; i >= 0; i--)
+	{
+		delete m_fbx[i];
+	}
+
+
+	for (int i = m_object.size() - 1; i >= 0; i--)
+	{
+		m_object[i]->Finalize();
+	}
 	m_object.clear();
+	for (int i = m_object.size() - 1; i >= 0; i--)
+	{
+		delete m_object[i];
+	}
+	m_textureName.clear();
 }

@@ -28,11 +28,6 @@ void SphereCollider::Update()
 	//hitObject = nullptr;
 }
 
-void SphereCollider::Draw()
-{
-	
-}
-
 void SphereCollider::Finalize()
 {
 	DeleteCollider(m_colliderID);

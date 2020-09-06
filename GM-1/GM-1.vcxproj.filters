@@ -84,25 +84,10 @@
     <ClCompile Include="renderer.cpp">
       <Filter>ソース ファイル\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Polygon.cpp">
-      <Filter>ソース ファイル\Script</Filter>
-    </ClCompile>
-    <ClCompile Include="Bullet.cpp">
-      <Filter>ソース ファイル\Script</Filter>
-    </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>ソース ファイル\Script</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>ソース ファイル\Script</Filter>
-    </ClCompile>
-    <ClCompile Include="Field.cpp">
-      <Filter>ソース ファイル\Script</Filter>
-    </ClCompile>
     <ClCompile Include="input.cpp">
-      <Filter>ソース ファイル\Script</Filter>
-    </ClCompile>
-    <ClCompile Include="model.cpp">
       <Filter>ソース ファイル\Script</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
@@ -144,9 +129,6 @@
     <ClCompile Include="LevelLoader.cpp">
       <Filter>ソース ファイル\Engine\Other</Filter>
     </ClCompile>
-    <ClCompile Include="SpriteEffect.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="ObjectPooler.cpp">
       <Filter>ソース ファイル\Engine\Other</Filter>
     </ClCompile>
@@ -163,9 +145,6 @@
       <Filter>ソース ファイル\Engine\Component</Filter>
     </ClCompile>
     <ClCompile Include="AABB.cpp">
-      <Filter>ソース ファイル\Engine\Component\Collider</Filter>
-    </ClCompile>
-    <ClCompile Include="LineSegment.cpp">
       <Filter>ソース ファイル\Engine\Component\Collider</Filter>
     </ClCompile>
     <ClCompile Include="Billboard.cpp">
@@ -198,45 +177,30 @@
     <ClCompile Include="AudioManager.cpp">
       <Filter>ソース ファイル\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="WoodBox.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="ItemController.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="TutorialManager.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\Script</Filter>
     </ClCompile>
     <ClCompile Include="ResultManager.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="TutorialManager.cpp">
+      <Filter>ソース ファイル\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="WoodBox.cpp">
+      <Filter>ソース ファイル\Script</Filter>
     </ClCompile>
     <ClCompile Include="SaveLoadManager.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\Engine\Other</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Polygon.h">
-      <Filter>ヘッダー ファイル\Script</Filter>
-    </ClInclude>
     <ClInclude Include="Camera.h">
-      <Filter>ヘッダー ファイル\Script</Filter>
-    </ClInclude>
-    <ClInclude Include="Field.h">
-      <Filter>ヘッダー ファイル\Script</Filter>
-    </ClInclude>
-    <ClInclude Include="model.h">
       <Filter>ヘッダー ファイル\Script</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>ヘッダー ファイル\Script</Filter>
     </ClInclude>
     <ClInclude Include="input.h">
-      <Filter>ヘッダー ファイル\Script</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>ヘッダー ファイル\Script</Filter>
-    </ClInclude>
-    <ClInclude Include="Bullet.h">
       <Filter>ヘッダー ファイル\Script</Filter>
     </ClInclude>
     <ClInclude Include="Scene.h">
@@ -271,9 +235,6 @@
     </ClInclude>
     <ClInclude Include="ClassDictionary.h">
       <Filter>ヘッダー ファイル\Engine\Other</Filter>
-    </ClInclude>
-    <ClInclude Include="SpriteEffect.h">
-      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="imgui\imgui_impl_dx11.h">
       <Filter>imgui</Filter>
@@ -326,12 +287,6 @@
     <ClInclude Include="AABB.h">
       <Filter>ヘッダー ファイル\Engine\Component\Collider</Filter>
     </ClInclude>
-    <ClInclude Include="LineSegment.h">
-      <Filter>ヘッダー ファイル\Engine\Component\Collider</Filter>
-    </ClInclude>
-    <ClInclude Include="Plane.h">
-      <Filter>ヘッダー ファイル\Engine\Component\Collider</Filter>
-    </ClInclude>
     <ClInclude Include="Billboard.h">
       <Filter>ヘッダー ファイル\Script</Filter>
     </ClInclude>
@@ -362,20 +317,23 @@
     <ClInclude Include="AudioManager.h">
       <Filter>ヘッダー ファイル\Engine</Filter>
     </ClInclude>
-    <ClInclude Include="WoodBox.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="ItemController.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="TutorialManager.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\Script</Filter>
     </ClInclude>
     <ClInclude Include="ResultManager.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="TutorialManager.h">
+      <Filter>ヘッダー ファイル\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="WoodBox.h">
+      <Filter>ヘッダー ファイル\Script</Filter>
     </ClInclude>
     <ClInclude Include="SaveLoadManager.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\Engine\Other</Filter>
+    </ClInclude>
+    <ClInclude Include="Plane.h">
+      <Filter>ヘッダー ファイル\Engine\Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

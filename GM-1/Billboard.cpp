@@ -30,12 +30,3 @@ void Billboard::Update()
 	}
 	gameObject->transform->rotation.y = -(rotationY * 180.0f / D3DX_PI - 90.0f);
 }
-
-void Billboard::Draw()
-{
-	
-}
-
-void Billboard::Finalize()
-{
-}

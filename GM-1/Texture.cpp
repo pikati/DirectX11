@@ -30,16 +30,6 @@ void Texture::Initialize()
 	ObjectPooler::SetComponent(this, m_fileName);
 }
 
-void Texture::Update()
-{
-
-}
-
-void Texture::Draw()
-{
-	
-}
-
 void Texture::Finalize()
 {
 	SAFE_RELEASE(m_texture);

@@ -1,35 +1,15 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "Scene.h"
 #include "SaveLoadManager.h"
-#include "ClassDictionary.h"
 #include "input.h"
-#include <typeinfo>
-#include <sstream>
 #include "Constants.h"
 #include "LevelLoader.h"
-#include "Transform.h"
 #include "Collider.h"
 #include "SceneManager.h"
-
-#include "GameObject.h"
-#include "Image.h"
-#include "Fade.h"
-#include "ResultManager.h"
 
 std::list<GameObject*> Scene::m_gameObject[LAYER_MAX];
 std::list<GameObject*> Scene::m_tempObject;
 bool Scene::m_isChange = false;
-
-enum AnimationName
-{
-	WALK,
-	SLASH,
-	STAB,
-	SHOOT,
-	DAMAGE,
-	IDOL,
-	END
-};
 
 Scene::Scene()
 {
@@ -43,7 +23,7 @@ Scene::~Scene()
 
 void Scene::Initialize()
 {
-	LevelLoader::LoadLevel(this, "Asset/Scene/stage1.scene");
+	LevelLoader::LoadLevel(this, "Asset/Scene/title.scene");
 }
 
 void Scene::Update()
@@ -98,7 +78,13 @@ void Scene::Update()
 				return false;
 			}
 		);
-	}	
+	}
+
+	if (m_isChange)
+	{
+ 		Finalize();
+		SceneManager::LoadScene();
+	}
 }
 
 void Scene::Draw()

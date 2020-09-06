@@ -26,13 +26,3 @@ void TutorialManager::Update()
 		SceneManager::LoadScene("Asset/Scene/stage1.scene");
 	}
 }
-
-void TutorialManager::Draw()
-{
-
-}
-
-void TutorialManager::Finalize()
-{
-
-}

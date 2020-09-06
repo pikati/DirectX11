@@ -71,11 +71,6 @@ void Camera::Draw()
 	CRenderer::SetProjectionMatrix(&projctionMatrix);
 }
 
-void Camera::Finalize()
-{
-
-}
-
 Vector3 Camera::GetTarget()
 {
 	return m_target;

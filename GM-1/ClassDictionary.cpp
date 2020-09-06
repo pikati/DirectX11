@@ -1,15 +1,10 @@
 #include "ClassDictionary.h"
 #include "GameObject.h"
-#include "Bullet.h"
 #include "Camera.h"
-#include "Enemy.h"
-#include "Field.h"
 #include "Player.h"
-#include "Polygon.h"
 #include "Transform.h"
 #include "SphereCollider.h"
 #include "AABB.h"
-#include "SpriteEffect.h"
 #include "Billboard.h"
 #include "Texture.h"
 #include "Fbx.h"
@@ -32,15 +27,10 @@ BuilderFromString ClassDictionary::builderfromstring;
 
 void ClassDictionary::Initialize()
 {
-	builderfromstring.Register(REGISTER_ARGS(Bullet));
 	builderfromstring.Register(REGISTER_ARGS(Camera));
-	builderfromstring.Register(REGISTER_ARGS(Enemy));
-	builderfromstring.Register(REGISTER_ARGS(Field));
 	builderfromstring.Register(REGISTER_ARGS(Player));
-	builderfromstring.Register(REGISTER_ARGS(CPolygon));
 	builderfromstring.Register(REGISTER_ARGS(Transform));
 	builderfromstring.Register(REGISTER_ARGS(SphereCollider));
-	builderfromstring.Register(REGISTER_ARGS(SpriteEffect));
 	builderfromstring.Register(REGISTER_ARGS(Billboard));
 	builderfromstring.Register(REGISTER_ARGS(Texture));
 	builderfromstring.Register(REGISTER_ARGS(Fbx));

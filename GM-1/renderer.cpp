@@ -51,7 +51,6 @@ void CRenderer::Init()
 	sd.Windowed = TRUE;
 
 	hr = D3D11CreateDeviceAndSwapChain( NULL,
-										//グラフィックカードによって動作が違う対応していない場合WARPにするとソフトウェアも使うのでなんかよくなるかも
 										D3D_DRIVER_TYPE_HARDWARE,
 										NULL,
 										0,
@@ -76,18 +75,18 @@ void CRenderer::Init()
 	//深度ステンシル用テクスチャー作成
 	ID3D11Texture2D* depthTexture = NULL;
 	D3D11_TEXTURE2D_DESC td;
-	ZeroMemory( &td, sizeof(td) );
-	td.Width			= sd.BufferDesc.Width;
-	td.Height			= sd.BufferDesc.Height;
-	td.MipLevels		= 1;
-	td.ArraySize		= 1;
-	td.Format			= DXGI_FORMAT_D24_UNORM_S8_UINT;
-	td.SampleDesc		= sd.SampleDesc;
-	td.Usage			= D3D11_USAGE_DEFAULT;
-	td.BindFlags		= D3D11_BIND_DEPTH_STENCIL;
-    td.CPUAccessFlags	= 0;
-    td.MiscFlags		= 0;
-	m_D3DDevice->CreateTexture2D( &td, NULL, &depthTexture );
+	ZeroMemory(&td, sizeof(td));
+	td.Width = sd.BufferDesc.Width;
+	td.Height = sd.BufferDesc.Height;
+	td.MipLevels = 1;
+	td.ArraySize = 1;
+	td.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
+	td.SampleDesc = sd.SampleDesc;
+	td.Usage = D3D11_USAGE_DEFAULT;
+	td.BindFlags = D3D11_BIND_DEPTH_STENCIL;
+	td.CPUAccessFlags = 0;
+	td.MiscFlags = 0;
+	m_D3DDevice->CreateTexture2D(&td, NULL, &depthTexture);
 
 	//ステンシルターゲット作成
 	D3D11_DEPTH_STENCIL_VIEW_DESC dsvd;
@@ -116,7 +115,7 @@ void CRenderer::Init()
 	// ラスタライザステート設定
 	D3D11_RASTERIZER_DESC rd; 
 	ZeroMemory( &rd, sizeof( rd ) );
-	rd.FillMode = D3D11_FILL_SOLID; //ここかえるとワイヤーフレームにできたりかも
+	rd.FillMode = D3D11_FILL_SOLID;
 	rd.CullMode = D3D11_CULL_BACK;
 	rd.DepthClipEnable = TRUE; 
 	rd.MultisampleEnable = FALSE; 
@@ -195,7 +194,7 @@ void CRenderer::Init()
 		FILE* file;
 		long int fsize;
 
-		file = fopen("vertexShader.cso", "rb");
+		file = fopen("Asset/Shader/vertexShader.cso", "rb");
 		fsize = _filelength(_fileno(file));
 		unsigned char* buffer = new unsigned char[fsize];
 		fread(buffer, fsize, 1, file);
@@ -230,7 +229,7 @@ void CRenderer::Init()
 		FILE* file;
 		long int fsize;
 
-		file = fopen("pixelShader.cso", "rb");
+		file = fopen("Asset/Shader/pixelShader.cso", "rb");
 		fsize = _filelength(_fileno(file));
 		unsigned char* buffer = new unsigned char[fsize];
 		fread(buffer, fsize, 1, file);

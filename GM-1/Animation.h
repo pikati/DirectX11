@@ -23,7 +23,6 @@ public:
 	Animation();
 	void Initialize();
 	void Update();
-	void Draw();
 	void Finalize();
 	void SetAnimationNum(int num);
 	void SetAnimationData(int state, bool isLoop, int startTime, int endTime, int speed = 1, int loopStartTime = -1, int loopEndTime = -1);

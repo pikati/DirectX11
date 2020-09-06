@@ -32,7 +32,4 @@ public:
     ~Player();
     void Initialize();
     void Update();
-    void Draw();
-    void Finalize();
-
 };

@@ -7,7 +7,7 @@
 #include "imGui/imgui_impl_win32.h"
 
 const char* CLASS_NAME = "AppClass";
-const char* WINDOW_NAME = "DX11ゲーム";
+const char* WINDOW_NAME = "美食屋マン";
 
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
@@ -39,10 +39,8 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 		NULL
 	};
 
-	// ウィンドウクラスの登録
 	RegisterClassEx(&wcex);
 
-	// ウィンドウの作成
 	g_Window = CreateWindowEx(0,
 		CLASS_NAME,
 		WINDOW_NAME,
@@ -57,33 +55,26 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 		NULL);
 
 
-	// 初期化処理(ウィンドウを作成してから行う)
 	CManager::Init();
 
 
-	// ウインドウの表示(初期化処理の後に行う)
 	ShowWindow(g_Window, nCmdShow);
 	UpdateWindow(g_Window);
 
-
-
-	//フレームカウント初期化
 	FPS::Initialize();
 
 
-	// メッセージループ
 	MSG msg;
 	while(1)
 	{
         if(PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
 		{
 			if(msg.message == WM_QUIT)
-			{// PostQuitMessage()が呼ばれたらループ終了
+			{
 				break;
 			}
 			else
 			{
-				// メッセージの翻訳とディスパッチ
 				TranslateMessage(&msg);
 				DispatchMessage(&msg);
 			}
@@ -92,22 +83,16 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 		{
 			if(FPS::Update())
 			{
-				// 更新処理
 				CManager::Update();
-
-				// 描画処理
-				FPS::Draw();
 				CManager::Draw();
 			}
 		}
 	}
 
-	FPS::Finalize();				// 分解能を戻す
+	FPS::Finalize();
 
-	// ウィンドウクラスの登録を解除
 	UnregisterClass(CLASS_NAME, wcex.hInstance);
 
-	// 終了処理
 	CManager::Uninit();
 
 	return (int)msg.wParam;
