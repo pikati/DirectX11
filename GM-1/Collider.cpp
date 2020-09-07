@@ -44,7 +44,7 @@ int Collider::SetCollider(Collider* collider)
 void Collider::DeleteCollider(int colliderID)
 {
 	m_colliders.erase(m_colliders.begin() + colliderID);
-	for (int i = colliderID; i < m_colliders.size(); i++)
+	for (unsigned int i = colliderID; i < m_colliders.size(); i++)
 	{
 		m_colliders[i]->m_colliderID--;
 	}
@@ -52,7 +52,7 @@ void Collider::DeleteCollider(int colliderID)
 
 void Collider::UpdateCollision()
 {
-	for (int i = 0; i < m_colliders.size(); i++)
+	for (unsigned int i = 0; i < m_colliders.size(); i++)
 	{
 		m_colliders[i]->Update();
 	}
@@ -65,12 +65,12 @@ void Collider::UpdateCollision()
 			RunCollisionDetection(m_colliders[i], m_colliders[j]);
 		}
 	}
-	for (int i = 0; i < m_colliders.size(); i++)
+	for (unsigned int i = 0; i < m_colliders.size(); i++)
 	{
 		if (!m_colliders[i]->m_isCollisionThisFrame)
 		{
 			m_colliders[i]->m_exitObject = m_colliders[i]->m_hitObject;
-			for (int j = 0; j < m_colliders[i]->m_hitObject.size(); j++)
+			for (unsigned int j = 0; j < m_colliders[i]->m_hitObject.size(); j++)
 			{
 				m_colliders[i]->m_hitObject[j] = nullptr;
 			}
@@ -128,9 +128,9 @@ std::vector<GameObject*> Collider::GetExitGameObject()
 
 void Collider::ResetExitCollision()
 {
-	for (int i = 0; i < m_colliders.size(); i++)
+	for (unsigned int i = 0; i < m_colliders.size(); i++)
 	{
-		for (int j = 0; j < m_colliders[i]->m_exitObject.size(); j++)
+		for (unsigned int j = 0; j < m_colliders[i]->m_exitObject.size(); j++)
 		{
 			m_colliders[i]->m_exitObject[j] = m_colliders[i]->m_hitObject[j];
 			m_colliders[i]->m_hitObject[j] = nullptr;
@@ -151,14 +151,14 @@ void Collider::Sphere2Sphere(Collider* c1, Collider* c2)
 		c2->m_isCollision = true;
 		c1->m_isCollisionThisFrame = true;
 		c2->m_isCollisionThisFrame = true;
-		for (int i = 0; i < c1->m_hitObject.size(); i++)
+		for (unsigned int i = 0; i < c1->m_hitObject.size(); i++)
 		{
 			if (c1->m_hitObject[i] == nullptr)
 			{
 				c1->m_hitObject[i] = c2->GetGameObject();
 			}
 		}
-		for (int i = 0; i < c2->m_hitObject.size(); i++)
+		for (unsigned int i = 0; i < c2->m_hitObject.size(); i++)
 		{
 			if (c2->m_hitObject[i] == nullptr)
 			{
@@ -287,7 +287,7 @@ void Collider::AABB2AABB(Collider* c1, Collider* c2)
 	c2->m_isCollision = true;
 	c1->m_isCollisionThisFrame = true;
 	c2->m_isCollisionThisFrame = true;
-	for (int i = 0; i < c1->m_hitObject.size(); i++)
+	for (unsigned int i = 0; i < c1->m_hitObject.size(); i++)
 	{
 		if (c1->m_hitObject[i] == nullptr)
 		{
@@ -295,7 +295,7 @@ void Collider::AABB2AABB(Collider* c1, Collider* c2)
 			break;
 		}
 	}
-	for (int i = 0; i < c2->m_hitObject.size(); i++)
+	for (unsigned int i = 0; i < c2->m_hitObject.size(); i++)
 	{
 		if (c2->m_hitObject[i] == nullptr)
 		{
@@ -402,14 +402,14 @@ void Collider::Sphere2AABB(Collider* c1, Collider* c2)
 		c2->m_isCollision = true;
 		c1->m_isCollisionThisFrame = true;
 		c2->m_isCollisionThisFrame = true;
-		for (int i = 0; i < c1->m_hitObject.size(); i++)
+		for (unsigned int i = 0; i < c1->m_hitObject.size(); i++)
 		{
 			if (c1->m_hitObject[i] == nullptr)
 			{
 				c1->m_hitObject[i] = c2->GetGameObject();
 			}
 		}
-		for (int i = 0; i < c2->m_hitObject.size(); i++)
+		for (unsigned int i = 0; i < c2->m_hitObject.size(); i++)
 		{
 			if (c2->m_hitObject[i] == nullptr)
 			{

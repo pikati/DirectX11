@@ -49,7 +49,7 @@ void ObjectPooler::SetComponent(Fbx* fbx)
 
 Texture* ObjectPooler::GetTexture(int id)
 {
-	if (id < m_texture.size())
+	if ((unsigned)id < m_texture.size())
 	{
 		return m_texture[id];
 	}
@@ -58,7 +58,7 @@ Texture* ObjectPooler::GetTexture(int id)
 
 Texture* ObjectPooler::GetTexture(std::string name)
 {
-	for (int i = 0; i < m_textureName.size(); i++)
+	for (unsigned int i = 0; i < m_textureName.size(); i++)
 	{
 		if (name == m_textureName[i])
 		{
@@ -70,7 +70,7 @@ Texture* ObjectPooler::GetTexture(std::string name)
 
 Fbx* ObjectPooler::GetComponent(int id, Fbx* tex)
 {
-	if (id < m_fbx.size())
+	if ((unsigned)id < m_fbx.size())
 	{
 		return m_fbx[id];
 	}

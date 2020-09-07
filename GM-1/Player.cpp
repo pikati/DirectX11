@@ -182,7 +182,7 @@ void Player::Jump()
 void Player::CheckCollision()
 {
 	std::vector<GameObject*> hit = m_collider->GetHitGameObject();
-	for (int i = 0; i < hit.size(); i++)
+	for (unsigned int i = 0; i < hit.size(); i++)
 	{
 		if (hit[i] != nullptr)
 		{
@@ -211,7 +211,7 @@ void Player::CheckCollision()
 		}
 	}
 	std::vector<GameObject*> exit = m_collider->GetExitGameObject();
-	for (int i = 0; i < exit.size(); i++)
+	for (unsigned int i = 0; i < exit.size(); i++)
 	{
 		if (exit[i] != nullptr)
 		{

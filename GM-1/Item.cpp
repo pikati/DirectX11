@@ -12,7 +12,7 @@ void Item::Initialize()
 void Item::Update()
 {
 	std::vector<GameObject*> hit = m_collider->GetHitGameObject();
-	for (int i = 0; i < hit.size(); i++)
+	for (unsigned int i = 0; i < hit.size(); i++)
 	{
 		if (hit[i] != nullptr)
 		{

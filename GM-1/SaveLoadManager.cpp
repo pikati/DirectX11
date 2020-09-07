@@ -126,13 +126,13 @@ void SaveLoadManager::SetInfo(int count, std::string str, GameObject* obj)
 		obj->layer = atoi(str.c_str());
 		break;
 	case POS_X:
-		obj->transform->position.x = atof(str.c_str());
+		obj->transform->position.x = (float)atof(str.c_str());
 		break;
 	case POS_Y:
-		obj->transform->position.y = atof(str.c_str());
+		obj->transform->position.y = (float)atof(str.c_str());
 		break;
 	case POS_Z:
-		obj->transform->position.z = atof(str.c_str());
+		obj->transform->position.z = (float)atof(str.c_str());
 		break;
 	default:
 		ClassDictionary::AddComponent(str, obj);
