@@ -16,6 +16,8 @@ public:
 	Component* GetComponent();
 	void SetGameObject(GameObject* obj);
 	GameObject* GetGameObject();
+	virtual void OnCollisionEnter(GameObject* obj);
+	virtual void OnCollisionExit(GameObject* obj);
 	void SetID(int n);
 	int GetID();
 	virtual void LoadProperties(const rapidjson::Value& inProp);

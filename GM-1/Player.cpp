@@ -56,8 +56,6 @@ void Player::Update()
 {
 	Vector3 forward = gameObject->GetForward();
 
-	CheckCollision();
-
 	if (CInput::GetKeyTrigger('K'))
 	{
 		Jump();
@@ -179,46 +177,36 @@ void Player::Jump()
 	}
 }
 
-void Player::CheckCollision()
+void Player::OnCollisionEnter(GameObject* obj)
 {
-	std::vector<GameObject*> hit = m_collider->GetHitGameObject();
-	for (unsigned int i = 0; i < hit.size(); i++)
+	if (obj->tag == "Ground")
 	{
-		if (hit[i] != nullptr)
+		m_isGrounded = true;
+	}
+	else if (obj->tag == "Item")
+	{
+		AudioManager::PlaySound(SE_GET);
+		switch (obj->GetComponent<Item>()->GetItemType())
 		{
-			if (hit[i]->tag == "Ground")
-			{
-				m_isGrounded = true;
-			}
-			else if (hit[i]->tag == "Item")
-			{
-				AudioManager::PlaySound(SE_GET);
-				switch (hit[i]->GetComponent<Item>()->GetItemType())
-				{
-				case ItemType::Apple:
-					m_itemController->GetApple();
-					break;
-				case ItemType::Strawberry:
-					m_itemController->GetStrawberry();
-					break;
-				case ItemType::Banana:
-					m_itemController->GetBanana();
-					break;
-				default:
-					break;
-				}
-			}
+		case ItemType::Apple:
+			m_itemController->GetApple();
+			break;
+		case ItemType::Strawberry:
+			m_itemController->GetStrawberry();
+			break;
+		case ItemType::Banana:
+			m_itemController->GetBanana();
+			break;
+		default:
+			break;
 		}
 	}
-	std::vector<GameObject*> exit = m_collider->GetExitGameObject();
-	for (unsigned int i = 0; i < exit.size(); i++)
+}
+
+void Player::OnCollisionExit(GameObject* obj)
+{
+	if (obj->tag == "Ground")
 	{
-		if (exit[i] != nullptr)
-		{
-			if (exit[i]->tag == "Ground")
-			{
-				m_isGrounded = false;
-			}
-		}
+		m_isGrounded = false;
 	}
 }

@@ -5,6 +5,7 @@
 #include "AABB.h"
 #include <math.h>
 #include "ImguiManager.h"
+#include "MeshCollider.h"
 
 std::vector<Collider*> Collider::m_colliders;
 
@@ -15,7 +16,14 @@ void Collider::Initialize()
 
 void Collider::Update()
 {
-
+	if (m_isCollision == false)
+	{
+		if (m_collisionObject != nullptr)
+		{
+			gameObject->OnCollisionExit(m_collisionObject);
+			m_collisionObject = nullptr;
+		}
+	}
 }
 
 void Collider::Draw()
@@ -36,8 +44,6 @@ bool Collider::IsCollision()
 int Collider::SetCollider(Collider* collider)
 {
 	m_colliders.push_back(collider);
-	collider->m_hitObject.resize(8);
-	collider->m_exitObject.resize(8);
 	return m_colliders.size() - 1;
 }
 
@@ -67,14 +73,15 @@ void Collider::UpdateCollision()
 	}
 	for (unsigned int i = 0; i < m_colliders.size(); i++)
 	{
-		if (!m_colliders[i]->m_isCollisionThisFrame)
+		//このフレームに当たらなかったら抜けた判定をさせる
+		/*if (!m_colliders[i]->m_isCollisionThisFrame)
 		{
 			m_colliders[i]->m_exitObject = m_colliders[i]->m_hitObject;
 			for (unsigned int j = 0; j < m_colliders[i]->m_hitObject.size(); j++)
 			{
 				m_colliders[i]->m_hitObject[j] = nullptr;
 			}
-		}
+		}*/
 	}
 }
 
@@ -116,28 +123,6 @@ float Collider::GetRadius()
 	return 0;
 }
 
-std::vector<GameObject*> Collider::GetHitGameObject()
-{
-	return m_hitObject;
-}
-
-std::vector<GameObject*> Collider::GetExitGameObject()
-{
-	return m_exitObject;
-}
-
-void Collider::ResetExitCollision()
-{
-	for (unsigned int i = 0; i < m_colliders.size(); i++)
-	{
-		for (unsigned int j = 0; j < m_colliders[i]->m_exitObject.size(); j++)
-		{
-			m_colliders[i]->m_exitObject[j] = m_colliders[i]->m_hitObject[j];
-			m_colliders[i]->m_hitObject[j] = nullptr;
-		}
-	}
-}
-
 void Collider::Sphere2Sphere(Collider* c1, Collider* c2)
 {
 	Vector3 c1Position = c1->GetPosition();
@@ -151,20 +136,10 @@ void Collider::Sphere2Sphere(Collider* c1, Collider* c2)
 		c2->m_isCollision = true;
 		c1->m_isCollisionThisFrame = true;
 		c2->m_isCollisionThisFrame = true;
-		for (unsigned int i = 0; i < c1->m_hitObject.size(); i++)
-		{
-			if (c1->m_hitObject[i] == nullptr)
-			{
-				c1->m_hitObject[i] = c2->GetGameObject();
-			}
-		}
-		for (unsigned int i = 0; i < c2->m_hitObject.size(); i++)
-		{
-			if (c2->m_hitObject[i] == nullptr)
-			{
-				c2->m_hitObject[i] = c1->GetGameObject();
-			}
-		}
+		c1->gameObject->OnCollisionEnter(c2->gameObject);
+		c2->gameObject->OnCollisionEnter(c1->gameObject);
+		c1->m_collisionObject = c2->gameObject;
+		c2->m_collisionObject = c1->gameObject;
 	}
 	else
 	{
@@ -287,22 +262,10 @@ void Collider::AABB2AABB(Collider* c1, Collider* c2)
 	c2->m_isCollision = true;
 	c1->m_isCollisionThisFrame = true;
 	c2->m_isCollisionThisFrame = true;
-	for (unsigned int i = 0; i < c1->m_hitObject.size(); i++)
-	{
-		if (c1->m_hitObject[i] == nullptr)
-		{
-			c1->m_hitObject[i] = c2->GetGameObject();
-			break;
-		}
-	}
-	for (unsigned int i = 0; i < c2->m_hitObject.size(); i++)
-	{
-		if (c2->m_hitObject[i] == nullptr)
-		{
-			c2->m_hitObject[i] = c1->GetGameObject();
-			
-		}
-	}
+	c1->gameObject->OnCollisionEnter(c2->gameObject);
+	c2->gameObject->OnCollisionEnter(c1->gameObject);
+	c1->m_collisionObject = c2->gameObject;
+	c2->m_collisionObject = c1->gameObject;
 
 	bool a1Kinematic = a1->IsKinematic();
 	bool a2Kinematic = a2->IsKinematic();
@@ -402,22 +365,195 @@ void Collider::Sphere2AABB(Collider* c1, Collider* c2)
 		c2->m_isCollision = true;
 		c1->m_isCollisionThisFrame = true;
 		c2->m_isCollisionThisFrame = true;
-		for (unsigned int i = 0; i < c1->m_hitObject.size(); i++)
+		c1->gameObject->OnCollisionEnter(c2->gameObject);
+		c2->gameObject->OnCollisionEnter(c1->gameObject);
+		c1->m_collisionObject = c2->gameObject;
+		c2->m_collisionObject = c1->gameObject;
+	}
+}
+
+void Collider::Box2Mesh(Collider* c1, Collider* c2)
+{
+	AABB* a = dynamic_cast<AABB*>(c1);
+	MeshCollider* m = dynamic_cast<MeshCollider*>(c2);
+	Vector3 pos = a->GetPosition();
+	float height = a->GetHeight();
+	Vector3* vertices = m->GetVertices();
+	int sizeX = m->GetSizeX();
+	int sizeZ = m->GetSizeZ();
+	int vSize = (sizeX + 1) * (sizeZ + 1);
+	for (int i = 0; i < vSize; i++)
+	{
+		vertices[i] += c2->gameObject->transform->position;
+	}
+	float minx = vertices[0].x;
+	float maxx;
+	if (minx < vertices[vSize - 1].x)
+	{
+		maxx = vertices[vSize - 1].x;
+	}
+	else
+	{
+		minx = vertices[vSize - 1].x;
+		maxx = vertices[0].x;
+	}
+
+	float minz = vertices[0].z;
+	float maxz;
+	if (minz < vertices[vSize - 1].z)
+	{
+		maxz = vertices[vSize - 1].z;
+	}
+	else
+	{
+		minz = vertices[vSize - 1].z;
+		maxz = vertices[0].z;
+	}
+	if (pos.x > maxx || pos.x < minx || pos.z > maxz || pos.z <= minz)
+	{
+		return;
+	}
+
+	for (int z = 0; z < sizeZ; z++)
+	{
+		for (int x = 0; x < sizeX + 1; x += 2)
 		{
-			if (c1->m_hitObject[i] == nullptr)
+			Vector3 p1 = pos + Vector3(0, height, 0);
+			Vector3 p2 = pos;
+			Vector3 v0 = vertices[x];
+			Vector3 v1 = vertices[x + 1];
+			Vector3 v2 = vertices[x + (z + 1) * (sizeX + 1)];
+			/*Vector3 v23 = vertices[x + 1] - vertices[x + (z + 1) * (sizeX + 1)];
+			Vector3 v12 = vertices[x] - vertices[x + 1];
+			v23.Normalize();
+			v12.Normalize();
+			Vector3 vn = Vector3::Cross(v12, v23);
+			if (vn.y < 0) vn.y *= -1;
+			vn.Normalize();
+			Vector3 v1 = pos - vertices[x];
+			Vector3 v2 = p2 - vertices[x];
+			float dd1 = Vector3::Dot(v1, vn);
+			float dd2 = Vector3::Dot(v2, vn);*/
+			//線分とあるポリゴンのサイズを無限にした平面がぶつかったにょ
+			bool isCollision = CollisionLineSegumentAndPlane(p1, p2, v0, v1, v2);
+			if (/*dd1 * dd2 <= 0*/isCollision)
 			{
-				c1->m_hitObject[i] = c2->GetGameObject();
+				//float length = Vector3::Cross(v12, v23).Length();
+				//float d1 = abs(Vector3::Dot(vn, v1)) / length;
+				//float d2 = abs(Vector3::Dot(vn, v2)) / length;
+				//float a = d1 / (d1 + d2);
+				//Vector3 v3 = (1 - a) * v1 + a * v2;
+				//Vector3 collisionPoint = vertices[x] + v3;
+
+				////ポリゴン内に見つけた点があるかチェック
+				//Vector3 v31 = vertices[x + (z + 1) * (sizeX + 1)] - vertices[x];
+
+				//v31.Normalize();
+				//Vector3 n11 = Vector3::Cross(v12, collisionPoint);
+				//Vector3 n22 = Vector3::Cross(v23, collisionPoint);
+				//Vector3 n33 = Vector3::Cross(v31, collisionPoint);
+				//Vector3 n1 = Vector3::Cross(vertices[x + 1] - vertices[x], collisionPoint - vertices[x + 1]);
+				//Vector3 n2 = Vector3::Cross(vertices[x + (z + 1) * (sizeX + 1)] - vertices[x + 1], collisionPoint - vertices[x + (z + 1) * (sizeX + 1)]);
+				//Vector3 n3 = Vector3::Cross(vertices[x] - vertices[x + (z + 1) * (sizeX + 1)], collisionPoint);
+				//n1.Normalize();
+				//n2.Normalize();
+				//n3.Normalize();
+				//float r1 = 1.0f - Vector3::Dot(vn, n1);
+				//float r2 = 1.0f - Vector3::Dot(vn, n2);
+				//float r3 = 1.0f - Vector3::Dot(vn, n3);
+				//if (r1 > 0.001f) continue;
+				//if (r2 > 0.001f) continue;
+				//if (r3 > 0.001f) continue;
+				Vector3 p = CalcIntersectionLineSegmentAndPlane(p1, p2, v0, v1, v2);
+
+				if (DetectPointIsEnclosedByPolygon(p, v0, v1, v2))
+				{
+					c1->gameObject->transform->position.y = p.y;
+					c1->m_isCollision = true;
+					c2->m_isCollision = true;
+					c1->m_isCollisionThisFrame = true;
+					c2->m_isCollisionThisFrame = true;
+					c1->gameObject->OnCollisionEnter(c2->gameObject);
+					c2->gameObject->OnCollisionEnter(c1->gameObject);
+					c1->m_collisionObject = c2->gameObject;
+					c2->m_collisionObject = c1->gameObject;
+				}
 			}
-		}
-		for (unsigned int i = 0; i < c2->m_hitObject.size(); i++)
-		{
-			if (c2->m_hitObject[i] == nullptr)
+
+			v0 = vertices[x];
+			v1 = vertices[x + (z + 1) * (sizeX + 1)];
+			v2 = vertices[x - 1 + (z + 1) * (sizeX + 1)];
+			isCollision = CollisionLineSegumentAndPlane(p1, p2, v0, v1, v2);
+			if (isCollision)
 			{
-				c2->m_hitObject[i] = c1->GetGameObject();
+				Vector3 p = CalcIntersectionLineSegmentAndPlane(p1, p2, v0, v1, v2);
+
+				if (DetectPointIsEnclosedByPolygon(p, v0, v1, v2))
+				{
+					c1->gameObject->transform->position.y = p.y;
+					c1->m_isCollision = true;
+					c2->m_isCollision = true;
+					c1->m_isCollisionThisFrame = true;
+					c2->m_isCollisionThisFrame = true;
+					c1->gameObject->OnCollisionEnter(c2->gameObject);
+					c2->gameObject->OnCollisionEnter(c1->gameObject);
+					c1->m_collisionObject = c2->gameObject;
+					c2->m_collisionObject = c1->gameObject;
+				}
 			}
 		}
 	}
 }
+
+bool Collider::CollisionLineSegumentAndPlane(Vector3 a, Vector3 b, Vector3 v0, Vector3 v1, Vector3 v2)
+{
+	Vector3 n = Vector3::Normalize(Vector3::Cross(v1 - v0, v2 - v1));
+	Vector3 g = (v0 + v1 + v2) * (1.0f / 3.0f);
+	float d1 = Vector3::Dot((a - g), n);
+	float d2 = Vector3::Dot((b - g), n);
+	if (Vector3::Dot((a - g), n) * Vector3::Dot((b - g), n) <= 0)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+Vector3 Collider::CalcIntersectionLineSegmentAndPlane(Vector3 a, Vector3 b, Vector3 v0, Vector3 v1, Vector3 v2)
+{
+	float distAP = CalcDistancePointAndPlane(a, v0, v1, v2);
+	float distBP = CalcDistancePointAndPlane(b, v0, v1, v2);
+
+	float t = distAP / (distAP + distBP);
+	Vector3 n = (b - a) * t + a;
+	return (b - a) * t + a;
+}
+
+float Collider::CalcDistancePointAndPlane(Vector3 p, Vector3 v0, Vector3 v1, Vector3 v2)
+{
+	Vector3 n = Vector3::Normalize(Vector3::Cross(v1 - v0, v2 - v1));
+	Vector3 g = (v0 + v1 + v2) * (1.0f / 3.0f);
+	float a = abs(Vector3::Dot(n, p - g));
+	return abs(Vector3::Dot(n, p - g));
+}
+
+bool Collider::DetectPointIsEnclosedByPolygon(Vector3 p, Vector3 v0, Vector3 v1, Vector3 v2)
+{
+	Vector3 n = Vector3::Normalize(Vector3::Cross(v1 - v0, v2 - v1));
+
+	Vector3 n0 = Vector3::Normalize(Vector3::Cross(v1 - v0, p - v1));
+	Vector3 n1 = Vector3::Normalize(Vector3::Cross(v2 - v1, p - v2));
+	Vector3 n2 = Vector3::Normalize(Vector3::Cross(v0 - v2, p - v0));
+
+	if ((1.0f - Vector3::Dot(n, n0)) > 0.001f) return false;
+	if ((1.0f - Vector3::Dot(n, n1)) > 0.001f) return false;
+	if ((1.0f - Vector3::Dot(n, n2)) > 0.001f) return false;
+
+	return true;
+}
+
 
 void Collider::LoadProperties(const rapidjson::Value& inProp)
 {

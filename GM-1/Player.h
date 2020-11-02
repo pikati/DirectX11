@@ -24,12 +24,13 @@ private:
     void Move();
     void Shot();
     void Jump();
-    void CheckCollision();
 
 public: 
 
     Player();
     ~Player();
-    void Initialize();
-    void Update();
+    void Initialize() override;
+    void Update() override;
+    void OnCollisionEnter(GameObject* obj) override;
+    void OnCollisionExit(GameObject* obj) override;
 };

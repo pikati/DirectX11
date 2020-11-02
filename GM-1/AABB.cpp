@@ -12,7 +12,7 @@ AABB::AABB()
 	m_max.Set(-10000, 10000, 10000);
 	m_min.Set(10000, 10000, 10000);
 	m_texture = new Texture();
-	m_texture->SetTextureName("Asset/Texture//fade.png");
+	m_texture->SetTextureName("Asset/Texture/fade.png");
 	m_texture->Initialize();
 }
 
@@ -116,6 +116,7 @@ void AABB::Update()
 	//hitObject = nullptr;
 	m_pos = gameObject->transform->position;
 	m_isCollisionThisFrame = false;
+	Collider::Update();
 }
 
 //“–‚½‚è”»’è•`‰æ—p
@@ -409,6 +410,11 @@ Vector3 AABB::GetMin()
 Vector3 AABB::GetPosition()
 {
 	return m_pos;
+}
+
+float AABB::GetHeight()
+{
+	return m_max.y - m_min.y;
 }
 
 void AABB::SetKinematic(bool on)

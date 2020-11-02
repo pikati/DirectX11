@@ -9,18 +9,11 @@ void Item::Initialize()
 	m_collider = gameObject->GetComponent<SphereCollider>();
 }
 
-void Item::Update()
+void Item::OnCollisionEnter(GameObject* obj)
 {
-	std::vector<GameObject*> hit = m_collider->GetHitGameObject();
-	for (unsigned int i = 0; i < hit.size(); i++)
+	if (obj->tag == "Player")
 	{
-		if (hit[i] != nullptr)
-		{
-			if (hit[i]->tag == "Player")
-			{
-				gameObject->Destroy();
-			}
-		}
+		gameObject->Destroy();
 	}
 }
 

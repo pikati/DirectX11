@@ -24,27 +24,21 @@ void WoodBox::Update()
 		gameObject->transform->position = m_startPosition;
 		m_velocity.y = 0;
 	}
-	std::vector<GameObject*> hit = m_collider->GetHitGameObject();
-	for (unsigned int i = 0; i < hit.size(); i++)
+}
+
+void WoodBox::OnCollisionEnter(GameObject* obj)
+{
+	if (obj->tag == "Ground")
 	{
-		if (hit[i] != nullptr)
-		{
-			if (hit[i]->tag == "Ground")
-			{
-				m_isGrounded = true;
-			}
-		}
+		m_isGrounded = true;
 	}
-	std::vector<GameObject*> exit = m_collider->GetExitGameObject();
-	for (unsigned int i = 0; i < exit.size(); i++)
+}
+
+void WoodBox::OnCollisionExit(GameObject* obj)
+{
+	if (obj->tag == "Ground")
 	{
-		if (exit[i] != nullptr)
-		{
-			if (exit[i]->tag == "Ground")
-			{
-				m_isGrounded = false;
-			}
-		}
+		m_isGrounded = false;
 	}
 }
 

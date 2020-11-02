@@ -43,6 +43,16 @@ void Component::LoadProperties(const rapidjson::Value& inProp)
 	return;
 }
 
+void Component::OnCollisionEnter(GameObject* obj)
+{
+	return;
+}
+
+void Component::OnCollisionExit(GameObject* obj)
+{
+	return;
+}
+
 void Component::SaveProperties(rapidjson::Document::AllocatorType& alloc, rapidjson::Value& inProp)
 {
 	std::string name = typeid(*this).name();

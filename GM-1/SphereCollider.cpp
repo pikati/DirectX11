@@ -25,6 +25,7 @@ void SphereCollider::Initialize()
 void SphereCollider::Update()
 {
 	m_isCollisionThisFrame = false;
+	Collider::Update();
 	//hitObject = nullptr;
 }
 

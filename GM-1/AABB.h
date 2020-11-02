@@ -32,6 +32,7 @@ public:
 	Vector3 GetMax();
 	Vector3 GetMin();
 	Vector3 GetPosition();
+	float GetHeight();
 	void SetKinematic(bool on);
 	bool IsKinematic();
 

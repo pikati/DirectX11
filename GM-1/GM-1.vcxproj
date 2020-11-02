@@ -181,7 +181,10 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainGameManager.cpp" />
     <ClCompile Include="manager.cpp" />
+    <ClCompile Include="MeshCollider.cpp" />
+    <ClCompile Include="MeshField.cpp" />
     <ClCompile Include="ObjectPooler.cpp" />
+    <ClCompile Include="PerlinNoise.cpp" />
     <ClCompile Include="Plane.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="renderer.cpp" />
@@ -230,7 +233,10 @@
     <ClInclude Include="main.h" />
     <ClInclude Include="MainGameManager.h" />
     <ClInclude Include="manager.h" />
+    <ClInclude Include="MeshCollider.h" />
+    <ClInclude Include="MeshField.h" />
     <ClInclude Include="ObjectPooler.h" />
+    <ClInclude Include="PerlinNoise.h" />
     <ClInclude Include="Plane.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="renderer.h" />

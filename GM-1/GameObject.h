@@ -32,6 +32,8 @@ public:
 	void Finalize();
 
 	void Destroy();
+	void OnCollisionEnter(GameObject* obj);
+	void OnCollisionExit(GameObject* obj);
 
 	Vector3 GetForward();
 

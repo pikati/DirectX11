@@ -92,6 +92,22 @@ void GameObject::Finalize()
 	}
 }
 
+void GameObject::OnCollisionEnter(GameObject* obj)
+{
+	for (Component* c : components)
+	{
+		c->OnCollisionEnter(obj);
+	}
+}
+
+void GameObject::OnCollisionExit(GameObject* obj)
+{
+	for (Component* c : components)
+	{
+		c->OnCollisionExit(obj);
+	}
+}
+
 Vector3 GameObject::GetForward()
 {
 	using namespace DirectX;

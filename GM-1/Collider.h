@@ -5,6 +5,7 @@ class Collider : public Component
 {
 private:
 	bool m_isCollision = false;
+	GameObject* m_collisionObject = nullptr;
 	bool m_isDestroy = false;
 
 	static void RunCollisionDetection(Collider* c1, Collider* c2);
@@ -12,7 +13,11 @@ private:
 	static void Sphere2Mesh(Collider* c1, Collider* c2);
 	static void Sphere2AABB(Collider* c1, Collider* c2);
 	static void AABB2AABB(Collider* c1, Collider* c2);
-	
+	static void Box2Mesh(Collider* c1, Collider* c2);
+	static bool CollisionLineSegumentAndPlane(Vector3 a, Vector3 b, Vector3 v0, Vector3 v1, Vector3 v2);
+	static Vector3 CalcIntersectionLineSegmentAndPlane(Vector3 a, Vector3 b, Vector3 v0, Vector3 v1, Vector3 v2);
+	static float CalcDistancePointAndPlane(Vector3 p, Vector3 v0, Vector3 v1, Vector3 v2);
+	static bool DetectPointIsEnclosedByPolygon(Vector3 p, Vector3 v0, Vector3 v1, Vector3 v2);
 protected:
 	enum ColliderType
 	{
@@ -23,9 +28,6 @@ protected:
 	};
 	int m_colliderID = -1;
 	bool m_isCollisionThisFrame = false;
-
-	std::vector<GameObject*> m_hitObject;
-	std::vector<GameObject*> m_exitObject;
 	ColliderType m_colliderType;
 
 	int SetCollider(Collider* collider);
@@ -43,11 +45,8 @@ public:
 	virtual float GetRadius();
 	virtual void LoadProperties(const rapidjson::Value& inProp);
 	virtual void SavePropaties(rapidjson::Document::AllocatorType& alloc, rapidjson::Value& inProp);
-	std::vector<GameObject*> GetHitGameObject();
-	std::vector<GameObject*> GetExitGameObject();
 	bool IsCollision();
 	static void UpdateCollision();
-	static void ResetExitCollision();
 	void Destroy();
 };
 
