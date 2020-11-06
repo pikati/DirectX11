@@ -58,6 +58,12 @@
     <Filter Include="ヘッダー ファイル\Script\Title">
       <UniqueIdentifier>{e3df0203-9f60-4235-b0d1-93e04df2169a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Editer">
+      <UniqueIdentifier>{283f0c93-b682-4df9-8d69-c94bb2dd3914}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Editer">
+      <UniqueIdentifier>{215b058e-a5d7-4ed6-b7c1-496f7ae7ded3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Component.cpp">
@@ -199,7 +205,7 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="MeshCollider.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\Engine\Component\Collider</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -351,7 +357,7 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="MeshCollider.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\Engine\Component\Collider</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

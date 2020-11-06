@@ -313,3 +313,8 @@ HRESULT AudioManager::ReadChunkData(HANDLE hFile, void* pBuffer, DWORD dwBuffers
 
 	return S_OK;
 }
+
+void AudioManager::SetVolume(float volume)
+{
+	m_masteringVoice->SetVolume(volume);
+}

@@ -37,5 +37,6 @@ public:
 	static void Finalize();
 	static void PlaySound(SoundLabel label);
 	static void StopSound();
+	static void SetVolume(float volume);
 };
 

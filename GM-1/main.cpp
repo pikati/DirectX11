@@ -6,7 +6,7 @@
 #include "imGui/imgui.h"
 #include "imGui/imgui_impl_win32.h"
 
-const char* CLASS_NAME = "AppClass";
+const char* CLASS_NAME = "MainWindow";
 const char* WINDOW_NAME = "î¸êHâÆÉ}Éì";
 
 
@@ -14,6 +14,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 
 HWND g_Window;
+HWND g_Window2;
 
 HWND GetWindow()
 {
@@ -54,12 +55,26 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 		hInstance,
 		NULL);
 
-
+	g_Window2 = CreateWindowEx(0,
+		CLASS_NAME,
+		WINDOW_NAME,
+		WS_OVERLAPPEDWINDOW,
+		CW_USEDEFAULT,
+		CW_USEDEFAULT,
+		(SCREEN_WIDTH + GetSystemMetrics(SM_CXDLGFRAME) * 2),
+		(SCREEN_HEIGHT + GetSystemMetrics(SM_CXDLGFRAME) * 2 + GetSystemMetrics(SM_CYCAPTION)),
+		NULL,
+		NULL,
+		hInstance,
+		NULL);
 	CManager::Init();
 
 
 	ShowWindow(g_Window, nCmdShow);
 	UpdateWindow(g_Window);
+
+	ShowWindow(g_Window2, nCmdShow);
+	UpdateWindow(g_Window2);
 
 	FPS::Initialize();
 

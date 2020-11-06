@@ -6,6 +6,7 @@
 #include "LevelLoader.h"
 #include "Collider.h"
 #include "SceneManager.h"
+#include "AudioManager.h"
 
 std::list<GameObject*> Scene::m_gameObject[LAYER_MAX];
 std::list<GameObject*> Scene::m_tempObject;
@@ -24,6 +25,7 @@ Scene::~Scene()
 void Scene::Initialize()
 {
 	LevelLoader::LoadLevel(this, "Asset/Scene/title.scene");
+	AudioManager::SetVolume(0);
 }
 
 void Scene::Update()
