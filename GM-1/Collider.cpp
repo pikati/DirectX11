@@ -49,6 +49,10 @@ int Collider::SetCollider(Collider* collider)
 
 void Collider::DeleteCollider(int colliderID)
 {
+	if (colliderID < 0)
+	{
+		return;
+	}
 	m_colliders.erase(m_colliders.begin() + colliderID);
 	for (unsigned int i = colliderID; i < m_colliders.size(); i++)
 	{

@@ -56,6 +56,11 @@ void Player::Update()
 {
 	Vector3 forward = gameObject->GetForward();
 
+	if (CInput::GetKeyTrigger(VK_SPACE))
+	{
+		Shot();
+	}
+
 	if (CInput::GetKeyTrigger('K'))
 	{
 		Jump();
@@ -164,9 +169,10 @@ void Player::Shot()
 	GameObject* obj;
 	obj = ObjectPooler::CreatePrefab("Bullet");
 	obj->transform->position = gameObject->transform->position;
+	obj->transform->position.y += 0.5f;
 	m_animation->SetState(SHOOT);
 }
-
+ 
 void Player::Jump()
 {
 	if (m_isGrounded)

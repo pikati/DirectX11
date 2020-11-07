@@ -6,6 +6,7 @@
 #include "ClassDictionary.h"
 #include "ImguiManager.h"
 #include "AudioManager.h"
+#include "ObjectPooler.h"
 
 Scene* g_scene;
 
@@ -13,8 +14,10 @@ void CManager::Init()
 {
 	ClassDictionary::Initialize();
 	CRenderer::Init();
+	ImguiManager::Initialize(GetWindow(), CRenderer::GetDevice(), CRenderer::GetDeviceContext());
 	CInput::Init();
 	AudioManager::Initialize();
+	ObjectPooler::Initialize();
 
 	g_scene = new Scene();
 	g_scene->Initialize();
@@ -22,12 +25,14 @@ void CManager::Init()
 
 void CManager::Uninit()
 {
-	ImguiManager::Finalize();
 	g_scene->Finalize();
 	delete g_scene;
+	ObjectPooler::Finalize();
 	AudioManager::Finalize();
 	CInput::Uninit();
+	ImguiManager::Finalize();
 	CRenderer::Uninit();
+
 }
 
 void CManager::Update()

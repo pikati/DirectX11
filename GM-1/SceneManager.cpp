@@ -15,7 +15,6 @@ void SceneManager::LoadScene(std::string sceneName)
 
 void SceneManager::LoadScene()
 {
-	ObjectPooler::Clear();
 	LevelLoader::LoadLevel(CManager::GetScene(), m_currentSceneName.c_str());
 	FPS::ResetFPS();
 }

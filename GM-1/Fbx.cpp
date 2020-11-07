@@ -43,6 +43,7 @@ void Fbx::Draw()
 
 void Fbx::Finalize()
 {
+	if (m_isCopy) return;
 	/*for (int i = m_fbxInfo.meshCount - 1; i >= 0; i--)
 	{
 		if(m_meshInfo[i].uvSetName != nullptr)
@@ -142,6 +143,7 @@ void Fbx::Load()
 			m_textureName = t->m_textureName;
 			m_timeCount = t->m_timeCount;
 			texture = t->texture;
+			m_isCopy = true;
 			m_maxID--;
 			return;
 		}

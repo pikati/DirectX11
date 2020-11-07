@@ -13,6 +13,8 @@ private:
 	static std::vector<Fbx*> m_fbx;
 	static std::vector<GameObject*> m_object;
 public:
+	static void Initialize();
+	static void Finalize();
 	static GameObject* SetGameObject(GameObject* obj);
 	static GameObject* LoadGameObject(std::string fileName);
 	static GameObject* CreatePrefab(std::string name);

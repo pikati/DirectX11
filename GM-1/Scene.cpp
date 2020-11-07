@@ -24,8 +24,8 @@ Scene::~Scene()
 
 void Scene::Initialize()
 {
-	LevelLoader::LoadLevel(this, "Asset/Scene/title.scene");
 	AudioManager::SetVolume(0);
+	LevelLoader::LoadLevel(this, "Asset/Scene/stage1.scene");
 }
 
 void Scene::Update()

@@ -51,8 +51,8 @@
                 {
                     "type": "Fbx",
                     "fileName": "Asset/Models/bullet.fbx",
-                    "textureName": "Asset/Texture/Bag_Himo.png",
-                    "id": 1
+                    "textureName": "Asset/Texture/fade.png",
+                    "id": 0
                 },
                 {
                     "type": "Bullet",

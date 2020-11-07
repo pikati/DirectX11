@@ -165,7 +165,7 @@
                     "type": "Fbx",
                     "fileName": "Asset/Models/Player/eatmanV3.fbx",
                     "textureName": "Asset/Texture/Player/eatman.png",
-                    "id": 0
+                    "id": 1
                 },
                 {
                     "type": "AABB",
@@ -219,7 +219,7 @@
                     "type": "Fbx",
                     "fileName": "Asset/Models/Stage/ground10x10.fbx",
                     "textureName": "Asset/Texture/Stage/ground1x1.png",
-                    "id": 1
+                    "id": 2
                 },
                 {
                     "type": "AABB",
@@ -265,7 +265,7 @@
                     "type": "Fbx",
                     "fileName": "Asset/Models/Stage/ground1x10.fbx",
                     "textureName": "Asset/Texture/Stage/ground1x1.png",
-                    "id": 2
+                    "id": 3
                 },
                 {
                     "type": "AABB",
@@ -311,7 +311,7 @@
                     "type": "Fbx",
                     "fileName": "Asset/Models/Stage/ground1x10.fbx",
                     "textureName": "Asset/Texture/Stage/ground1x1.png",
-                    "id": 2
+                    "id": 3
                 },
                 {
                     "type": "AABB",
@@ -357,7 +357,7 @@
                     "type": "Fbx",
                     "fileName": "Asset/Models/Stage/ground1x10.fbx",
                     "textureName": "Asset/Texture/Stage/ground1x1.png",
-                    "id": 2
+                    "id": 3
                 },
                 {
                     "type": "AABB",
@@ -403,7 +403,7 @@
                     "type": "Fbx",
                     "fileName": "Asset/Models/Stage/ground10x10.fbx",
                     "textureName": "Asset/Texture/Stage/ground1x1.png",
-                    "id": 1
+                    "id": 2
                 },
                 {
                     "type": "AABB",
@@ -449,7 +449,7 @@
                     "type": "Fbx",
                     "fileName": "Asset/Models/Stage/ground10x10.fbx",
                     "textureName": "Asset/Texture/Stage/ground1x1.png",
-                    "id": 1
+                    "id": 2
                 },
                 {
                     "type": "AABB",
@@ -495,7 +495,7 @@
                     "type": "Fbx",
                     "fileName": "Asset/Models/Stage/ground10x10.fbx",
                     "textureName": "Asset/Texture/Stage/ground1x1.png",
-                    "id": 1
+                    "id": 2
                 },
                 {
                     "type": "AABB",
@@ -541,7 +541,7 @@
                     "type": "Fbx",
                     "fileName": "Asset/Models/Stage/ground10x10.fbx",
                     "textureName": "Asset/Texture/Stage/ground1x1.png",
-                    "id": 1
+                    "id": 2
                 },
                 {
                     "type": "AABB",
@@ -587,7 +587,7 @@
                     "type": "Fbx",
                     "fileName": "Asset/Models/Stage/ground10x10.fbx",
                     "textureName": "Asset/Texture/Stage/ground1x1.png",
-                    "id": 1
+                    "id": 2
                 },
                 {
                     "type": "AABB",
@@ -633,7 +633,7 @@
                     "type": "Fbx",
                     "fileName": "Asset/Models/Stage/ground10x10.fbx",
                     "textureName": "Asset/Texture/Stage/ground1x1.png",
-                    "id": 1
+                    "id": 2
                 },
                 {
                     "type": "AABB",
@@ -679,7 +679,7 @@
                     "type": "Fbx",
                     "fileName": "Asset/Models/Stage/box.fbx",
                     "textureName": "Asset/Texture/Stage/metalBox.png",
-                    "id": 3
+                    "id": 4
                 },
                 {
                     "type": "AABB",
@@ -725,7 +725,7 @@
                     "type": "Fbx",
                     "fileName": "Asset/Models/Stage/box.fbx",
                     "textureName": "Asset/Texture/Stage/metalBox.png",
-                    "id": 3
+                    "id": 4
                 },
                 {
                     "type": "AABB",
@@ -771,7 +771,7 @@
                     "type": "Fbx",
                     "fileName": "Asset/Models/Stage/box.fbx",
                     "textureName": "Asset/Texture/Stage/metalBox.png",
-                    "id": 3
+                    "id": 4
                 },
                 {
                     "type": "AABB",
@@ -817,7 +817,7 @@
                     "type": "Fbx",
                     "fileName": "Asset/Models/Stage/box.fbx",
                     "textureName": "Asset/Texture/Stage/metalBox.png",
-                    "id": 3
+                    "id": 4
                 },
                 {
                     "type": "AABB",
@@ -863,7 +863,7 @@
                     "type": "Fbx",
                     "fileName": "Asset/Models/Stage/box.fbx",
                     "textureName": "Asset/Texture/Stage/metalBox.png",
-                    "id": 3
+                    "id": 4
                 },
                 {
                     "type": "AABB",
@@ -909,7 +909,7 @@
                     "type": "Fbx",
                     "fileName": "Asset/Models/Stage/box.fbx",
                     "textureName": "Asset/Texture/Stage/metalBox.png",
-                    "id": 3
+                    "id": 4
                 },
                 {
                     "type": "AABB",
@@ -955,7 +955,7 @@
                     "type": "Fbx",
                     "fileName": "Asset/Models/Stage/box.fbx",
                     "textureName": "Asset/Texture/Stage/metalBox.png",
-                    "id": 3
+                    "id": 4
                 },
                 {
                     "type": "AABB",
@@ -1001,7 +1001,7 @@
                     "type": "Fbx",
                     "fileName": "Asset/Models/Stage/box.fbx",
                     "textureName": "Asset/Texture/Stage/metalBox.png",
-                    "id": 3
+                    "id": 4
                 },
                 {
                     "type": "AABB",
@@ -1047,7 +1047,7 @@
                     "type": "Fbx",
                     "fileName": "Asset/Models/Stage/box.fbx",
                     "textureName": "Asset/Texture/Stage/metalBox.png",
-                    "id": 3
+                    "id": 4
                 },
                 {
                     "type": "AABB",
@@ -1093,7 +1093,7 @@
                     "type": "Fbx",
                     "fileName": "Asset/Models/Stage/box.fbx",
                     "textureName": "Asset/Texture/Stage/metalBox.png",
-                    "id": 3
+                    "id": 4
                 },
                 {
                     "type": "AABB",
@@ -1139,7 +1139,7 @@
                     "type": "Fbx",
                     "fileName": "Asset/Models/Stage/box.fbx",
                     "textureName": "Asset/Texture/Stage/metalBox.png",
-                    "id": 3
+                    "id": 4
                 },
                 {
                     "type": "AABB",
@@ -1185,7 +1185,7 @@
                     "type": "Fbx",
                     "fileName": "Asset/Models/Stage/box.fbx",
                     "textureName": "Asset/Texture/Stage/metalBox.png",
-                    "id": 3
+                    "id": 4
                 },
                 {
                     "type": "AABB",
@@ -1231,7 +1231,7 @@
                     "type": "Fbx",
                     "fileName": "Asset/Models/Stage/box.fbx",
                     "textureName": "Asset/Texture/Stage/metalBox.png",
-                    "id": 3
+                    "id": 4
                 },
                 {
                     "type": "AABB",
@@ -1277,7 +1277,7 @@
                     "type": "Fbx",
                     "fileName": "Asset/Models/Stage/box.fbx",
                     "textureName": "Asset/Texture/Stage/metalBox.png",
-                    "id": 3
+                    "id": 4
                 },
                 {
                     "type": "AABB",
@@ -1323,7 +1323,7 @@
                     "type": "Fbx",
                     "fileName": "Asset/Models/Stage/box.fbx",
                     "textureName": "Asset/Texture/Stage/metalBox.png",
-                    "id": 3
+                    "id": 4
                 },
                 {
                     "type": "AABB",
@@ -1369,7 +1369,7 @@
                     "type": "Fbx",
                     "fileName": "Asset/Models/Stage/box.fbx",
                     "textureName": "Asset/Texture/Stage/woodBox.png",
-                    "id": 4
+                    "id": 5
                 },
                 {
                     "type": "AABB",
@@ -1423,7 +1423,7 @@
                     "type": "Fbx",
                     "fileName": "Asset/Models/Stage/box.fbx",
                     "textureName": "Asset/Texture/Stage/woodBox.png",
-                    "id": 4
+                    "id": 5
                 },
                 {
                     "type": "AABB",
@@ -1477,7 +1477,7 @@
                     "type": "Fbx",
                     "fileName": "Asset/Models/Stage/skyDorm.fbx",
                     "textureName": "Asset/Texture/Stage/Sky.png",
-                    "id": 5
+                    "id": 6
                 },
                 {
                     "type": "SkyDorm",

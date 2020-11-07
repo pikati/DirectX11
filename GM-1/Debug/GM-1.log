@@ -1,11 +1,2 @@
-﻿  AudioManager.cpp
-  MainGameManager.cpp
-  Player.cpp
-  ResultManager.cpp
-  Scene.cpp
-  TitleManager.cpp
-  TutorialManager.cpp
-  main.cpp
-  manager.cpp
-  コードを生成中...
+﻿  Bullet.cpp
   GM-1.vcxproj -> D:\HAL\3\GM\DX11\Debug\GM-1.exe

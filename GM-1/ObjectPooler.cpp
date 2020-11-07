@@ -8,6 +8,33 @@ std::vector<std::string> ObjectPooler::m_textureName;
 std::vector<Fbx*> ObjectPooler::m_fbx;
 std::vector<GameObject*> ObjectPooler::m_object;
 
+void ObjectPooler::Initialize()
+{
+	HANDLE h;
+	WIN32_FIND_DATA data;
+	h = FindFirstFile("Asset/Prefabs/*.prefab", &data);
+	if (h == INVALID_HANDLE_VALUE)
+	{
+		MessageBox(NULL, "ƒvƒŒƒnƒu‚È‚µ", NULL, MB_OK);
+		return;
+	}
+
+	do
+	{
+		std::string name = data.cFileName;
+		std::string fileName = "Asset/Prefabs/" + name;
+		GameObject* obj = LevelLoader::LoadPrefab(fileName.c_str());
+		m_object.emplace_back(obj);
+	} while (FindNextFile(h, &data));
+
+
+}
+
+void ObjectPooler::Finalize()
+{
+	Clear();
+}
+
 GameObject* ObjectPooler::SetGameObject(GameObject* obj)
 {
 	m_object.emplace_back(obj);
