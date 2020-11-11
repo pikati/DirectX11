@@ -32,6 +32,7 @@ GameObject::GameObject(const GameObject& obj)
 			ss >> getStr;
 		}
 		Component* c = ClassDictionary::SetComponent(getStr);
+		c->SetProperties(component);
 		c2.push_back(c);
 		c->SetGameObject(this);
 		c->SetID(component->GetID());

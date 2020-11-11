@@ -8,6 +8,9 @@
 #include "SceneManager.h"
 #include "AudioManager.h"
 
+#include "BoxCollider.h"
+#include "Transform.h"
+
 std::list<GameObject*> Scene::m_gameObject[LAYER_MAX];
 std::list<GameObject*> Scene::m_tempObject;
 bool Scene::m_isChange = false;
@@ -25,7 +28,12 @@ Scene::~Scene()
 void Scene::Initialize()
 {
 	AudioManager::SetVolume(0);
-	LevelLoader::LoadLevel(this, "Asset/Scene/stage1.scene");
+	LevelLoader::LoadLevel(this, "Asset/Scene/OBBTest.scene");
+	GameObject* obj = new GameObject();
+	AddGameObject(obj, false);
+	obj->AddComponent<BoxCollider>();
+	obj->Initialize();
+	//obj->transform->rotation.Set(0, 20.0f, 0);
 }
 
 void Scene::Update()

@@ -22,6 +22,7 @@
 #include "TutorialManager.h"
 #include "ResultManager.h"
 #include "Bullet.h"
+#include "BoxCollider.h"
 
 std::map<std::string, Component*> ClassDictionary::dictionary;
 BuilderFromString ClassDictionary::builderfromstring;
@@ -50,6 +51,7 @@ void ClassDictionary::Initialize()
 	builderfromstring.Register(REGISTER_ARGS(TutorialManager));
 	builderfromstring.Register(REGISTER_ARGS(ResultManager));
 	builderfromstring.Register(REGISTER_ARGS(Bullet));
+	builderfromstring.Register(REGISTER_ARGS(BoxCollider));
 }
 
 void ClassDictionary::Register(const std::string& ty_name, Component* component)

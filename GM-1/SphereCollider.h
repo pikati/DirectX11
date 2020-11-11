@@ -12,11 +12,13 @@ public:
 	~SphereCollider();
 	void Initialize();
 	void Update();
+	void Draw() override;
 	void Finalize();
 
 	void SetCenter(Vector3 center);
 	void SetCenter(float x, float y, float z);
 	void SetRadius(float radius);
+	void SetProperties(Component* c) override;
 	void LoadProperties(const rapidjson::Value& inProp) override;
 	void SaveProperties(rapidjson::Document::AllocatorType& alloc, rapidjson::Value& inProp) override;
 

@@ -57,6 +57,9 @@ public:
 	friend Vector3 operator*(Vector3 vec, const float n);
 	/*const Vector3 operator/(const float n) const;*/
 	Vector3& operator+=(const Vector3& vec);
+	Vector3& operator/=(const float& n);
+	bool operator==(const Vector3& vec) const;
+	bool operator!=(const Vector3& vec) const;
 };
 
 class Vector4

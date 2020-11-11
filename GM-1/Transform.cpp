@@ -7,12 +7,61 @@ Transform::Transform()
 	position = Vector3::zero;
 	rotation = Vector3::zero;
 	scale = Vector3::one;
+	m_oldPosition = position;
+	m_oldRotation = rotation;
+	m_oldScale = scale;
 	m_sortingOrder = 0;
 }
 
 Transform::~Transform()
 {
 
+}
+
+void Transform::Update()
+{
+	if (position != m_oldPosition)
+	{
+		m_isChangePosition = true;
+	}
+	else
+	{
+		m_isChangePosition = false;
+	}
+	if (rotation != m_oldRotation)
+	{
+		m_isChangeRotation = true;
+	}
+	else
+	{
+		m_isChangeRotation = false;
+	}
+	if (scale != m_oldScale)
+	{
+		m_isChangeScale = true;
+	}
+	else
+	{
+		m_isChangeScale = false;
+	}
+	m_oldPosition = position;
+	m_oldRotation = rotation;
+	m_oldScale = scale;
+}
+
+bool Transform::IsChangePosition()
+{
+	return m_isChangePosition;
+}
+
+bool Transform::IsChangeRotation()
+{
+	return m_isChangeRotation;
+}
+
+bool Transform::IsChangeScale()
+{
+	return m_isChangeScale;
 }
 
 void Transform::LoadProperties(const rapidjson::Value& inProp)

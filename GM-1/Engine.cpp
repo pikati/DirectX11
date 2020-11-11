@@ -171,6 +171,24 @@ Vector3& Vector3::operator+=(const Vector3& vec)
 	return *this;
 }
 
+Vector3& Vector3::operator/=(const float& n)
+{
+	this->x /= n;
+	this->y /= n;
+	this->z /= n;
+	return *this;
+}
+
+bool Vector3::operator==(const Vector3& vec) const
+{
+	return this->x == vec.x && this->y == vec.y && this->z == vec.z;
+}
+
+bool Vector3::operator!=(const Vector3& vec) const
+{
+	return this->x != vec.x || this->y != vec.y || this->z != vec.z;
+}
+
 #pragma endregion
 
 #pragma region Vector4

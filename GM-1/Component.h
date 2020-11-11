@@ -20,6 +20,7 @@ public:
 	virtual void OnCollisionExit(GameObject* obj);
 	void SetID(int n);
 	int GetID();
+	virtual void SetProperties(Component* c);
 	virtual void LoadProperties(const rapidjson::Value& inProp);
 	virtual void SaveProperties(rapidjson::Document::AllocatorType& alloc, rapidjson::Value& inProp);
 

@@ -29,6 +29,11 @@ void SphereCollider::Update()
 	//hitObject = nullptr;
 }
 
+void SphereCollider::Draw()
+{
+
+}
+
 void SphereCollider::Finalize()
 {
 	DeleteCollider(m_colliderID);
@@ -58,6 +63,13 @@ Vector3 SphereCollider::GetPosition()
 float SphereCollider::GetRadius()
 {
 	return m_radius;
+}
+
+void SphereCollider::SetProperties(Component* c)
+{
+	SphereCollider* s = dynamic_cast<SphereCollider*>(c);
+	m_center = s->m_center;
+	m_radius = s->m_radius;
 }
 
 void SphereCollider::LoadProperties(const rapidjson::Value& inProp)

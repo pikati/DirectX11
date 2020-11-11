@@ -14,6 +14,7 @@ private:
 	static void Sphere2AABB(Collider* c1, Collider* c2);
 	static void AABB2AABB(Collider* c1, Collider* c2);
 	static void Box2Mesh(Collider* c1, Collider* c2);
+	static void Box2Sphere(Collider* c1, Collider* c2);
 	static bool CollisionLineSegumentAndPlane(Vector3 a, Vector3 b, Vector3 v0, Vector3 v1, Vector3 v2);
 	static Vector3 CalcIntersectionLineSegmentAndPlane(Vector3 a, Vector3 b, Vector3 v0, Vector3 v1, Vector3 v2);
 	static float CalcDistancePointAndPlane(Vector3 p, Vector3 v0, Vector3 v1, Vector3 v2);
@@ -24,6 +25,7 @@ protected:
 		Sphere,
 		Mesh,
 		Aabb,
+		Box,
 		Max
 	};
 	int m_colliderID = -1;

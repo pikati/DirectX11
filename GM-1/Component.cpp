@@ -37,12 +37,6 @@ GameObject* Component::GetGameObject()
 	return gameObject;
 }
 
-void Component::LoadProperties(const rapidjson::Value& inProp)
-{
-	JsonHelper::GetInt(inProp, "id", m_id);
-	return;
-}
-
 void Component::OnCollisionEnter(GameObject* obj)
 {
 	return;
@@ -50,6 +44,17 @@ void Component::OnCollisionEnter(GameObject* obj)
 
 void Component::OnCollisionExit(GameObject* obj)
 {
+	return;
+}
+
+void Component::SetProperties(Component* c)
+{
+	return;
+}
+
+void Component::LoadProperties(const rapidjson::Value& inProp)
+{
+	JsonHelper::GetInt(inProp, "id", m_id);
 	return;
 }
 

@@ -1,6 +1,6 @@
 #pragma once
-
-
+#include <vector>
+#include "Engine.h"
 
 
 
@@ -13,6 +13,12 @@ struct VERTEX_3D
     D3DXVECTOR2 TexCoord;
 };
 
+// 頂点構造体
+struct VERTEX_LINE
+{
+	Vector3 Position;
+	D3DXVECTOR4 Diffuse;
+};
 
 
 // マテリアル構造体
@@ -26,25 +32,10 @@ struct MATERIAL
 	float		Dummy[3];//16byte境界用
 };
 
-
-
-
-// マテリアル構造体
-struct DX11_MODEL_MATERIAL
+struct COLOR
 {
-	MATERIAL		Material;
-	class CTexture*	Texture;
+	D3DXVECTOR4 color;
 };
-
-
-// 描画サブセット構造体
-struct DX11_SUBSET
-{
-	unsigned int	StartIndex;
-	unsigned int	IndexNum;
-	DX11_MODEL_MATERIAL	Material;
-};
-
 struct LIGHT
 {
 	BOOL		Enable;
@@ -59,6 +50,12 @@ class CVertexBuffer;
 class CIndexBuffer;
 class CTexture;
 
+enum class SHADER_TYPE : int
+{
+	Default,
+	Color,
+	Max
+};
 
 class CRenderer
 {
@@ -74,9 +71,9 @@ private:
 
 
 
-	static ID3D11VertexShader*     m_VertexShader;
-	static ID3D11PixelShader*      m_PixelShader;
-	static ID3D11InputLayout*      m_VertexLayout;
+	static std::vector<ID3D11VertexShader*>     m_VertexShader;
+	static std::vector<ID3D11PixelShader*>      m_PixelShader;
+	static std::vector<ID3D11InputLayout*>      m_VertexLayout;
 	static ID3D11Buffer*			m_WorldBuffer;
 	static ID3D11Buffer*			m_ViewBuffer;
 	static ID3D11Buffer*			m_ProjectionBuffer;
@@ -87,7 +84,8 @@ private:
 	static ID3D11DepthStencilState* m_DepthStateEnable;
 	static ID3D11DepthStencilState* m_DepthStateDisable;
 
-
+	static void CreateDefaultShader();
+	static void CreateColorShader();
 
 
 public:
@@ -103,6 +101,11 @@ public:
 	static void SetProjectionMatrix(D3DXMATRIX * ProjectionMatrix);
 	static void SetMaterial(MATERIAL Material);
 	static void SetLight(LIGHT Light);
+
+	static void SetShader(SHADER_TYPE type);
+	static void SetVertexShader(SHADER_TYPE type);
+	static void SetPixelShader(SHADER_TYPE type);
+	static void SetInputLayout(SHADER_TYPE type);
 
 	static ID3D11Device* GetDevice( void ){ return m_D3DDevice; }
 	static ID3D11DeviceContext* GetDeviceContext( void ){ return m_ImmediateContext; }
