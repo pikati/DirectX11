@@ -55,7 +55,7 @@ public:
 	const Vector3 operator-(const Vector3& vec) const;
 	friend Vector3 operator*(const float n, Vector3 vec);
 	friend Vector3 operator*(Vector3 vec, const float n);
-	/*const Vector3 operator/(const float n) const;*/
+	const Vector3 operator/(const float n) const;
 	Vector3& operator+=(const Vector3& vec);
 	Vector3& operator/=(const float& n);
 	bool operator==(const Vector3& vec) const;

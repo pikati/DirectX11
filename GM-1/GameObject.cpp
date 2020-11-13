@@ -58,10 +58,8 @@ void GameObject::Initialize()
 
 void GameObject::Update()
 {
-	if (!activeSelf)
-	{
-		return;
-	}
+	if (!activeSelf) return;
+	m_isDraw = true;
 	transform->Update();
 	for (Component* c : components)
 	{
@@ -71,10 +69,8 @@ void GameObject::Update()
 
 void GameObject::Draw()
 {
-	if (!activeSelf)
-	{
-		return;
-	}
+	if (!activeSelf) return;
+	if (!m_isDraw) return;
 
 	transform->Draw();
 	for (Component* c : components)

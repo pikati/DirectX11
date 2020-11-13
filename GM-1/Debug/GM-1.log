@@ -1,3 +1,2 @@
 ﻿  Collider.cpp
-D:\HAL\3\GM\DX11\GM-1\Collider.cpp(541,14): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
-  GM-1.vcxproj -> D:\HAL\3\GM\DX11\Debug\GM-1.exe
+  GM-1.vcxproj -> D:\HAL\3\Pikatan\Debug\GM-1.exe

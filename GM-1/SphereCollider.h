@@ -6,7 +6,6 @@ private:
 	Vector3 m_center = Vector3::zero;
 	float m_radius = 0;
 	Transform* m_transform = nullptr;
-	
 public:
 	SphereCollider();
 	~SphereCollider();

@@ -159,10 +159,12 @@ Vector3 operator*(const Vector3 vec, float n)
 //	return Vector3(this->x * n, this->y * n, this->z * n);
 //}
 //
-//const Vector3 Vector3::operator/(const float n) const
-//{
-//	return Vector3(this->x / n, this->y / n, this->z / n);
-//}
+
+const Vector3 Vector3::operator/(const float n) const
+{
+	return Vector3(this->x / n, this->y / n, this->z / n);
+}
+
 Vector3& Vector3::operator+=(const Vector3& vec)
 {
 	x += vec.x;

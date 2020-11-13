@@ -12,6 +12,7 @@ class GameObject
 {
 private:
 	std::list<Component*> components;
+	bool m_isDraw = true;
 
 	bool DeleteComponent(Component* component);
 protected:
@@ -36,6 +37,8 @@ public:
 	void OnCollisionExit(GameObject* obj);
 
 	Vector3 GetForward();
+
+	void IsDraw(bool isDraw);
 
 	std::list<Component*> GetComponents() const;
 	void SetComponents(std::list<Component*> component);

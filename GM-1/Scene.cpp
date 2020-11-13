@@ -33,7 +33,7 @@ void Scene::Initialize()
 	AddGameObject(obj, false);
 	obj->AddComponent<BoxCollider>();
 	obj->Initialize();
-	//obj->transform->rotation.Set(0, 20.0f, 0);
+	//obj->transform->rotation.Set(0, 45.0f, 0);
 }
 
 void Scene::Update()

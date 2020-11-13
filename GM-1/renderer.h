@@ -17,7 +17,7 @@ struct VERTEX_3D
 struct VERTEX_LINE
 {
 	Vector3 Position;
-	D3DXVECTOR4 Diffuse;
+	Vector4 Diffuse;
 };
 
 

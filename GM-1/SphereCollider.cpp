@@ -2,6 +2,11 @@
 #include "Transform.h"
 #include "LevelLoader.h"
 #include "rapidjson/document.h"
+#include "main.h"
+#include "renderer.h"
+#include <DirectXMath.h>
+
+static const int num = 192;
 
 SphereCollider::SphereCollider()
 {
@@ -31,7 +36,93 @@ void SphereCollider::Update()
 
 void SphereCollider::Draw()
 {
+	VERTEX_LINE v[num];
 
+	float rad = DirectX::XM_2PI / (num / 3);
+	float a = 0;
+	for (int i = 0; i < num / 3; i++)
+	{
+		v[i].Position.x = m_radius * cos(a);
+		v[i].Position.y = m_radius * sin(a);
+		v[i].Position.z = 0;
+		v[i].Diffuse = { 0, 0, 1, 1 };
+		a += rad;
+	}
+	a = 0;
+	for (int i = num / 3; i < num / 3 * 2; i++)
+	{
+		v[i].Position.x = 0;
+		v[i].Position.y = m_radius * sin(a);
+		v[i].Position.z = m_radius * cos(a);
+		v[i].Diffuse = { 0, 0, 1, 1 };
+		a += rad;
+	}
+	a = 0;
+	for (int i = num / 3 * 2; i < num; i++)
+	{
+		v[i].Position.x = m_radius * sin(a);
+		v[i].Position.y =0 ;
+		v[i].Position.z = m_radius * cos(a);
+		v[i].Diffuse = { 0, 0, 1, 1 };
+		a += rad;
+	}
+
+	ID3D11Buffer* pVB;
+
+	D3D11_BUFFER_DESC bd;
+	ZeroMemory(&bd, sizeof(bd));
+	bd.Usage = D3D11_USAGE_DYNAMIC;
+	bd.ByteWidth = sizeof(VERTEX_LINE) * num;
+	bd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+	bd.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+	bd.MiscFlags = 0;
+	bd.StructureByteStride = 0;
+
+	D3D11_SUBRESOURCE_DATA sd;
+	ZeroMemory(&sd, sizeof(sd));
+	sd.pSysMem = v;
+	sd.SysMemPitch = 0;
+	sd.SysMemSlicePitch = 0;
+	CRenderer::GetDevice()->CreateBuffer(&bd, &sd, &pVB);
+
+	using namespace DirectX;
+	D3DXMATRIX world, rotation;
+	D3DXMatrixRotationYawPitchRoll(&rotation, XMConvertToRadians(gameObject->transform->rotation.y), XMConvertToRadians(gameObject->transform->rotation.x), XMConvertToRadians(gameObject->transform->rotation.z));
+	world._11 = gameObject->transform->scale.x * rotation._11;
+	world._12 = gameObject->transform->scale.x * rotation._12;
+	world._13 = gameObject->transform->scale.x * rotation._13;
+	world._21 = gameObject->transform->scale.y * rotation._21;
+	world._22 = gameObject->transform->scale.y * rotation._22;
+	world._23 = gameObject->transform->scale.y * rotation._23;
+	world._31 = gameObject->transform->scale.z * rotation._31;
+	world._32 = gameObject->transform->scale.z * rotation._32;
+	world._33 = gameObject->transform->scale.z * rotation._33;
+	world._41 = gameObject->transform->position.x;
+	world._42 = gameObject->transform->position.y;
+	world._43 = gameObject->transform->position.z;
+	world._14 = 0;
+	world._24 = 0;
+	world._34 = 0;
+	world._44 = 1.0f;
+	CRenderer::SetWorldMatrix(&world);
+
+	CRenderer::SetVertexShader(SHADER_TYPE::Color);
+	CRenderer::SetPixelShader(SHADER_TYPE::Color);
+	CRenderer::SetInputLayout(SHADER_TYPE::Color);
+
+	UINT stride = sizeof(VERTEX_LINE);
+	UINT offset = 0;
+	CRenderer::GetDeviceContext()->IASetVertexBuffers(0, 1, &pVB, &stride, &offset);
+
+	// プリミティブトポロジ設定
+	CRenderer::GetDeviceContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_POINTLIST);
+
+	// ポリゴン描画
+	CRenderer::GetDeviceContext()->Draw(num, 0);
+
+	CRenderer::SetShader(SHADER_TYPE::Default);
+
+	SAFE_RELEASE(pVB);
 }
 
 void SphereCollider::Finalize()

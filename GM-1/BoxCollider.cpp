@@ -4,7 +4,6 @@
 #include "rapidjson/document.h"
 #include "main.h"
 #include "renderer.h"
-#include <io.h>
 #include <DirectXMath.h>
 
 BoxCollider::BoxCollider()
@@ -146,6 +145,9 @@ void BoxCollider::Draw()
 	CRenderer::GetDeviceContext()->DrawIndexed(24, 0, 0);
 
 	CRenderer::SetShader(SHADER_TYPE::Default);
+
+	SAFE_RELEASE(pVB);
+	SAFE_RELEASE(pIB);
 }
 
 void BoxCollider::Finalize()
