@@ -101,18 +101,6 @@ void CRenderer::Init()
 	m_ImmediateContext->OMSetRenderTargets(1, &m_RenderTargetView, m_DepthStencilView);
 
 
-	// ビューポート設定
-	D3D11_VIEWPORT vp;
-	vp.Width = (FLOAT)SCREEN_WIDTH;
-	vp.Height = (FLOAT)SCREEN_HEIGHT;
-	vp.MinDepth = 0.0f;
-	vp.MaxDepth = 1.0f;
-	vp.TopLeftX = 0;
-	vp.TopLeftY = 0;
-	m_ImmediateContext->RSSetViewports(1, &vp);
-
-
-
 	// ラスタライザステート設定
 	D3D11_RASTERIZER_DESC rd;
 	ZeroMemory(&rd, sizeof(rd));
@@ -296,8 +284,8 @@ void CRenderer::CreateDefaultShader()
 
 	file2 = fopen("Asset/Shader/pixelShader.cso", "rb");
 	fsize2 = _filelength(_fileno(file2));
-	unsigned char* buffer2 = new unsigned char[fsize];
-	fread(buffer2, fsize, 1, file2);
+	unsigned char* buffer2 = new unsigned char[fsize2];
+	fread(buffer2, fsize2, 1, file2);
 	fclose(file2);
 	ID3D11PixelShader* ps;
 	m_D3DDevice->CreatePixelShader(buffer2, fsize2, NULL, &ps);
@@ -345,9 +333,9 @@ void CRenderer::CreateColorShader()
 	long int fsize2;
 
 	file2 = fopen("Asset/Shader/ColorPS.cso", "rb");
-	fsize2 = _filelength(_fileno(file));
-	unsigned char* buffer2 = new unsigned char[fsize];
-	fread(buffer2, fsize2, 1, file);
+	fsize2 = _filelength(_fileno(file2));
+	unsigned char* buffer2 = new unsigned char[fsize2];
+	fread(buffer2, fsize2, 1, file2);
 	fclose(file2);
 	ID3D11PixelShader* ps;
 	m_D3DDevice->CreatePixelShader(buffer2, fsize2, NULL, &ps);
@@ -477,6 +465,11 @@ void CRenderer::SetLight(LIGHT Light)
 
 	m_ImmediateContext->UpdateSubresource(m_LightBuffer, 0, NULL, &Light, 0, 0);
 
+}
+
+void CRenderer::SetViewPort(D3D11_VIEWPORT* viewPort)
+{
+	m_ImmediateContext->RSSetViewports(1, viewPort);
 }
 
 void CRenderer::SetShader(SHADER_TYPE type)

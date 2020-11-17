@@ -6,6 +6,7 @@
 #include "main.h"
 #include <DirectXMath.h>
 #include "LevelLoader.h"
+#include "BoundingBox.h"
 
 GameObject::GameObject()
 {
@@ -77,6 +78,10 @@ void GameObject::Draw()
 	{
 		c->Draw();
 	}
+	if (m_isDrawBB)
+	{
+		m_bb->Draw(transform);
+	}
 }
 
 void GameObject::Finalize()
@@ -115,6 +120,26 @@ Vector3 GameObject::GetForward()
 	forward.y = rot._32;
 	forward.z = rot._33;
 	return forward;
+}
+
+BoundingBox* GameObject::GetBoundingBox()
+{
+	if (m_bb != nullptr)
+	{
+		return m_bb;
+	}
+	return nullptr;
+}
+
+void GameObject::SetBoundingBox(BoundingBox* bb)
+{
+	m_bb = bb;
+	m_isDrawBB = true;
+}
+
+void GameObject::IsDraw(bool isDraw)
+{
+	m_isDraw = isDraw;
 }
 
 Component* GameObject::AddComponent(Component* component)

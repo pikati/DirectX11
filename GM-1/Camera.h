@@ -15,8 +15,15 @@ private:
 	float m_rotation = 0;
 	const float m_rotationValue = D3DX_PI * 0.01f;
 	const float m_distance = 10.0f;
+
+	int m_viewPortWidth = 0;
+	int m_viewPortHeight = 0;
+	int m_viewPortTopLeftX = 0;
+	int m_viewPortTopLeftY = 0;
+	int m_renderNum = 0;
+	D3D11_VIEWPORT m_viewPort;
 	
-	bool CheckView();
+	void CheckView();
 public:
 	Camera();
 	~Camera();
@@ -26,5 +33,8 @@ public:
 	Vector3 GetTarget();
 	D3DXMATRIX GetViewMatrix();
 	float GetRotation();
+
+	void LoadProperties(const rapidjson::Value& inProp) override;
+	void SaveProperties(rapidjson::Document::AllocatorType& alloc, rapidjson::Value& inProp) override;
 };
 

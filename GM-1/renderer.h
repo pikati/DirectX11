@@ -101,6 +101,7 @@ public:
 	static void SetProjectionMatrix(D3DXMATRIX * ProjectionMatrix);
 	static void SetMaterial(MATERIAL Material);
 	static void SetLight(LIGHT Light);
+	static void SetViewPort(D3D11_VIEWPORT* viewPort);
 
 	static void SetShader(SHADER_TYPE type);
 	static void SetVertexShader(SHADER_TYPE type);

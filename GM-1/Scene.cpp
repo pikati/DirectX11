@@ -14,6 +14,7 @@
 std::list<GameObject*> Scene::m_gameObject[LAYER_MAX];
 std::list<GameObject*> Scene::m_tempObject;
 bool Scene::m_isChange = false;
+int Scene::m_renderNum = 1;
 
 Scene::Scene()
 {

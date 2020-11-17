@@ -12,6 +12,7 @@ private:
 	static std::list<GameObject*> m_gameObject[LAYER_MAX];
 	static std::list<GameObject*> m_tempObject;
 	static bool m_isChange;
+	static int m_renderNum;
 
 	GameObject* AddGameObject();
 public:
@@ -30,6 +31,8 @@ public:
 	GameObject* Find(std::string name);
 	std::list<GameObject*>* GetAllGameObject();
 
+	void SetRenderNum(int num);
+	int GetRenderNum();
 	static void ChangeScene();
 
 	template <typename T>

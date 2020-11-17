@@ -8,11 +8,15 @@
 class Component;
 class Transform;
 
+class BoundingBox;
+
 class GameObject
 {
 private:
 	std::list<Component*> components;
 	bool m_isDraw = true;
+	bool m_isDrawBB = false;
+	BoundingBox* m_bb = nullptr;
 
 	bool DeleteComponent(Component* component);
 protected:
@@ -39,6 +43,8 @@ public:
 	Vector3 GetForward();
 
 	void IsDraw(bool isDraw);
+	void SetBoundingBox(BoundingBox* bb);
+	BoundingBox* GetBoundingBox();
 
 	std::list<Component*> GetComponents() const;
 	void SetComponents(std::list<Component*> component);

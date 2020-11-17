@@ -8,6 +8,7 @@
 #include <memory>
 
 class Animation;
+class BoundingBox;
 
 struct MeshInfo
 {
@@ -92,6 +93,7 @@ private:
 	std::string m_fileName;
 	ID3D11ShaderResourceView* texture;
 	bool m_isCopy = false;
+	BoundingBox* m_bb = nullptr;
 
 	void LoadFBX(const char* fileName);
 	void InitializeFBX();

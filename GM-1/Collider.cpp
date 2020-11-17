@@ -533,55 +533,30 @@ void Collider::Box2Sphere(Collider* c1, Collider* c2)
 	Vector3 direction = sPos - bPos;
 	Vector3 colLength;
 
-	//for (int i = 0; i < 3; i++)
-	//{
-	//	float len = box->GetLength(i);//’·‚³
-	//	Vector3 obb = box->GetAxis(i);//Ž²
-	//	obb /= len;
-	//	float dist = fabs(Vector3::Dot(obb, direction));
-	//	if (i == 0)
-	//	{
-	//		vec.x = dist;
-	//		colLength.x = len + radius;
-	//	}
-	//	else if (i == 1)
-	//	{
-	//		vec.y = dist; 
-	//		colLength.y = len + radius;
-	//	}
-	//	else if (i == 2)
-	//	{
-	//		vec.z = dist;
-	//		colLength.z = len + radius;
-	//	}
-	//}
-
-	/*if (vec.x <= colLength.x && vec.y <= colLength.y && vec.z <= colLength.z)
+	for (int i = 0; i < 3; i++)
 	{
-		c1->m_isCollision = true;
-		c2->m_isCollision = true;
-		c1->m_isCollisionThisFrame = true;
-		c2->m_isCollisionThisFrame = true;
-		c1->gameObject->OnCollisionEnter(c2->gameObject);
-		c2->gameObject->OnCollisionEnter(c1->gameObject);
-		c1->m_collisionObject = c2->gameObject;
-		c2->m_collisionObject = c1->gameObject;
-	}*/
+		float len = box->GetLength(i);//’·‚³
+		Vector3 obb = box->GetAxis(i);//Ž²
+		obb /= len;
+		float dist = fabs(Vector3::Dot(obb, direction));
+		if (i == 0)
+		{
+			vec.x = dist;
+			colLength.x = len + radius;
+		}
+		else if (i == 1)
+		{
+			vec.y = dist; 
+			colLength.y = len + radius;
+		}
+		else if (i == 2)
+		{
+			vec.z = dist;
+			colLength.z = len + radius;
+		}
+	}
 
-	float lenx = box->GetLength(0);
-	float leny = box->GetLength(1);
-	float lenz = box->GetLength(2);
-
-	Vector3 obbx = box->GetAxis(0) / lenx;
-	Vector3 obby = box->GetAxis(1) / leny;
-	Vector3 obbz = box->GetAxis(2) / lenz;
-	float distx = fabs(direction.x + radius - lenx);
-	float disty = fabs(direction.y + radius - leny);
-	float distz = fabs(direction.z + radius - lenz);
-
-	Vector3 vec2 = { distx, disty, distz };
-	//vec2 = direction - vec2;
-	if (vec2.x < lenx && vec2.y < leny && vec2.z < lenz)
+	if (vec.x <= colLength.x && vec.y <= colLength.y && vec.z <= colLength.z)
 	{
 		c1->m_isCollision = true;
 		c2->m_isCollision = true;

@@ -15,3 +15,7 @@ IK－＞足元とかのあれをあれする
 zoom
 3603222712
 7nSSZM
+
+SceneにGetRender系関数
+Cameraクラスのファイル書き換え
+CameraクラスrenderNumに応じて描画切り替え
