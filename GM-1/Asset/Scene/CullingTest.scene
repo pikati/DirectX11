@@ -26,11 +26,46 @@
             "component": [
                 {
                     "type": "Camera",
-                    "viewWidth": 960,
+                    "viewWidth": 480,
                     "viewHeight": 540,
                     "topLeftX": 0,
                     "topLeftY": 0,
                     "renderNum": 0,
+                    "id": -1
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "TopViewCamera",
+                "tag": "SubCamera",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 0,
+                "position": [
+                    20.0,
+                    30.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Camera",
+                    "viewWidth": 480,
+                    "viewHeight": 540,
+                    "topLeftX": 480,
+                    "topLeftY": 0,
+                    "renderNum": 1,
                     "id": -1
                 }
             ]

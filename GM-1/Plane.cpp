@@ -87,6 +87,7 @@ void Plane::Draw()
 	world._34 = 0;
 	world._44 = 1.0f;
 	CRenderer::SetWorldMatrix(&world);
+	CRenderer::SetShader(SHADER_TYPE::Default);
 
 	UINT stride = sizeof(VERTEX_3D);
 	UINT offset = 0;

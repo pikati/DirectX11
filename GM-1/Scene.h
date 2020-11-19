@@ -13,6 +13,7 @@ private:
 	static std::list<GameObject*> m_tempObject;
 	static bool m_isChange;
 	static int m_renderNum;
+	static int m_nowRenderNum;
 
 	GameObject* AddGameObject();
 public:
@@ -32,6 +33,7 @@ public:
 	std::list<GameObject*>* GetAllGameObject();
 
 	void SetRenderNum(int num);
+	void AddRenderNum();
 	int GetRenderNum();
 	static void ChangeScene();
 

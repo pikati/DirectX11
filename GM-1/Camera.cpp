@@ -16,7 +16,7 @@ static D3DMATRIX m;
 
 Camera::Camera()
 {
-
+	
 }
 
 Camera::~Camera()
@@ -26,7 +26,6 @@ Camera::~Camera()
 
 void Camera::Initialize()
 {
-	gameObject->transform->position = Vector3(0.0f, 5.0f, -10.0f);
 	m_target = Vector3(0.0f, 0.0f, 0.0f);
 	m_viewPort.Width = m_viewPortWidth;
 	m_viewPort.Height = m_viewPortHeight;
@@ -34,6 +33,7 @@ void Camera::Initialize()
 	m_viewPort.MaxDepth = 1.0f;
 	m_viewPort.TopLeftX = m_viewPortTopLeftX;
 	m_viewPort.TopLeftY = m_viewPortTopLeftY;
+	CManager::GetScene()->AddRenderNum();
 }
 
 void Camera::Update()
@@ -68,35 +68,51 @@ void Camera::Update()
 	gameObject->transform->position.y = m_player->transform->position.y + 5.0f;
 	gameObject->transform->position.z = m_target.z - cosf(m_rotation) * m_distance;*/
 
-	if (CInput::GetKeyPress('Z'))
+	if (gameObject->tag == "MainCamera")
 	{
-		m_target.x += 0.1f;
+		if (CInput::GetKeyPress('Z'))
+		{
+			m_target.x += 0.2f;
+		}
+		if (CInput::GetKeyPress('X'))
+		{
+			m_target.x += -0.2f;
+		}
+		if (CInput::GetKeyPress('N'))
+		{
+			m_target.y += 0.2f;
+		}
+		if (CInput::GetKeyPress('M'))
+		{
+			m_target.y += -0.2f;
+		}
 	}
-	if (CInput::GetKeyPress('X'))
-	{
-		m_target.x += -0.1f;
-	}
-	if (CInput::GetKeyPress('N'))
-	{
-		m_target.y += 0.1f;
-	}
-	if (CInput::GetKeyPress('M'))
-	{
-		m_target.y += -0.1f;
-	}
-
 }
 
 void Camera::Draw()
 {
-	//ビューマトリクス設定
-	D3DXMatrixLookAtLH(&m_viewMatrix, &D3DXVECTOR3(gameObject->transform->position.x, gameObject->transform->position.y, gameObject->transform->position.z), &D3DXVECTOR3(m_target.x, m_target.y, m_target.z), &D3DXVECTOR3(0.0f, 1.0f, 0.0f));
-	CRenderer::SetViewMatrix(&m_viewMatrix);
-	m = m_viewMatrix;
-	//プロジェクションマトリクス設定
-	D3DXMatrixPerspectiveFovLH(&m_projectionMatrix, 1.0f, (float)SCREEN_WIDTH / SCREEN_HEIGHT, 1.0f, 1000.0f);
-	CRenderer::SetProjectionMatrix(&m_projectionMatrix);
-	CheckView();
+	if (m_renderNum != CManager::GetScene()->GetRenderNum()) return;
+	CRenderer::SetViewPort(&m_viewPort);
+	if (m_renderNum == 0)
+	{
+		//ビューマトリクス設定
+		D3DXMatrixLookAtLH(&m_viewMatrix, &D3DXVECTOR3(gameObject->transform->position.x, gameObject->transform->position.y, gameObject->transform->position.z), &D3DXVECTOR3(m_target.x, m_target.y, m_target.z), &D3DXVECTOR3(0.0f, 1.0f, 0.0f));
+		CRenderer::SetViewMatrix(&m_viewMatrix);
+		m = m_viewMatrix;
+		//プロジェクションマトリクス設定
+		D3DXMatrixPerspectiveFovLH(&m_projectionMatrix, 1.0f, (float)SCREEN_WIDTH / 2 / SCREEN_HEIGHT, 1.0f, 1000.0f);
+		CRenderer::SetProjectionMatrix(&m_projectionMatrix);
+		CheckView();
+	}
+	else if (m_renderNum == 1)
+	{
+		D3DXMatrixLookAtLH(&m_viewMatrix, &D3DXVECTOR3(gameObject->transform->position.x, gameObject->transform->position.y, gameObject->transform->position.z), &D3DXVECTOR3(0.0f, m_target.y, m_target.z), &D3DXVECTOR3(1.0f, 0.0f, 0.0f));
+		CRenderer::SetViewMatrix(&m_viewMatrix);
+		m = m_viewMatrix;
+		//プロジェクションマトリクス設定
+		D3DXMatrixPerspectiveFovLH(&m_projectionMatrix, 1.0f, (float)SCREEN_WIDTH / 2 / SCREEN_HEIGHT, 1.0f, 1000.0f);
+		CRenderer::SetProjectionMatrix(&m_projectionMatrix);
+	}
 }
 
 void Camera::CheckView()
@@ -106,31 +122,30 @@ void Camera::CheckView()
 	vp = m_viewMatrix * m_projectionMatrix;
 	D3DXMatrixInverse(&invvp, NULL, &vp);
 
+	D3DXVECTOR3 vpos[4];
+	D3DXVECTOR3 wpos[4];
+
+	vpos[0] = { -1.0f,  1.0f, 1.0f };
+	vpos[1] = { 1.0f,  1.0f, 1.0f };
+	vpos[2] = { -1.0f, -1.0f, 1.0f };
+	vpos[3] = { 1.0f, -1.0f, 1.0f };
+
+	//視錐台の4頂点の位置を逆行列で求める
+	D3DXVec3TransformCoord(&wpos[0], &vpos[0], &invvp);
+	D3DXVec3TransformCoord(&wpos[1], &vpos[1], &invvp);
+	D3DXVec3TransformCoord(&wpos[2], &vpos[2], &invvp);
+	D3DXVec3TransformCoord(&wpos[3], &vpos[3], &invvp);
+
 	for (int i = OBJECTS; i < LAYER_MAX; i++)
 	{
 		for (GameObject* object : objects[i])
 		{
 			BoundingBox* bb = object->GetBoundingBox();
-			if (bb == nullptr) return;
-
-			D3DXVECTOR3 vpos[4];
-			D3DXVECTOR3 wpos[4];
-
-			vpos[0] = { -1.0f,  1.0f, 1.0f };
-			vpos[1] = { 1.0f,  1.0f, 1.0f };
-			vpos[2] = { -1.0f, -1.0f, 1.0f };
-			vpos[3] = { 1.0f, -1.0f, 1.0f };
-
-			//視錐台の4頂点の位置を逆行列で求める
-			D3DXVec3TransformCoord(&wpos[0], &vpos[0], &invvp);
-			D3DXVec3TransformCoord(&wpos[1], &vpos[1], &invvp);
-			D3DXVec3TransformCoord(&wpos[2], &vpos[2], &invvp);
-			D3DXVec3TransformCoord(&wpos[3], &vpos[3], &invvp);
+			if (bb == nullptr) continue;
 
 			Vector3 v, v1, v2, n;
 
 			Vector3 mPos = gameObject->transform->position;
-			
 			Vector3 pos[8];
 			Vector3 max = bb->m_max;
 			Vector3 min = bb->m_min;
@@ -143,19 +158,20 @@ void Camera::CheckView()
 			pos[6] = { max.x, min.y, max.z };
 			pos[7] = { min.x, min.y, max.z };
 
-			//左面分
-			for (int i = 0; i < 8; i++)
+			//4面の描画するかどうか判定
+			bool isDraw[4] = { false, false, false, false };
+			for (int j = 0; j < 8; j++)
 			{
-				v = pos[i] - mPos;
+				//左面分
+				v = pos[j] - mPos;
 				v1 = { wpos[0].x - mPos.x, wpos[0].y - mPos.y, wpos[0].z - mPos.z };
 				v2 = { wpos[2].x - mPos.x, wpos[2].y - mPos.y, wpos[2].z - mPos.z };
 				n = Vector3::Cross(v1, v2);
 
-				//n.Normalize();
 
-				if (Vector3::Dot(n, v) < 0.0f)
+				if (Vector3::Dot(n, v) > 0.0f)
 				{
-					object->IsDraw(false);
+					isDraw[0] = true;
 				}
 
 				//上面分
@@ -166,9 +182,10 @@ void Camera::CheckView()
 
 				n.Normalize();
 
-				if (Vector3::Dot(n, v) < 0.0f)
+				if (Vector3::Dot(n, v) > 0.0f)
 				{
-					object->IsDraw(false);
+					isDraw[1] = true;
+					
 				}
 
 				//右面分
@@ -178,9 +195,9 @@ void Camera::CheckView()
 
 				n.Normalize();
 
-				if (Vector3::Dot(n, v) < 0.0f)
+				if (Vector3::Dot(n, v) > 0.0f)
 				{
-					object->IsDraw(false);
+					isDraw[2] = true;
 				}
 
 				//下面分
@@ -190,12 +207,12 @@ void Camera::CheckView()
 
 				n.Normalize();
 
-				if (Vector3::Dot(n, v) < 0.0f)
+				if (Vector3::Dot(n, v) > 0.0f)
 				{
-					object->IsDraw(false);
+					isDraw[3] = true;
 				}
 			}
-			
+			object->IsDraw(isDraw[0] && isDraw[1] && isDraw[2] && isDraw[3]);
 		}
 	}
 }
@@ -229,10 +246,13 @@ void Camera::LoadProperties(const rapidjson::Value& inProp)
 void Camera::SaveProperties(rapidjson::Document::AllocatorType& alloc, rapidjson::Value& inProp)
 {
 	std::string name = typeid(*this).name();
+	JsonHelper::AddString(alloc, inProp, "type", name.substr(6).c_str());
 	JsonHelper::AddInt(alloc, inProp, "viewWidth", m_viewPortWidth);
 	JsonHelper::AddInt(alloc, inProp, "viewHeight", m_viewPortHeight);
 	JsonHelper::AddInt(alloc, inProp, "topLeftX", m_viewPortTopLeftX);
 	JsonHelper::AddInt(alloc, inProp, "topLeftY", m_viewPortTopLeftY);
 	JsonHelper::AddInt(alloc, inProp, "renderNum", m_renderNum);
 	JsonHelper::AddInt(alloc, inProp, "id", m_id);
+	SCREEN_WIDTH;
+	SCREEN_HEIGHT;
 }

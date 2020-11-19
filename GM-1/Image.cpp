@@ -97,6 +97,7 @@ void Image::Update()
 
 void Image::Draw()
 {
+	CRenderer::SetShader(SHADER_TYPE::Default);
 	//マトリクス設定
 	CRenderer::SetWorldViewProjection2D();
 

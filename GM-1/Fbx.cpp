@@ -408,6 +408,34 @@ void Fbx::GetVertex(int meshIndex)
 			m_bb->m_min.z = v.z;
 		}
 	}
+
+	using namespace DirectX;
+	D3DXMATRIX mat, rotation;
+	D3DXMatrixRotationYawPitchRoll(&rotation, XMConvertToRadians(gameObject->transform->rotation.y), XMConvertToRadians(gameObject->transform->rotation.x), XMConvertToRadians(gameObject->transform->rotation.z));
+	mat._11 = gameObject->transform->scale.x * rotation._11;
+	mat._12 = gameObject->transform->scale.x * rotation._12;
+	mat._13 = gameObject->transform->scale.x * rotation._13;
+	mat._21 = gameObject->transform->scale.y * rotation._21;
+	mat._22 = gameObject->transform->scale.y * rotation._22;
+	mat._23 = gameObject->transform->scale.y * rotation._23;
+	mat._31 = gameObject->transform->scale.z * rotation._31;
+	mat._32 = gameObject->transform->scale.z * rotation._32;
+	mat._33 = gameObject->transform->scale.z * rotation._33;
+	mat._41 = gameObject->transform->position.x;
+	mat._42 = gameObject->transform->position.y;
+	mat._43 = gameObject->transform->position.z;
+	mat._14 = 0;
+	mat._24 = 0;
+	mat._34 = 0;
+	mat._44 = 1.0f;
+	Vector3 a = m_bb->m_max;
+	Vector3 b = m_bb->m_min;
+	m_bb->m_max.x = mat._11 * a.x + mat._12 * a.y + mat._13 * a.z + mat._41;
+	m_bb->m_max.y = mat._21 * a.x + mat._22 * a.y + mat._23 * a.z + mat._42;
+	m_bb->m_max.z = mat._31 * a.x + mat._32 * a.y + mat._33 * a.z + mat._43;
+	m_bb->m_min.x = mat._11 * b.x + mat._12 * b.y + mat._13 * b.z + mat._41;
+	m_bb->m_min.y = mat._21 * b.x + mat._22 * b.y + mat._23 * b.z + mat._42;
+	m_bb->m_min.z = mat._31 * b.x + mat._32 * b.y + mat._33 * b.z + mat._43;
 }
 
 void Fbx::GetNormal(int meshIndex)
@@ -890,6 +918,8 @@ void Fbx::DrawAnimation()
 	world._44 = 1.0f;
 	CRenderer::SetWorldMatrix(&world);
 
+	CRenderer::SetShader(SHADER_TYPE::Default);
+
 	for (int i = 0; i < m_fbxInfo.meshCount; i++)
 	{
 		SetVertexBuffer(i);
@@ -946,6 +976,8 @@ void Fbx::UpdateTime()
 
 void Fbx::UpdateAnimationVertex()
 {
+	m_bb->m_max = { 0,0,0 };
+	m_bb->m_min = { 0,0,0 };
 	for (int i = 0; i < m_fbxInfo.meshCount; i++)
 	{
 		for (int j = 0; j < m_meshInfo[i].vertexCount; j++)
@@ -981,6 +1013,33 @@ void Fbx::UpdateAnimationVertex()
 			}
 		}
 	}
+	using namespace DirectX;
+	D3DXMATRIX mat, rotation;
+	D3DXMatrixRotationYawPitchRoll(&rotation, XMConvertToRadians(gameObject->transform->rotation.y), XMConvertToRadians(gameObject->transform->rotation.x), XMConvertToRadians(gameObject->transform->rotation.z));
+	mat._11 = gameObject->transform->scale.x * rotation._11;
+	mat._12 = gameObject->transform->scale.x * rotation._12;
+	mat._13 = gameObject->transform->scale.x * rotation._13;
+	mat._21 = gameObject->transform->scale.y * rotation._21;
+	mat._22 = gameObject->transform->scale.y * rotation._22;
+	mat._23 = gameObject->transform->scale.y * rotation._23;
+	mat._31 = gameObject->transform->scale.z * rotation._31;
+	mat._32 = gameObject->transform->scale.z * rotation._32;
+	mat._33 = gameObject->transform->scale.z * rotation._33;
+	mat._41 = gameObject->transform->position.x;
+	mat._42 = gameObject->transform->position.y;
+	mat._43 = gameObject->transform->position.z;
+	mat._14 = 0;
+	mat._24 = 0;
+	mat._34 = 0;
+	mat._44 = 1.0f;
+	Vector3 a = m_bb->m_max;
+	Vector3 b = m_bb->m_min;
+	m_bb->m_max.x = mat._11 * a.x + mat._12 * a.y + mat._13 * a.z + mat._41;
+	m_bb->m_max.y = mat._21 * a.x + mat._22 * a.y + mat._23 * a.z + mat._42;
+	m_bb->m_max.z = mat._31 * a.x + mat._32 * a.y + mat._33 * a.z + mat._43;
+	m_bb->m_min.x = mat._11 * b.x + mat._12 * b.y + mat._13 * b.z + mat._41;
+	m_bb->m_min.y = mat._21 * b.x + mat._22 * b.y + mat._23 * b.z + mat._42;
+	m_bb->m_min.z = mat._31 * b.x + mat._32 * b.y + mat._33 * b.z + mat._43;
 	gameObject->SetBoundingBox(m_bb);
 }
 

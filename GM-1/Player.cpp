@@ -65,6 +65,18 @@ void Player::Update()
 	{
 		Jump();
 	}
+	if (CInput::GetKeyTrigger('C'))
+	{
+		m_animation->SetState(SLASH);
+	}
+	if (CInput::GetKeyTrigger('V'))
+	{
+		m_animation->SetState(STAB);
+	}
+	if (CInput::GetKeyTrigger('B'))
+	{
+		m_animation->SetState(DAMAGE);
+	}
 	Move();
 
 	if (m_isGrounded)

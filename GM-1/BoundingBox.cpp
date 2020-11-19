@@ -80,24 +80,8 @@ void BoundingBox::Draw(Transform* t)
 	CRenderer::GetDevice()->CreateBuffer(&bd2, &sd2, &pIB);
 
 	using namespace DirectX;
-	D3DXMATRIX world, rotation;
-	D3DXMatrixRotationYawPitchRoll(&rotation, XMConvertToRadians(t->rotation.y), XMConvertToRadians(t->rotation.x), XMConvertToRadians(t->rotation.z));
-	world._11 = t->scale.x * rotation._11;
-	world._12 = t->scale.x * rotation._12;
-	world._13 = t->scale.x * rotation._13;
-	world._21 = t->scale.y * rotation._21;
-	world._22 = t->scale.y * rotation._22;
-	world._23 = t->scale.y * rotation._23;
-	world._31 = t->scale.z * rotation._31;
-	world._32 = t->scale.z * rotation._32;
-	world._33 = t->scale.z * rotation._33;
-	world._41 = t->position.x;
-	world._42 = t->position.y;
-	world._43 = t->position.z;
-	world._14 = 0;
-	world._24 = 0;
-	world._34 = 0;
-	world._44 = 1.0f;
+	D3DXMATRIX world;
+	D3DXMatrixIdentity(&world);
 	CRenderer::SetWorldMatrix(&world);
 
 	CRenderer::SetVertexShader(SHADER_TYPE::Color);

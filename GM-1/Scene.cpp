@@ -14,7 +14,8 @@
 std::list<GameObject*> Scene::m_gameObject[LAYER_MAX];
 std::list<GameObject*> Scene::m_tempObject;
 bool Scene::m_isChange = false;
-int Scene::m_renderNum = 1;
+int Scene::m_renderNum = 0;
+int Scene::m_nowRenderNum = 0;
 
 Scene::Scene()
 {
@@ -29,12 +30,7 @@ Scene::~Scene()
 void Scene::Initialize()
 {
 	AudioManager::SetVolume(0);
-	LevelLoader::LoadLevel(this, "Asset/Scene/OBBTest.scene");
-	GameObject* obj = new GameObject();
-	AddGameObject(obj, false);
-	obj->AddComponent<BoxCollider>();
-	obj->Initialize();
-	//obj->transform->rotation.Set(0, 45.0f, 0);
+	LevelLoader::LoadLevel(this, "Asset/Scene/CullingTest.scene");
 }
 
 void Scene::Update()
@@ -106,13 +102,17 @@ void Scene::Draw()
 		return;
 	}
 
-	for (int i = 0; i < LAYER_MAX; i++)
+	for (; m_nowRenderNum < m_renderNum; m_nowRenderNum++)
 	{
-		for (GameObject* object : m_gameObject[i])
+		for (int i = 0; i < LAYER_MAX; i++)
 		{
-			object->Draw();
+			for (GameObject* object : m_gameObject[i])
+			{
+				object->Draw();
+			}
 		}
 	}
+	m_nowRenderNum = 0;
 }
 
 
@@ -199,4 +199,19 @@ GameObject* Scene::AddGameObject()
 	GameObject* obj = new GameObject();
 	m_gameObject[obj->layer].emplace_back(obj);
 	return obj;
+}
+
+void Scene::SetRenderNum(int num)
+{
+	m_renderNum = num;
+}
+
+void Scene::AddRenderNum()
+{
+	m_renderNum++;
+}
+
+int Scene::GetRenderNum()
+{
+	return m_nowRenderNum;
 }
