@@ -618,7 +618,6 @@ bool Collider::DetectPointIsEnclosedByPolygon(Vector3 p, Vector3 v0, Vector3 v1,
 	return true;
 }
 
-
 void Collider::LoadProperties(const rapidjson::Value& inProp)
 {
 	return;

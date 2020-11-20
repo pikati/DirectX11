@@ -7,6 +7,7 @@
 #include "Texture.h"
 #include "LevelLoader.h"
 #include "ObjectPooler.h"
+#include "BoundingBox.h"
 #include <DirectXMath.h>
 #include <math.h>
 
@@ -63,6 +64,7 @@ void Plane::Initialize()
 		tex->Initialize();
 		m_tex = tex->GetTexture();
 	}
+	
 }
 
 void Plane::Draw()
@@ -107,6 +109,18 @@ void Plane::Draw()
 
 	CRenderer::GetDeviceContext()->Draw(4, 0);
 	//DrawNormal();
+	BoundingBox* bb = new BoundingBox();
+	bb->m_max = { 1.0f, 0, 1.0f };
+	bb->m_min = { -1.0f, 0, -1.0f };
+	Vector3 a = bb->m_max;
+	Vector3 b = bb->m_min;
+	bb->m_max.x = world._11 * a.x + world._12 * a.y + world._13 * a.z + world._41;
+	bb->m_max.y = world._21 * a.x + world._22 * a.y + world._23 * a.z + world._42;
+	bb->m_max.z = world._31 * a.x + world._32 * a.y + world._33 * a.z + world._43;
+	bb->m_min.x = world._11 * b.x + world._12 * b.y + world._13 * b.z + world._41;
+	bb->m_min.y = world._21 * b.x + world._22 * b.y + world._23 * b.z + world._42;
+	bb->m_min.z = world._31 * b.x + world._32 * b.y + world._33 * b.z + world._43;
+	gameObject->SetBoundingBox(bb);
 }
 
 void Plane::Finalize()

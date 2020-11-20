@@ -26,8 +26,8 @@
             "component": [
                 {
                     "type": "Camera",
-                    "viewWidth": 960,
-                    "viewHeight": 540,
+                    "viewWidth": 1920,
+                    "viewHeight": 1080,
                     "topLeftX": 0,
                     "topLeftY": 0,
                     "renderNum": 0,

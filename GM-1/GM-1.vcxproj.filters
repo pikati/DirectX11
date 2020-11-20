@@ -198,9 +198,6 @@
     <ClCompile Include="SaveLoadManager.cpp">
       <Filter>ソース ファイル\Engine\Other</Filter>
     </ClCompile>
-    <ClCompile Include="MeshField.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="PerlinNoise.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -213,11 +210,20 @@
     <ClCompile Include="BoxCollider.cpp">
       <Filter>ソース ファイル\Engine\Component\Collider</Filter>
     </ClCompile>
-    <ClCompile Include="EditerManager.cpp">
+    <ClCompile Include="MeshField.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="Hierarchy.cpp">
+      <Filter>ソース ファイル\Editer</Filter>
+    </ClCompile>
     <ClCompile Include="BoundingBox.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\Engine\Other</Filter>
+    </ClCompile>
+    <ClCompile Include="Editer.cpp">
+      <Filter>ソース ファイル\Editer</Filter>
+    </ClCompile>
+    <ClCompile Include="Inspector.cpp">
+      <Filter>ソース ファイル\Editer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -377,11 +383,17 @@
     <ClInclude Include="BoxCollider.h">
       <Filter>ヘッダー ファイル\Engine\Component\Collider</Filter>
     </ClInclude>
-    <ClInclude Include="EditerManager.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="Hierarchy.h">
+      <Filter>ヘッダー ファイル\Editer</Filter>
     </ClInclude>
     <ClInclude Include="BoundingBox.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\Engine\Other</Filter>
+    </ClInclude>
+    <ClInclude Include="Editer.h">
+      <Filter>ヘッダー ファイル\Editer</Filter>
+    </ClInclude>
+    <ClInclude Include="Inspector.h">
+      <Filter>ヘッダー ファイル\Editer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

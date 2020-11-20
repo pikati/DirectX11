@@ -7,9 +7,7 @@
 #include "Collider.h"
 #include "SceneManager.h"
 #include "AudioManager.h"
-
-#include "BoxCollider.h"
-#include "Transform.h"
+#include "ObjectPooler.h"
 
 std::list<GameObject*> Scene::m_gameObject[LAYER_MAX];
 std::list<GameObject*> Scene::m_tempObject;
@@ -30,7 +28,7 @@ Scene::~Scene()
 void Scene::Initialize()
 {
 	AudioManager::SetVolume(0);
-	LevelLoader::LoadLevel(this, "Asset/Scene/CullingTest.scene");
+	LevelLoader::LoadLevel(this, "Asset/Scene/stage1.scene");
 }
 
 void Scene::Update()
@@ -91,6 +89,12 @@ void Scene::Update()
 	{
  		Finalize();
 		SceneManager::LoadScene();
+	}
+	if (CInput::GetKeyTrigger('R'))
+	{
+		Finalize();
+		ObjectPooler::Finalize();
+		LevelLoader::LoadLevel(this, "Asset/Scene/stage1.scene");
 	}
 }
 

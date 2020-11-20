@@ -5,6 +5,9 @@
 #include "main.h"
 #include "renderer.h"
 #include <DirectXMath.h>
+#include "imGui/imgui.h"
+#include "imGui/imgui_impl_win32.h"
+#include "imGui/imgui_impl_dx11.h"
 
 BoxCollider::BoxCollider()
 {
@@ -33,6 +36,7 @@ void BoxCollider::Update()
 
 void BoxCollider::Draw()
 {
+	if (!m_isDraw) return;
 	VERTEX_LINE v[8];
 	Vector3 pos = gameObject->transform->position;
 	v[0].Position = Vector3(m_min.x, m_max.y, m_min.z);
@@ -218,6 +222,20 @@ Vector3 BoxCollider::GetAxis(int i)
 	}
 	return v;
 
+}
+
+void BoxCollider::SetInspector()
+{
+	std::string name = typeid(*this).name();
+	ImGui::Text(name.substr(6).c_str());
+	float max[3] = { m_max.x, m_max.y, m_max.z };
+	float min[3] = { m_min.x, m_min.y, m_min.z };
+	ImGui::InputFloat3("maxPosition", max);
+	ImGui::InputFloat3("minPosition", min);
+	//ImGui::Checkbox("isKinematic", &m_isKinematic);
+	ImGui::Checkbox("DrawCollider", &m_isDraw);
+	m_max = { max[0], max[1], max[2] };
+	m_min = { min[0], min[1], min[2] };
 }
 
 void BoxCollider::LoadProperties(const rapidjson::Value& inProp)

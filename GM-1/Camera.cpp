@@ -38,7 +38,7 @@ void Camera::Initialize()
 
 void Camera::Update()
 {
-	/*if (!m_inisialized)
+	if (!m_inisialized)
 	{
 		Scene* s = CManager::GetScene();
 		m_player = s->Find<Player>();
@@ -66,27 +66,27 @@ void Camera::Update()
 	}
 	gameObject->transform->position.x = m_target.x - sinf(m_rotation) * m_distance;
 	gameObject->transform->position.y = m_player->transform->position.y + 5.0f;
-	gameObject->transform->position.z = m_target.z - cosf(m_rotation) * m_distance;*/
+	gameObject->transform->position.z = m_target.z - cosf(m_rotation) * m_distance;
 
-	if (gameObject->tag == "MainCamera")
+	/*if (gameObject->tag == "MainCamera")
 	{
 		if (CInput::GetKeyPress('Z'))
 		{
-			m_target.x += 0.2f;
+			m_target.x += 0.4f;
 		}
 		if (CInput::GetKeyPress('X'))
 		{
-			m_target.x += -0.2f;
+			m_target.x += -0.4f;
 		}
 		if (CInput::GetKeyPress('N'))
 		{
-			m_target.y += 0.2f;
+			m_target.y += 0.4f;
 		}
 		if (CInput::GetKeyPress('M'))
 		{
-			m_target.y += -0.2f;
+			m_target.y += -0.4f;
 		}
-	}
+	}*/
 }
 
 void Camera::Draw()
@@ -100,7 +100,7 @@ void Camera::Draw()
 		CRenderer::SetViewMatrix(&m_viewMatrix);
 		m = m_viewMatrix;
 		//プロジェクションマトリクス設定
-		D3DXMatrixPerspectiveFovLH(&m_projectionMatrix, 1.0f, (float)SCREEN_WIDTH / 2 / SCREEN_HEIGHT, 1.0f, 1000.0f);
+		D3DXMatrixPerspectiveFovLH(&m_projectionMatrix, 1.0f, (float)SCREEN_WIDTH / SCREEN_HEIGHT, 1.0f, 1000.0f);
 		CRenderer::SetProjectionMatrix(&m_projectionMatrix);
 		CheckView();
 	}
@@ -130,7 +130,7 @@ void Camera::CheckView()
 	vpos[2] = { -1.0f, -1.0f, 1.0f };
 	vpos[3] = { 1.0f, -1.0f, 1.0f };
 
-	//視錐台の4頂点の位置を逆行列で求める
+	//視錐台の奥の4頂点の位置を逆行列で求める
 	D3DXVec3TransformCoord(&wpos[0], &vpos[0], &invvp);
 	D3DXVec3TransformCoord(&wpos[1], &vpos[1], &invvp);
 	D3DXVec3TransformCoord(&wpos[2], &vpos[2], &invvp);
@@ -162,56 +162,48 @@ void Camera::CheckView()
 			bool isDraw[4] = { false, false, false, false };
 			for (int j = 0; j < 8; j++)
 			{
-				//左面分
+				//左面
 				v = pos[j] - mPos;
 				v1 = { wpos[0].x - mPos.x, wpos[0].y - mPos.y, wpos[0].z - mPos.z };
 				v2 = { wpos[2].x - mPos.x, wpos[2].y - mPos.y, wpos[2].z - mPos.z };
 				n = Vector3::Cross(v1, v2);
-
 
 				if (Vector3::Dot(n, v) > 0.0f)
 				{
 					isDraw[0] = true;
 				}
 
-				//上面分
-
+				//上面
 				v1 = { wpos[1].x - mPos.x, wpos[1].y - mPos.y, wpos[1].z - mPos.z };
 				v2 = { wpos[0].x - mPos.x, wpos[0].y - mPos.y, wpos[0].z - mPos.z };
 				n = Vector3::Cross(v1, v2);
 
-				n.Normalize();
-
 				if (Vector3::Dot(n, v) > 0.0f)
 				{
 					isDraw[1] = true;
-					
 				}
 
-				//右面分
+				//右面
 				v1 = { wpos[3].x - mPos.x, wpos[3].y - mPos.y, wpos[3].z - mPos.z };
 				v2 = { wpos[1].x - mPos.x, wpos[1].y - mPos.y, wpos[1].z - mPos.z };
 				n = Vector3::Cross(v1, v2);
-
-				n.Normalize();
 
 				if (Vector3::Dot(n, v) > 0.0f)
 				{
 					isDraw[2] = true;
 				}
 
-				//下面分
+				//下面
 				v1 = { wpos[2].x - mPos.x, wpos[2].y - mPos.y, wpos[2].z - mPos.z };
 				v2 = { wpos[3].x - mPos.x, wpos[3].y - mPos.y, wpos[3].z - mPos.z };
 				n = Vector3::Cross(v1, v2);
-
-				n.Normalize();
 
 				if (Vector3::Dot(n, v) > 0.0f)
 				{
 					isDraw[3] = true;
 				}
 			}
+			//どれかの面の判定で8頂点が外側なら描画しない
 			object->IsDraw(isDraw[0] && isDraw[1] && isDraw[2] && isDraw[3]);
 		}
 	}

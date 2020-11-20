@@ -49,9 +49,7 @@ public:
 	std::list<Component*> GetComponents() const;
 	void SetComponents(std::list<Component*> component);
 
-
-
-
+	void IsBoundingBoxDraw(bool isDraw);
 
 
 

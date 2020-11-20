@@ -134,7 +134,6 @@ BoundingBox* GameObject::GetBoundingBox()
 void GameObject::SetBoundingBox(BoundingBox* bb)
 {
 	m_bb = bb;
-	m_isDrawBB = true;
 }
 
 void GameObject::IsDraw(bool isDraw)
@@ -182,4 +181,9 @@ bool GameObject::DeleteComponent(Component* component)
 	component->Finalize();
 	delete component;
 	return true;
+}
+
+void GameObject::IsBoundingBoxDraw(bool isDraw)
+{
+	m_isDrawBB = isDraw;
 }

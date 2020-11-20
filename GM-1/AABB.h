@@ -13,8 +13,8 @@ private:
 	Vector3 m_max;
 	Vector3 m_min;
 	Vector3 m_pos;
-	ID3D11Buffer* m_vb1;
-	ID3D11Buffer* m_vb2;
+	ID3D11Buffer* m_vb1 = nullptr;
+	ID3D11Buffer* m_vb2 = nullptr;
 	LINE_VERTEX m_v[14];
 	Texture* m_texture;
 	bool m_isKinematic = false;
@@ -35,6 +35,7 @@ public:
 	float GetHeight();
 	void SetKinematic(bool on);
 	bool IsKinematic();
+	void SetInspector() override;
 
 	void LoadProperties(const rapidjson::Value& inProp) override;
 	void SaveProperties(rapidjson::Document::AllocatorType& alloc, rapidjson::Value& inProp) override;

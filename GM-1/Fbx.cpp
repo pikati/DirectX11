@@ -1015,7 +1015,7 @@ void Fbx::UpdateAnimationVertex()
 	}
 	using namespace DirectX;
 	D3DXMATRIX mat, rotation;
-	D3DXMatrixRotationYawPitchRoll(&rotation, XMConvertToRadians(gameObject->transform->rotation.y), XMConvertToRadians(gameObject->transform->rotation.x), XMConvertToRadians(gameObject->transform->rotation.z));
+	D3DXMatrixRotationYawPitchRoll(&rotation, XMConvertToRadians(-gameObject->transform->rotation.y), XMConvertToRadians(gameObject->transform->rotation.x), XMConvertToRadians(gameObject->transform->rotation.z));
 	mat._11 = gameObject->transform->scale.x * rotation._11;
 	mat._12 = gameObject->transform->scale.x * rotation._12;
 	mat._13 = gameObject->transform->scale.x * rotation._13;

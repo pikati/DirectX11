@@ -7,6 +7,7 @@
 #include "ImguiManager.h"
 #include "AudioManager.h"
 #include "ObjectPooler.h"
+#include "Editer.h"
 
 Scene* g_scene;
 
@@ -18,6 +19,7 @@ void CManager::Init()
 	CInput::Init();
 	AudioManager::Initialize();
 	ObjectPooler::Initialize();
+	Editer::Initialize();
 
 	g_scene = new Scene();
 	g_scene->Initialize();
@@ -27,6 +29,7 @@ void CManager::Uninit()
 {
 	g_scene->Finalize();
 	delete g_scene;
+	Editer::Finalize();
 	ObjectPooler::Finalize();
 	AudioManager::Finalize();
 	CInput::Uninit();
@@ -40,6 +43,7 @@ void CManager::Update()
 	CInput::Update();
 	ImguiManager::Update();
 	g_scene->Update();
+	Editer::Update();
 }
 
 void CManager::Draw()
@@ -55,7 +59,7 @@ void CManager::Draw()
 	CRenderer::SetLight(light);
 
 	g_scene->Draw();
-
+	Editer::Draw();
 	ImguiManager::Draw();
 	CRenderer::End();
 }

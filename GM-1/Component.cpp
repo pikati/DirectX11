@@ -1,6 +1,8 @@
 #include "Component.h"
 #include "LevelLoader.h"
-
+#include "imGui/imgui.h"
+#include "imGui/imgui_impl_win32.h"
+#include "imGui/imgui_impl_dx11.h"
 
 void Component::Initialize()
 {
@@ -45,6 +47,12 @@ void Component::OnCollisionEnter(GameObject* obj)
 void Component::OnCollisionExit(GameObject* obj)
 {
 	return;
+}
+
+void Component::SetInspector()
+{
+	std::string name = typeid(*this).name();
+	ImGui::Text(name.substr(6).c_str());
 }
 
 void Component::SetProperties(Component* c)

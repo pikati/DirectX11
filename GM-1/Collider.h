@@ -31,6 +31,7 @@ protected:
 	int m_colliderID = -1;
 	bool m_isCollisionThisFrame = false;
 	ColliderType m_colliderType;
+	bool m_isDraw = false;
 
 	int SetCollider(Collider* collider);
 	void DeleteCollider(int colliderID);

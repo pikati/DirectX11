@@ -24,4 +24,102 @@ TBの求め方
 隣の頂点とか探してさらにUV座標とかの関係も含めてTB求められそう（できるとはいっていない）
 
 視錐台カリング
-位置が移動したときにも再計算させる必要があるよ（実装すると入っていない）
+位置が移動したときにも再計算させる必要があるよ（実装するとはいっていない）
+
+インスペクタにあるオブジェクトがDestoryされるとエラー
+
+
+        {
+            "properties": {
+                "name": "Player",
+                "tag": "Player",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    -5.0,
+                    0.1,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Animation",
+                    "dataNum": 6,
+                    "loop1": true,
+                    "start1": 0,
+                    "end1": 62,
+                    "lstart1": 20,
+                    "lend1": 60,
+                    "speed1": 2,
+                    "loop2": false,
+                    "start2": 63,
+                    "end2": 94,
+                    "lstart2": -1,
+                    "lend2": -1,
+                    "speed2": 1,
+                    "loop3": false,
+                    "start3": 95,
+                    "end3": 135,
+                    "lstart3": -1,
+                    "lend3": -1,
+                    "speed3": 1,
+                    "loop4": false,
+                    "start4": 136,
+                    "end4": 171,
+                    "lstart4": -1,
+                    "lend4": -1,
+                    "speed4": 1,
+                    "loop5": false,
+                    "start5": 172,
+                    "end5": 212,
+                    "lstart5": -1,
+                    "lend5": -1,
+                    "speed5": 1,
+                    "loop6": false,
+                    "start6": 0,
+                    "end6": 0,
+                    "lstart6": -1,
+                    "lend6": -1,
+                    "speed6": 1
+                },
+                {
+                    "type": "Fbx",
+                    "fileName": "Asset/Models/Player/eatmanV3.fbx",
+                    "textureName": "Asset/Texture/Player/eatman.png",
+                    "id": 1
+                },
+                {
+                    "type": "AABB",
+                    "max": [
+                        0.4,
+                        1.5,
+                        0.4
+                    ],
+                    "min": [
+                        -0.4,
+                        0.0,
+                        -0.4
+                    ],
+                    "kinematic": false
+                },
+                {
+                    "type": "Player",
+                    "id": -1
+                },
+                {
+                    "type": "ItemController",
+                    "id": -1
+                }
+            ]
+        },

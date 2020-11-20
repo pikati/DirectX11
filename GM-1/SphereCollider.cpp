@@ -5,6 +5,9 @@
 #include "main.h"
 #include "renderer.h"
 #include <DirectXMath.h>
+#include "imGui/imgui.h"
+#include "imGui/imgui_impl_win32.h"
+#include "imGui/imgui_impl_dx11.h"
 
 static const int num = 192;
 
@@ -36,6 +39,7 @@ void SphereCollider::Update()
 
 void SphereCollider::Draw()
 {
+	if (!m_isDraw) return;
 	VERTEX_LINE v[num];
 
 	float rad = DirectX::XM_2PI / (num / 3);
@@ -161,6 +165,18 @@ void SphereCollider::SetProperties(Component* c)
 	SphereCollider* s = dynamic_cast<SphereCollider*>(c);
 	m_center = s->m_center;
 	m_radius = s->m_radius;
+}
+
+void SphereCollider::SetInspector()
+{
+	std::string name = typeid(*this).name();
+	ImGui::Text(name.substr(6).c_str());
+	float center[3] = { m_center.x, m_center.y, m_center.z };
+	ImGui::InputFloat3("center", center);
+	ImGui::InputFloat("radius", &m_radius, 0.01f, 1.0f, 5);
+	//ImGui::Checkbox("isKinematic", &m_isKinematic);
+	ImGui::Checkbox("DrawCollider", &m_isDraw);
+	m_center = { center[0], center[1], center[2] };
 }
 
 void SphereCollider::LoadProperties(const rapidjson::Value& inProp)

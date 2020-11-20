@@ -6,6 +6,9 @@
 #include "LevelLoader.h"
 #include "rapidjson/document.h"
 #include <DirectXMath.h>
+#include "imGui/imgui.h"
+#include "imGui/imgui_impl_win32.h"
+#include "imGui/imgui_impl_dx11.h"
 
 AABB::AABB()
 {
@@ -122,7 +125,8 @@ void AABB::Update()
 //“–‚½‚è”»’è•`‰æ—p
 void AABB::Draw()
 {
-	/*using namespace DirectX;
+	if (!m_isDraw) return;
+	using namespace DirectX;
 	D3DXMATRIX world, rotation;
 	D3DXMatrixRotationYawPitchRoll(&rotation, XMConvertToRadians(0), XMConvertToRadians(0), XMConvertToRadians(0));
 	world._11 = 1 * rotation._11;
@@ -332,7 +336,7 @@ void AABB::Draw()
 	CRenderer::GetDeviceContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_LINELIST);
 	CRenderer::GetDeviceContext()->PSSetShaderResources(0, 1, &t);
 
-	CRenderer::GetDeviceContext()->Draw(2, 0);*/
+	CRenderer::GetDeviceContext()->Draw(2, 0);
 }
 
 void AABB::Finalize()
@@ -425,6 +429,20 @@ void AABB::SetKinematic(bool on)
 bool AABB::IsKinematic()
 {
 	return m_isKinematic;
+}
+
+void AABB::SetInspector()
+{
+	std::string name = typeid(*this).name();
+	ImGui::Text(name.substr(6).c_str());
+	float max[3] = { m_max.x, m_max.y, m_max.z };
+	float min[3] = { m_min.x, m_min.y, m_min.z };
+	ImGui::InputFloat3("maxPosition", max);
+	ImGui::InputFloat3("minPosition", min);
+	ImGui::Checkbox("isKinematic", &m_isKinematic);
+	ImGui::Checkbox("DrawCollider", &m_isDraw);
+	m_max = { max[0], max[1], max[2] };
+	m_min = { min[0], min[1], min[2] };
 }
 
 void AABB::LoadProperties(const rapidjson::Value& inProp)
