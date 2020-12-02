@@ -30,6 +30,10 @@ void Fbx::Initialize()
 
 void Fbx::Update()
 {
+	if (gameObject->transform->rotation.y >= 360)
+	{
+		gameObject->transform->rotation.y -= 360;
+	}
 	if (m_animationStackNumber != 0)
 	{
 		if (m_animation == nullptr)
@@ -161,6 +165,7 @@ void Fbx::Load()
 			return;
 		}
 	}
+	m_frame = 0;
 
 	LoadFBX(m_fileName.c_str());
 	InitializeFBX();
@@ -501,6 +506,33 @@ void Fbx::GetNormal(int meshIndex)
 
 			break;
 		case FbxGeometryElement::eByPolygonVertex:
+			switch (reference)
+			{
+			case FbxGeometryElement::eDirect:
+			{
+				//--- 法線数を取得 ---//
+				int normalCount = normal->GetDirectArray().GetCount();
+
+				//-----------------------------------------------------------------------
+				// eDirect の場合データは順番に格納されているのでそのまま保持
+				//-----------------------------------------------------------------------
+				for (int i = 0; normalCount > i; i++)
+				{
+					//--- 法線の取得 ---//
+					m_meshInfo[meshIndex].vertex[i].Normal.x = -(float)normal->GetDirectArray().GetAt(i)[0];
+					m_meshInfo[meshIndex].vertex[i].Normal.y = (float)normal->GetDirectArray().GetAt(i)[1];
+					m_meshInfo[meshIndex].vertex[i].Normal.z = (float)normal->GetDirectArray().GetAt(i)[2];
+				}
+			}
+			break;
+
+			case FbxGeometryElement::eIndexToDirect:
+				break;
+
+			default:
+				break;
+			}
+
 			break;
 		default:
 			break;
@@ -1103,6 +1135,31 @@ void Fbx::SetFileName(const char* fileName)
 {
 	m_fileName = fileName;
 }
+
+void Fbx::DrawInformation()
+{
+	std::string name = typeid(*this).name();
+
+	ImGui::PushStyleColor(ImGuiCol_TitleBgActive, ImVec4(0.0f, 0.7f, 0.2f, 1.0f));
+	ImGui::PushStyleColor(ImGuiCol_TitleBg, ImVec4(0.0f, 0.3f, 0.1f, 1.0f));
+	ImGui::SetNextWindowPos(ImVec2(1000, 20), ImGuiCond_Once);
+	ImGui::SetNextWindowSize(ImVec2(400, 300), ImGuiCond_Once);
+	ImGui::Begin(name.substr(6).c_str());
+	char fname[256];
+	strcpy_s(fname, m_fileName.c_str());
+	ImGui::InputText("fileName", fname, sizeof(fname));
+	m_fileName = fname;
+	if (ImGui::Button("Reload"))
+	{
+		Finalize();
+		Initialize();
+	}
+	ImGui::End();
+
+	ImGui::PopStyleColor();
+	ImGui::PopStyleColor();
+}
+
 
 void Fbx::LoadProperties(const rapidjson::Value& inProp)
 {

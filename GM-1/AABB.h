@@ -35,7 +35,7 @@ public:
 	float GetHeight();
 	void SetKinematic(bool on);
 	bool IsKinematic();
-	void SetInspector() override;
+	void DrawInformation() override;
 
 	void LoadProperties(const rapidjson::Value& inProp) override;
 	void SaveProperties(rapidjson::Document::AllocatorType& alloc, rapidjson::Value& inProp) override;

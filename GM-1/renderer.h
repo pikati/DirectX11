@@ -1,8 +1,7 @@
 #pragma once
 #include <vector>
+#include "main.h"
 #include "Engine.h"
-
-
 
 // í∏ì_ç\ë¢ëÃ
 struct VERTEX_3D
@@ -45,6 +44,13 @@ struct LIGHT
 	D3DXCOLOR	Ambient;
 };
 
+struct POINTLIGHT 
+{
+	Vector4 position;
+	Vector4 attenuation;
+	Vector4 diffuse;
+};
+
 
 class CVertexBuffer;
 class CIndexBuffer;
@@ -79,7 +85,7 @@ private:
 	static ID3D11Buffer*			m_ProjectionBuffer;
 	static ID3D11Buffer*			m_MaterialBuffer;
 	static ID3D11Buffer*			m_LightBuffer;
-
+	static ID3D11Buffer*			m_CameraBuffer;
 
 	static ID3D11DepthStencilState* m_DepthStateEnable;
 	static ID3D11DepthStencilState* m_DepthStateDisable;
@@ -102,6 +108,7 @@ public:
 	static void SetMaterial(MATERIAL Material);
 	static void SetLight(LIGHT Light);
 	static void SetViewPort(D3D11_VIEWPORT* viewPort);
+	static void SetCameraPosition(Vector3 CameraPosition);
 
 	static void SetShader(SHADER_TYPE type);
 	static void SetVertexShader(SHADER_TYPE type);

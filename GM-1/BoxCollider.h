@@ -22,7 +22,7 @@ public:
 
 	float GetLength(int i);
 	Vector3 GetAxis(int i);
-	void SetInspector() override;
+	void DrawInformation() override;
 
 	void LoadProperties(const rapidjson::Value& inProp) override;
 	void SaveProperties(rapidjson::Document::AllocatorType& alloc, rapidjson::Value& inProp) override;

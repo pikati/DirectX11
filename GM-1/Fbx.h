@@ -140,6 +140,7 @@ public:
 	void DownFrame();
 	void PlayAnimation();
 	void SetFileName(const char* fileName);
+	void DrawInformation() override;
 
 	void LoadProperties(const rapidjson::Value& inProp) override;
 	void SaveProperties(rapidjson::Document::AllocatorType& alloc, rapidjson::Value& inProp) override;

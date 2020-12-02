@@ -8,6 +8,7 @@
 #include "SceneManager.h"
 #include "AudioManager.h"
 #include "ObjectPooler.h"
+#include "Editer.h"
 
 std::list<GameObject*> Scene::m_gameObject[LAYER_MAX];
 std::list<GameObject*> Scene::m_tempObject;
@@ -94,6 +95,7 @@ void Scene::Update()
 	{
 		Finalize();
 		ObjectPooler::Finalize();
+		Editer::Finalize();
 		LevelLoader::LoadLevel(this, "Asset/Scene/stage1.scene");
 	}
 }
@@ -143,6 +145,7 @@ void Scene::Finalize()
 GameObject* Scene::CreateGameObject()
 {
 	GameObject* obj = new GameObject();
+	obj->name = SetDefaultName(0);
 	m_tempObject.emplace_back(obj);
 	return obj;
 }
@@ -218,4 +221,62 @@ void Scene::AddRenderNum()
 int Scene::GetRenderNum()
 {
 	return m_nowRenderNum;
+}
+
+std::string Scene::SetDefaultName(int i)
+{
+	std::string name = "unname";
+	if (i != 0)
+	{
+		std::string num = std::to_string(i);
+		name += num;
+	}
+	for (int j = 0; j < LAYER_MAX; j++)
+	{
+		for (GameObject* obj : m_gameObject[j])
+		{
+			if (i == 0)
+			{
+				if (obj->name == "unname")
+				{
+					name = SetDefaultName(1);
+				}
+			}
+			else
+			{
+				
+				if (obj->name == name)
+				{
+					name = SetDefaultName(i + 1);
+				}
+			}
+		}
+	}
+	return name;
+}
+
+void Scene::LoadScene(std::string path)
+{
+	Finalize();
+	ObjectPooler::Finalize();
+	LevelLoader::LoadLevel(this, path.c_str());
+}
+
+void Scene::SaveScene(std::string path)
+{
+	LevelLoader::SaveLevel(this, path.c_str());
+}
+
+void Scene::ObjectInitialize()
+{
+	for (int j = 0; j < LAYER_MAX; j++)
+	{
+		for (GameObject* obj : m_gameObject[j])
+		{
+			for (Component* c : obj->GetComponents())
+			{
+				c->Initialize();
+			}
+		}
+	}
 }

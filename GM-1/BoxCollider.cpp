@@ -6,8 +6,6 @@
 #include "renderer.h"
 #include <DirectXMath.h>
 #include "imGui/imgui.h"
-#include "imGui/imgui_impl_win32.h"
-#include "imGui/imgui_impl_dx11.h"
 
 BoxCollider::BoxCollider()
 {
@@ -224,10 +222,16 @@ Vector3 BoxCollider::GetAxis(int i)
 
 }
 
-void BoxCollider::SetInspector()
+void BoxCollider::DrawInformation()
 {
 	std::string name = typeid(*this).name();
-	ImGui::Text(name.substr(6).c_str());
+
+	ImGui::PushStyleColor(ImGuiCol_TitleBgActive, ImVec4(0.0f, 0.7f, 0.2f, 1.0f));
+	ImGui::PushStyleColor(ImGuiCol_TitleBg, ImVec4(0.0f, 0.3f, 0.1f, 1.0f));
+	ImGui::SetNextWindowPos(ImVec2(1000, 20), ImGuiCond_Once);
+	ImGui::SetNextWindowSize(ImVec2(400, 300), ImGuiCond_Once);
+	ImGui::Begin(name.substr(6).c_str());
+
 	float max[3] = { m_max.x, m_max.y, m_max.z };
 	float min[3] = { m_min.x, m_min.y, m_min.z };
 	ImGui::InputFloat3("maxPosition", max);
@@ -236,6 +240,11 @@ void BoxCollider::SetInspector()
 	ImGui::Checkbox("DrawCollider", &m_isDraw);
 	m_max = { max[0], max[1], max[2] };
 	m_min = { min[0], min[1], min[2] };
+
+	ImGui::End();
+
+	ImGui::PopStyleColor();
+	ImGui::PopStyleColor();
 }
 
 void BoxCollider::LoadProperties(const rapidjson::Value& inProp)

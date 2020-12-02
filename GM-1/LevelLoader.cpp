@@ -26,6 +26,7 @@ bool LevelLoader::LoadLevel(Scene* scene, const char* fileName)
 	{
 		LoadGameObject(scene, objects);
 	}
+	scene->ObjectInitialize();
 	return true;
 }
 
@@ -83,11 +84,11 @@ void LevelLoader::LoadGameObject(Scene* scene, const rapidjson::Value& inObj)
 				}
 			}
 			scene->AddGameObject(obj, false);
-			std::list<Component*> comp = obj->GetComponents();
+			/*std::list<Component*> comp = obj->GetComponents();
 			for (Component* c : comp)
 			{
 				c->Initialize();
-			}
+			}*/
 		}	
 	}
 	

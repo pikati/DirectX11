@@ -1,14 +1,2 @@
-﻿  AABB.cpp
-  BoxCollider.cpp
-D:\HAL\3\GM\DirectX11\GM-1\BoxCollider.cpp(182,34): warning C4244: 'return': 'double' から 'float' への変換です。データが失われる可能性があります。
-D:\HAL\3\GM\DirectX11\GM-1\BoxCollider.cpp(186,34): warning C4244: 'return': 'double' から 'float' への変換です。データが失われる可能性があります。
-D:\HAL\3\GM\DirectX11\GM-1\BoxCollider.cpp(190,34): warning C4244: 'return': 'double' から 'float' への変換です。データが失われる可能性があります。
-  SphereCollider.cpp
-D:\HAL\3\GM\DirectX11\GM-1\SphereCollider.cpp(49,30): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
-D:\HAL\3\GM\DirectX11\GM-1\SphereCollider.cpp(50,30): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
-D:\HAL\3\GM\DirectX11\GM-1\SphereCollider.cpp(59,30): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
-D:\HAL\3\GM\DirectX11\GM-1\SphereCollider.cpp(60,30): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
-D:\HAL\3\GM\DirectX11\GM-1\SphereCollider.cpp(67,30): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
-D:\HAL\3\GM\DirectX11\GM-1\SphereCollider.cpp(69,30): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
-  コードを生成中...
+﻿  compilation object save succeeded; see D:\HAL\3\GM\DirectX11\GM-1\Asset\Shader\pixelShader.cso
   GM-1.vcxproj -> D:\HAL\3\GM\DirectX11\Debug\GM-1.exe

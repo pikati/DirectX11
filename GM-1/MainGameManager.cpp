@@ -8,6 +8,7 @@ void MainGameManager::Initialize()
 {
 	AudioManager::StopSound();
 	AudioManager::PlaySound(BGM_MAIN);
-	m_fade = CManager::GetScene()->Find("Fade")->GetComponent<Fade>();
+	GameObject* obj = CManager::GetScene()->Find("Fade");
+	m_fade = obj->GetComponent<Fade>();
 	m_fade->FadeOut();
 }

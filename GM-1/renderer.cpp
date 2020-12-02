@@ -23,6 +23,7 @@ ID3D11Buffer* CRenderer::m_ViewBuffer = NULL;
 ID3D11Buffer* CRenderer::m_ProjectionBuffer = NULL;
 ID3D11Buffer* CRenderer::m_MaterialBuffer = NULL;
 ID3D11Buffer* CRenderer::m_LightBuffer = NULL;
+ID3D11Buffer* CRenderer::m_CameraBuffer = NULL;
 
 
 ID3D11DepthStencilState* CRenderer::m_DepthStateEnable = NULL;
@@ -207,9 +208,12 @@ void CRenderer::Init()
 	hBufferDesc.ByteWidth = sizeof(LIGHT);
 
 	m_D3DDevice->CreateBuffer(&hBufferDesc, NULL, &m_LightBuffer);
-	m_ImmediateContext->VSSetConstantBuffers(4, 1, &m_LightBuffer);
+	m_ImmediateContext->PSSetConstantBuffers(4, 1, &m_LightBuffer);
 
+	hBufferDesc.ByteWidth = sizeof(D3DXVECTOR4);
 
+	m_D3DDevice->CreateBuffer(&hBufferDesc, NULL, &m_CameraBuffer);
+	m_ImmediateContext->PSSetConstantBuffers(5, 1, &m_CameraBuffer);
 
 
 
@@ -465,6 +469,11 @@ void CRenderer::SetLight(LIGHT Light)
 
 	m_ImmediateContext->UpdateSubresource(m_LightBuffer, 0, NULL, &Light, 0, 0);
 
+}
+
+void CRenderer::SetCameraPosition(Vector3 CameraPosition)
+{
+	m_ImmediateContext->UpdateSubresource(m_CameraBuffer, 0, NULL, &D3DXVECTOR4(CameraPosition.x, CameraPosition.y, CameraPosition.z, 1.0f), 0, 0);
 }
 
 void CRenderer::SetViewPort(D3D11_VIEWPORT* viewPort)

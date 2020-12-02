@@ -23,9 +23,11 @@
 #include "ResultManager.h"
 #include "Bullet.h"
 #include "BoxCollider.h"
+#include <algorithm>
 
 std::map<std::string, Component*> ClassDictionary::dictionary;
 BuilderFromString ClassDictionary::builderfromstring;
+std::vector<std::string> ClassDictionary::componentName;
 
 void ClassDictionary::Initialize()
 {
@@ -52,6 +54,29 @@ void ClassDictionary::Initialize()
 	builderfromstring.Register(REGISTER_ARGS(ResultManager));
 	builderfromstring.Register(REGISTER_ARGS(Bullet));
 	builderfromstring.Register(REGISTER_ARGS(BoxCollider));
+	componentName.push_back("Camera");
+	componentName.push_back("Player");
+	componentName.push_back("SphereCollider");
+	componentName.push_back("Billboard");
+	componentName.push_back("Texture");
+	componentName.push_back("Fbx");
+	componentName.push_back("Animation");
+	componentName.push_back("Plane");
+	componentName.push_back("AABB");
+	componentName.push_back("Item");
+	componentName.push_back("Image");
+	componentName.push_back("TitleText");
+	componentName.push_back("TitleManager");
+	componentName.push_back("Fade");
+	componentName.push_back("MainGameManager");
+	componentName.push_back("SkyDorm");
+	componentName.push_back("WoodBox");
+	componentName.push_back("ItemController");
+	componentName.push_back("TutorialManager");
+	componentName.push_back("ResultManager");
+	componentName.push_back("Bullet");
+	componentName.push_back("BoxCollider");
+	std::sort(componentName.begin(), componentName.end());
 }
 
 void ClassDictionary::Register(const std::string& ty_name, Component* component)
@@ -68,4 +93,9 @@ Component* ClassDictionary::SetComponent(const std::string& name)
 {
 	Component* c = builderfromstring.Create(name);
 	return c;
+}
+
+std::vector<std::string> ClassDictionary::GetComponentName()
+{
+	return componentName;
 }

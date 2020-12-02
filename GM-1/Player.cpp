@@ -77,7 +77,7 @@ void Player::Update()
 	{
 		m_animation->SetState(DAMAGE);
 	}
-	Move();
+	//Move();
 
 	if (m_isGrounded)
 	{

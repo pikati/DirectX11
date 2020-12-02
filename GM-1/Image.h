@@ -21,6 +21,7 @@ public:
 	void SetTextureName(std::string textureName);
 	void SetSize(float width, float height);
 	void SetColor(float r, float g, float b, float a);
+	void DrawInformation() override;
 
 	void LoadProperties(const rapidjson::Value& inProp) override;
 	void SaveProperties(rapidjson::Document::AllocatorType& alloc, rapidjson::Value& inProp) override;

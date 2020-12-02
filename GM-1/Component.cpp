@@ -1,8 +1,6 @@
 #include "Component.h"
 #include "LevelLoader.h"
 #include "imGui/imgui.h"
-#include "imGui/imgui_impl_win32.h"
-#include "imGui/imgui_impl_dx11.h"
 
 void Component::Initialize()
 {
@@ -49,10 +47,20 @@ void Component::OnCollisionExit(GameObject* obj)
 	return;
 }
 
-void Component::SetInspector()
+void Component::DrawInformation()
 {
 	std::string name = typeid(*this).name();
-	ImGui::Text(name.substr(6).c_str());
+
+	ImGui::PushStyleColor(ImGuiCol_TitleBgActive, ImVec4(0.0f, 0.7f, 0.2f, 1.0f));
+	ImGui::PushStyleColor(ImGuiCol_TitleBg, ImVec4(0.0f, 0.3f, 0.1f, 1.0f));
+	ImGui::SetNextWindowPos(ImVec2(1000, 20), ImGuiCond_Once);
+	ImGui::SetNextWindowSize(ImVec2(400, 300), ImGuiCond_Once);
+	ImGui::Begin(name.substr(6).c_str());
+
+	ImGui::End();
+
+	ImGui::PopStyleColor();
+	ImGui::PopStyleColor();
 }
 
 void Component::SetProperties(Component* c)

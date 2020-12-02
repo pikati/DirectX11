@@ -34,6 +34,7 @@ void Camera::Initialize()
 	m_viewPort.TopLeftX = m_viewPortTopLeftX;
 	m_viewPort.TopLeftY = m_viewPortTopLeftY;
 	CManager::GetScene()->AddRenderNum();
+	m_inisialized = false;
 }
 
 void Camera::Update()
@@ -44,8 +45,15 @@ void Camera::Update()
 		m_player = s->Find<Player>();
 		m_inisialized = true;
 	}
-	m_target = m_player->transform->position;
-	float pZ = m_player->transform->position.z;
+	if (m_player == nullptr)
+	{
+		m_target = { 0,0,0 };
+	}
+	else
+	{
+		m_target = m_player->transform->position;
+	}
+	float pZ = m_target.z;
 
 
 	if (CInput::GetKeyPress('J'))
@@ -87,6 +95,7 @@ void Camera::Update()
 			m_target.y += -0.4f;
 		}
 	}*/
+	CRenderer::SetCameraPosition(gameObject->transform->position);
 }
 
 void Camera::Draw()

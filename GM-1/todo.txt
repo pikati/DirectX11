@@ -29,6 +29,8 @@ TBの求め方
 インスペクタにあるオブジェクトがDestoryされるとエラー
 
 
+メモ
+キューブマップのフォーマットはDDS
         {
             "properties": {
                 "name": "Player",

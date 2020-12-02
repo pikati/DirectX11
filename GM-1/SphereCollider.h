@@ -20,7 +20,7 @@ public:
 	void SetProperties(Component* c) override;
 	void LoadProperties(const rapidjson::Value& inProp) override;
 	void SaveProperties(rapidjson::Document::AllocatorType& alloc, rapidjson::Value& inProp) override;
-	void SetInspector() override;
+	void DrawInformation() override;
 
 	Vector3 GetPosition();
 	float GetRadius();

@@ -16,6 +16,7 @@ private:
 	static int m_nowRenderNum;
 
 	GameObject* AddGameObject();
+	std::string SetDefaultName(int i);
 public:
 	Scene();
 	~Scene();
@@ -36,6 +37,9 @@ public:
 	void AddRenderNum();
 	int GetRenderNum();
 	static void ChangeScene();
+	void LoadScene(std::string path);
+	void SaveScene(std::string path);
+	void ObjectInitialize();
 
 	template <typename T>
 	GameObject* Find()

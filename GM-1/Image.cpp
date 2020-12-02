@@ -4,6 +4,7 @@
 #include "ObjectPooler.h"
 #include "LevelLoader.h"
 #include "Transform.h"
+#include "imGui/imgui.h"
 
 void Image::Initialize()
 {
@@ -148,6 +149,30 @@ void Image::LoadProperties(const rapidjson::Value& inProp)
 	JsonHelper::GetFloat(inProp, "width", m_width);
 	JsonHelper::GetFloat(inProp, "height", m_height);
 	JsonHelper::GetInt(inProp, "id", m_id);
+}
+
+void Image::DrawInformation()
+{
+	std::string name = typeid(*this).name();
+
+	ImGui::PushStyleColor(ImGuiCol_TitleBgActive, ImVec4(0.0f, 0.7f, 0.2f, 1.0f));
+	ImGui::PushStyleColor(ImGuiCol_TitleBg, ImVec4(0.0f, 0.3f, 0.1f, 1.0f));
+	ImGui::SetNextWindowPos(ImVec2(1000, 20), ImGuiCond_Once);
+	ImGui::SetNextWindowSize(ImVec2(400, 300), ImGuiCond_Once);
+	ImGui::Begin(name.substr(6).c_str());
+	char fname[256];
+	strcpy_s(fname, m_textureName.c_str());
+	ImGui::InputText("fileName", fname, sizeof(fname));
+	m_textureName = fname;
+	if (ImGui::Button("Reload"))
+	{
+		Finalize();
+		Initialize();
+	}
+	ImGui::End();
+
+	ImGui::PopStyleColor();
+	ImGui::PopStyleColor();
 }
 
 void Image::SaveProperties(rapidjson::Document::AllocatorType& alloc, rapidjson::Value& inProp)

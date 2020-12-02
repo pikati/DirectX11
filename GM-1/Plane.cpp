@@ -10,6 +10,7 @@
 #include "BoundingBox.h"
 #include <DirectXMath.h>
 #include <math.h>
+#include "imGui/imgui.h"
 
 void Plane::Initialize()
 {
@@ -62,6 +63,10 @@ void Plane::Initialize()
 		tex = new Texture();
 		tex->SetTextureName(m_textureName);
 		tex->Initialize();
+		m_tex = tex->GetTexture();
+	}
+	else
+	{
 		m_tex = tex->GetTexture();
 	}
 	
@@ -125,7 +130,8 @@ void Plane::Draw()
 
 void Plane::Finalize()
 {
-	SAFE_RELEASE(m_tex);
+	SAFE_RELEASE(m_vertexBuffer);
+	//SAFE_RELEASE(m_tex);
 }
 
 void Plane::SetTextureName(std::string name)
@@ -201,6 +207,30 @@ void Plane::DrawNormal()
 	CRenderer::GetDeviceContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_LINELIST);
 
 	CRenderer::GetDeviceContext()->Draw(2, 0);
+}
+
+void Plane::DrawInformation()
+{
+	std::string name = typeid(*this).name();
+
+	ImGui::PushStyleColor(ImGuiCol_TitleBgActive, ImVec4(0.0f, 0.7f, 0.2f, 1.0f));
+	ImGui::PushStyleColor(ImGuiCol_TitleBg, ImVec4(0.0f, 0.3f, 0.1f, 1.0f));
+	ImGui::SetNextWindowPos(ImVec2(1000, 20), ImGuiCond_Once);
+	ImGui::SetNextWindowSize(ImVec2(400, 300), ImGuiCond_Once);
+	ImGui::Begin(name.substr(6).c_str());
+	char fname[256];
+	strcpy_s(fname, m_textureName.c_str());
+	ImGui::InputText("fileName", fname, sizeof(fname));
+	m_textureName = fname;
+	if (ImGui::Button("Reload"))
+	{
+		Finalize();
+		Initialize();
+	}
+	ImGui::End();
+
+	ImGui::PopStyleColor();
+	ImGui::PopStyleColor();
 }
 
 void Plane::LoadProperties(const rapidjson::Value& inProp)
