@@ -445,7 +445,7 @@ void Fbx::GetVertex(int meshIndex)
 
 void Fbx::GetNormal(int meshIndex)
 {
-	//ピカタん龍
+	////ピカタん龍
 	//FbxArray<FbxVector4> normals;
 	////法線を取得
 	//m_fbxInfo.meshes[meshIndex]->GetPolygonVertexNormals(normals);
@@ -454,9 +454,9 @@ void Fbx::GetNormal(int meshIndex)
 	//for (int i = 0; i < normalCount; i++)
 	//{
 	//	//頂点インデックスに対応した頂点に値を代入
-	//	m_meshInfo[meshIndex].vertex[m_meshInfo[meshIndex].index[i]].Normal.x = -normals[i][0];
-	//	m_meshInfo[meshIndex].vertex[m_meshInfo[meshIndex].index[i]].Normal.y = normals[i][1];
-	//	m_meshInfo[meshIndex].vertex[m_meshInfo[meshIndex].index[i]].Normal.z = normals[i][2];
+	//	m_meshInfo[meshIndex].vertex[i].Normal.x = -normals[i][0];
+	//	m_meshInfo[meshIndex].vertex[i].Normal.y = normals[i][1];
+	//	m_meshInfo[meshIndex].vertex[i].Normal.z = normals[i][2];
 	//}
 	//--- 法線セット数を取得 ---//
 	int normalLayerCount = m_fbxInfo.meshes[meshIndex]->GetElementNormalCount();
@@ -975,6 +975,57 @@ void Fbx::DrawAnimation()
 		// ポリゴン描画
 		CRenderer::GetDeviceContext()->DrawIndexed(m_meshInfo[i].indexCount, 0, 0);
 	}
+	DrawNormal();
+}
+
+void Fbx::DrawNormal()
+{
+	int vCount = 0;
+	for (int i = 0; i < m_fbxInfo.meshCount; i++)
+	{
+		vCount += m_meshInfo->vertexCount;
+	}
+
+	VERTEX_LINE* v = new VERTEX_LINE[vCount * 2];
+	ID3D11Buffer* b;
+	int count = 0;
+
+	for (int i = 0; i < m_fbxInfo.meshCount; i++)
+	{
+		for (int j = 0; j < m_meshInfo[i].vertexCount; j++)
+		{
+			Vector3 n = { m_meshInfo->vertex[j].Normal.x, m_meshInfo->vertex[j].Normal.y, m_meshInfo->vertex[j].Normal.z };
+			v[count].Position = { m_meshInfo->vertex[j].Position.x, m_meshInfo->vertex[j].Position.y, m_meshInfo->vertex[j].Position.z };
+			v[count++].Diffuse = { 1.0f,1.0f,1.0f,1.0f };
+			v[count].Position = v[count - 1].Position + n;
+			v[count++].Diffuse = { 1.0f,1.0f,1.0f,1.0f };
+		}
+	}
+
+	D3D11_BUFFER_DESC bd;
+	ZeroMemory(&bd, sizeof(bd));
+	bd.Usage = D3D11_USAGE_DEFAULT;
+	bd.ByteWidth = sizeof(VERTEX_LINE) * vCount * 2;
+	bd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+	bd.CPUAccessFlags = 0;
+
+	D3D11_SUBRESOURCE_DATA sd;
+	ZeroMemory(&sd, sizeof(sd));
+	sd.pSysMem = v;
+
+	CRenderer::GetDevice()->CreateBuffer(&bd, &sd, &b);
+
+	UINT stride = sizeof(VERTEX_LINE);
+	UINT offset = 0;
+	CRenderer::SetShader(SHADER_TYPE::Color);
+	CRenderer::GetDeviceContext()->IASetVertexBuffers(0, 1, &b, &stride, &offset);
+
+	CRenderer::GetDeviceContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_LINELIST);
+
+	CRenderer::GetDeviceContext()->Draw(vCount * 2, 0);
+	CRenderer::SetShader(SHADER_TYPE::Default);
+	SAFE_RELEASE(b);
+	delete[] v;
 }
 
 void Fbx::UpdateTime()

@@ -201,6 +201,7 @@
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SkyDorm.cpp" />
     <ClCompile Include="SphereCollider.cpp" />
+    <ClCompile Include="Spring.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TitleManager.cpp" />
     <ClCompile Include="TitleText.cpp" />
@@ -260,6 +261,7 @@
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SkyDorm.h" />
     <ClInclude Include="SphereCollider.h" />
+    <ClInclude Include="Spring.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TitleManager.h" />
     <ClInclude Include="TitleText.h" />

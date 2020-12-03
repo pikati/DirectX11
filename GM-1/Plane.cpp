@@ -207,6 +207,7 @@ void Plane::DrawNormal()
 	CRenderer::GetDeviceContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_LINELIST);
 
 	CRenderer::GetDeviceContext()->Draw(2, 0);
+	SAFE_RELEASE(b);
 }
 
 void Plane::DrawInformation()

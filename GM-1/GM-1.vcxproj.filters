@@ -64,6 +64,12 @@
     <Filter Include="ヘッダー ファイル\Editer">
       <UniqueIdentifier>{215b058e-a5d7-4ed6-b7c1-496f7ae7ded3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\3KOU">
+      <UniqueIdentifier>{d69e123f-6c06-4c88-bf6d-786b3f954e93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\3KOU">
+      <UniqueIdentifier>{d4dea085-8fc2-41cb-b90c-779ffbc6a1e9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Component.cpp">
@@ -227,6 +233,9 @@
     </ClCompile>
     <ClCompile Include="DirectionalLight.cpp">
       <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Spring.cpp">
+      <Filter>ソース ファイル\3KOU</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -400,6 +409,9 @@
     </ClInclude>
     <ClInclude Include="DirectionalLight.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Spring.h">
+      <Filter>ヘッダー ファイル\3KOU</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

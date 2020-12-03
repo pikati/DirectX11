@@ -31,6 +31,8 @@ TBの求め方
 
 メモ
 キューブマップのフォーマットはDDS
+
+
         {
             "properties": {
                 "name": "Player",

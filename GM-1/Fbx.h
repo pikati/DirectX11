@@ -124,10 +124,10 @@ private:
 
 	void DrawAnimation();
 	void UpdateTime();
-
 	/*デバッグ用のファイル出力*/
 	void PrintFile();
 	void DrawAnimationFrame();
+	void DrawNormal();
 public:
 	void Initialize();
 	void Update();

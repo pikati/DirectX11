@@ -1,18 +1,5 @@
 
-cbuffer WorldBuffer : register(b0)
-{
-    matrix World;
-}
-
-cbuffer ViewBuffer : register(b1)
-{
-    matrix View;
-}
-
-cbuffer ProjectionBuffer : register(b2)
-{
-    matrix Projection;
-}
+#include "Common.hlsl"
 
 void main(in float4 inPosition : POSITION0,
 						  in float4 inDiffuse : COLOR0,
