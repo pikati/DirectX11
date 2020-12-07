@@ -40,6 +40,7 @@ public:
 	void LoadScene(std::string path);
 	void SaveScene(std::string path);
 	void ObjectInitialize();
+	void DeleteObject(int layer, int index);
 
 	template <typename T>
 	GameObject* Find()

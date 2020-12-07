@@ -10,6 +10,10 @@
 #include "ObjectPooler.h"
 #include "Editer.h"
 
+#include "Fbx.h"
+#include "GameObject.h"
+#include "Transform.h"
+
 std::list<GameObject*> Scene::m_gameObject[LAYER_MAX];
 std::list<GameObject*> Scene::m_tempObject;
 bool Scene::m_isChange = false;
@@ -30,6 +34,12 @@ void Scene::Initialize()
 {
 	AudioManager::SetVolume(0);
 	LevelLoader::LoadLevel(this, "Asset/Scene/stage1.scene");
+	GameObject* obj = CreateGameObject();
+	Fbx* f = obj->AddComponent<Fbx>();
+	f->SetFileName("Asset/Models/Player/Cat.fbx");
+	f->SetTextureName("Asset/Texture/Player/Cat.png");
+	obj->Initialize();
+	obj->transform->position.y = 1.5f;
 }
 
 void Scene::Update()
@@ -278,5 +288,19 @@ void Scene::ObjectInitialize()
 				c->Initialize();
 			}
 		}
+	}
+}
+
+void Scene::DeleteObject(int layer, int index)
+{
+	int count = 0;
+	for (GameObject* obj : m_gameObject[layer])
+	{
+		if (count == index)
+		{
+			obj->Destroy();
+			return;
+		}
+		count++;
 	}
 }

@@ -19,17 +19,18 @@ void CManager::Init()
 	CInput::Init();
 	AudioManager::Initialize();
 	ObjectPooler::Initialize();
-	Editer::Initialize();
 
 	g_scene = new Scene();
 	g_scene->Initialize();
+	Editer::Initialize();
+
 }
 
 void CManager::Uninit()
 {
+	Editer::Finalize();
 	g_scene->Finalize();
 	delete g_scene;
-	Editer::Finalize();
 	ObjectPooler::Finalize();
 	AudioManager::Finalize();
 	CInput::Uninit();
@@ -54,7 +55,7 @@ void CManager::Draw()
 	light.Enable = true;
 	light.Direction = D3DXVECTOR4(1.0f, -1.0f, 1.0f, 0.0f);
 	D3DXVec4Normalize(&light.Direction, &light.Direction);
-	light.Ambient = D3DXCOLOR(0.4f, 0.4f, 0.4f, 1.0f);
+	light.Ambient = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
 	light.Diffuse = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
 	CRenderer::SetLight(light);
 

@@ -11,12 +11,22 @@
 
 bool Hierarchy::m_isLoadMenu = false;
 bool Hierarchy::m_isSaveMenu = false;
+int* Hierarchy::m_layerMax = nullptr;
 std::string Hierarchy::m_loadPath = "";
 std::string Hierarchy::m_savePath = "";
 
 void Hierarchy::Initialize()
 {
-    
+    m_layerMax = new int[LAYER_MAX];
+    std::list<GameObject*>* objs = CManager::GetScene()->GetAllGameObject();
+    for (int i = 0; i < LAYER_MAX; i++)
+    {
+        m_layerMax[i] = 0;
+        for (GameObject* obj : objs[i])
+        {
+            m_layerMax[i]++;
+        }
+    }
 }
 
 void Hierarchy::Update()
@@ -49,14 +59,14 @@ void Hierarchy::Update()
             if(ImGui::MenuItem("Empty"))
             {
                 GameObject* obj = CManager::GetScene()->CreateGameObject();
-                Inspector::SetGameObject(obj);
+                Inspector::SetGameObject(obj, 1, m_layerMax[1]);
             }
             if (ImGui::MenuItem("Plane"))
             {
                 GameObject* obj = CManager::GetScene()->CreateGameObject();
                 obj->AddComponent<Plane>();
                 obj->Initialize();
-                Inspector::SetGameObject(obj);
+                Inspector::SetGameObject(obj, 1, m_layerMax[1]);
             }
             ImGui::EndMenu();
         }
@@ -65,12 +75,14 @@ void Hierarchy::Update()
 
     for (int i = 0; i < LAYER_MAX; i++)
     {
+        int count = 0;
         for (GameObject* object : objects[i])
         {
             if (ImGui::Button(object->name.c_str()))
             {
-                Inspector::SetGameObject(object);
+                Inspector::SetGameObject(object, i, count);
             }
+            count++;
         }
     }
 

@@ -103,6 +103,7 @@ void Plane::Draw()
 	MATERIAL material;
 	ZeroMemory(&material, sizeof(material));
 	material.Diffuse = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
+	material.Ambient = { 0.5f, 0.5f, 0.5f, 1.0f };
 	CRenderer::SetMaterial(material);
 
 	if (m_tex != nullptr)

@@ -203,6 +203,7 @@ void CRenderer::Init()
 
 	m_D3DDevice->CreateBuffer(&hBufferDesc, NULL, &m_MaterialBuffer);
 	m_ImmediateContext->VSSetConstantBuffers(3, 1, &m_MaterialBuffer);
+	m_ImmediateContext->PSSetConstantBuffers(3, 1, &m_MaterialBuffer);
 
 
 	hBufferDesc.ByteWidth = sizeof(LIGHT);

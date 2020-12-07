@@ -324,7 +324,7 @@ void Fbx::GetMaterial()
 			m_fbxInfo.materialInfo[i].Diffuse.g = 1.0f;
 			m_fbxInfo.materialInfo[i].Diffuse.b = 1.0f;
 			m_fbxInfo.materialInfo[i].Diffuse.a = 1.0f;
-			m_fbxInfo.materialInfo[i].Ambient = D3DXCOLOR(0.3f, 0.3f, 0.3f, 0.3f);
+			m_fbxInfo.materialInfo[i].Ambient = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
 			m_fbxInfo.materialInfo[i].Specular = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
 			m_fbxInfo.materialInfo[i].Emission = D3DXCOLOR(0.0f, 0.0f, 0.0f, 0.0f);
 			m_fbxInfo.materialInfo[i].Shininess = 0.0f;
@@ -965,9 +965,13 @@ void Fbx::DrawAnimation()
 
 		// プリミティブトポロジ設定
 		CRenderer::GetDeviceContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
+		MATERIAL material;
+		ZeroMemory(&material, sizeof(material));
+		material.Diffuse = m_fbxInfo.materialInfo[i].Diffuse;
+		material.Ambient = m_fbxInfo.materialInfo[i].Ambient;
+		CRenderer::SetMaterial(material);
 		// マテリアル設定
-		CRenderer::SetMaterial(m_fbxInfo.materialInfo[i]);
+		//CRenderer::SetMaterial(m_fbxInfo.materialInfo[i]);
 
 		// テクスチャ設定
 		CRenderer::GetDeviceContext()->PSSetShaderResources(0, 1, &texture);
@@ -975,7 +979,7 @@ void Fbx::DrawAnimation()
 		// ポリゴン描画
 		CRenderer::GetDeviceContext()->DrawIndexed(m_meshInfo[i].indexCount, 0, 0);
 	}
-	DrawNormal();
+	//DrawNormal();
 }
 
 void Fbx::DrawNormal()

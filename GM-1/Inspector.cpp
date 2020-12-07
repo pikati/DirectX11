@@ -4,14 +4,17 @@
 #include "Transform.h"
 #include "Component.h"
 #include "ClassDictionary.h"
+#include "manager.h"
+#include "Scene.h"
 
-GameObject* Inspector::m_object = nullptr;
+ActiveObjInfo* Inspector::m_object = nullptr;
 std::vector<bool> Inspector::m_isDrawInfo;
 bool Inspector::m_isComponent = false;
 
 void Inspector::Initialize()
 {
-
+	m_object = new ActiveObjInfo();
+	m_object->obj = nullptr;
 }
 
 void Inspector::Update()
@@ -30,6 +33,10 @@ void Inspector::Update()
 		m_isComponent = !m_isComponent;
 	}
 
+	if (ImGui::Button("Delete"))
+	{
+		DeleteObject();
+	}
 	if (m_isComponent)
 	{
 		DispAddComponentWindow();
@@ -48,12 +55,20 @@ void Inspector::Draw()
 
 void Inspector::Finalize()
 {
-	m_object = nullptr;
+	if (m_object != nullptr)
+	{
+		if (m_object->obj != nullptr)
+		{
+			m_object->obj = nullptr;
+		}
+		delete m_object;
+		m_object = nullptr;
+	}
 }
 
 void Inspector::DispObjectInformation()
 {
-	if (m_object == nullptr) return;
+	if (m_object->obj == nullptr) return;
 
 	if (ImGui::Button("Transform"))
 	{
@@ -61,7 +76,7 @@ void Inspector::DispObjectInformation()
 	}
 
 	int count = 1;
-	std::list<Component*> components = m_object->GetComponents();
+	std::list<Component*> components = m_object->obj->GetComponents();
 	for (Component* c : components)
 	{
 		std::string name = typeid(*c).name();
@@ -97,25 +112,25 @@ void Inspector::DispTransform()
 
 	ImGui::Text("position");
 	ImGui::Text("x"); ImGui::SameLine();
-	ImGui::InputFloat(" ", &m_object->transform->position.x, 0.01f, 1.0f, 5);
+	ImGui::InputFloat(" ", &m_object->obj->transform->position.x, 0.01f, 1.0f, 5);
 	ImGui::Text("y"); ImGui::SameLine();
-	ImGui::InputFloat("  ", &m_object->transform->position.y, 0.01f, 1.0f, 5);
+	ImGui::InputFloat("  ", &m_object->obj->transform->position.y, 0.01f, 1.0f, 5);
 	ImGui::Text("z"); ImGui::SameLine();
-	ImGui::InputFloat("   ", &m_object->transform->position.z, 0.01f, 1.0f, 5);
+	ImGui::InputFloat("   ", &m_object->obj->transform->position.z, 0.01f, 1.0f, 5);
 	ImGui::Text("rotation");
 	ImGui::Text("x"); ImGui::SameLine();
-	ImGui::InputFloat("    ", &m_object->transform->rotation.x, 0.01f, 1.0f, 5);
+	ImGui::InputFloat("    ", &m_object->obj->transform->rotation.x, 0.01f, 1.0f, 5);
 	ImGui::Text("y"); ImGui::SameLine();
-	ImGui::InputFloat("     ", &m_object->transform->rotation.y, 1.01f, 1.0f, 5);
+	ImGui::InputFloat("     ", &m_object->obj->transform->rotation.y, 1.01f, 1.0f, 5);
 	ImGui::Text("z"); ImGui::SameLine();
-	ImGui::InputFloat("      ", &m_object->transform->rotation.z, 0.01f, 1.0f, 5);
+	ImGui::InputFloat("      ", &m_object->obj->transform->rotation.z, 0.01f, 1.0f, 5);
 	ImGui::Text("scale");
 	ImGui::Text("x"); ImGui::SameLine();
-	ImGui::InputFloat("       ", &m_object->transform->scale.x, 0.01f, 1.0f, 5);
+	ImGui::InputFloat("       ", &m_object->obj->transform->scale.x, 0.01f, 1.0f, 5);
 	ImGui::Text("y"); ImGui::SameLine();
-	ImGui::InputFloat("        ", &m_object->transform->scale.y, 0.01f, 1.0f, 5);
+	ImGui::InputFloat("        ", &m_object->obj->transform->scale.y, 0.01f, 1.0f, 5);
 	ImGui::Text("z"); ImGui::SameLine();
-	ImGui::InputFloat("         ", &m_object->transform->scale.z, 0.01f, 1.0f, 5);
+	ImGui::InputFloat("         ", &m_object->obj->transform->scale.z, 0.01f, 1.0f, 5);
 
 	ImGui::End();
 
@@ -133,20 +148,28 @@ void Inspector::DispAddComponentWindow()
 	{
 		if (ImGui::Button(str.c_str()))
 		{
-			ClassDictionary::AddComponent(str, m_object);
+			ClassDictionary::AddComponent(str, m_object->obj);
 			m_isDrawInfo.push_back(false);
 		}
 	}
 	ImGui::End();
 }
 
-void Inspector::SetGameObject(GameObject* obj)
+void Inspector::SetGameObject(GameObject* obj, int layer, int index)
 {
-	m_object = obj;
+	m_object->obj = obj;
+	m_object->layer = layer;
+	m_object->index = index;
 	m_isDrawInfo.clear();
 	int n = obj->GetComponents().size() + 1;
 	for (int i = 0; i < n; i++)
 	{
 		m_isDrawInfo.push_back(false);
 	}
+}
+
+void Inspector::DeleteObject()
+{
+	CManager::GetScene()->DeleteObject(m_object->layer, m_object->index);
+	m_object->obj = nullptr;
 }
