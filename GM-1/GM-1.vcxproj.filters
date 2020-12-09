@@ -252,6 +252,9 @@
     <ClCompile Include="Editor.cpp">
       <Filter>ソース ファイル\Editor</Filter>
     </ClCompile>
+    <ClCompile Include="Morphing.cpp">
+      <Filter>ソース ファイル\3KOU</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -437,6 +440,9 @@
     <ClInclude Include="Editor.h">
       <Filter>ヘッダー ファイル\Editor</Filter>
     </ClInclude>
+    <ClInclude Include="Morphing.h">
+      <Filter>ヘッダー ファイル\3KOU</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="pixelShader.hlsl">
@@ -458,6 +464,9 @@
       <Filter>リソース ファイル</Filter>
     </FxCompile>
     <FxCompile Include="unlitTextureVS.hlsl">
+      <Filter>リソース ファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="MorphingPS.hlsl">
       <Filter>リソース ファイル</Filter>
     </FxCompile>
   </ItemGroup>

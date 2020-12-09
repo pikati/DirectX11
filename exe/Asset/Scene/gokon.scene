@@ -1,0 +1,609 @@
+{
+    "GameObject": [
+        {
+            "properties": {
+                "name": "MainCamera",
+                "tag": "MainCamera",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 0,
+                "position": [
+                    0.0,
+                    0.0,
+                    -10.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Camera",
+                    "viewWidth": 1280,
+                    "viewHeight": 720,
+                    "topLeftX": 0,
+                    "topLeftY": 0,
+                    "renderNum": 0,
+                    "id": -1
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "unname",
+                "tag": "untagged",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    130.3984832763672,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Fbx",
+                    "fileName": "Asset/Models/Stage/skyDorm.fbx",
+                    "textureName": "Asset/Texture/Stage/Sky.png",
+                    "id": 6
+                },
+                {
+                    "type": "SkyDorm",
+                    "id": -1
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "BackDog1",
+                "tag": "untagged",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    1.3000001907348633,
+                    -0.25022244453430178,
+                    -0.5999999046325684
+                ],
+                "rotation": [
+                    -9883.0322265625,
+                    112.8749771118164,
+                    -2503.702392578125
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Fbx",
+                    "fileName": "Asset/Models/Enemy/Dog.fbx",
+                    "textureName": "Asset/Texture/Enemy/Dog.png",
+                    "id": -1
+                },
+                {
+                    "type": "RigidBody",
+                    "id": -1
+                },
+                {
+                    "type": "Spring",
+                    "id": -1
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "BackDog2",
+                "tag": "untagged",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    -3.038337230682373,
+                    -0.38823699951171877,
+                    3.788332223892212
+                ],
+                "rotation": [
+                    -2599.005859375,
+                    91.8917236328125,
+                    8819.5107421875
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Fbx",
+                    "fileName": "Asset/Models/Enemy/Dog.fbx",
+                    "textureName": "Asset/Texture/Enemy/Dog.png",
+                    "id": -1
+                },
+                {
+                    "type": "RigidBody",
+                    "id": -1
+                },
+                {
+                    "type": "Spring",
+                    "id": -1
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "BackDog3",
+                "tag": "untagged",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    -5.471663951873779,
+                    -0.2314351499080658,
+                    -4.539999485015869
+                ],
+                "rotation": [
+                    12276.48046875,
+                    326.9952392578125,
+                    8317.7236328125
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Fbx",
+                    "fileName": "Asset/Models/Enemy/Dog.fbx",
+                    "textureName": "Asset/Texture/Enemy/Dog.png",
+                    "id": -1
+                },
+                {
+                    "type": "RigidBody",
+                    "id": -1
+                },
+                {
+                    "type": "Spring",
+                    "id": -1
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "BackDog4",
+                "tag": "untagged",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    1.5,
+                    -0.9950008988380432,
+                    -1.8999998569488526
+                ],
+                "rotation": [
+                    1075.6229248046876,
+                    55.891868591308597,
+                    -1334.8946533203126
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Fbx",
+                    "fileName": "Asset/Models/Enemy/Dog.fbx",
+                    "textureName": "Asset/Texture/Enemy/Dog.png",
+                    "id": -1
+                },
+                {
+                    "type": "RigidBody",
+                    "id": -1
+                },
+                {
+                    "type": "Spring",
+                    "id": -1
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "BackDog5",
+                "tag": "untagged",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    1.478334665298462,
+                    -0.27598097920417788,
+                    1.451667070388794
+                ],
+                "rotation": [
+                    -9287.7216796875,
+                    129.1005401611328,
+                    -2258.587890625
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Fbx",
+                    "fileName": "Asset/Models/Enemy/Dog.fbx",
+                    "textureName": "Asset/Texture/Enemy/Dog.png",
+                    "id": -1
+                },
+                {
+                    "type": "RigidBody",
+                    "id": -1
+                },
+                {
+                    "type": "Spring",
+                    "id": -1
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "BackRabbit1",
+                "tag": "untagged",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    -3.299999952316284,
+                    0.9152773022651672,
+                    -2.5
+                ],
+                "rotation": [
+                    -9532.6396484375,
+                    215.48394775390626,
+                    -3637.2158203125
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Fbx",
+                    "fileName": "Asset/Models/Enemy/Rabbit.fbx",
+                    "textureName": "Asset/Texture/Enemy/Rabbit.png",
+                    "id": -1
+                },
+                {
+                    "type": "RigidBody",
+                    "id": -1
+                },
+                {
+                    "type": "Spring",
+                    "id": -1
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "BackRabbit2",
+                "tag": "untagged",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    4.230000972747803,
+                    -0.23798426985740663,
+                    3.4066667556762697
+                ],
+                "rotation": [
+                    -1723.1575927734376,
+                    277.87750244140627,
+                    -2596.6220703125
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Fbx",
+                    "fileName": "Asset/Models/Enemy/Rabbit.fbx",
+                    "textureName": "Asset/Texture/Enemy/Rabbit.png",
+                    "id": -1
+                },
+                {
+                    "type": "RigidBody",
+                    "id": -1
+                },
+                {
+                    "type": "Spring",
+                    "id": -1
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "BackRabbit3",
+                "tag": "untagged",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    -1.7999999523162842,
+                    -0.15022248029708863,
+                    -1.5
+                ],
+                "rotation": [
+                    -16805.20703125,
+                    192.77694702148438,
+                    -9755.5263671875
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Fbx",
+                    "fileName": "Asset/Models/Enemy/Rabbit.fbx",
+                    "textureName": "Asset/Texture/Enemy/Rabbit.png",
+                    "id": -1
+                },
+                {
+                    "type": "RigidBody",
+                    "id": -1
+                },
+                {
+                    "type": "Spring",
+                    "id": -1
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "BackRabbit4",
+                "tag": "untagged",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    0.8183332085609436,
+                    -0.6259894967079163,
+                    -2.5083329677581789
+                ],
+                "rotation": [
+                    2370.656494140625,
+                    76.7978515625,
+                    178.33135986328126
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Fbx",
+                    "fileName": "Asset/Models/Enemy/Rabbit.fbx",
+                    "textureName": "Asset/Texture/Enemy/Rabbit.png",
+                    "id": -1
+                },
+                {
+                    "type": "RigidBody",
+                    "id": -1
+                },
+                {
+                    "type": "Spring",
+                    "id": -1
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "BackRabbit5",
+                "tag": "untagged",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    -0.3050000071525574,
+                    -0.18863680958747865,
+                    -0.17666620016098023
+                ],
+                "rotation": [
+                    -9603.21484375,
+                    295.1031494140625,
+                    3242.826904296875
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Fbx",
+                    "fileName": "Asset/Models/Enemy/Rabbit.fbx",
+                    "textureName": "Asset/Texture/Enemy/Rabbit.png",
+                    "id": -1
+                },
+                {
+                    "type": "RigidBody",
+                    "id": -1
+                },
+                {
+                    "type": "Spring",
+                    "id": -1
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "FrontCat",
+                "tag": "untagged",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    0.0,
+                    -1.0899993181228638,
+                    -7.630080223083496
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Fbx",
+                    "fileName": "Asset/Models/Player/Cat.fbx",
+                    "textureName": "Asset/Texture/Player/Cat.png",
+                    "id": -1
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "BackGround",
+                "tag": "untagged",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    0.0,
+                    0.0,
+                    50.0
+                ],
+                "rotation": [
+                    -90.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    100.0,
+                    100.0,
+                    100.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Plane",
+                    "fileName": "Asset/Texture/Title/TitleBG.png",
+                    "shader": 2,
+                    "id": -1
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "Fade",
+                "tag": "untagged",
+                "activeSelf": false,
+                "isDestroy": false,
+                "layer": 2,
+                "position": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Image",
+                    "fileName": "Asset/Texture/Fade.png",
+                    "width": 960.0,
+                    "height": 540.0,
+                    "id": -1
+                },
+                {
+                    "type": "Fade",
+                    "id": -1
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "Title",
+                "tag": "untagged",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 2,
+                "position": [
+                    300.0,
+                    70.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Image",
+                    "fileName": "Asset/Texture/Title/TitleText.png",
+                    "width": 768.0,
+                    "height": 192.0,
+                    "id": -1
+                }
+            ]
+        }
+    ]
+}

@@ -780,7 +780,6 @@ void Fbx::TextureMemoryAllocate(int meshIndex)
 
 void Fbx::CreateVertexBuffer(int meshIndex)
 {
-	//ÉÅÉìÉoâªÇ≈Ç´ÇªÇ§
 	D3D11_BUFFER_DESC bd;
 	ZeroMemory(&bd, sizeof(bd));
 	bd.Usage = D3D11_USAGE_DYNAMIC;
@@ -1243,6 +1242,36 @@ void Fbx::PlayAnimation()
 void Fbx::SetFileName(const char* fileName)
 {
 	m_fileName = fileName;
+}
+
+VERTEX_3D* Fbx::GetVertices(int meshNum)
+{
+	return m_meshInfo[meshNum].vertex;
+}
+
+int Fbx::GetVerticesCount(int meshNum)
+{
+	return m_meshInfo[meshNum].vertexCount;
+}
+
+int* Fbx::GetIndeces(int meshNum)
+{
+	return m_meshInfo[meshNum].index;
+}
+
+int Fbx::GetIndecesCount(int meshNum)
+{
+	return m_meshInfo[meshNum].indexCount;
+}
+
+ID3D11ShaderResourceView* Fbx::GetTexture(int meshNum)
+{
+	return m_meshInfo[meshNum].texture;
+}
+
+ID3D11ShaderResourceView* Fbx::GetTexture()
+{
+	return texture;
 }
 
 void Fbx::DrawInformation()

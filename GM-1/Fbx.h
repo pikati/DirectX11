@@ -140,6 +140,12 @@ public:
 	void DownFrame();
 	void PlayAnimation();
 	void SetFileName(const char* fileName);
+	VERTEX_3D* GetVertices(int meshNum);
+	int GetVerticesCount(int meshNum);
+	int* GetIndeces(int meshNum);
+	int GetIndecesCount(int meshNum);
+	ID3D11ShaderResourceView* GetTexture(int meshNum);
+	ID3D11ShaderResourceView* GetTexture();
 	void DrawInformation() override;
 
 	void LoadProperties(const rapidjson::Value& inProp) override;

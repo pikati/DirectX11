@@ -1,0 +1,1718 @@
+{
+    "GameObject": [
+        {
+            "properties": {
+                "name": "MainCamera",
+                "tag": "MainCamera",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 0,
+                "position": [
+                    0.02999947965145111,
+                    5.010000228881836,
+                    -13.590002059936524
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Camera",
+                    "viewWidth": 480,
+                    "viewHeight": 540,
+                    "topLeftX": 0,
+                    "topLeftY": 0,
+                    "renderNum": 0,
+                    "id": -1
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "TopViewCamera",
+                "tag": "SubCamera",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 0,
+                "position": [
+                    20.0,
+                    30.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Camera",
+                    "viewWidth": 480,
+                    "viewHeight": 540,
+                    "topLeftX": 480,
+                    "topLeftY": 0,
+                    "renderNum": 1,
+                    "id": -1
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "Fade",
+                "tag": "untagged",
+                "activeSelf": false,
+                "isDestroy": false,
+                "layer": 2,
+                "position": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Image",
+                    "fileName": "Asset/Texture/Fade.png",
+                    "width": 960.0,
+                    "height": 540.0,
+                    "id": -1
+                },
+                {
+                    "type": "Fade",
+                    "id": -1
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "unname",
+                "tag": "untagged",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "MainGameManager",
+                    "id": -1
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "Player",
+                "tag": "Player",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    -5.0,
+                    0.1,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Animation",
+                    "dataNum": 6,
+                    "loop1": true,
+                    "start1": 0,
+                    "end1": 62,
+                    "lstart1": 20,
+                    "lend1": 60,
+                    "speed1": 2,
+                    "loop2": false,
+                    "start2": 63,
+                    "end2": 94,
+                    "lstart2": -1,
+                    "lend2": -1,
+                    "speed2": 1,
+                    "loop3": false,
+                    "start3": 95,
+                    "end3": 135,
+                    "lstart3": -1,
+                    "lend3": -1,
+                    "speed3": 1,
+                    "loop4": false,
+                    "start4": 136,
+                    "end4": 171,
+                    "lstart4": -1,
+                    "lend4": -1,
+                    "speed4": 1,
+                    "loop5": false,
+                    "start5": 172,
+                    "end5": 212,
+                    "lstart5": -1,
+                    "lend5": -1,
+                    "speed5": 1,
+                    "loop6": false,
+                    "start6": 0,
+                    "end6": 0,
+                    "lstart6": -1,
+                    "lend6": -1,
+                    "speed6": 1
+                },
+                {
+                    "type": "Fbx",
+                    "fileName": "Asset/Models/Player/eatmanV3.fbx",
+                    "textureName": "Asset/Texture/Player/eatman.png",
+                    "id": 1
+                },
+                {
+                    "type": "AABB",
+                    "max": [
+                        0.4,
+                        1.5,
+                        0.4
+                    ],
+                    "min": [
+                        -0.4,
+                        0.0,
+                        -0.4
+                    ],
+                    "kinematic": false
+                },
+                {
+                    "type": "Player",
+                    "id": -1
+                },
+                {
+                    "type": "ItemController",
+                    "id": -1
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "ground10x10_1",
+                "tag": "Ground",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    5.0,
+                    -4.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Fbx",
+                    "fileName": "Asset/Models/Stage/ground10x10.fbx",
+                    "textureName": "Asset/Texture/Stage/ground1x1.png",
+                    "id": 2
+                },
+                {
+                    "type": "AABB",
+                    "max": [
+                        5.0,
+                        2.0,
+                        5.0
+                    ],
+                    "min": [
+                        -5.0,
+                        0.0,
+                        -5.0
+                    ],
+                    "kinematic": true
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "ground1x10_1",
+                "tag": "Ground",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    -5.0,
+                    -2.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    90.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Fbx",
+                    "fileName": "Asset/Models/Stage/ground1x10.fbx",
+                    "textureName": "Asset/Texture/Stage/ground1x1.png",
+                    "id": 3
+                },
+                {
+                    "type": "AABB",
+                    "max": [
+                        5.0,
+                        2.0,
+                        1.0
+                    ],
+                    "min": [
+                        -5.0,
+                        0.0,
+                        -1.0
+                    ],
+                    "kinematic": true
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "ground1x10_1",
+                "tag": "Ground",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    11.0,
+                    -6.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Fbx",
+                    "fileName": "Asset/Models/Stage/ground1x10.fbx",
+                    "textureName": "Asset/Texture/Stage/ground1x1.png",
+                    "id": 3
+                },
+                {
+                    "type": "AABB",
+                    "max": [
+                        1.0,
+                        2.0,
+                        5.0
+                    ],
+                    "min": [
+                        -1.0,
+                        0.0,
+                        -5.0
+                    ],
+                    "kinematic": true
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "ground1x10_1",
+                "tag": "Ground",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    13.0,
+                    -8.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Fbx",
+                    "fileName": "Asset/Models/Stage/ground1x10.fbx",
+                    "textureName": "Asset/Texture/Stage/ground1x1.png",
+                    "id": 3
+                },
+                {
+                    "type": "AABB",
+                    "max": [
+                        1.0,
+                        2.0,
+                        5.0
+                    ],
+                    "min": [
+                        -1.0,
+                        0.0,
+                        -5.0
+                    ],
+                    "kinematic": true
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "ground10x10_1",
+                "tag": "Ground",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    22.0,
+                    -4.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Fbx",
+                    "fileName": "Asset/Models/Stage/ground10x10.fbx",
+                    "textureName": "Asset/Texture/Stage/ground1x1.png",
+                    "id": 2
+                },
+                {
+                    "type": "AABB",
+                    "max": [
+                        5.0,
+                        2.0,
+                        5.0
+                    ],
+                    "min": [
+                        -5.0,
+                        0.0,
+                        -5.0
+                    ],
+                    "kinematic": true
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "ground10x10_1",
+                "tag": "Ground",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    33.5,
+                    -4.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Fbx",
+                    "fileName": "Asset/Models/Stage/ground10x10.fbx",
+                    "textureName": "Asset/Texture/Stage/ground1x1.png",
+                    "id": 2
+                },
+                {
+                    "type": "AABB",
+                    "max": [
+                        5.0,
+                        2.0,
+                        5.0
+                    ],
+                    "min": [
+                        -5.0,
+                        0.0,
+                        -5.0
+                    ],
+                    "kinematic": true
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "ground10x10_1",
+                "tag": "Ground",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    22.0,
+                    -4.0,
+                    -11.5
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Fbx",
+                    "fileName": "Asset/Models/Stage/ground10x10.fbx",
+                    "textureName": "Asset/Texture/Stage/ground1x1.png",
+                    "id": 2
+                },
+                {
+                    "type": "AABB",
+                    "max": [
+                        5.0,
+                        2.0,
+                        5.0
+                    ],
+                    "min": [
+                        -5.0,
+                        0.0,
+                        -5.0
+                    ],
+                    "kinematic": true
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "ground10x10_1",
+                "tag": "Ground",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    33.5,
+                    -4.0,
+                    -11.5
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Fbx",
+                    "fileName": "Asset/Models/Stage/ground10x10.fbx",
+                    "textureName": "Asset/Texture/Stage/ground1x1.png",
+                    "id": 2
+                },
+                {
+                    "type": "AABB",
+                    "max": [
+                        5.0,
+                        2.0,
+                        5.0
+                    ],
+                    "min": [
+                        -5.0,
+                        0.0,
+                        -5.0
+                    ],
+                    "kinematic": true
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "ground10x10_1",
+                "tag": "Ground",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    50.0,
+                    -4.0,
+                    -11.5
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Fbx",
+                    "fileName": "Asset/Models/Stage/ground10x10.fbx",
+                    "textureName": "Asset/Texture/Stage/ground1x1.png",
+                    "id": 2
+                },
+                {
+                    "type": "AABB",
+                    "max": [
+                        5.0,
+                        2.0,
+                        5.0
+                    ],
+                    "min": [
+                        -5.0,
+                        0.0,
+                        -5.0
+                    ],
+                    "kinematic": true
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "ground10x10_1",
+                "tag": "Ground",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    60.0,
+                    -2.0,
+                    -11.5
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Fbx",
+                    "fileName": "Asset/Models/Stage/ground10x10.fbx",
+                    "textureName": "Asset/Texture/Stage/ground1x1.png",
+                    "id": 2
+                },
+                {
+                    "type": "AABB",
+                    "max": [
+                        5.0,
+                        2.0,
+                        5.0
+                    ],
+                    "min": [
+                        -5.0,
+                        0.0,
+                        -5.0
+                    ],
+                    "kinematic": true
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "MetalBox",
+                "tag": "Ground",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    33.5,
+                    -2.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Fbx",
+                    "fileName": "Asset/Models/Stage/box.fbx",
+                    "textureName": "Asset/Texture/Stage/metalBox.png",
+                    "id": 4
+                },
+                {
+                    "type": "AABB",
+                    "max": [
+                        1.0,
+                        2.0,
+                        1.0
+                    ],
+                    "min": [
+                        -1.0,
+                        0.0,
+                        -1.0
+                    ],
+                    "kinematic": true
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "MetalBox",
+                "tag": "Ground",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    33.5,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Fbx",
+                    "fileName": "Asset/Models/Stage/box.fbx",
+                    "textureName": "Asset/Texture/Stage/metalBox.png",
+                    "id": 4
+                },
+                {
+                    "type": "AABB",
+                    "max": [
+                        1.0,
+                        2.0,
+                        1.0
+                    ],
+                    "min": [
+                        -1.0,
+                        0.0,
+                        -1.0
+                    ],
+                    "kinematic": true
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "MetalBox",
+                "tag": "Ground",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    23.5,
+                    -2.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Fbx",
+                    "fileName": "Asset/Models/Stage/box.fbx",
+                    "textureName": "Asset/Texture/Stage/metalBox.png",
+                    "id": 4
+                },
+                {
+                    "type": "AABB",
+                    "max": [
+                        1.0,
+                        2.0,
+                        1.0
+                    ],
+                    "min": [
+                        -1.0,
+                        0.0,
+                        -1.0
+                    ],
+                    "kinematic": true
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "MetalBox",
+                "tag": "Ground",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    23.5,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Fbx",
+                    "fileName": "Asset/Models/Stage/box.fbx",
+                    "textureName": "Asset/Texture/Stage/metalBox.png",
+                    "id": 4
+                },
+                {
+                    "type": "AABB",
+                    "max": [
+                        1.0,
+                        2.0,
+                        1.0
+                    ],
+                    "min": [
+                        -1.0,
+                        0.0,
+                        -1.0
+                    ],
+                    "kinematic": true
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "MetalBox",
+                "tag": "Ground",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    33.5,
+                    -2.0,
+                    -11.5
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Fbx",
+                    "fileName": "Asset/Models/Stage/box.fbx",
+                    "textureName": "Asset/Texture/Stage/metalBox.png",
+                    "id": 4
+                },
+                {
+                    "type": "AABB",
+                    "max": [
+                        1.0,
+                        2.0,
+                        1.0
+                    ],
+                    "min": [
+                        -1.0,
+                        0.0,
+                        -1.0
+                    ],
+                    "kinematic": true
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "MetalBox",
+                "tag": "Ground",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    33.5,
+                    0.0,
+                    -11.5
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Fbx",
+                    "fileName": "Asset/Models/Stage/box.fbx",
+                    "textureName": "Asset/Texture/Stage/metalBox.png",
+                    "id": 4
+                },
+                {
+                    "type": "AABB",
+                    "max": [
+                        1.0,
+                        2.0,
+                        1.0
+                    ],
+                    "min": [
+                        -1.0,
+                        0.0,
+                        -1.0
+                    ],
+                    "kinematic": true
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "MetalBox",
+                "tag": "Ground",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    23.5,
+                    -2.0,
+                    -11.5
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Fbx",
+                    "fileName": "Asset/Models/Stage/box.fbx",
+                    "textureName": "Asset/Texture/Stage/metalBox.png",
+                    "id": 4
+                },
+                {
+                    "type": "AABB",
+                    "max": [
+                        1.0,
+                        2.0,
+                        1.0
+                    ],
+                    "min": [
+                        -1.0,
+                        0.0,
+                        -1.0
+                    ],
+                    "kinematic": true
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "MetalBox",
+                "tag": "Ground",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    23.5,
+                    0.0,
+                    -11.5
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Fbx",
+                    "fileName": "Asset/Models/Stage/box.fbx",
+                    "textureName": "Asset/Texture/Stage/metalBox.png",
+                    "id": 4
+                },
+                {
+                    "type": "AABB",
+                    "max": [
+                        1.0,
+                        2.0,
+                        1.0
+                    ],
+                    "min": [
+                        -1.0,
+                        0.0,
+                        -1.0
+                    ],
+                    "kinematic": true
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "MetalBox",
+                "tag": "Ground",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    42.0,
+                    -4.0,
+                    -15.5
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Fbx",
+                    "fileName": "Asset/Models/Stage/box.fbx",
+                    "textureName": "Asset/Texture/Stage/metalBox.png",
+                    "id": 4
+                },
+                {
+                    "type": "AABB",
+                    "max": [
+                        1.0,
+                        2.0,
+                        1.0
+                    ],
+                    "min": [
+                        -1.0,
+                        0.0,
+                        -1.0
+                    ],
+                    "kinematic": true
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "MetalBox",
+                "tag": "Ground",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    50.0,
+                    -2.0,
+                    -12.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Fbx",
+                    "fileName": "Asset/Models/Stage/box.fbx",
+                    "textureName": "Asset/Texture/Stage/metalBox.png",
+                    "id": 4
+                },
+                {
+                    "type": "AABB",
+                    "max": [
+                        1.0,
+                        2.0,
+                        1.0
+                    ],
+                    "min": [
+                        -1.0,
+                        0.0,
+                        -1.0
+                    ],
+                    "kinematic": true
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "MetalBox",
+                "tag": "Ground",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    50.0,
+                    0.0,
+                    -12.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Fbx",
+                    "fileName": "Asset/Models/Stage/box.fbx",
+                    "textureName": "Asset/Texture/Stage/metalBox.png",
+                    "id": 4
+                },
+                {
+                    "type": "AABB",
+                    "max": [
+                        1.0,
+                        2.0,
+                        1.0
+                    ],
+                    "min": [
+                        -1.0,
+                        0.0,
+                        -1.0
+                    ],
+                    "kinematic": true
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "MetalBox",
+                "tag": "Ground",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    50.0,
+                    0.0,
+                    -16.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Fbx",
+                    "fileName": "Asset/Models/Stage/box.fbx",
+                    "textureName": "Asset/Texture/Stage/metalBox.png",
+                    "id": 4
+                },
+                {
+                    "type": "AABB",
+                    "max": [
+                        1.0,
+                        2.0,
+                        1.0
+                    ],
+                    "min": [
+                        -1.0,
+                        0.0,
+                        -1.0
+                    ],
+                    "kinematic": true
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "MetalBox",
+                "tag": "Ground",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    50.0,
+                    0.0,
+                    -20.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Fbx",
+                    "fileName": "Asset/Models/Stage/box.fbx",
+                    "textureName": "Asset/Texture/Stage/metalBox.png",
+                    "id": 4
+                },
+                {
+                    "type": "AABB",
+                    "max": [
+                        1.0,
+                        2.0,
+                        1.0
+                    ],
+                    "min": [
+                        -1.0,
+                        0.0,
+                        -1.0
+                    ],
+                    "kinematic": true
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "MetalBox",
+                "tag": "Ground",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    53.0,
+                    0.0,
+                    -23.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Fbx",
+                    "fileName": "Asset/Models/Stage/box.fbx",
+                    "textureName": "Asset/Texture/Stage/metalBox.png",
+                    "id": 4
+                },
+                {
+                    "type": "AABB",
+                    "max": [
+                        1.0,
+                        2.0,
+                        1.0
+                    ],
+                    "min": [
+                        -1.0,
+                        0.0,
+                        -1.0
+                    ],
+                    "kinematic": true
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "MetalBox",
+                "tag": "Ground",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    57.0,
+                    0.0,
+                    -27.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Fbx",
+                    "fileName": "Asset/Models/Stage/box.fbx",
+                    "textureName": "Asset/Texture/Stage/metalBox.png",
+                    "id": 4
+                },
+                {
+                    "type": "AABB",
+                    "max": [
+                        1.0,
+                        2.0,
+                        1.0
+                    ],
+                    "min": [
+                        -1.0,
+                        0.0,
+                        -1.0
+                    ],
+                    "kinematic": true
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "WoodBox",
+                "tag": "Ground",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    6.0,
+                    -3.0,
+                    -2.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Fbx",
+                    "fileName": "Asset/Models/Stage/box.fbx",
+                    "textureName": "Asset/Texture/Stage/woodBox.png",
+                    "id": 5
+                },
+                {
+                    "type": "AABB",
+                    "max": [
+                        1.0,
+                        2.0,
+                        1.0
+                    ],
+                    "min": [
+                        -1.0,
+                        0.0,
+                        -1.0
+                    ],
+                    "kinematic": false
+                },
+                {
+                    "type": "WoodBox",
+                    "startPosition": [
+                        6.0,
+                        -3.0,
+                        -2.0
+                    ]
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "WoodBox",
+                "tag": "Ground",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    62.5,
+                    0.0,
+                    -11.5
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Fbx",
+                    "fileName": "Asset/Models/Stage/box.fbx",
+                    "textureName": "Asset/Texture/Stage/woodBox.png",
+                    "id": 5
+                },
+                {
+                    "type": "AABB",
+                    "max": [
+                        1.0,
+                        2.0,
+                        1.0
+                    ],
+                    "min": [
+                        -1.0,
+                        0.0,
+                        -1.0
+                    ],
+                    "kinematic": false
+                },
+                {
+                    "type": "WoodBox",
+                    "startPosition": [
+                        62.5,
+                        0.0,
+                        -11.5
+                    ]
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "unname",
+                "tag": "untagged",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    109.81684112548828,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Fbx",
+                    "fileName": "Asset/Models/Stage/skyDorm.fbx",
+                    "textureName": "Asset/Texture/Stage/Sky.png",
+                    "id": 6
+                },
+                {
+                    "type": "SkyDorm",
+                    "id": -1
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "Apple",
+                "tag": "Item",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    36.0,
+                    1.0,
+                    0.0
+                ],
+                "rotation": [
+                    -90.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "SphereCollider",
+                    "center": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "radius": 0.5,
+                    "position": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "rotation": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "scale": [
+                        1.0,
+                        1.0,
+                        1.0
+                    ]
+                },
+                {
+                    "type": "Plane",
+                    "fileName": "Asset/Texture/Item/apple.png",
+                    "id": -1
+                },
+                {
+                    "type": "Billboard",
+                    "id": -1
+                },
+                {
+                    "type": "Item",
+                    "itemType": 1
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "Starwberry",
+                "tag": "Item",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    50.0,
+                    6.0,
+                    -12.0
+                ],
+                "rotation": [
+                    -90.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "SphereCollider",
+                    "center": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "radius": 0.5,
+                    "position": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "rotation": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "scale": [
+                        1.0,
+                        1.0,
+                        1.0
+                    ]
+                },
+                {
+                    "type": "Plane",
+                    "fileName": "Asset/Texture/Item/strawberry.png",
+                    "id": -1
+                },
+                {
+                    "type": "Billboard",
+                    "id": -1
+                },
+                {
+                    "type": "Item",
+                    "itemType": 0
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "Banana",
+                "tag": "Item",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    57.0,
+                    6.5,
+                    -27.0
+                ],
+                "rotation": [
+                    -90.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "SphereCollider",
+                    "center": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "radius": 0.5,
+                    "position": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "rotation": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "scale": [
+                        1.0,
+                        1.0,
+                        1.0
+                    ]
+                },
+                {
+                    "type": "Plane",
+                    "fileName": "Asset/Texture/Item/banana.png",
+                    "id": -1
+                },
+                {
+                    "type": "Billboard",
+                    "id": -1
+                },
+                {
+                    "type": "Item",
+                    "itemType": 2
+                }
+            ]
+        }
+    ]
+}

@@ -24,6 +24,7 @@ ID3D11Buffer* CRenderer::m_ProjectionBuffer = NULL;
 ID3D11Buffer* CRenderer::m_MaterialBuffer = NULL;
 ID3D11Buffer* CRenderer::m_LightBuffer = NULL;
 ID3D11Buffer* CRenderer::m_CameraBuffer = NULL;
+ID3D11Buffer* CRenderer::m_paramBuffer = NULL;
 
 
 ID3D11DepthStencilState* CRenderer::m_DepthStateEnable = NULL;
@@ -180,6 +181,7 @@ void CRenderer::Init()
 	CreateDefaultShader();
 	CreateColorShader();
 	CreateTextureShader();
+	CreateMorphingShader();
 
 	// 定数バッファ生成
 	D3D11_BUFFER_DESC hBufferDesc;
@@ -217,7 +219,8 @@ void CRenderer::Init()
 	m_D3DDevice->CreateBuffer(&hBufferDesc, NULL, &m_CameraBuffer);
 	m_ImmediateContext->PSSetConstantBuffers(5, 1, &m_CameraBuffer);
 
-
+	m_D3DDevice->CreateBuffer(&hBufferDesc, NULL, &m_paramBuffer);
+	m_ImmediateContext->PSSetConstantBuffers(5, 1, &m_paramBuffer);
 
 	// 入力レイアウト設定
 	m_ImmediateContext->IASetInputLayout(m_VertexLayout[(int)SHADER_TYPE::Default]);
@@ -391,7 +394,7 @@ void CRenderer::CreateTextureShader()
 	FILE* file2;
 	long int fsize2;
 
-	file2 = fopen("Asset/Shader/UnlitTExturePS.cso", "rb");
+	file2 = fopen("Asset/Shader/UnlitTexturePS.cso", "rb");
 	fsize2 = _filelength(_fileno(file2));
 	unsigned char* buffer2 = new unsigned char[fsize2];
 	fread(buffer2, fsize2, 1, file2);
@@ -404,6 +407,58 @@ void CRenderer::CreateTextureShader()
 	delete[] buffer2;
 }
 
+void CRenderer::CreateMorphingShader()
+{
+
+	ID3D11VertexShader* vs;
+	FILE* file;
+	long int fsize;
+
+	file = fopen("Asset/Shader/vertexShader.cso", "rb");
+	fsize = _filelength(_fileno(file));
+	unsigned char* buffer = new unsigned char[fsize];
+	fread(buffer, fsize, 1, file);
+	fclose(file);
+
+	m_D3DDevice->CreateVertexShader(buffer, fsize, NULL, &vs);
+	m_VertexShader.push_back(vs);
+
+	// 入力レイアウト生成
+	D3D11_INPUT_ELEMENT_DESC layout[] =
+	{
+		{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+		{ "NORMAL",   0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 4 * 3, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+		{ "COLOR",    0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 4 * 6, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+		{ "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 4 * 10, D3D11_INPUT_PER_VERTEX_DATA, 0 }
+	};
+	UINT numElements = ARRAYSIZE(layout);
+
+	ID3D11InputLayout* l;
+	m_D3DDevice->CreateInputLayout(layout,
+		numElements,
+		buffer,
+		fsize,
+		&l);
+
+	m_VertexLayout.push_back(l);
+
+	delete[] buffer;
+
+	FILE* file2;
+	long int fsize2;
+
+	file2 = fopen("Asset/Shader/MorphingPS.cso", "rb");
+	fsize2 = _filelength(_fileno(file2));
+	unsigned char* buffer2 = new unsigned char[fsize2];
+	fread(buffer2, fsize2, 1, file2);
+	fclose(file2);
+	ID3D11PixelShader* ps;
+	m_D3DDevice->CreatePixelShader(buffer2, fsize2, NULL, &ps);
+
+	m_PixelShader.push_back(ps);
+
+	delete[] buffer2;
+}
 
 void CRenderer::Uninit()
 {
@@ -530,6 +585,11 @@ void CRenderer::SetLight(LIGHT Light)
 void CRenderer::SetCameraPosition(Vector3 CameraPosition)
 {
 	m_ImmediateContext->UpdateSubresource(m_CameraBuffer, 0, NULL, &D3DXVECTOR4(CameraPosition.x, CameraPosition.y, CameraPosition.z, 1.0f), 0, 0);
+}
+
+void CRenderer::SetParameter(Vector4 v)
+{
+	m_ImmediateContext->UpdateSubresource(m_CameraBuffer, 0, NULL, &v, 0, 0);
 }
 
 void CRenderer::SetViewPort(D3D11_VIEWPORT* viewPort)

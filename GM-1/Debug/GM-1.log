@@ -1,6 +1,29 @@
-﻿  Editor.cpp
-  RigidBody.cpp
+﻿  ClassDictionary.cpp
+  Fbx.cpp
+D:\HAL\3\GM\DirectX11\GM-1\Fbx.cpp(633,93): warning C4244: '=': 'T' から 'FLOAT' への変換です。データが失われる可能性があります。
+          with
+          [
+              T=fbxsdk::FbxDouble
+          ]
+D:\HAL\3\GM\DirectX11\GM-1\Fbx.cpp(634,87): warning C4244: '=': 'T' から 'FLOAT' への変換です。データが失われる可能性があります。
+          with
+          [
+              T=fbxsdk::FbxDouble
+          ]
+  Image.cpp
+  Morphing.cpp
+  ObjectPooler.cpp
+  Plane.cpp
+D:\HAL\3\GM\DirectX11\GM-1\Plane.cpp(149,27): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+D:\HAL\3\GM\DirectX11\GM-1\Plane.cpp(150,27): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+D:\HAL\3\GM\DirectX11\GM-1\Plane.cpp(152,27): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+D:\HAL\3\GM\DirectX11\GM-1\Plane.cpp(153,27): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+D:\HAL\3\GM\DirectX11\GM-1\Plane.cpp(155,27): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+D:\HAL\3\GM\DirectX11\GM-1\Plane.cpp(156,27): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+  Player.cpp
   Scene.cpp
+  SceneManager.cpp
+  Texture.cpp
   manager.cpp
   コードを生成中...
   GM-1.vcxproj -> D:\HAL\3\GM\DirectX11\Debug\GM-1.exe

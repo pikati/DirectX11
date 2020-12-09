@@ -27,6 +27,7 @@
 #include "CameraController.h"
 #include "RigidBody.h"
 #include "Spring.h"
+#include "Morphing.h"
 
 std::map<std::string, Component*> ClassDictionary::dictionary;
 BuilderFromString ClassDictionary::builderfromstring;
@@ -60,6 +61,7 @@ void ClassDictionary::Initialize()
 	builderfromstring.Register(REGISTER_ARGS(CameraController));
 	builderfromstring.Register(REGISTER_ARGS(RigidBody));
 	builderfromstring.Register(REGISTER_ARGS(Spring));
+	builderfromstring.Register(REGISTER_ARGS(Morphing));
 	componentName.push_back("Camera");
 	componentName.push_back("Player");
 	componentName.push_back("SphereCollider");
@@ -85,6 +87,7 @@ void ClassDictionary::Initialize()
 	componentName.push_back("CameraController");
 	componentName.push_back("RigidBody");
 	componentName.push_back("Spring");
+	componentName.push_back("Morphing");
 	std::sort(componentName.begin(), componentName.end());
 }
 

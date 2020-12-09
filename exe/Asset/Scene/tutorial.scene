@@ -1,0 +1,104 @@
+{
+    "GameObject": [
+        {
+            "properties": {
+                "name": "TitleImage",
+                "tag": "untagged",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Image",
+                    "fileName": "Asset/Texture/tutorial.png",
+                    "width": 960.0,
+                    "height": 540.0,
+                    "id": -1
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "Fade",
+                "tag": "untagged",
+                "activeSelf": false,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Image",
+                    "fileName": "Asset/Texture/Fade.png",
+                    "width": 960.0,
+                    "height": 540.0,
+                    "id": -1
+                },
+                {
+                    "type": "Fade",
+                    "id": -1
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "TitleManager",
+                "tag": "untagged",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "TutorialManager",
+                    "id": -1
+                }
+            ]
+        }
+    ]
+}

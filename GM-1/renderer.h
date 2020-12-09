@@ -51,6 +51,11 @@ struct POINTLIGHT
 	Vector4 diffuse;
 };
 
+struct Parameter
+{
+	Vector4 param;
+};
+
 
 class CVertexBuffer;
 class CIndexBuffer;
@@ -61,6 +66,7 @@ enum class SHADER_TYPE : int
 	Default,
 	Color,
 	Texture,
+	Morphing,
 	Max
 };
 
@@ -87,6 +93,7 @@ private:
 	static ID3D11Buffer*			m_MaterialBuffer;
 	static ID3D11Buffer*			m_LightBuffer;
 	static ID3D11Buffer*			m_CameraBuffer;
+	static ID3D11Buffer*			m_paramBuffer;
 
 	static ID3D11DepthStencilState* m_DepthStateEnable;
 	static ID3D11DepthStencilState* m_DepthStateDisable;
@@ -94,6 +101,7 @@ private:
 	static void CreateDefaultShader();
 	static void CreateColorShader();
 	static void CreateTextureShader();
+	static void CreateMorphingShader();
 
 public:
 	static void Init();
@@ -110,6 +118,7 @@ public:
 	static void SetLight(LIGHT Light);
 	static void SetViewPort(D3D11_VIEWPORT* viewPort);
 	static void SetCameraPosition(Vector3 CameraPosition);
+	static void SetParameter(Vector4 v);
 
 	static void SetShader(SHADER_TYPE type);
 	static void SetVertexShader(SHADER_TYPE type);

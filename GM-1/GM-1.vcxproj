@@ -192,6 +192,7 @@
     <ClCompile Include="manager.cpp" />
     <ClCompile Include="MeshCollider.cpp" />
     <ClCompile Include="MeshField.cpp" />
+    <ClCompile Include="Morphing.cpp" />
     <ClCompile Include="ObjectPooler.cpp" />
     <ClCompile Include="PerlinNoise.cpp" />
     <ClCompile Include="Plane.cpp" />
@@ -255,6 +256,7 @@
     <ClInclude Include="manager.h" />
     <ClInclude Include="MeshCollider.h" />
     <ClInclude Include="MeshField.h" />
+    <ClInclude Include="Morphing.h" />
     <ClInclude Include="ObjectPooler.h" />
     <ClInclude Include="PerlinNoise.h" />
     <ClInclude Include="Plane.h" />
@@ -293,6 +295,13 @@
     </FxCompile>
     <FxCompile Include="Common.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="MorphingPS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Asset/Shader/%(Filename).cso</ObjectFileOutput>
     </FxCompile>
     <FxCompile Include="pixelShader.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>

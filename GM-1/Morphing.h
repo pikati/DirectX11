@@ -1,0 +1,25 @@
+#pragma once
+#include "Component.h"
+#include "main.h"
+#include "renderer.h"
+class Fbx;
+class Morphing : public Component
+{
+private:
+	VERTEX_3D* m_f1 = nullptr;
+	VERTEX_3D* m_f2 = nullptr;
+	int m_vCount = 0;
+	int m_iCount = 0;
+	ID3D11ShaderResourceView* m_tex1 = nullptr;
+	ID3D11ShaderResourceView* m_tex2 = nullptr;
+	float m_raito = 0.0f;
+	bool m_isUp = true;
+	ID3D11Buffer* pVB;
+	ID3D11Buffer* pIB;
+public:
+	void Initialize() override;
+	void Update() override;
+	void Draw() override;
+	void Finalize() override;
+};
+
