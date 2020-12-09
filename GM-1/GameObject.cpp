@@ -68,6 +68,15 @@ void GameObject::Update()
 	}
 }
 
+void GameObject::SystemUpdate()
+{
+	transform->SystemUpdate();
+	for (Component* c : components)
+	{
+		c->SystemUpdate();
+	}
+}
+
 void GameObject::Draw()
 {
 	if (!activeSelf) return;
@@ -186,4 +195,9 @@ bool GameObject::DeleteComponent(Component* component)
 void GameObject::IsBoundingBoxDraw(bool isDraw)
 {
 	m_isDrawBB = isDraw;
+}
+
+void GameObject::SetSortingNum(int sortingNum)
+{
+	m_drawSortNum = sortingNum;
 }

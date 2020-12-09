@@ -60,6 +60,7 @@ enum class SHADER_TYPE : int
 {
 	Default,
 	Color,
+	Texture,
 	Max
 };
 
@@ -92,7 +93,7 @@ private:
 
 	static void CreateDefaultShader();
 	static void CreateColorShader();
-
+	static void CreateTextureShader();
 
 public:
 	static void Init();

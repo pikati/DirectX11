@@ -17,5 +17,7 @@ public:
 	static void Update();
 	static void Draw();
 	static void Finalize();
+
+	static void SetDefaultPath(std::string path);
 };
 

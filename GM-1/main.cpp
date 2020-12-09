@@ -7,7 +7,7 @@
 #include "imGui/imgui_impl_win32.h"
 
 const char* CLASS_NAME = "MainWindow";
-const char* WINDOW_NAME = "î¸êHâÆÉ}Éì";
+const char* WINDOW_NAME = "Editor";
 
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);

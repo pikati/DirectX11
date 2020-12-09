@@ -8,6 +8,7 @@
 
 void Image::Initialize()
 {
+	m_sortingOrder = 2;
 	VERTEX_3D vertex[4];
 	float width = m_width * 0.5f;
 	float height = m_height * 0.5f;
@@ -60,9 +61,10 @@ void Image::Initialize()
 		NULL,
 		&m_texture,
 		NULL);
+	gameObject->SetSortingNum(m_sortingOrder);
 }
 
-void Image::Update()
+void Image::SystemUpdate()
 {
 	VERTEX_3D vertex[4];
 	float width = m_width * 0.5f;
@@ -98,7 +100,7 @@ void Image::Update()
 
 void Image::Draw()
 {
-	CRenderer::SetShader(SHADER_TYPE::Default);
+	CRenderer::SetShader(SHADER_TYPE::Texture);
 	//マトリクス設定
 	CRenderer::SetWorldViewProjection2D();
 
@@ -162,6 +164,10 @@ void Image::DrawInformation()
 	ImGui::Begin(name.substr(6).c_str());
 	char fname[256];
 	strcpy_s(fname, m_textureName.c_str());
+
+	ImGui::InputFloat("width", &m_width);
+	ImGui::InputFloat("height", &m_height);
+
 	ImGui::InputText("fileName", fname, sizeof(fname));
 	m_textureName = fname;
 	if (ImGui::Button("Reload"))

@@ -10,7 +10,7 @@
 #include "Animation.h"
 #include "ObjectPooler.h"
 #include "Scene.h"
-#include "Camera.h"
+#include "CameraController.h"
 #include "Item.h"
 #include "ItemController.h"
 #include "AudioManager.h"
@@ -47,7 +47,7 @@ void Player::Initialize()
 	m_collider = gameObject->GetComponent<AABB>();
 	m_animation = gameObject->GetComponent<Animation>();
 	m_itemController = gameObject->GetComponent<ItemController>();
-	m_camera = CManager::GetScene()->Find("MainCamera")->GetComponent<Camera>();
+	m_camera = CManager::GetScene()->Find("MainCamera")->GetComponent<CameraController>();
 
 	m_animation->SetSpeed(WALK, 2);
 }

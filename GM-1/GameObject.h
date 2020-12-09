@@ -17,7 +17,7 @@ private:
 	bool m_isDraw = true;
 	bool m_isDrawBB = false;
 	BoundingBox* m_bb = nullptr;
-
+	int m_drawSortNum = 1;
 	bool DeleteComponent(Component* component);
 protected:
 public:
@@ -33,6 +33,7 @@ public:
 	~GameObject();
 	void Initialize();
 	void Update();
+	void SystemUpdate();
 	void Draw();
 	void Finalize();
 
@@ -50,7 +51,7 @@ public:
 	void SetComponents(std::list<Component*> component);
 
 	void IsBoundingBoxDraw(bool isDraw);
-
+	void SetSortingNum(int sortingNum);
 
 
 

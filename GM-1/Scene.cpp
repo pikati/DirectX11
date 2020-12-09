@@ -8,7 +8,9 @@
 #include "SceneManager.h"
 #include "AudioManager.h"
 #include "ObjectPooler.h"
-#include "Editer.h"
+#include "Editor.h"
+#include "Hierarchy.h"
+#include <algorithm>
 
 #include "Fbx.h"
 #include "GameObject.h"
@@ -19,6 +21,7 @@ std::list<GameObject*> Scene::m_tempObject;
 bool Scene::m_isChange = false;
 int Scene::m_renderNum = 0;
 int Scene::m_nowRenderNum = 0;
+std::string Scene::m_currentSceneName;
 
 Scene::Scene()
 {
@@ -33,80 +36,31 @@ Scene::~Scene()
 void Scene::Initialize()
 {
 	AudioManager::SetVolume(0);
-	LevelLoader::LoadLevel(this, "Asset/Scene/stage1.scene");
-	GameObject* obj = CreateGameObject();
+	LevelLoader::LoadLevel(this, "Asset/Scene/gokon.scene");
+	Hierarchy::SetDefaultPath("Asset/Scene/gokon.scene");
+	m_currentSceneName = "Asset/Scene/gokon.scene";
+	/*GameObject* obj = CreateGameObject();
 	Fbx* f = obj->AddComponent<Fbx>();
 	f->SetFileName("Asset/Models/Player/Cat.fbx");
 	f->SetTextureName("Asset/Texture/Player/Cat.png");
 	obj->Initialize();
-	obj->transform->position.y = 1.5f;
+	obj->transform->position.y = 1.5f;*/
 }
 
 void Scene::Update()
 {
-	Collider::UpdateCollision();
+	UpdateGameObject();
 
-	for (int i = 0; i < LAYER_MAX; i++)
-	{
-		for (GameObject* object : m_gameObject[i])
-		{
-			object->Update();
-		}
-	}
+	MoveTmpObject();
 
-	for (GameObject* object : m_tempObject)
-	{
-		m_gameObject[object->layer].emplace_back(object);
-		object->Update();
-	}
-	m_tempObject.clear();
-	
+	ChangeLayer();
 
-	for (int i = 0; i < LAYER_MAX; i++)
-	{
-		//レイヤ番号と管理レイヤが異なった場合に入れ替える
-		auto itr = m_gameObject[i].begin();
-		for (GameObject* object : m_gameObject[i])
-		{
-			if (object->layer != i)
-			{
-				m_gameObject[i].erase(itr);
-				m_gameObject[object->layer].emplace_back(object);
-				itr--;
-				itr = m_gameObject[i].begin();
-			}
-			itr++;
-		}
-	}
-
-	//リストに関数を実行させてtureならリストから削除される
-	//[]をつけると名前のない関数にできる
-	for (int i = 0; i < LAYER_MAX; i++)
-	{
-		m_gameObject[i].remove_if([](GameObject* object)
-			{
-				if (object->isDestroy)
-				{
-					object->Finalize();
-					delete object;
-					return true;
-				}
-				return false;
-			}
-		);
-	}
+	ErasePossessedObject();
 
 	if (m_isChange)
 	{
  		Finalize();
 		SceneManager::LoadScene();
-	}
-	if (CInput::GetKeyTrigger('R'))
-	{
-		Finalize();
-		ObjectPooler::Finalize();
-		Editer::Finalize();
-		LevelLoader::LoadLevel(this, "Asset/Scene/stage1.scene");
 	}
 }
 
@@ -118,6 +72,8 @@ void Scene::Draw()
 		return;
 	}
 
+	std::list<GameObject*> obj;
+
 	for (; m_nowRenderNum < m_renderNum; m_nowRenderNum++)
 	{
 		for (int i = 0; i < LAYER_MAX; i++)
@@ -125,12 +81,18 @@ void Scene::Draw()
 			for (GameObject* object : m_gameObject[i])
 			{
 				object->Draw();
+				//obj.emplace_back(object);
 			}
 		}
+		/*std::sort(obj.begin(), obj.end());
+		for (GameObject* o : obj)
+		{
+			o->Draw();
+		}
+		obj.clear();*/
 	}
 	m_nowRenderNum = 0;
 }
-
 
 void Scene::Finalize()
 {
@@ -269,6 +231,7 @@ void Scene::LoadScene(std::string path)
 {
 	Finalize();
 	ObjectPooler::Finalize();
+	Editor::Finalize();
 	LevelLoader::LoadLevel(this, path.c_str());
 }
 
@@ -303,4 +266,78 @@ void Scene::DeleteObject(int layer, int index)
 		}
 		count++;
 	}
+}
+
+void Scene::UpdateGameObject()
+{
+	if (Editor::IsPlay())
+	{
+		Collider::UpdateCollision();
+
+		for (int i = 0; i < LAYER_MAX; i++)
+		{
+			for (GameObject* object : m_gameObject[i])
+			{
+				object->Update();
+			}
+		}
+	}
+
+	for (int i = 0; i < LAYER_MAX; i++)
+	{
+		for (GameObject* object : m_gameObject[i])
+		{
+			object->SystemUpdate();
+		}
+	}
+}
+
+void Scene::MoveTmpObject()
+{
+	for (GameObject* object : m_tempObject)
+	{
+		m_gameObject[object->layer].emplace_back(object);
+		object->Update();
+	}
+	m_tempObject.clear();
+}
+
+void Scene::ChangeLayer()
+{
+	for (int i = 0; i < LAYER_MAX; i++)
+	{
+		//レイヤ番号と管理レイヤが異なった場合に入れ替える
+		m_gameObject[i].remove_if([i](GameObject* object)
+			{
+				if (object->layer != i)
+				{
+					m_gameObject[object->layer].emplace_back(object);
+					return true;
+				}
+				return false;
+			});
+	}
+}
+
+void Scene::ErasePossessedObject()
+{
+	for (int i = 0; i < LAYER_MAX; i++)
+	{
+		m_gameObject[i].remove_if([](GameObject* object)
+			{
+				if (object->isDestroy)
+				{
+					object->Finalize();
+					delete object;
+					return true;
+				}
+				return false;
+			}
+		);
+	}
+}
+
+std::string Scene::GetSceneName()
+{
+	return m_currentSceneName;
 }

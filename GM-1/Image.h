@@ -7,14 +7,14 @@ class Image : public Component
 private:
 	ID3D11ShaderResourceView* m_texture = nullptr;
 	ID3D11Buffer* m_vertexBuffer = nullptr;
-	std::string m_textureName = "";
+	std::string m_textureName = "Asset/Texture/Default/Plane.png";
 	float m_width = 100.0f;
 	float m_height = 100.0f;
 	D3DXCOLOR m_color = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
 
 public:
 	void Initialize() override;
-	void Update() override;
+	void SystemUpdate() override;
 	void Draw() override;
 	void Finalize() override;
 

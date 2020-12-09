@@ -12,6 +12,11 @@ void Component::Update()
 
 }
 
+void Component::SystemUpdate()
+{
+
+}
+
 void Component::Draw()
 {
 

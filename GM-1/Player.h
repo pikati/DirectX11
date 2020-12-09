@@ -3,7 +3,7 @@
 
 class AABB;
 class Animation;
-class Camera;
+class CameraController;
 class ItemController;
 
 class Player : public Component
@@ -12,7 +12,7 @@ private:
 
     AABB* m_collider;
     Animation* m_animation;
-    Camera* m_camera;
+    CameraController* m_camera;
     ItemController* m_itemController;
     const float SPEED = 5.0f;
     const float m_gravity = 9.8f;

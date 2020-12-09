@@ -11,6 +11,7 @@
 #include "GameObject.h"
 #include "BoundingBox.h"
 #include "LevelLoader.h"
+#include "imgui/imgui.h"
 
 static D3DMATRIX m;
 
@@ -34,67 +35,10 @@ void Camera::Initialize()
 	m_viewPort.TopLeftX = m_viewPortTopLeftX;
 	m_viewPort.TopLeftY = m_viewPortTopLeftY;
 	CManager::GetScene()->AddRenderNum();
-	m_inisialized = false;
 }
 
 void Camera::Update()
 {
-	if (!m_inisialized)
-	{
-		Scene* s = CManager::GetScene();
-		m_player = s->Find<Player>();
-		m_inisialized = true;
-	}
-	if (m_player == nullptr)
-	{
-		m_target = { 0,0,0 };
-	}
-	else
-	{
-		m_target = m_player->transform->position;
-	}
-	float pZ = m_target.z;
-
-
-	if (CInput::GetKeyPress('J'))
-	{
-		m_rotation -= m_rotationValue;
-		if (m_rotation < 0)
-		{
-			m_rotation += D3DX_PI * 2.0f;
-		}
-	}
-	if (CInput::GetKeyPress('L'))
-	{
-		m_rotation += m_rotationValue;
-		if (m_rotation > D3DX_PI * 2.0f)
-		{
-			m_rotation -= D3DX_PI * 2.0f;
-		}
-	}
-	gameObject->transform->position.x = m_target.x - sinf(m_rotation) * m_distance;
-	gameObject->transform->position.y = m_player->transform->position.y + 5.0f;
-	gameObject->transform->position.z = m_target.z - cosf(m_rotation) * m_distance;
-
-	/*if (gameObject->tag == "MainCamera")
-	{
-		if (CInput::GetKeyPress('Z'))
-		{
-			m_target.x += 0.4f;
-		}
-		if (CInput::GetKeyPress('X'))
-		{
-			m_target.x += -0.4f;
-		}
-		if (CInput::GetKeyPress('N'))
-		{
-			m_target.y += 0.4f;
-		}
-		if (CInput::GetKeyPress('M'))
-		{
-			m_target.y += -0.4f;
-		}
-	}*/
 	CRenderer::SetCameraPosition(gameObject->transform->position);
 }
 
@@ -218,21 +162,34 @@ void Camera::CheckView()
 	}
 }
 
-Vector3 Camera::GetTarget()
-{
-	return m_target;
-}
-
 D3DXMATRIX Camera::GetViewMatrix()
 {
 	return m;
 }
 
-float Camera::GetRotation()
+void Camera::SetLookAt(Vector3 lookPoint)
 {
-	return m_rotation;
+	m_target = lookPoint;
 }
 
+void Camera::DrawInformation()
+{
+	std::string name = typeid(*this).name();
+
+	ImGui::PushStyleColor(ImGuiCol_TitleBgActive, ImVec4(0.0f, 0.7f, 0.2f, 1.0f));
+	ImGui::PushStyleColor(ImGuiCol_TitleBg, ImVec4(0.0f, 0.3f, 0.1f, 1.0f));
+	ImGui::SetNextWindowPos(ImVec2(1000, 20), ImGuiCond_Once);
+	ImGui::SetNextWindowSize(ImVec2(400, 300), ImGuiCond_Once);
+	ImGui::Begin(name.substr(6).c_str());
+
+	float target[3] = { m_target.x, m_target.y, m_target.z };
+	ImGui::InputFloat3("target", target, 1, 10);
+	m_target = { target[0], target[1], target[2] };
+	ImGui::End();
+
+	ImGui::PopStyleColor();
+	ImGui::PopStyleColor();
+}
 
 void Camera::LoadProperties(const rapidjson::Value& inProp)
 {
@@ -254,6 +211,4 @@ void Camera::SaveProperties(rapidjson::Document::AllocatorType& alloc, rapidjson
 	JsonHelper::AddInt(alloc, inProp, "topLeftY", m_viewPortTopLeftY);
 	JsonHelper::AddInt(alloc, inProp, "renderNum", m_renderNum);
 	JsonHelper::AddInt(alloc, inProp, "id", m_id);
-	SCREEN_WIDTH;
-	SCREEN_HEIGHT;
 }

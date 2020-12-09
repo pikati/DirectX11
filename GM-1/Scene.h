@@ -14,9 +14,14 @@ private:
 	static bool m_isChange;
 	static int m_renderNum;
 	static int m_nowRenderNum;
+	static std::string m_currentSceneName;
 
 	GameObject* AddGameObject();
 	std::string SetDefaultName(int i);
+	void UpdateGameObject();
+	void MoveTmpObject();
+	void ChangeLayer();
+	void ErasePossessedObject();
 public:
 	Scene();
 	~Scene();
@@ -41,6 +46,9 @@ public:
 	void SaveScene(std::string path);
 	void ObjectInitialize();
 	void DeleteObject(int layer, int index);
+	std::string GetSceneName();
+
+
 
 	template <typename T>
 	GameObject* Find()

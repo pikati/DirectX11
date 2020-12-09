@@ -10,12 +10,6 @@ private:
 	Vector3 m_target;
 	D3DXMATRIX m_viewMatrix;
 	D3DXMATRIX m_projectionMatrix;
-	GameObject* m_player;
-	bool m_inisialized = false;
-	float m_rotation = 0;
-	const float m_rotationValue = D3DX_PI * 0.01f;
-	const float m_distance = 10.0f;
-
 	int m_viewPortWidth = 0;
 	int m_viewPortHeight = 0;
 	int m_viewPortTopLeftX = 0;
@@ -30,9 +24,9 @@ public:
 	void Initialize();
 	void Update();
 	void Draw();
-	Vector3 GetTarget();
 	D3DXMATRIX GetViewMatrix();
-	float GetRotation();
+	void SetLookAt(Vector3 lookPoint);
+	void DrawInformation() override;
 
 	void LoadProperties(const rapidjson::Value& inProp) override;
 	void SaveProperties(rapidjson::Document::AllocatorType& alloc, rapidjson::Value& inProp) override;

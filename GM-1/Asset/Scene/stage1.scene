@@ -32,6 +32,10 @@
                     "topLeftY": 0,
                     "renderNum": 0,
                     "id": -1
+                },
+                {
+                    "type": "CameraController",
+                    "id": -1
                 }
             ]
         },

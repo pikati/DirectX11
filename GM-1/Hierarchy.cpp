@@ -113,12 +113,13 @@ void Hierarchy::Finalize()
 
 void Hierarchy::DispLoadMenu()
 {
+    bool batsu = true;
     char path[256] = "";
     strcpy_s(path, m_loadPath.c_str());
     ImGui::SetNextWindowPos(ImVec2(20, 20), ImGuiCond_Once);
     ImGui::SetNextWindowSize(ImVec2(200, 300), ImGuiCond_Once);
 
-    ImGui::Begin("Load", nullptr, ImGuiWindowFlags_MenuBar);
+    ImGui::Begin("Load", &batsu, ImGuiWindowFlags_MenuBar);
     ImGui::InputText("loadFile", path, sizeof(path));
     m_loadPath = path;
     if (ImGui::Button("Load"))
@@ -131,13 +132,14 @@ void Hierarchy::DispLoadMenu()
 
 void Hierarchy::DispSaveMenu()
 {
+    bool batsu = true;
     char path[256] = "";
     strcpy_s(path, m_savePath.c_str());
 
     ImGui::SetNextWindowPos(ImVec2(20, 20), ImGuiCond_Once);
     ImGui::SetNextWindowSize(ImVec2(200, 300), ImGuiCond_Once);
 
-    ImGui::Begin("Save", nullptr, ImGuiWindowFlags_MenuBar);
+    ImGui::Begin("Save", &batsu, ImGuiWindowFlags_MenuBar);
     ImGui::InputText("saveFile", path, sizeof(path));
     m_savePath = path;
     if (ImGui::Button("Save"))
@@ -145,4 +147,10 @@ void Hierarchy::DispSaveMenu()
         CManager::GetScene()->SaveScene(path);
     }
     ImGui::End();
+}
+
+void Hierarchy::SetDefaultPath(std::string path)
+{
+    m_loadPath = path;
+    m_savePath = path;
 }

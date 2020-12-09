@@ -6,11 +6,13 @@ class Component
 protected:
 	GameObject* gameObject = nullptr;
 	int m_id = -1;
-public:
 	int m_sortingOrder = 1;
+
+public:
 
 	virtual void Initialize();
 	virtual void Update();
+	virtual void SystemUpdate();
 	virtual void Draw();
 	virtual void Finalize();
 	Component* GetComponent();

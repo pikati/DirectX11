@@ -179,6 +179,7 @@ void CRenderer::Init()
 
 	CreateDefaultShader();
 	CreateColorShader();
+	CreateTextureShader();
 
 	// 定数バッファ生成
 	D3D11_BUFFER_DESC hBufferDesc;
@@ -349,6 +350,60 @@ void CRenderer::CreateColorShader()
 
 	delete[] buffer2;
 }
+
+void CRenderer::CreateTextureShader()
+{
+
+	ID3D11VertexShader* vs;
+	FILE* file;
+	long int fsize;
+
+	file = fopen("Asset/Shader/unlitTextureVS.cso", "rb");
+	fsize = _filelength(_fileno(file));
+	unsigned char* buffer = new unsigned char[fsize];
+	fread(buffer, fsize, 1, file);
+	fclose(file);
+
+	m_D3DDevice->CreateVertexShader(buffer, fsize, NULL, &vs);
+	m_VertexShader.push_back(vs);
+
+	// 入力レイアウト生成
+	D3D11_INPUT_ELEMENT_DESC layout[] =
+	{
+		{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+		{ "NORMAL",   0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 4 * 3, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+		{ "COLOR",    0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 4 * 6, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+		{ "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 4 * 10, D3D11_INPUT_PER_VERTEX_DATA, 0 }
+	};
+	UINT numElements = ARRAYSIZE(layout);
+
+	ID3D11InputLayout* l;
+	m_D3DDevice->CreateInputLayout(layout,
+		numElements,
+		buffer,
+		fsize,
+		&l);
+
+	m_VertexLayout.push_back(l);
+
+	delete[] buffer;
+
+	FILE* file2;
+	long int fsize2;
+
+	file2 = fopen("Asset/Shader/UnlitTExturePS.cso", "rb");
+	fsize2 = _filelength(_fileno(file2));
+	unsigned char* buffer2 = new unsigned char[fsize2];
+	fread(buffer2, fsize2, 1, file2);
+	fclose(file2);
+	ID3D11PixelShader* ps;
+	m_D3DDevice->CreatePixelShader(buffer2, fsize2, NULL, &ps);
+
+	m_PixelShader.push_back(ps);
+
+	delete[] buffer2;
+}
+
 
 void CRenderer::Uninit()
 {

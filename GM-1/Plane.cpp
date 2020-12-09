@@ -1,5 +1,4 @@
 #include "Plane.h"
-#include "renderer.h"
 #include "main.h"
 #include "GameObject.h"
 #include "Transform.h"
@@ -94,7 +93,7 @@ void Plane::Draw()
 	world._34 = 0;
 	world._44 = 1.0f;
 	CRenderer::SetWorldMatrix(&world);
-	CRenderer::SetShader(SHADER_TYPE::Default);
+	CRenderer::SetShader(m_shaderType);
 
 	UINT stride = sizeof(VERTEX_3D);
 	UINT offset = 0;
@@ -199,7 +198,7 @@ void Plane::DrawNormal()
 	UINT stride = sizeof(VERTEX_3D);
 	UINT offset = 0;
 	CRenderer::GetDeviceContext()->IASetVertexBuffers(0, 1, &b, &stride, &offset);
-
+	CRenderer::SetShader(SHADER_TYPE::Color);
 	MATERIAL material;
 	ZeroMemory(&material, sizeof(material));
 	material.Diffuse = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
@@ -229,6 +228,11 @@ void Plane::DrawInformation()
 		Finalize();
 		Initialize();
 	}
+
+	const char* items[] = { "Default", "Color", "Texture" };
+	int itemCurrent = (int)m_shaderType;
+	ImGui::Combo("combo", &itemCurrent, items, IM_ARRAYSIZE(items));
+	m_shaderType = (SHADER_TYPE)itemCurrent;
 	ImGui::End();
 
 	ImGui::PopStyleColor();
@@ -238,6 +242,9 @@ void Plane::DrawInformation()
 void Plane::LoadProperties(const rapidjson::Value& inProp)
 {
 	JsonHelper::GetString(inProp, "fileName", m_textureName);
+	int shader;
+	JsonHelper::GetInt(inProp, "shader", shader);
+	m_shaderType = (SHADER_TYPE)shader;
 	JsonHelper::GetInt(inProp, "id", m_id);
 }
 
@@ -246,5 +253,7 @@ void Plane::SaveProperties(rapidjson::Document::AllocatorType& alloc, rapidjson:
 	std::string name = typeid(*this).name();
 	JsonHelper::AddString(alloc, inProp, "type", name.substr(6).c_str());
 	JsonHelper::AddString(alloc, inProp, "fileName", m_textureName);
+	int shader = (int)m_shaderType;
+	JsonHelper::AddInt(alloc, inProp, "shader", shader);
 	JsonHelper::AddInt(alloc, inProp, "id", m_id);
 }

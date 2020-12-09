@@ -6,6 +6,7 @@
 #include "ClassDictionary.h"
 #include "manager.h"
 #include "Scene.h"
+#include <string>
 
 ActiveObjInfo* Inspector::m_object = nullptr;
 std::vector<bool> Inspector::m_isDrawInfo;
@@ -68,7 +69,13 @@ void Inspector::Finalize()
 
 void Inspector::DispObjectInformation()
 {
+	if (m_object == nullptr) return;
 	if (m_object->obj == nullptr) return;
+	char name[256];
+	strcpy_s(name, 256, m_object->obj->name.c_str());
+	ImGui::InputText("name", name, 256);
+	m_object->obj->name = name;
+	ImGui::InputInt("layer", &m_object->obj->layer);
 
 	if (ImGui::Button("Transform"))
 	{
@@ -140,15 +147,17 @@ void Inspector::DispTransform()
 
 void Inspector::DispAddComponentWindow()
 {
+	bool batsu = true;
 	ImGui::SetNextWindowPos(ImVec2(1000, 20), ImGuiCond_Once);
 	ImGui::SetNextWindowSize(ImVec2(400, 300), ImGuiCond_Once);
-	ImGui::Begin("AddComponent");
+	ImGui::Begin("AddComponent", &batsu);
 	std::vector<std::string> componentName = ClassDictionary::GetComponentName();
 	for (std::string str : componentName)
 	{
 		if (ImGui::Button(str.c_str()))
 		{
-			ClassDictionary::AddComponent(str, m_object->obj);
+			Component* c = ClassDictionary::AddComponent(str, m_object->obj);
+			c->Initialize();
 			m_isDrawInfo.push_back(false);
 		}
 	}
@@ -157,6 +166,10 @@ void Inspector::DispAddComponentWindow()
 
 void Inspector::SetGameObject(GameObject* obj, int layer, int index)
 {
+	if (m_object == nullptr)
+	{
+		m_object = new ActiveObjInfo();
+	}
 	m_object->obj = obj;
 	m_object->layer = layer;
 	m_object->index = index;

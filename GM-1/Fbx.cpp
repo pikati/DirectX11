@@ -18,6 +18,7 @@ int Fbx::m_maxID = -1;
 
 void Fbx::Initialize()
 {
+
 	m_device = CRenderer::GetDevice();
 	m_fbxInfo.uvSetCount = 0;
 	m_sortingOrder = 0;
@@ -53,7 +54,60 @@ void Fbx::Draw()
 
 void Fbx::Finalize()
 {
-	if (m_isCopy) return;
+	if (m_isCopy)
+	{
+		if (m_animationStackNumber != 0)
+		{
+			if (m_animationVertex != nullptr)
+			{
+				for (int i = 0; i < m_fbxInfo.meshCount; i++)
+				{
+					if (m_animationVertex[i] != nullptr)
+						for (int j = 0; j < m_count; j++)
+						{
+							if (m_animationVertex[i][j] != nullptr)
+							{
+								m_animationVertex[i][j] = nullptr;
+							}
+						}
+					m_animationVertex[i] = nullptr;
+				}
+				m_animationVertex = nullptr;
+			}
+
+		}
+
+
+		for (int i = m_fbxInfo.meshCount - 1; i >= 0; i--)
+		{
+			if (m_meshInfo[i].vertex != nullptr)
+			{
+				m_meshInfo[i].vertex = nullptr;
+			}
+
+		}
+		for (int i = m_fbxInfo.meshCount - 1; i >= 0; i--)
+		{
+			if (m_meshInfo[i].index != nullptr)
+			{
+				m_meshInfo[i].index = nullptr;
+			}
+		}
+		for (int i = m_fbxInfo.meshCount - 1; i >= 0; i--)
+		{;
+			m_meshInfo[i].pVB = nullptr;
+			m_meshInfo[i].pIB = nullptr;
+		}
+		/*if (m_meshInfo != nullptr)
+			delete m_meshInfo;
+		if (m_fbxInfo.uvSetName != nullptr)
+			delete m_fbxInfo.uvSetName;*/
+		if (m_bb != nullptr)
+		{
+			m_bb = nullptr;
+		}
+		return;
+	}
 	/*for (int i = m_fbxInfo.meshCount - 1; i >= 0; i--)
 	{
 		if(m_meshInfo[i].uvSetName != nullptr)
@@ -1200,10 +1254,17 @@ void Fbx::DrawInformation()
 	ImGui::SetNextWindowPos(ImVec2(1000, 20), ImGuiCond_Once);
 	ImGui::SetNextWindowSize(ImVec2(400, 300), ImGuiCond_Once);
 	ImGui::Begin(name.substr(6).c_str());
+	
 	char fname[256];
 	strcpy_s(fname, m_fileName.c_str());
 	ImGui::InputText("fileName", fname, sizeof(fname));
 	m_fileName = fname;
+
+	char tname[256];
+	strcpy_s(tname, m_textureName.c_str());
+	ImGui::InputText("textureName", tname, sizeof(tname));
+	m_textureName = tname;
+	
 	if (ImGui::Button("Reload"))
 	{
 		Finalize();

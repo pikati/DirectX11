@@ -1,4 +1,5 @@
 #include "ClassDictionary.h"
+#include <algorithm>
 #include "GameObject.h"
 #include "Camera.h"
 #include "Player.h"
@@ -23,7 +24,9 @@
 #include "ResultManager.h"
 #include "Bullet.h"
 #include "BoxCollider.h"
-#include <algorithm>
+#include "CameraController.h"
+#include "RigidBody.h"
+#include "Spring.h"
 
 std::map<std::string, Component*> ClassDictionary::dictionary;
 BuilderFromString ClassDictionary::builderfromstring;
@@ -54,6 +57,9 @@ void ClassDictionary::Initialize()
 	builderfromstring.Register(REGISTER_ARGS(ResultManager));
 	builderfromstring.Register(REGISTER_ARGS(Bullet));
 	builderfromstring.Register(REGISTER_ARGS(BoxCollider));
+	builderfromstring.Register(REGISTER_ARGS(CameraController));
+	builderfromstring.Register(REGISTER_ARGS(RigidBody));
+	builderfromstring.Register(REGISTER_ARGS(Spring));
 	componentName.push_back("Camera");
 	componentName.push_back("Player");
 	componentName.push_back("SphereCollider");
@@ -76,6 +82,9 @@ void ClassDictionary::Initialize()
 	componentName.push_back("ResultManager");
 	componentName.push_back("Bullet");
 	componentName.push_back("BoxCollider");
+	componentName.push_back("CameraController");
+	componentName.push_back("RigidBody");
+	componentName.push_back("Spring");
 	std::sort(componentName.begin(), componentName.end());
 }
 
