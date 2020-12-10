@@ -6,6 +6,8 @@
 #include "renderer.h"
 #include "Fbx.h"
 #include "FPS.h"
+#include "imgui/imgui.h"
+#include "LevelLoader.h"
 #include <DirectXMath.h>
 
 void Morphing::Initialize()
@@ -63,7 +65,7 @@ void Morphing::Update()
 {
 	if (m_isUp)
 	{
-		m_raito += FPS::deltaTime * 0.2f;
+		m_raito += FPS::deltaTime * m_morphSpeed;
 		if (m_raito >= 1.0f)
 		{
 			m_raito = 1.0f;
@@ -72,7 +74,7 @@ void Morphing::Update()
 	}
 	else
 	{
-		m_raito -= FPS::deltaTime * 0.2f;
+		m_raito -= FPS::deltaTime * m_morphSpeed;
 		if (m_raito <= 0.0f)
 		{
 			m_raito = 0.0f;
@@ -138,13 +140,11 @@ void Morphing::Draw()
 	material.Diffuse = { 1.0f,1.0f,1.0f,1.0f };
 	material.Ambient = { 1.0f,1.0f,1.0f,1.0f };
 	CRenderer::SetMaterial(material);
-	// マテリアル設定
-	//CRenderer::SetMaterial(m_fbxInfo.materialInfo[i]);
+	CRenderer::SetParameter(Vector4(m_raito, 0, 0, 0));
 
 	// テクスチャ設定
 	CRenderer::GetDeviceContext()->PSSetShaderResources(0, 1, &m_tex1);
 	CRenderer::GetDeviceContext()->PSSetShaderResources(1, 1, &m_tex2);
-	CRenderer::SetParameter(Vector4(m_raito, 0, 0, 0));
 
 	// ポリゴン描画
 	CRenderer::GetDeviceContext()->DrawIndexed(m_iCount, 0, 0);
@@ -160,4 +160,39 @@ void Morphing::Finalize()
 	m_tex2 = nullptr;
 	m_f1 = nullptr;
 	m_f2 = nullptr;
+}
+
+void Morphing::DrawInformation()
+{
+	std::string name = typeid(*this).name();
+
+	ImGui::PushStyleColor(ImGuiCol_TitleBgActive, ImVec4(0.0f, 0.7f, 0.2f, 1.0f));
+	ImGui::PushStyleColor(ImGuiCol_TitleBg, ImVec4(0.0f, 0.3f, 0.1f, 1.0f));
+	ImGui::SetNextWindowPos(ImVec2(1000, 20), ImGuiCond_Once);
+	ImGui::SetNextWindowSize(ImVec2(400, 300), ImGuiCond_Once);
+	ImGui::Begin(name.substr(6).c_str());
+
+	ImGui::InputFloat("morphSpeed", &m_morphSpeed, 1, 10, 3);
+	ImGui::SliderFloat("morphRaito", &m_raito, 0.0f, 1.0f);
+	ImGui::End();
+
+	ImGui::PopStyleColor();
+	ImGui::PopStyleColor();
+}
+
+void Morphing::LoadProperties(const rapidjson::Value& inProp)
+{
+	JsonHelper::GetFloat(inProp, "morphSpeed", m_morphSpeed);
+	JsonHelper::GetFloat(inProp, "raito", m_raito);
+	JsonHelper::GetInt(inProp, "id", m_id);
+	//Initialize();
+}
+
+void Morphing::SaveProperties(rapidjson::Document::AllocatorType& alloc, rapidjson::Value& inProp)
+{
+	std::string name = typeid(*this).name();
+	JsonHelper::AddString(alloc, inProp, "type", name.substr(6).c_str());
+	JsonHelper::AddFloat(alloc, inProp, "morphSpeed", m_morphSpeed);
+	JsonHelper::AddFloat(alloc, inProp, "raito", m_raito);
+	JsonHelper::AddInt(alloc, inProp, "id", m_id);
 }

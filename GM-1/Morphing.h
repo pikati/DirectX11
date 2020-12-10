@@ -14,12 +14,19 @@ private:
 	ID3D11ShaderResourceView* m_tex2 = nullptr;
 	float m_raito = 0.0f;
 	bool m_isUp = true;
-	ID3D11Buffer* pVB;
-	ID3D11Buffer* pIB;
+	ID3D11Buffer* pVB = nullptr;
+	ID3D11Buffer* pIB = nullptr;
+	float m_morphSpeed = 0.2f;
+
 public:
 	void Initialize() override;
 	void Update() override;
 	void Draw() override;
 	void Finalize() override;
+
+	void DrawInformation() override;
+
+	void LoadProperties(const rapidjson::Value& inProp) override;
+	void SaveProperties(rapidjson::Document::AllocatorType& alloc, rapidjson::Value& inProp) override;
 };
 

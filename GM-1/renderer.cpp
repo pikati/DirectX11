@@ -220,7 +220,7 @@ void CRenderer::Init()
 	m_ImmediateContext->PSSetConstantBuffers(5, 1, &m_CameraBuffer);
 
 	m_D3DDevice->CreateBuffer(&hBufferDesc, NULL, &m_paramBuffer);
-	m_ImmediateContext->PSSetConstantBuffers(5, 1, &m_paramBuffer);
+	m_ImmediateContext->PSSetConstantBuffers(6, 1, &m_paramBuffer);
 
 	// 入力レイアウト設定
 	m_ImmediateContext->IASetInputLayout(m_VertexLayout[(int)SHADER_TYPE::Default]);
@@ -589,7 +589,7 @@ void CRenderer::SetCameraPosition(Vector3 CameraPosition)
 
 void CRenderer::SetParameter(Vector4 v)
 {
-	m_ImmediateContext->UpdateSubresource(m_CameraBuffer, 0, NULL, &v, 0, 0);
+	m_ImmediateContext->UpdateSubresource(m_paramBuffer, 0, NULL, &v, 0, 0);
 }
 
 void CRenderer::SetViewPort(D3D11_VIEWPORT* viewPort)

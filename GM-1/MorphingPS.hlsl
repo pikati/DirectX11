@@ -20,23 +20,4 @@ void main(in PS_IN In, out float4 outDiffuse : SV_Target)
     float4 tex = outDiffuse;
     outDiffuse.rgb *= In.Diffuse.rgb * light * Light.Diffuse.rgb;
     outDiffuse.a *= In.Diffuse.a;
-    outDiffuse.rgb = max(outDiffuse.rgb, Light.Ambient.rgb * Material.Ambient.rgb * tex.rgb);
-    
-    //スペキュラ(フォン)
-    float3 eyev = In.WorldPosition.xyz - CameraPosition.xyz;
-    eyev = normalize(eyev);
-    
-    float3 refv = reflect(Light.Direction.xyz, normal.xyz);
-    refv = normalize(refv);
-    float3 pos;
-    pos.xyz = 10;
-    float3 L = normalize(pos - In.WorldPosition.xyz); //ライトベクトル
-    
-    //float specular = -dot(eyev, refv);
-    //specular = saturate(specular);
-    //specular = pow(specular, 10);
-    
-    //outDiffuse.rgb += specular;
-    
-   
 }
