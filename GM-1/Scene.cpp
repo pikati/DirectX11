@@ -36,9 +36,10 @@ Scene::~Scene()
 void Scene::Initialize()
 {
 	AudioManager::SetVolume(0);
-	LevelLoader::LoadLevel(this, "Asset/Scene/gokon.scene");
-	Hierarchy::SetDefaultPath("Asset/Scene/gokon.scene");
-	m_currentSceneName = "Asset/Scene/gokon.scene";
+	m_currentSceneName = "Asset/Scene/stage1.scene";
+	LevelLoader::LoadLevel(this, m_currentSceneName.c_str());
+	Hierarchy::SetDefaultPath(m_currentSceneName);
+	
 	/*GameObject* obj = CreateGameObject();
 	Fbx* f = obj->AddComponent<Fbx>();
 	f->SetFileName("Asset/Models/Player/Cat.fbx");
@@ -60,6 +61,8 @@ void Scene::Update()
 	if (m_isChange)
 	{
  		Finalize();
+		ObjectPooler::Finalize();
+		Editor::Finalize();
 		SceneManager::LoadScene();
 	}
 }
