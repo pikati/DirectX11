@@ -17,7 +17,7 @@ AABB::AABB()
 	m_texture->Initialize();
 }
 
-void AABB::Initialize()
+void AABB::SystemInitialize()
 {
 
 	m_pos.Set(0, 0, 0);

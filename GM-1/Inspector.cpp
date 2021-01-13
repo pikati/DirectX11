@@ -20,7 +20,8 @@ void Inspector::Initialize()
 
 void Inspector::Update()
 {
-
+	if (!m_object) return;
+	if (!m_object->obj) return;
 	ImGui::PushStyleColor(ImGuiCol_TitleBgActive, ImVec4(0.0f, 0.7f, 0.2f, 1.0f));
 	ImGui::PushStyleColor(ImGuiCol_TitleBg, ImVec4(0.0f, 0.3f, 0.1f, 1.0f));
 	ImGui::SetNextWindowPos(ImVec2(1000, 20), ImGuiCond_Once);
@@ -56,9 +57,9 @@ void Inspector::Draw()
 
 void Inspector::Finalize()
 {
-	if (m_object != nullptr)
+	if (m_object)
 	{
-		if (m_object->obj != nullptr)
+		if (m_object->obj)
 		{
 			m_object->obj = nullptr;
 		}
@@ -69,8 +70,7 @@ void Inspector::Finalize()
 
 void Inspector::DispObjectInformation()
 {
-	if (m_object == nullptr) return;
-	if (m_object->obj == nullptr) return;
+	
 	char name[256];
 	strcpy_s(name, 256, m_object->obj->name.c_str());
 	ImGui::InputText("name", name, 256);
@@ -166,9 +166,16 @@ void Inspector::DispAddComponentWindow()
 
 void Inspector::SetGameObject(GameObject* obj, int layer, int index)
 {
-	if (m_object == nullptr)
+	if (!m_object)
 	{
 		m_object = new ActiveObjInfo();
+	}
+	else
+	{
+		if (m_object->obj)
+		{
+			m_object->obj->SetActiveGizmo(false);
+		}
 	}
 	m_object->obj = obj;
 	m_object->layer = layer;
@@ -179,10 +186,12 @@ void Inspector::SetGameObject(GameObject* obj, int layer, int index)
 	{
 		m_isDrawInfo.push_back(false);
 	}
+	m_object->obj->SetActiveGizmo(true);
 }
 
 void Inspector::DeleteObject()
 {
 	CManager::GetScene()->DeleteObject(m_object->layer, m_object->index);
+	m_object->obj->SetActiveGizmo(false);
 	m_object->obj = nullptr;
 }

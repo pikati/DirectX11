@@ -106,9 +106,19 @@ float Vector3::Length()
 	return sqrtf(powf(x, 2) + powf(y, 2) + powf(z, 2));
 }
 
+float Vector3::Length(Vector3 vec)
+{
+	return sqrtf(powf(vec.x, 2) + powf(vec.y, 2) + powf(vec.z, 2));
+}
+
 float Vector3::LengthSquared()
 {
 	return powf(x, 2) + powf(y, 2) + powf(z, 2);
+}
+
+float Vector3::LengthSquared(Vector3 vec)
+{
+	return powf(vec.x, 2) + powf(vec.y, 2) + powf(vec.z, 2);
 }
 
 void Vector3::Normalize()
@@ -214,6 +224,28 @@ void Vector4::Set(float x, float y, float z, float w)
 	this->y = y;
 	this->z = z;
 	this->w = w;
+}
+
+float Vector4::Length()
+{
+	return sqrtf(powf(x, 2) + powf(y, 2) + powf(z, 2) + powf(w, 2));
+}
+
+void Vector4::Normalize()
+{
+	float length = Length();
+	x /= length;
+	y /= length;
+	z /= length;
+}
+
+Vector4 Vector4::Normalize(Vector4 vec)
+{
+	float length = vec.Length();
+	vec.x /= length;
+	vec.y /= length;
+	vec.z /= length;
+	return vec;
 }
 
 const Vector4 Vector4::operator+(const Vector4& vec) const

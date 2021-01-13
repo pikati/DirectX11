@@ -39,9 +39,9 @@ struct LIGHT
 {
 	BOOL		Enable;
 	BOOL		Dummy[3];//16byte‹«ŠE—p
-	D3DXVECTOR4	Direction;
-	D3DXCOLOR	Diffuse;
-	D3DXCOLOR	Ambient;
+	Vector4		Direction;
+	Vector4		Diffuse;
+	Vector4		Ambient;
 };
 
 struct POINTLIGHT 

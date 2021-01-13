@@ -11,9 +11,11 @@
 #include "GameObject.h"
 #include "BoundingBox.h"
 #include "LevelLoader.h"
+#include "Editor.h"
 #include "imgui/imgui.h"
 
 static D3DMATRIX m;
+static D3DXMATRIX w;
 
 Camera::Camera()
 {
@@ -28,12 +30,12 @@ Camera::~Camera()
 void Camera::Initialize()
 {
 	m_target = Vector3(0.0f, 0.0f, 0.0f);
-	m_viewPort.Width = m_viewPortWidth;
-	m_viewPort.Height = m_viewPortHeight;
+	m_viewPort.Width = static_cast<FLOAT>(m_viewPortWidth);
+	m_viewPort.Height = static_cast<FLOAT>(m_viewPortHeight);
 	m_viewPort.MinDepth = 0.0f;
 	m_viewPort.MaxDepth = 1.0f;
-	m_viewPort.TopLeftX = m_viewPortTopLeftX;
-	m_viewPort.TopLeftY = m_viewPortTopLeftY;
+	m_viewPort.TopLeftX = static_cast<FLOAT>(m_viewPortTopLeftX);
+	m_viewPort.TopLeftY = static_cast<FLOAT>(m_viewPortTopLeftY);
 	CManager::GetScene()->AddRenderNum();
 }
 
@@ -44,6 +46,7 @@ void Camera::Update()
 
 void Camera::Draw()
 {
+	if (!Editor::IsPlay()) return;
 	if (m_renderNum != CManager::GetScene()->GetRenderNum()) return;
 	CRenderer::SetViewPort(&m_viewPort);
 	if (m_renderNum == 0)
@@ -54,6 +57,7 @@ void Camera::Draw()
 		m = m_viewMatrix;
 		//プロジェクションマトリクス設定
 		D3DXMatrixPerspectiveFovLH(&m_projectionMatrix, 1.0f, (float)SCREEN_WIDTH / SCREEN_HEIGHT, 1.0f, 1000.0f);
+		w = m_projectionMatrix;
 		CRenderer::SetProjectionMatrix(&m_projectionMatrix);
 		CheckView();
 	}
@@ -167,9 +171,22 @@ D3DXMATRIX Camera::GetViewMatrix()
 	return m;
 }
 
+D3DXMATRIX Camera::GetProjectionMatrix()
+{
+	return w;
+}
+
 void Camera::SetLookAt(Vector3 lookPoint)
 {
 	m_target = lookPoint;
+}
+
+void Camera::SetViwePort(D3D11_VIEWPORT viewPort)
+{
+	m_viewPortHeight = static_cast<int>(viewPort.Height);
+	m_viewPortWidth = static_cast<int>(viewPort.Width);
+	m_viewPortTopLeftX = static_cast<int>(viewPort.TopLeftX);
+	m_viewPortTopLeftY = static_cast<int>(viewPort.TopLeftY);
 }
 
 void Camera::DrawInformation()

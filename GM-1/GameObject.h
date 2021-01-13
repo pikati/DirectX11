@@ -4,10 +4,12 @@
 #include <list>
 #include <typeinfo>
 #include "rapidjson/document.h"
+#include "imgui/ImGuizmo.h"
+#include "main.h"
 
 class Component;
 class Transform;
-
+class Camera;
 class BoundingBox;
 
 class GameObject
@@ -18,7 +20,16 @@ private:
 	bool m_isDrawBB = false;
 	BoundingBox* m_bb = nullptr;
 	int m_drawSortNum = 1;
+	bool m_isActiveGizmo = false;
+	Camera* m_camera;
+	ImGuizmo::OPERATION m_currentOperation = ImGuizmo::TRANSLATE;
+	ImGuizmo::MODE m_currentMode = ImGuizmo::LOCAL;
+	bool m_isSnap = false;
+
 	bool DeleteComponent(Component* component);
+	void ImGuizmoUpdate();
+	void SetGizmoMatrix(float matrix[16], const D3DXMATRIX& mat);
+	void CalcMatrix(D3DXMATRIX& mat);
 protected:
 public:
 	GameObject(const GameObject& obj);
@@ -32,6 +43,7 @@ public:
 	GameObject();
 	~GameObject();
 	void Initialize();
+	void SystemInitialize();
 	void Update();
 	void SystemUpdate();
 	void Draw();
@@ -42,6 +54,8 @@ public:
 	void OnCollisionExit(GameObject* obj);
 
 	Vector3 GetForward();
+	Vector3 GetRight();
+	Vector3 GetUp();
 
 	void IsDraw(bool isDraw);
 	void SetBoundingBox(BoundingBox* bb);
@@ -53,7 +67,7 @@ public:
 	void IsBoundingBoxDraw(bool isDraw);
 	void SetSortingNum(int sortingNum);
 
-
+	void SetActiveGizmo(bool active);
 
 
 

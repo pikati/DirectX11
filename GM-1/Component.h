@@ -11,6 +11,7 @@ protected:
 public:
 
 	virtual void Initialize();
+	virtual void SystemInitialize();
 	virtual void Update();
 	virtual void SystemUpdate();
 	virtual void Draw();

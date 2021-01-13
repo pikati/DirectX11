@@ -44,7 +44,9 @@ public:
 
 	void Set(float x, float y, float z);
 	float Length();
+	static float Length(Vector3 vec);
 	float LengthSquared();
+	static float LengthSquared(Vector3 vec);
 	void Normalize();
 	static Vector3 Normalize(Vector3 vec);
 	static float Dot(Vector3 vec1, Vector3 vec2);
@@ -72,6 +74,9 @@ public:
 	float x, y, z, w;
 
 	void Set(float x, float y, float z, float w);
+	float Length();
+	void Normalize();
+	static Vector4 Normalize(Vector4 vec);
 
 	const Vector4 operator+(const Vector4& vec) const;
 	const Vector4 operator-(const Vector4& vec) const;

@@ -1,16 +1,19 @@
 #include "DirectionalLight.h"
 #include "imGui/imgui.h"
+#include "LevelLoader.h"
 
-void DirectionalLight::Initialize()
+void DirectionalLight::SystemInitialize()
 {
 	m_light.Diffuse = { 1.0f, 1.0f, 1.0f, 1.0f };
 	m_light.Ambient = { 0.1f, 0.1f, 0.1f, 1.0f };
 	m_light.Direction = { 1.0f, -1.0f, 1.0f, 0.0f };
 	m_light.Enable = true;
+	gameObject->layer = 0;
 }
 
-void DirectionalLight::Update()
+void DirectionalLight::SystemUpdate()
 {
+	m_light.Direction.Normalize();
 	CRenderer::SetLight(m_light);
 }
 
@@ -23,36 +26,55 @@ void DirectionalLight::DrawInformation()
 	ImGui::SetNextWindowPos(ImVec2(1000, 20), ImGuiCond_Once);
 	ImGui::SetNextWindowSize(ImVec2(400, 300), ImGuiCond_Once);
 	ImGui::Begin(name.substr(6).c_str());
-	int dr = (int)(m_light.Diffuse.r * 255);
-	int dg = (int)(m_light.Diffuse.g * 255);
-	int db = (int)(m_light.Diffuse.b * 255);
-	int da = (int)(m_light.Diffuse.a * 255);
-	ImGui::Text("Diffuse");
-	ImGui::InputInt("R", &dr, 0, 0); ImGui::SameLine();
-	ImGui::InputInt("G", &dg, 0, 0); ImGui::SameLine();
-	ImGui::InputInt("B", &db, 0, 0); ImGui::SameLine();
-	ImGui::InputInt("A", &da, 0, 0);
-	int ar = (int)(m_light.Diffuse.r * 255);
-	int ag = (int)(m_light.Diffuse.g * 255);
-	int ab = (int)(m_light.Diffuse.b * 255);
-	int aa = (int)(m_light.Diffuse.a * 255);
-	ImGui::Text("Ambient");
-	ImGui::InputInt("R ", &ar, 0, 0); ImGui::SameLine();
-	ImGui::InputInt("G ", &ag, 0, 0); ImGui::SameLine();
-	ImGui::InputInt("B ", &ab, 0, 0); ImGui::SameLine();
-	ImGui::InputInt("A ", &aa, 0, 0);
-	m_light.Diffuse.r = dr / 255.0f;
-	m_light.Diffuse.g = dg / 255.0f;
-	m_light.Diffuse.b = db / 255.0f;
-	m_light.Diffuse.a = da / 255.0f;
-	m_light.Ambient.r = ar / 255.0f;
-	m_light.Ambient.g = ag / 255.0f;
-	m_light.Ambient.b = ab / 255.0f;
-	m_light.Ambient.a = aa / 255.0f;
+	float diffuse[4] = { m_light.Diffuse.x, m_light.Diffuse.y, m_light.Diffuse.z, m_light.Diffuse.w };
+	float ambient[4] = { m_light.Ambient.x, m_light.Ambient.y, m_light.Ambient.z, m_light.Ambient.w };
+	float direction[3] = { m_light.Direction.x, m_light.Direction.y, m_light.Direction.z};
+	ImGui::ColorEdit4("diffuse", diffuse);
+	ImGui::ColorEdit4("ambient", ambient);
+	ImGui::InputFloat3("direction", direction, 3);
+	m_light.Diffuse.x = diffuse[0];
+	m_light.Diffuse.y = diffuse[1];
+	m_light.Diffuse.z = diffuse[2];
+	m_light.Diffuse.w = diffuse[3];
+	m_light.Ambient.x = ambient[0];
+	m_light.Ambient.y = ambient[1];
+	m_light.Ambient.z = ambient[2];
+	m_light.Ambient.w = ambient[3];
+	m_light.Direction.x = direction[0];
+	m_light.Direction.y = direction[1];
+	m_light.Direction.z = direction[2];
 	
-	ImGui::Checkbox("Enable", (bool*)m_light.Enable);
+	bool enable = true;
+	if (m_light.Enable == 0)
+	{
+		enable = false;
+	}
+	
+	ImGui::Checkbox("Enable", &enable);
+	m_light.Enable = enable;
 	ImGui::End();
 
 	ImGui::PopStyleColor();
 	ImGui::PopStyleColor();
+}
+
+void DirectionalLight::LoadProperties(const rapidjson::Value& inProp)
+{
+	JsonHelper::GetVector4(inProp, "diffuse", m_light.Diffuse);
+	JsonHelper::GetVector4(inProp, "ambient", m_light.Ambient);
+	JsonHelper::GetVector4(inProp, "direction", m_light.Direction);
+	JsonHelper::GetInt(inProp, "enable", m_light.Enable);
+	JsonHelper::GetInt(inProp, "id", m_id);
+	//Initialize();
+}
+
+void DirectionalLight::SaveProperties(rapidjson::Document::AllocatorType& alloc, rapidjson::Value& inProp)
+{
+	std::string name = typeid(*this).name();
+	JsonHelper::AddString(alloc, inProp, "type", name.substr(6).c_str());
+	JsonHelper::AddVector4(alloc, inProp, "diffuse", m_light.Diffuse);
+	JsonHelper::AddVector4(alloc, inProp, "ambient", m_light.Ambient);
+	JsonHelper::AddVector4(alloc, inProp, "direction", m_light.Direction);
+	JsonHelper::AddInt(alloc, inProp, "enable", m_light.Enable);
+	JsonHelper::AddInt(alloc, inProp, "id", m_id);
 }

@@ -6,6 +6,7 @@
 void Fade::Initialize()
 {
 	m_image = gameObject->GetComponent<Image>();
+	m_image->SetColor(1.0f, 1.0f, 1.0f, m_alpha);
 }
 
 void Fade::Update()

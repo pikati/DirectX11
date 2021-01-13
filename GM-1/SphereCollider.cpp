@@ -23,7 +23,7 @@ SphereCollider::~SphereCollider()
 {
 }
 
-void SphereCollider::Initialize()
+void SphereCollider::SystemInitialize()
 {
 	m_colliderID = SetCollider(this);
 }

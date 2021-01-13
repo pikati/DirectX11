@@ -28,6 +28,6 @@
 #define SCREEN_HEIGHT	(720)			// ウインドウの高さ
 
 #define SAFE_RELEASE(p) do { if(p){ (p)->Release(); (p) = NULL;} } while(0)
-
+#define SAFE_DELETE(p) do{if(p){ delete (p); (p) = nullptr;}} while(0)
 
 HWND GetWindow();

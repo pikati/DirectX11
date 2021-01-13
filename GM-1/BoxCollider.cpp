@@ -21,7 +21,7 @@ BoxCollider::~BoxCollider()
 {
 }
 
-void BoxCollider::Initialize()
+void BoxCollider::SystemInitialize()
 {
 	m_colliderID = SetCollider(this);
 }
@@ -177,15 +177,15 @@ float BoxCollider::GetLength(int i)
 {
 	if (i == 0)
 	{
-		return fabs(m_max.x - m_min.x) / 2;
+		return fabsf(m_max.x - m_min.x) / 2;
 	}
 	else if (i == 1)
 	{
-		return fabs(m_max.y - m_min.y) / 2;
+		return fabsf(m_max.y - m_min.y) / 2;
 	}
 	else if (i == 2)
 	{
-		return fabs(m_max.z - m_min.z) / 2;
+		return fabsf(m_max.z - m_min.z) / 2;
 	}
 	return -1;
 }

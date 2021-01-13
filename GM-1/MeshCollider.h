@@ -13,7 +13,7 @@ public:
 	MeshCollider();
 	~MeshCollider();
 
-	void Initialize() override;
+	void SystemInitialize() override;
 	void Update() override;
 	void Finalize() override;
 

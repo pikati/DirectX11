@@ -8,6 +8,7 @@ bool EditorController::m_isPlay = false;
 
 void EditorController::Update()
 {
+	bool isOldIsPlay = m_isPlay;
 	ImGui::PushStyleColor(ImGuiCol_TitleBgActive, ImVec4(0.0f, 0.7f, 0.2f, 1.0f));
 	ImGui::PushStyleColor(ImGuiCol_TitleBg, ImVec4(0.0f, 0.3f, 0.1f, 1.0f));
 	ImGui::SetNextWindowPos(ImVec2(SCREEN_WIDTH / 2 - 100, 20), ImGuiCond_Once);
@@ -25,6 +26,10 @@ void EditorController::Update()
 
 	ImGui::PopStyleColor();
 	ImGui::PopStyleColor();
+	if (!isOldIsPlay && m_isPlay)
+	{
+		CManager::GetScene()->PlayInitialize();
+	}
 }
 
 bool EditorController::IsPlay()

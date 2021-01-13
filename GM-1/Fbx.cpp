@@ -16,7 +16,7 @@
 int Fbx::m_maxID = -1;
 
 
-void Fbx::Initialize()
+void Fbx::SystemInitialize()
 {
 
 	m_device = CRenderer::GetDevice();
@@ -260,7 +260,7 @@ void Fbx::LoadFBX(const char* fileName)
 				}
 				else
 				{
-					MessageBox(NULL, "ファイルパス間違ってるかもよ", NULL, MB_OK);
+					//MessageBox(NULL, "ファイルパス間違ってるかもよ", NULL, MB_OK);
 				}
 			}
 		}

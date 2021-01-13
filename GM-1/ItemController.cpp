@@ -9,14 +9,14 @@
 void ItemController::Initialize()
 {
 	m_collider = gameObject->GetComponent<AABB>();
-	m_fade = CManager::GetScene()->Find("Fade")->GetComponent<Fade>();
+	//m_fade = CManager::GetScene()->Find("Fade")->GetComponent<Fade>();
 }
 
 void ItemController::Update()
 {
 	if (m_isGetApple && m_isGetStrawberry && m_isGetBanana && !m_isChangeScene)
 	{
-		m_fade->FadeIn();
+		//m_fade->FadeIn();
 		m_isChangeScene = true;
 	}
 	if (m_isChangeScene)

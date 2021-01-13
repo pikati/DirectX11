@@ -18,7 +18,7 @@ private:
 	void SetCenter(Vector3 a, Vector3 b, Vector3 c, Vector3 d);
 	void DrawNormal();
 public:
-	void Initialize();
+	void SystemInitialize();
 	void Draw();
 	void Finalize();
 	void SetTextureName(std::string name);

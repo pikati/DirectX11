@@ -1,0 +1,10 @@
+name: Bullet
+tag: Bullet
+activeSelf: 1
+isDestroy: 0
+layer: 1
+x: 6.7
+y: 1
+z: 1
+Bullet
+SphereCollider

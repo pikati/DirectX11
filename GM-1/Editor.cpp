@@ -4,12 +4,18 @@
 #include "EditorController.h"
 #include "main.h"
 #include "input.h"
+
 bool Editor::m_isDrawEditor = true;
+std::unique_ptr<EditorCamera> Editor::m_camera;
+
+using namespace std;
 
 void Editor::Initialize()
 {
 	Hierarchy::Initialize();
 	Inspector::Initialize();
+	m_camera = make_unique<EditorCamera>();
+	m_camera->Initialize();
 }
 
 void Editor::Update()
@@ -22,6 +28,10 @@ void Editor::Update()
 		}
 	}
 	if (!m_isDrawEditor) return;
+	if (!EditorController::IsPlay())
+	{
+		m_camera->Update();
+	}
 	Hierarchy::Update();
 	Inspector::Update();
 	EditorController::Update();
@@ -31,6 +41,10 @@ void Editor::Update()
 void Editor::Draw()
 {
 	if (!m_isDrawEditor) return;
+	if (!EditorController::IsPlay())
+	{
+		m_camera->Draw();
+	}
 	Hierarchy::Draw();
 	Inspector::Draw();
 }
@@ -45,4 +59,14 @@ void Editor::Finalize()
 bool Editor::IsPlay()
 {
 	return EditorController::IsPlay();
+}
+
+D3DXMATRIX Editor::GetEditorCameraViewMatrix()
+{
+	return m_camera->GetViewMatrix();
+}
+
+D3DXMATRIX Editor::GetEditorCameraProjectionMatrix()
+{
+	return m_camera->GetProjectionMatrix();
 }

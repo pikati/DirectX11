@@ -4,6 +4,7 @@
 
 class Scene;
 class Vector3;
+class Vector4;
 class GameObject;
 
 class LevelLoader
@@ -31,10 +32,12 @@ public:
 	static bool GetString(const rapidjson::Value& inObject, const char* inProperty, std::string& outString);
 	static bool GetBool(const rapidjson::Value& inObject, const char* inProperty, bool& outBool);
 	static bool GetVector3(const rapidjson::Value& inObject, const char* inProperty, Vector3& outVec3);
+	static bool GetVector4(const rapidjson::Value& inObject, const char* inProperty, Vector4& outVec4);
 
 	static void AddInt(rapidjson::Document::AllocatorType& alloc, rapidjson::Value& inObject, const char* name, int value);
 	static void AddFloat(rapidjson::Document::AllocatorType& alloc, rapidjson::Value& inObject, const char* name, float value);
 	static void AddString(rapidjson::Document::AllocatorType& alloc, rapidjson::Value& inObject, const char* name, std::string value);
 	static void AddBool(rapidjson::Document::AllocatorType& alloc, rapidjson::Value& inObject, const char* name, bool value);
 	static void AddVector3(rapidjson::Document::AllocatorType& alloc, rapidjson::Value& inObject, const char* name, const Vector3& value);
+	static void AddVector4(rapidjson::Document::AllocatorType& alloc, rapidjson::Value& inObject, const char* name, const Vector4& value);
 };

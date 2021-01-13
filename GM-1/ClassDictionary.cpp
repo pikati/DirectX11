@@ -26,6 +26,7 @@
 #include "BoxCollider.h"
 #include "CameraController.h"
 #include "RigidBody.h"
+#include "DirectionalLight.h"
 #include "Spring.h"
 #include "Morphing.h"
 
@@ -60,6 +61,7 @@ void ClassDictionary::Initialize()
 	builderfromstring.Register(REGISTER_ARGS(BoxCollider));
 	builderfromstring.Register(REGISTER_ARGS(CameraController));
 	builderfromstring.Register(REGISTER_ARGS(RigidBody));
+	builderfromstring.Register(REGISTER_ARGS(DirectionalLight));
 	builderfromstring.Register(REGISTER_ARGS(Spring));
 	builderfromstring.Register(REGISTER_ARGS(Morphing));
 	componentName.push_back("Camera");
@@ -86,6 +88,7 @@ void ClassDictionary::Initialize()
 	componentName.push_back("BoxCollider");
 	componentName.push_back("CameraController");
 	componentName.push_back("RigidBody");
+	componentName.push_back("DirectionalLight");
 	componentName.push_back("Spring");
 	componentName.push_back("Morphing");
 	std::sort(componentName.begin(), componentName.end());

@@ -5,15 +5,17 @@ class AABB;
 class Animation;
 class CameraController;
 class ItemController;
+class RigidBody;
 
 class Player : public Component
 {
 private:
 
-    AABB* m_collider;
-    Animation* m_animation;
-    CameraController* m_camera;
-    ItemController* m_itemController;
+    AABB* m_collider = nullptr;
+    Animation* m_animation = nullptr;
+    CameraController* m_camera = nullptr;
+    ItemController* m_itemController = nullptr;
+    RigidBody* m_rigidBody = nullptr;
     const float SPEED = 5.0f;
     const float m_gravity = 9.8f;
     Vector3 m_velocity;

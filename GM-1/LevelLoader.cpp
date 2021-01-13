@@ -386,6 +386,36 @@ bool JsonHelper::GetVector3(const rapidjson::Value& inObject, const char* inProp
 	return true;
 }
 
+bool JsonHelper::GetVector4(const rapidjson::Value& inObject, const char* inProperty, Vector4& outVec4)
+{
+	auto itr = inObject.FindMember(inProperty);
+	if (itr == inObject.MemberEnd())
+	{
+		return false;
+	}
+
+	auto& property = itr->value;
+	if (!property.IsArray() || property.Size() != 4)
+	{
+		return false;
+	}
+
+	for (rapidjson::SizeType i = 0; i < 4; i++)
+	{
+		if (!property[i].IsDouble())
+		{
+			return false;
+		}
+	}
+
+	outVec4.x = (float)property[0].GetDouble();
+	outVec4.y = (float)property[1].GetDouble();
+	outVec4.z = (float)property[2].GetDouble();
+	outVec4.w = (float)property[3].GetDouble();
+
+	return true;
+}
+
 void JsonHelper::AddInt(rapidjson::Document::AllocatorType& alloc, 
 	rapidjson::Value& inObject, const char* name, int value)
 {
@@ -424,6 +454,21 @@ void JsonHelper::AddVector3(rapidjson::Document::AllocatorType& alloc,
 	v.PushBack(rapidjson::Value(value.x).Move(), alloc);
 	v.PushBack(rapidjson::Value(value.y).Move(), alloc);
 	v.PushBack(rapidjson::Value(value.z).Move(), alloc);
+
+	// Add array to inObject
+	inObject.AddMember(rapidjson::StringRef(name), v, alloc);
+}
+
+void JsonHelper::AddVector4(rapidjson::Document::AllocatorType& alloc,
+	rapidjson::Value& inObject, const char* name, const Vector4& value)
+{
+	// Create an array
+	rapidjson::Value v(rapidjson::kArrayType);
+	// Push back elements
+	v.PushBack(rapidjson::Value(value.x).Move(), alloc);
+	v.PushBack(rapidjson::Value(value.y).Move(), alloc);
+	v.PushBack(rapidjson::Value(value.z).Move(), alloc);
+	v.PushBack(rapidjson::Value(value.w).Move(), alloc);
 
 	// Add array to inObject
 	inObject.AddMember(rapidjson::StringRef(name), v, alloc);

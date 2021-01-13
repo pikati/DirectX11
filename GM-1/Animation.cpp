@@ -9,7 +9,7 @@ Animation::Animation()
 	m_state = 0;
 }
 
-void Animation::Initialize()
+void Animation::SystemInitialize()
 {
 	m_defaultState = 0;
 	for (int i = 0; i < m_dataNum; i++)

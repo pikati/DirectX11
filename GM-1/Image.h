@@ -13,7 +13,7 @@ private:
 	D3DXCOLOR m_color = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
 
 public:
-	void Initialize() override;
+	void SystemInitialize() override;
 	void SystemUpdate() override;
 	void Draw() override;
 	void Finalize() override;

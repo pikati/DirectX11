@@ -20,7 +20,7 @@ private:
 	bool m_isKinematic = false;
 public:
 	AABB();
-	void Initialize();
+	void SystemInitialize() override;
 	void Update();
 	void Draw();
 	void Finalize();

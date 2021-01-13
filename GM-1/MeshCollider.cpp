@@ -11,7 +11,7 @@ MeshCollider::~MeshCollider()
 
 }
 
-void MeshCollider::Initialize()
+void MeshCollider::SystemInitialize()
 {
 	m_colliderID = SetCollider(this);
 }

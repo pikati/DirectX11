@@ -129,7 +129,7 @@ private:
 	void DrawAnimationFrame();
 	void DrawNormal();
 public:
-	void Initialize();
+	void SystemInitialize();
 	void Update();
 	void Draw();
 	void Finalize();

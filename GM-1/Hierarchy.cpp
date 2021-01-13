@@ -44,6 +44,11 @@ void Hierarchy::Update()
     {
         if (ImGui::BeginMenu("File"))
         {
+            if (ImGui::MenuItem("New Scene"))
+            {
+                CManager::GetScene()->CreateScene();
+            }
+            ImGui::Separator();
             if (ImGui::MenuItem("Save"))
             {
                 m_isSaveMenu = !m_isSaveMenu;

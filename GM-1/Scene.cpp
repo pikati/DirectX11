@@ -11,8 +11,8 @@
 #include "Editor.h"
 #include "Hierarchy.h"
 #include <algorithm>
-
-#include "Fbx.h"
+#include "DirectionalLight.h"
+#include "Camera.h"
 #include "GameObject.h"
 #include "Transform.h"
 
@@ -39,13 +39,6 @@ void Scene::Initialize()
 	m_currentSceneName = "Asset/Scene/stage1.scene";
 	LevelLoader::LoadLevel(this, m_currentSceneName.c_str());
 	Hierarchy::SetDefaultPath(m_currentSceneName);
-	
-	/*GameObject* obj = CreateGameObject();
-	Fbx* f = obj->AddComponent<Fbx>();
-	f->SetFileName("Asset/Models/Player/Cat.fbx");
-	f->SetTextureName("Asset/Texture/Player/Cat.png");
-	obj->Initialize();
-	obj->transform->position.y = 1.5f;*/
 }
 
 void Scene::Update()
@@ -72,6 +65,12 @@ void Scene::Draw()
 	if (m_isChange)
 	{
 		m_isChange = false;
+		return;
+	}
+
+	if (!Editor::IsPlay())
+	{
+		EditorDraw();
 		return;
 	}
 
@@ -122,6 +121,7 @@ GameObject* Scene::CreateGameObject()
 	GameObject* obj = new GameObject();
 	obj->name = SetDefaultName(0);
 	m_tempObject.emplace_back(obj);
+	obj->Initialize();
 	return obj;
 }
 
@@ -236,6 +236,8 @@ void Scene::LoadScene(std::string path)
 	ObjectPooler::Finalize();
 	Editor::Finalize();
 	LevelLoader::LoadLevel(this, path.c_str());
+	m_currentSceneName = path;
+	Hierarchy::SetDefaultPath(m_currentSceneName);
 }
 
 void Scene::SaveScene(std::string path)
@@ -249,10 +251,7 @@ void Scene::ObjectInitialize()
 	{
 		for (GameObject* obj : m_gameObject[j])
 		{
-			for (Component* c : obj->GetComponents())
-			{
-				c->Initialize();
-			}
+			obj->SystemInitialize();
 		}
 	}
 }
@@ -343,4 +342,53 @@ void Scene::ErasePossessedObject()
 std::string Scene::GetSceneName()
 {
 	return m_currentSceneName;
+}
+
+void Scene::CreateScene()
+{
+	Finalize();
+	ObjectPooler::Finalize();
+	Editor::Finalize();
+	m_currentSceneName = "Asset/Scene/sampleScene.scene";
+	GameObject* obj2 = AddGameObject();
+	Camera* c = obj2->AddComponent<Camera>();
+	D3D11_VIEWPORT v;
+	v.Width = 1920;
+	v.Height = 1080;
+	v.TopLeftX = 0;
+	v.TopLeftY = 0;
+	c->SetViwePort(v);
+	c->SetLookAt(Vector3(0, 0, 0));
+	obj2->name = "MainCamera";
+	obj2->tag = "MainCamera";
+	obj2->transform->position.Set(0, 10.0f, -10.0f);
+	obj2->Initialize();
+	GameObject* obj = CreateGameObject();
+	obj->AddComponent<DirectionalLight>();
+	obj->name = "DirectionalLight";
+	obj->tag = "Light";
+	obj->transform->position.Set(10.0f, 10.0f, 10.0f);
+	obj->Initialize();
+}
+
+void Scene::PlayInitialize()
+{
+	for (int j = 0; j < LAYER_MAX; j++)
+	{
+		for (GameObject* obj : m_gameObject[j])
+		{
+			obj->Initialize();
+		}
+	}
+}
+
+void Scene::EditorDraw()
+{
+	for (int i = 0; i < LAYER_MAX; i++)
+	{
+		for (GameObject* object : m_gameObject[i])
+		{
+			object->Draw();
+		}
+	}
 }

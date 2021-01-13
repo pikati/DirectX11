@@ -11,7 +11,7 @@ private:
 public:
 	BoxCollider();
 	~BoxCollider();
-	void Initialize() override;
+	void SystemInitialize() override;
 	void Update() override;
 	void Draw() override;
 	void Finalize() override;

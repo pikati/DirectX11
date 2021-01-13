@@ -436,47 +436,10 @@ void Collider::Box2Mesh(Collider* c1, Collider* c2)
 			Vector3 v0 = vertices[x];
 			Vector3 v1 = vertices[x + 1];
 			Vector3 v2 = vertices[x + (z + 1) * (sizeX + 1)];
-			/*Vector3 v23 = vertices[x + 1] - vertices[x + (z + 1) * (sizeX + 1)];
-			Vector3 v12 = vertices[x] - vertices[x + 1];
-			v23.Normalize();
-			v12.Normalize();
-			Vector3 vn = Vector3::Cross(v12, v23);
-			if (vn.y < 0) vn.y *= -1;
-			vn.Normalize();
-			Vector3 v1 = pos - vertices[x];
-			Vector3 v2 = p2 - vertices[x];
-			float dd1 = Vector3::Dot(v1, vn);
-			float dd2 = Vector3::Dot(v2, vn);*/
 			//線分とあるポリゴンのサイズを無限にした平面がぶつかったにょ
 			bool isCollision = CollisionLineSegumentAndPlane(p1, p2, v0, v1, v2);
-			if (/*dd1 * dd2 <= 0*/isCollision)
+			if (isCollision)
 			{
-				//float length = Vector3::Cross(v12, v23).Length();
-				//float d1 = abs(Vector3::Dot(vn, v1)) / length;
-				//float d2 = abs(Vector3::Dot(vn, v2)) / length;
-				//float a = d1 / (d1 + d2);
-				//Vector3 v3 = (1 - a) * v1 + a * v2;
-				//Vector3 collisionPoint = vertices[x] + v3;
-
-				////ポリゴン内に見つけた点があるかチェック
-				//Vector3 v31 = vertices[x + (z + 1) * (sizeX + 1)] - vertices[x];
-
-				//v31.Normalize();
-				//Vector3 n11 = Vector3::Cross(v12, collisionPoint);
-				//Vector3 n22 = Vector3::Cross(v23, collisionPoint);
-				//Vector3 n33 = Vector3::Cross(v31, collisionPoint);
-				//Vector3 n1 = Vector3::Cross(vertices[x + 1] - vertices[x], collisionPoint - vertices[x + 1]);
-				//Vector3 n2 = Vector3::Cross(vertices[x + (z + 1) * (sizeX + 1)] - vertices[x + 1], collisionPoint - vertices[x + (z + 1) * (sizeX + 1)]);
-				//Vector3 n3 = Vector3::Cross(vertices[x] - vertices[x + (z + 1) * (sizeX + 1)], collisionPoint);
-				//n1.Normalize();
-				//n2.Normalize();
-				//n3.Normalize();
-				//float r1 = 1.0f - Vector3::Dot(vn, n1);
-				//float r2 = 1.0f - Vector3::Dot(vn, n2);
-				//float r3 = 1.0f - Vector3::Dot(vn, n3);
-				//if (r1 > 0.001f) continue;
-				//if (r2 > 0.001f) continue;
-				//if (r3 > 0.001f) continue;
 				Vector3 p = CalcIntersectionLineSegmentAndPlane(p1, p2, v0, v1, v2);
 
 				if (DetectPointIsEnclosedByPolygon(p, v0, v1, v2))
@@ -538,7 +501,7 @@ void Collider::Box2Sphere(Collider* c1, Collider* c2)
 		float len = box->GetLength(i);//長さ
 		Vector3 obb = box->GetAxis(i);//軸
 		obb /= len;
-		float dist = fabs(Vector3::Dot(obb, direction));
+		float dist = fabsf(Vector3::Dot(obb, direction));
 		if (i == 0)
 		{
 			vec.x = dist;

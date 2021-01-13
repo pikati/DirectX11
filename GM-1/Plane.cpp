@@ -11,7 +11,7 @@
 #include <math.h>
 #include "imGui/imgui.h"
 
-void Plane::Initialize()
+void Plane::SystemInitialize()
 {
 	VERTEX_3D vertex[4];
 
@@ -231,7 +231,7 @@ void Plane::DrawInformation()
 
 	const char* items[] = { "Default", "Color", "Texture" };
 	int itemCurrent = (int)m_shaderType;
-	ImGui::Combo("combo", &itemCurrent, items, IM_ARRAYSIZE(items));
+	ImGui::Combo("shader", &itemCurrent, items, IM_ARRAYSIZE(items));
 	m_shaderType = (SHADER_TYPE)itemCurrent;
 	ImGui::End();
 

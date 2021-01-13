@@ -22,6 +22,7 @@ private:
 	void MoveTmpObject();
 	void ChangeLayer();
 	void ErasePossessedObject();
+	void EditorDraw();
 public:
 	Scene();
 	~Scene();
@@ -47,6 +48,8 @@ public:
 	void ObjectInitialize();
 	void DeleteObject(int layer, int index);
 	std::string GetSceneName();
+	void CreateScene();
+	void PlayInitialize();
 
 
 

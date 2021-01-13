@@ -25,7 +25,9 @@ public:
 	void Update();
 	void Draw();
 	D3DXMATRIX GetViewMatrix();
+	D3DXMATRIX GetProjectionMatrix();
 	void SetLookAt(Vector3 lookPoint);
+	void SetViwePort(D3D11_VIEWPORT viewPort);
 	void DrawInformation() override;
 
 	void LoadProperties(const rapidjson::Value& inProp) override;

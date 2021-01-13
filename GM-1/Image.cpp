@@ -6,7 +6,7 @@
 #include "Transform.h"
 #include "imGui/imgui.h"
 
-void Image::Initialize()
+void Image::SystemInitialize()
 {
 	m_sortingOrder = 2;
 	VERTEX_3D vertex[4];

@@ -7,6 +7,11 @@ void Component::Initialize()
 
 }
 
+void Component::SystemInitialize()
+{
+
+}
+
 void Component::Update()
 {
 

@@ -9,7 +9,7 @@ private:
 public:
 	SphereCollider();
 	~SphereCollider();
-	void Initialize();
+	void SystemInitialize();
 	void Update();
 	void Draw() override;
 	void Finalize();
