@@ -61,6 +61,11 @@ bool Editor::IsPlay()
 	return EditorController::IsPlay();
 }
 
+const float& Editor::GetEditorCameraDistance()
+{
+	return m_camera->GetDistance();
+}
+
 D3DXMATRIX Editor::GetEditorCameraViewMatrix()
 {
 	return m_camera->GetViewMatrix();

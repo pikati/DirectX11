@@ -5,7 +5,7 @@
 #include "imgui/imgui.h"
 #include "Editor.h"
 
-void RigidBody::Initialize()
+void RigidBody::SystemInitialize()
 {
 	m_force = { 0,0,0 };
 	m_velocity = { 0,0,0 };

@@ -19,6 +19,7 @@ void EditorCamera::Initialize()
 	m_viewPort.TopLeftY = 0;
 	m_viewPort.MinDepth = 0.0f;
 	m_viewPort.MaxDepth = 1.0f;
+	m_distance = 0;
 }
 
 void EditorCamera::Update()
@@ -75,7 +76,6 @@ void EditorCamera::Dolly()
 		{
 			m_rotation.y += m_moveValue.x * MOVE_SPEED;
 		}
-		float distance = 10;
 		/*float x = sinf(XMConvertToRadians(m_rotation.y)) * distance + m_target.x;
 		float y = cosf(XMConvertToRadians(m_rotation.x)) * distance + m_target.y;
 		float z = cosf(XMConvertToRadians(m_rotation.y)) * distance * cosf(XMConvertToRadians(m_rotation.x)) + m_target.z;*/
@@ -84,9 +84,9 @@ void EditorCamera::Dolly()
 		/*float x = (cosf(roty) + sinf(roty)) * distance + m_target.x;
 		float y = (-sinf(rotx) * -sinf(roty) + cosf(rotx) + -sinf(rotx) * cosf(roty)) * distance + m_target.y;
 		float z = (cosf(rotx) * -sinf(roty) + sinf(rotx) + cosf(rotx) * cosf(roty)) * distance + m_target.z;*/
-		float x = sinf(roty) * distance + m_target.x;
-		float y = distance + m_target.y;
-		float z = cosf(roty) * distance + m_target.z;
+		float x = sinf(roty) * m_distance + m_target.x;
+		float y = m_distance + m_target.y;
+		float z = cosf(roty) * m_distance + m_target.z;
 		m_position.x = x;
 		m_position.y = y;
 		m_position.z = z;
@@ -169,6 +169,11 @@ void EditorCamera::CalcUp()
 	right.z = rot2._33;
 	right.Normalize();
 	m_up = Vector3::Cross(forward, right);
+}
+
+const float& EditorCamera::GetDistance()
+{
+	return m_distance;
 }
 
 D3DXMATRIX EditorCamera::GetViewMatrix()

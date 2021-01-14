@@ -55,6 +55,7 @@ GameObject* ObjectPooler::CreatePrefab(std::string name)
 		if (name == obj->name)
 		{
 			GameObject* ob = new GameObject(*obj);
+			ob->SystemInitialize();
 			ob->Initialize();
 			CManager::GetScene()->AddGameObject(ob);
 			return ob;

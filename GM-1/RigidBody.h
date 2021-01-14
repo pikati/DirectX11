@@ -17,7 +17,7 @@ private:
 	Vector3 m_impulseForce = { 0,0,0 };
 public:
 
-	void Initialize() override;
+	void SystemInitialize() override;
 	void Update() override;
 	void Draw() override;
 

@@ -15,10 +15,14 @@ private:
 	static void AABB2AABB(Collider* c1, Collider* c2);
 	static void Box2Mesh(Collider* c1, Collider* c2);
 	static void Box2Sphere(Collider* c1, Collider* c2);
+	static void Box2Box(Collider* c1, Collider* c2);
 	static bool CollisionLineSegumentAndPlane(Vector3 a, Vector3 b, Vector3 v0, Vector3 v1, Vector3 v2);
 	static Vector3 CalcIntersectionLineSegmentAndPlane(Vector3 a, Vector3 b, Vector3 v0, Vector3 v1, Vector3 v2);
 	static float CalcDistancePointAndPlane(Vector3 p, Vector3 v0, Vector3 v1, Vector3 v2);
 	static bool DetectPointIsEnclosedByPolygon(Vector3 p, Vector3 v0, Vector3 v1, Vector3 v2);
+	static float LenSegOnSeparateAxis(Vector3 sep, Vector3 e1, Vector3 e2, Vector3 e3);
+	static bool CollisionOBBSparationAxis(Vector3 separationAxis, Vector3 axsisLength, Vector3 l1, Vector3 l2, Vector3 l3, Vector3 intarval);
+	static bool CollisionOBBSparationAxis(Vector3 separationAxisA, Vector3 SeparationAxisB, Vector3 l1, Vector3 l2, Vector3 l3, Vector3 l4, Vector3 interval);
 protected:
 	enum ColliderType
 	{

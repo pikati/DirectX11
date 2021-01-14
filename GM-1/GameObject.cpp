@@ -302,8 +302,7 @@ void GameObject::ImGuizmoUpdate()
 		/*if (CInput::GetKeyTrigger('S'))
 			m_isSnap = !m_isSnap;*/
 		ImGuiIO& io = ImGui::GetIO();
-		Vector3 distance = m_camera->GetGameObject()->transform->position - transform->position;
-		float camDistance = fabs(distance.Length());
+		float camDistance = Editor::GetEditorCameraDistance();
 		ImGuizmo::SetRect(0, 0, io.DisplaySize.x, io.DisplaySize.y);
 		ImGuizmo::Manipulate(cameraView, cameraProjection, m_currentOperation, m_currentMode, matrix, NULL, m_isSnap ? &snap[0] : NULL);
 		ImGui::End();

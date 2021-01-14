@@ -163,8 +163,8 @@ void Player::Move()
 	}
 	gameObject->transform->rotation.y += diffRotationY;
 
-	m_velocity.y += -m_gravity * FPS::deltaTime * 0.125f;
-	gameObject->transform->position += m_velocity;
+	//m_velocity.y += -m_gravity * FPS::deltaTime * 0.125f;
+	//gameObject->transform->position += m_velocity;
 
 	if (m_velocity.x != 0 || m_velocity.z != 0)
 	{

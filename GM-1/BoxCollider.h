@@ -7,7 +7,7 @@ private:
 	Vector3 m_min = Vector3(-1, -1, -1);
 	Vector3 m_center = Vector3::zero;
 	Transform* m_transform = nullptr;
-
+	bool m_isKinematic = false;
 public:
 	BoxCollider();
 	~BoxCollider();
@@ -23,6 +23,7 @@ public:
 	float GetLength(int i);
 	Vector3 GetAxis(int i);
 	void DrawInformation() override;
+	bool IsKinematic();
 
 	void LoadProperties(const rapidjson::Value& inProp) override;
 	void SaveProperties(rapidjson::Document::AllocatorType& alloc, rapidjson::Value& inProp) override;

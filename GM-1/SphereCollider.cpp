@@ -17,6 +17,7 @@ SphereCollider::SphereCollider()
 		m_transform = new Transform();
 		m_sortingOrder = 0;
 	}
+	m_isDraw = true;
 }
 
 SphereCollider::~SphereCollider()

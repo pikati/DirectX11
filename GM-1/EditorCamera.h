@@ -13,6 +13,7 @@ private:
 	Vector2 m_moveValue;
 	Vector2 m_oldMoveValue;
 	Vector3 m_up;
+	float m_distance = 0;
 	D3DXMATRIX m_viewMatrix;
 	D3DXMATRIX m_projectionMatrix;
 	bool m_isMoveVertical = false;
@@ -29,6 +30,7 @@ public:
 	void Initialize();
 	void Update();
 	void Draw();
+	const float& GetDistance();
 	D3DXMATRIX GetViewMatrix();
 	D3DXMATRIX GetProjectionMatrix();
 };

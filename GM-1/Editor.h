@@ -14,6 +14,7 @@ public:
 	static void Finalize();
 
 	static bool IsPlay();
+	static const float& GetEditorCameraDistance();
 	static D3DXMATRIX GetEditorCameraViewMatrix();
 	static D3DXMATRIX GetEditorCameraProjectionMatrix();
 };

@@ -7,6 +7,7 @@
 #include "ImguiManager.h"
 #include "MeshCollider.h"
 #include "BoxCollider.h"
+#include "RigidBody.h"
 
 std::vector<Collider*> Collider::m_colliders;
 
@@ -123,6 +124,10 @@ void Collider::RunCollisionDetection(Collider* c1, Collider* c2)
 	else if (c1->m_colliderType == Sphere && c2->m_colliderType == Box)
 	{
 		Box2Sphere(c2, c1);
+	}
+	else if (c1->m_colliderType == Box && c2->m_colliderType == Box)
+	{
+		Box2Box(c1, c2);
 	}
 }
 
@@ -318,6 +323,17 @@ void Collider::AABB2AABB(Collider* c1, Collider* c2)
 			pos1.x += dx / 2.0f + 0.01f;
 			pos2.x -= dx / 2.0f + 0.01f;
 		}
+		RigidBody* rb1 = c1->gameObject->GetComponent<RigidBody>();
+		RigidBody* rb2 = c2->gameObject->GetComponent<RigidBody>();
+		if (rb1 != nullptr && rb2 != nullptr)
+		{
+			Vector3 force = rb1->GetForce();
+			force.x = 0;
+			rb1->SetForce(force);
+			force = rb2->GetForce();
+			force.x = 0;
+			rb2->SetForce(force);
+		}
 	}
 	else if (fabsf(dy) <= fabsf(dx) && fabsf(dy) <= fabsf(dz))
 	{
@@ -334,6 +350,17 @@ void Collider::AABB2AABB(Collider* c1, Collider* c2)
 			pos1.y += dy / 2.0f + 0.01f;
 			pos2.y -= dy / 2.0f + 0.01f;
 		}
+		RigidBody* rb1 = c1->gameObject->GetComponent<RigidBody>();
+		RigidBody* rb2 = c2->gameObject->GetComponent<RigidBody>();
+		if (rb1 != nullptr && rb2 != nullptr)
+		{
+			Vector3 force = rb1->GetForce();
+			force.y = 0;
+			rb1->SetForce(force);
+			force = rb2->GetForce();
+			force.y = 0;
+			rb2->SetForce(force);
+		}
 	}
 	else
 	{
@@ -349,6 +376,17 @@ void Collider::AABB2AABB(Collider* c1, Collider* c2)
 		{
 			pos1.z += dz / 2.0f + 0.01f;
 			pos2.z -= dz / 2.0f + 0.01f;
+		}
+		RigidBody* rb1 = c1->gameObject->GetComponent<RigidBody>();
+		RigidBody* rb2 = c2->gameObject->GetComponent<RigidBody>();
+		if (rb1 != nullptr && rb2 != nullptr)
+		{
+			Vector3 force = rb1->GetForce();
+			force.z = 0;
+			rb1->SetForce(force);
+			force = rb2->GetForce();
+			force.z= 0;
+			rb2->SetForce(force);
 		}
 	}
 	c1->gameObject->transform->position = pos1;
@@ -532,6 +570,80 @@ void Collider::Box2Sphere(Collider* c1, Collider* c2)
 	}
 }
 
+void Collider::Box2Box(Collider* c1, Collider* c2)
+{
+	BoxCollider* b1 = dynamic_cast<BoxCollider*>(c1);
+	BoxCollider* b2 = dynamic_cast<BoxCollider*>(c2);
+
+	Vector3 NAe1 = b1->GetAxis(0);
+	Vector3 NAe2 = b1->GetAxis(1);
+	Vector3 NAe3 = b1->GetAxis(2);
+	Vector3 NBe1 = b2->GetAxis(0);
+	Vector3 NBe2 = b2->GetAxis(1);
+	Vector3 NBe3 = b2->GetAxis(2);
+	Vector3 Ae1 = NAe1 * b1->GetLength(0);
+	Vector3 Ae2 = NAe2 * b1->GetLength(1);
+	Vector3 Ae3 = NAe3 * b1->GetLength(2);
+	Vector3 Be1 = NBe1 * b2->GetLength(0);
+	Vector3 Be2 = NBe2 * b2->GetLength(1);
+	Vector3 Be3 = NBe3 * b2->GetLength(2);
+	Vector3 interval = b1->GetPosition() - b2->GetPosition();
+
+	// •ª—£Ž² : Ae1
+	if (!CollisionOBBSparationAxis(NAe1, Ae1, Be1, Be2, Be3, interval)) return;
+
+	// •ª—£Ž² : Ae2
+	if (!CollisionOBBSparationAxis(NAe2, Ae2, Be1, Be2, Be3, interval)) return;
+
+	// •ª—£Ž² : Ae3
+	if (!CollisionOBBSparationAxis(NAe3, Ae3, Be1, Be2, Be3, interval)) return;
+
+	// •ª—£Ž² : Be1
+	if (!CollisionOBBSparationAxis(NBe1, Be1, Ae1, Ae2, Ae3, interval)) return;
+
+	// •ª—£Ž² : Be3
+	if (!CollisionOBBSparationAxis(NBe2, Be2, Ae1, Ae2, Ae3, interval)) return;
+
+	// •ª—£Ž² : Be1
+	if (!CollisionOBBSparationAxis(NBe3, Be3, Ae1, Ae2, Ae3, interval)) return;
+
+	// •ª—£Ž² : C11
+	if (!CollisionOBBSparationAxis(NAe1, NBe1, Ae2, Ae3, Be2, Be3, interval)) return;
+
+	// •ª—£Ž² : C12
+	if (!CollisionOBBSparationAxis(NAe1, NBe2, Ae2, Ae3, Be1, Be3, interval)) return;
+
+	// •ª—£Ž² : C13
+	if (!CollisionOBBSparationAxis(NAe1, NBe3, Ae2, Ae3, Be1, Be2, interval)) return;
+
+	// •ª—£Ž² : C21
+	if (!CollisionOBBSparationAxis(NAe2, NBe1, Ae1, Ae3, Be2, Be3, interval)) return;
+
+	// •ª—£Ž² : C22
+	if (!CollisionOBBSparationAxis(NAe2, NBe2, Ae1, Ae3, Be1, Be3, interval)) return;
+
+	// •ª—£Ž² : C23
+	if (!CollisionOBBSparationAxis(NAe2, NBe3, Ae1, Ae3, Be1, Be2, interval)) return;
+
+	// •ª—£Ž² : C31
+	if (!CollisionOBBSparationAxis(NAe3, NBe1, Ae1, Ae2, Be2, Be3, interval)) return;
+
+	// •ª—£Ž² : C32
+	if (!CollisionOBBSparationAxis(NAe3, NBe2, Ae1, Ae2, Be1, Be3, interval)) return;
+
+	// •ª—£Ž² : C33
+	if (!CollisionOBBSparationAxis(NAe3, NBe3, Ae1, Ae2, Be1, Be2, interval)) return;
+
+	c1->m_isCollision = true;
+	c2->m_isCollision = true;
+	c1->m_isCollisionThisFrame = true;
+	c2->m_isCollisionThisFrame = true;
+	c1->gameObject->OnCollisionEnter(c2->gameObject);
+	c2->gameObject->OnCollisionEnter(c1->gameObject);
+	c1->m_collisionObject = c2->gameObject;
+	c2->m_collisionObject = c1->gameObject;
+}
+
 bool Collider::CollisionLineSegumentAndPlane(Vector3 a, Vector3 b, Vector3 v0, Vector3 v1, Vector3 v2)
 {
 	Vector3 n = Vector3::Normalize(Vector3::Cross(v1 - v0, v2 - v1));
@@ -578,6 +690,37 @@ bool Collider::DetectPointIsEnclosedByPolygon(Vector3 p, Vector3 v0, Vector3 v1,
 	if ((1.0f - Vector3::Dot(n, n1)) > 0.001f) return false;
 	if ((1.0f - Vector3::Dot(n, n2)) > 0.001f) return false;
 
+	return true;
+}
+
+float Collider::LenSegOnSeparateAxis(Vector3 sep, Vector3 e1, Vector3 e2,Vector3 e3 = Vector3::zero)
+{
+	float r1 = fabsf(Vector3::Dot(sep, e1));
+	float r2 = fabsf(Vector3::Dot(sep, e2));
+	float r3 = 0;
+	if (e3.Length() != 0)
+	{
+		r3 = fabsf(Vector3::Dot(sep, e3));
+	}
+	return r1 + r2 + r3;
+}
+
+bool Collider::CollisionOBBSparationAxis(Vector3 separationAxis, Vector3 axsisLength, Vector3 l1, Vector3 l2, Vector3 l3, Vector3 interval)
+{
+	float rA = Vector3::Length(axsisLength);
+	float rB = LenSegOnSeparateAxis(separationAxis, l1, l2, l3);
+	float L = fabsf(Vector3::Dot(interval, separationAxis));
+	if (L > rA + rB) return false;
+	return true;
+}
+
+bool Collider::CollisionOBBSparationAxis(Vector3 separationAxisA, Vector3 SeparationAxisB, Vector3 l1, Vector3 l2, Vector3 l3, Vector3 l4, Vector3 interval)
+{
+	Vector3 cross = Vector3::Cross(separationAxisA, SeparationAxisB);
+	float rA = LenSegOnSeparateAxis(cross, l1, l2);
+	float rB = LenSegOnSeparateAxis(cross, l3, l4);
+	float L = fabsf(Vector3::Dot(interval, cross));
+	if (L > rA + rB) return false;
 	return true;
 }
 

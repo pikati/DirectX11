@@ -157,7 +157,7 @@ void Inspector::DispAddComponentWindow()
 		if (ImGui::Button(str.c_str()))
 		{
 			Component* c = ClassDictionary::AddComponent(str, m_object->obj);
-			c->Initialize();
+			c->SystemInitialize();
 			m_isDrawInfo.push_back(false);
 		}
 	}
