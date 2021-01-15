@@ -27,12 +27,11 @@ void Animation::Update()
 	UpdateFrame();
 }
 
-void Animation::Finalize()
+void Animation::SystemFinalize()
 {
 	for (AnimationData* d : m_animationData)
 	{
-		delete d;
-		d = nullptr;
+		SAFE_DELETE(d);
 	}
 	m_animationData.clear();
 }

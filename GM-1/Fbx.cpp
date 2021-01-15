@@ -52,7 +52,7 @@ void Fbx::Draw()
 	DrawAnimation();
 }
 
-void Fbx::Finalize()
+void Fbx::SystemFinalize()
 {
 	if (m_isCopy)
 	{

@@ -16,6 +16,7 @@ public:
 	virtual void SystemUpdate();
 	virtual void Draw();
 	virtual void Finalize();
+	virtual void SystemFinalize();
 	Component* GetComponent();
 	void SetGameObject(GameObject* obj);
 	GameObject* GetGameObject();

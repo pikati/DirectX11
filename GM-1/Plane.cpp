@@ -128,7 +128,7 @@ void Plane::Draw()
 	gameObject->SetBoundingBox(bb);
 }
 
-void Plane::Finalize()
+void Plane::SystemFinalize()
 {
 	SAFE_RELEASE(m_vertexBuffer);
 	//SAFE_RELEASE(m_tex);

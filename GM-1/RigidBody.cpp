@@ -28,6 +28,13 @@ void RigidBody::Draw()
 	m_impulseForce = { 0,0,0 };
 }
 
+void RigidBody::Finalize()
+{
+	m_force = { 0,0,0 };
+	m_velocity = { 0,0,0 };
+	m_oldForce = { 0,0,0 };
+}
+
 void RigidBody::SetGravity(float gravity)
 {
 	m_gravity = gravity;

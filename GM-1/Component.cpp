@@ -32,6 +32,10 @@ void Component::Finalize()
 
 }
 
+void Component::SystemFinalize()
+{
+}
+
 Component* Component::GetComponent()
 {
 	return this;

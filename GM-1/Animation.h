@@ -26,7 +26,7 @@ public:
 	Animation();
 	void SystemInitialize() override;
 	void Update() override;
-	void Finalize() override;
+	void SystemFinalize() override;
 	void SetAnimationNum(int num);
 	void SetAnimationData(std::string name, int state, bool isLoop, int startTime, int endTime, int speed = 1, int loopStartTime = -1, int loopEndTime = -1);
 	void SetAnimationData(const char* name, int state, bool isLoop, int startTime, int endTime, int speed = 1, int loopStartTime = -1, int loopEndTime = -1);

@@ -21,9 +21,10 @@ private:
 public:
 	Camera();
 	~Camera();
-	void Initialize();
-	void Update();
-	void Draw();
+	void Initialize() override;
+	void Update() override;
+	void Draw() override;
+	void Finalize() override;
 	D3DXMATRIX GetViewMatrix();
 	D3DXMATRIX GetProjectionMatrix();
 	void SetLookAt(Vector3 lookPoint);

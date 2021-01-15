@@ -118,11 +118,20 @@ void GameObject::Draw()
 
 void GameObject::Finalize()
 {
-	transform->Finalize();
-	delete transform;
 	for (Component* c : components)
 	{
 		c->Finalize();
+	}
+	m_camera = nullptr;
+}
+
+void GameObject::SystemFinalize()
+{
+	transform->Finalize();
+	SAFE_DELETE(transform);
+	for (Component* c : components)
+	{
+		c->SystemFinalize();
 	}
 }
 

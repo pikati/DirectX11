@@ -17,6 +17,11 @@ AABB::AABB()
 	m_texture->Initialize();
 }
 
+AABB::~AABB()
+{
+	SAFE_DELETE(m_texture);
+}
+
 void AABB::SystemInitialize()
 {
 
@@ -337,7 +342,7 @@ void AABB::Draw()
 	CRenderer::GetDeviceContext()->Draw(2, 0);
 }
 
-void AABB::Finalize()
+void AABB::SystemFinalize()
 {
 	DeleteCollider(m_colliderID);
 }

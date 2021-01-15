@@ -9,10 +9,11 @@ private:
 public:
 	SphereCollider();
 	~SphereCollider();
-	void SystemInitialize();
-	void Update();
+	void SystemInitialize()override;
+	void Update()override;
 	void Draw() override;
-	void Finalize();
+	void Finalize() override;
+	void SystemFinalize()override;
 
 	void SetCenter(Vector3 center);
 	void SetCenter(float x, float y, float z);

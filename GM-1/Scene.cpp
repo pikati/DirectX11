@@ -92,12 +92,16 @@ void Scene::Draw()
 			o->Draw();
 		}
 		obj.clear();*/
+		std::string str;
+		str = std::to_string(m_nowRenderNum) + "\n";
+		OutputDebugString(str.c_str());
 	}
 	m_nowRenderNum = 0;
 }
 
 void Scene::Finalize()
 {
+	PlayFinalize();
 	for (int i = 0; i < LAYER_MAX; i++)
 	{
 		for (GameObject* object : m_gameObject[i])
@@ -378,6 +382,17 @@ void Scene::PlayInitialize()
 		for (GameObject* obj : m_gameObject[j])
 		{
 			obj->Initialize();
+		}
+	}
+}
+
+void Scene::PlayFinalize()
+{
+	for (int j = 0; j < LAYER_MAX; j++)
+	{
+		for (GameObject* obj : m_gameObject[j])
+		{
+			obj->Finalize();
 		}
 	}
 }

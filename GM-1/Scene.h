@@ -50,7 +50,7 @@ public:
 	std::string GetSceneName();
 	void CreateScene();
 	void PlayInitialize();
-
+	void PlayFinalize();
 
 
 	template <typename T>

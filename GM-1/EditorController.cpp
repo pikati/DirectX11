@@ -30,6 +30,10 @@ void EditorController::Update()
 	{
 		CManager::GetScene()->PlayInitialize();
 	}
+	else if (isOldIsPlay && !m_isPlay)
+	{
+		CManager::GetScene()->PlayFinalize();
+	}
 }
 
 bool EditorController::IsPlay()

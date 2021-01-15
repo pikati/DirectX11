@@ -15,7 +15,7 @@ public:
 
 	void SystemInitialize() override;
 	void Update() override;
-	void Finalize() override;
+	void SystemFinalize() override;
 
 	void SetVertices(VERTEX_3D* vertcies, int sizeX, int sizeZ);
 	Vector3* GetVertices();

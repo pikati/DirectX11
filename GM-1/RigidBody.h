@@ -20,6 +20,7 @@ public:
 	void SystemInitialize() override;
 	void Update() override;
 	void Draw() override;
+	void Finalize() override;
 
 	void SetGravity(float gravity);
 	float GetGrabity();

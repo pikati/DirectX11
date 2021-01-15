@@ -48,6 +48,7 @@ public:
 	void SystemUpdate();
 	void Draw();
 	void Finalize();
+	void SystemFinalize();
 
 	void Destroy();
 	void OnCollisionEnter(GameObject* obj);

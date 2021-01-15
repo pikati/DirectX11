@@ -16,7 +16,7 @@ public:
 	void SystemInitialize() override;
 	void SystemUpdate() override;
 	void Draw() override;
-	void Finalize() override;
+	void SystemFinalize() override;
 
 	void SetTextureName(std::string textureName);
 	void SetSize(float width, float height);

@@ -22,7 +22,7 @@ void MeshCollider::Update()
 	Collider::Update();
 }
 
-void MeshCollider::Finalize()
+void MeshCollider::SystemFinalize()
 {
 	DeleteCollider(m_colliderID);
 	if (!m_mesh)

@@ -153,7 +153,7 @@ void BoxCollider::Draw()
 	SAFE_RELEASE(pIB);
 }
 
-void BoxCollider::Finalize()
+void BoxCollider::SystemFinalize()
 {
 	DeleteCollider(m_colliderID);
 	delete m_transform;

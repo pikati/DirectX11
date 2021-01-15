@@ -14,7 +14,7 @@ public:
 	void SystemInitialize() override;
 	void Update() override;
 	void Draw() override;
-	void Finalize() override;
+	void SystemFinalize() override;
 
 	Vector3 GetPosition() override;
 	void SetMax(Vector3 max);

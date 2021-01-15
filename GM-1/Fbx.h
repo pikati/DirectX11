@@ -132,7 +132,7 @@ public:
 	void SystemInitialize();
 	void Update();
 	void Draw();
-	void Finalize();
+	void SystemFinalize();
 	void Load(const char* fileName);
 	void Load();
 	void SetTextureName(const char* fileName);

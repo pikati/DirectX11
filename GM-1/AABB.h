@@ -20,10 +20,11 @@ private:
 	bool m_isKinematic = false;
 public:
 	AABB();
+	~AABB();
 	void SystemInitialize() override;
-	void Update();
-	void Draw();
-	void Finalize();
+	void Update() override;
+	void Draw() override;
+	void SystemFinalize() override;
 	void SetMax(Vector3 max);
 	void SetMin(Vector3 min);
 	void SetMax(float x, float y, float z);

@@ -124,7 +124,7 @@ void Image::Draw()
 	CRenderer::GetDeviceContext()->Draw(4, 0);
 }
 
-void Image::Finalize()
+void Image::SystemFinalize()
 {
 	SAFE_RELEASE(m_texture);
 }

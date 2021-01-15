@@ -72,6 +72,11 @@ void Camera::Draw()
 	}
 }
 
+void Camera::Finalize()
+{
+	CManager::GetScene()->SetRenderNum(0);
+}
+
 void Camera::CheckView()
 {
 	std::list<GameObject*>* objects = CManager::GetScene()->GetAllGameObject();

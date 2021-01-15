@@ -130,8 +130,12 @@ void SphereCollider::Draw()
 
 void SphereCollider::Finalize()
 {
+	SAFE_DELETE(m_transform);
+}
+
+void SphereCollider::SystemFinalize()
+{
 	DeleteCollider(m_colliderID);
-	delete m_transform;
 }
 
 void SphereCollider::SetCenter(Vector3 center)

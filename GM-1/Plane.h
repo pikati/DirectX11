@@ -20,7 +20,7 @@ private:
 public:
 	void SystemInitialize();
 	void Draw();
-	void Finalize();
+	void SystemFinalize();
 	void SetTextureName(std::string name);
 	void DrawInformation() override;
 
