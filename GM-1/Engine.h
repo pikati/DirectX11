@@ -21,6 +21,8 @@ public:
 
 	const Vector2 operator+(const Vector2& vec) const;
 	const Vector2 operator-(const Vector2& vec) const;
+	friend Vector2 operator*(const float n, Vector2 vec);
+	friend Vector2 operator*(Vector2 vec, const float n);
 	Vector2& operator+=(const Vector2& vec);
 };
 

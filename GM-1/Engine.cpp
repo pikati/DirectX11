@@ -64,6 +64,15 @@ const Vector2 Vector2::operator-(const Vector2& vec) const
 	return Vector2(x - vec.x, y - vec.y);
 }
 
+Vector2 operator*(float n, const Vector2 vec)
+{
+	return Vector2(n * vec.x, n * vec.y);
+}
+Vector2 operator*(const Vector2 vec, float n)
+{
+	return Vector2(n * vec.x, n * vec.y);
+}
+
 Vector2& Vector2::operator+=(const Vector2& vec)
 {
 	x += vec.x;
