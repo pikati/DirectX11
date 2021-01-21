@@ -1,9 +1,152 @@
-﻿  Billboard.cpp
+﻿  compilation object save succeeded; see D:\HAL\3\Pikatan\GM-1\Asset\Shader\ColorPS.cso
+  compilation object save succeeded; see D:\HAL\3\Pikatan\GM-1\Asset\Shader\ColorVS.cso
+  compilation object save succeeded; see D:\HAL\3\Pikatan\GM-1\Asset\Shader\MorphingPS.cso
+  compilation object save succeeded; see D:\HAL\3\Pikatan\GM-1\Asset\Shader\pixelShader.cso
+  compilation object save succeeded; see D:\HAL\3\Pikatan\GM-1\Asset\Shader\unlitTexturePS.cso
+D:\HAL\3\Pikatan\GM-1\unlitTextureVS.hlsl(3,34-36): warning X3578: 'main': Top-level output parameter 'Out' not completely initialized
+  compilation object save succeeded; see D:\HAL\3\Pikatan\GM-1\Asset\Shader\unlitTextureVS.cso
+D:\HAL\3\Pikatan\GM-1\unlitTextureVS.hlsl(3,34-36): warning X3578: Output value 'Out' is not completely initialized
+  
+  compilation object save succeeded; see D:\HAL\3\Pikatan\GM-1\Asset\Shader\vertexShader.cso
+  AABB.cpp
+  Animation.cpp
+  AudioManager.cpp
+  Billboard.cpp
+  BoundingBox.cpp
+  BoxCollider.cpp
+  Bullet.cpp
   Camera.cpp
   CameraController.cpp
   ClassDictionary.cpp
-  GameObject.cpp
-  ImguiManager.cpp
-  Scene.cpp
+  Collider.cpp
+  Component.cpp
+  EditorCamera.cpp
+  EditorController.cpp
+  DirectionalLight.cpp
+  Editor.cpp
+  Engine.cpp
+  Fade.cpp
+  Fbx.cpp
+D:\HAL\3\Pikatan\GM-1\Fbx.cpp(633,93): warning C4244: '=': 'T' から 'FLOAT' への変換です。データが失われる可能性があります。
+          with
+          [
+              T=fbxsdk::FbxDouble
+          ]
+D:\HAL\3\Pikatan\GM-1\Fbx.cpp(634,87): warning C4244: '=': 'T' から 'FLOAT' への変換です。データが失われる可能性があります。
+          with
+          [
+              T=fbxsdk::FbxDouble
+          ]
+  FPS.cpp
   コードを生成中...
-  GM-1.vcxproj -> D:\HAL\3\GM\DirectX11\Debug\GM-1.exe
+  コンパイル中...
+  GameObject.cpp
+  Hierarchy.cpp
+  Image.cpp
+  ImguiManager.cpp
+  ImCurveEdit.cpp
+  ImGradient.cpp
+  imgui.cpp
+  ImGuizmo.cpp
+  imgui_demo.cpp
+  imgui_draw.cpp
+  imgui_impl_dx11.cpp
+D:\ProgramFiles\DirectX9 June\Include\dxgitype.h(12,1): warning C4005: 'DXGI_STATUS_OCCLUDED': マクロが再定義されました。
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\winerror.h(55840): message : 'DXGI_STATUS_OCCLUDED' の以前の定義を確認してください
+D:\ProgramFiles\DirectX9 June\Include\dxgitype.h(13,1): warning C4005: 'DXGI_STATUS_CLIPPED': マクロが再定義されました。
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\winerror.h(55849): message : 'DXGI_STATUS_CLIPPED' の以前の定義を確認してください
+D:\ProgramFiles\DirectX9 June\Include\dxgitype.h(14,1): warning C4005: 'DXGI_STATUS_NO_REDIRECTION': マクロが再定義されました。
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\winerror.h(55858): message : 'DXGI_STATUS_NO_REDIRECTION' の以前の定義を確認してください
+D:\ProgramFiles\DirectX9 June\Include\dxgitype.h(15,1): warning C4005: 'DXGI_STATUS_NO_DESKTOP_ACCESS': マクロが再定義されました。
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\winerror.h(55867): message : 'DXGI_STATUS_NO_DESKTOP_ACCESS' の以前の定義を確認してください
+D:\ProgramFiles\DirectX9 June\Include\dxgitype.h(16,1): warning C4005: 'DXGI_STATUS_GRAPHICS_VIDPN_SOURCE_IN_USE': マクロが再定義されました。
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\winerror.h(55876): message : 'DXGI_STATUS_GRAPHICS_VIDPN_SOURCE_IN_USE' の以前の定義を確認してください
+D:\ProgramFiles\DirectX9 June\Include\dxgitype.h(17,1): warning C4005: 'DXGI_STATUS_MODE_CHANGED': マクロが再定義されました。
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\winerror.h(55885): message : 'DXGI_STATUS_MODE_CHANGED' の以前の定義を確認してください
+D:\ProgramFiles\DirectX9 June\Include\dxgitype.h(18,1): warning C4005: 'DXGI_STATUS_MODE_CHANGE_IN_PROGRESS': マクロが再定義されました。
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\winerror.h(55894): message : 'DXGI_STATUS_MODE_CHANGE_IN_PROGRESS' の以前の定義を確認してください
+D:\ProgramFiles\DirectX9 June\Include\dxgitype.h(21,1): warning C4005: 'DXGI_ERROR_INVALID_CALL': マクロが再定義されました。
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\winerror.h(55909): message : 'DXGI_ERROR_INVALID_CALL' の以前の定義を確認してください
+D:\ProgramFiles\DirectX9 June\Include\dxgitype.h(22,1): warning C4005: 'DXGI_ERROR_NOT_FOUND': マクロが再定義されました。
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\winerror.h(55918): message : 'DXGI_ERROR_NOT_FOUND' の以前の定義を確認してください
+D:\ProgramFiles\DirectX9 June\Include\dxgitype.h(23,1): warning C4005: 'DXGI_ERROR_MORE_DATA': マクロが再定義されました。
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\winerror.h(55927): message : 'DXGI_ERROR_MORE_DATA' の以前の定義を確認してください
+D:\ProgramFiles\DirectX9 June\Include\dxgitype.h(24,1): warning C4005: 'DXGI_ERROR_UNSUPPORTED': マクロが再定義されました。
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\winerror.h(55936): message : 'DXGI_ERROR_UNSUPPORTED' の以前の定義を確認してください
+D:\ProgramFiles\DirectX9 June\Include\dxgitype.h(25,1): warning C4005: 'DXGI_ERROR_DEVICE_REMOVED': マクロが再定義されました。
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\winerror.h(55945): message : 'DXGI_ERROR_DEVICE_REMOVED' の以前の定義を確認してください
+D:\ProgramFiles\DirectX9 June\Include\dxgitype.h(26,1): warning C4005: 'DXGI_ERROR_DEVICE_HUNG': マクロが再定義されました。
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\winerror.h(55954): message : 'DXGI_ERROR_DEVICE_HUNG' の以前の定義を確認してください
+D:\ProgramFiles\DirectX9 June\Include\dxgitype.h(27,1): warning C4005: 'DXGI_ERROR_DEVICE_RESET': マクロが再定義されました。
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\winerror.h(55964): message : 'DXGI_ERROR_DEVICE_RESET' の以前の定義を確認してください
+D:\ProgramFiles\DirectX9 June\Include\dxgitype.h(28,1): warning C4005: 'DXGI_ERROR_WAS_STILL_DRAWING': マクロが再定義されました。
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\winerror.h(55973): message : 'DXGI_ERROR_WAS_STILL_DRAWING' の以前の定義を確認してください
+D:\ProgramFiles\DirectX9 June\Include\dxgitype.h(29,1): warning C4005: 'DXGI_ERROR_FRAME_STATISTICS_DISJOINT': マクロが再定義されました。
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\winerror.h(55983): message : 'DXGI_ERROR_FRAME_STATISTICS_DISJOINT' の以前の定義を確認してください
+D:\ProgramFiles\DirectX9 June\Include\dxgitype.h(30,1): warning C4005: 'DXGI_ERROR_GRAPHICS_VIDPN_SOURCE_IN_USE': マクロが再定義されました。
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\winerror.h(55992): message : 'DXGI_ERROR_GRAPHICS_VIDPN_SOURCE_IN_USE' の以前の定義を確認してください
+D:\ProgramFiles\DirectX9 June\Include\dxgitype.h(31,1): warning C4005: 'DXGI_ERROR_DRIVER_INTERNAL_ERROR': マクロが再定義されました。
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\winerror.h(56002): message : 'DXGI_ERROR_DRIVER_INTERNAL_ERROR' の以前の定義を確認してください
+D:\ProgramFiles\DirectX9 June\Include\dxgitype.h(32,1): warning C4005: 'DXGI_ERROR_NONEXCLUSIVE': マクロが再定義されました。
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\winerror.h(56011): message : 'DXGI_ERROR_NONEXCLUSIVE' の以前の定義を確認してください
+D:\ProgramFiles\DirectX9 June\Include\dxgitype.h(33,1): warning C4005: 'DXGI_ERROR_NOT_CURRENTLY_AVAILABLE': マクロが再定義されました。
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\winerror.h(56020): message : 'DXGI_ERROR_NOT_CURRENTLY_AVAILABLE' の以前の定義を確認してください
+D:\ProgramFiles\DirectX9 June\Include\dxgitype.h(34,1): warning C4005: 'DXGI_ERROR_REMOTE_CLIENT_DISCONNECTED': マクロが再定義されました。
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\winerror.h(56030): message : 'DXGI_ERROR_REMOTE_CLIENT_DISCONNECTED' の以前の定義を確認してください
+D:\ProgramFiles\DirectX9 June\Include\dxgitype.h(35,1): warning C4005: 'DXGI_ERROR_REMOTE_OUTOFMEMORY': マクロが再定義されました。
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\winerror.h(56039): message : 'DXGI_ERROR_REMOTE_OUTOFMEMORY' の以前の定義を確認してください
+D:\ProgramFiles\DirectX9 June\Include\d3d11.h(917,1): warning C4005: 'D3D11_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS': マクロが再定義されました。
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\winerror.h(56303): message : 'D3D11_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS' の以前の定義を確認してください
+D:\ProgramFiles\DirectX9 June\Include\d3d11.h(918,1): warning C4005: 'D3D11_ERROR_FILE_NOT_FOUND': マクロが再定義されました。
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\winerror.h(56312): message : 'D3D11_ERROR_FILE_NOT_FOUND' の以前の定義を確認してください
+D:\ProgramFiles\DirectX9 June\Include\d3d11.h(919,1): warning C4005: 'D3D11_ERROR_TOO_MANY_UNIQUE_VIEW_OBJECTS': マクロが再定義されました。
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\winerror.h(56322): message : 'D3D11_ERROR_TOO_MANY_UNIQUE_VIEW_OBJECTS' の以前の定義を確認してください
+D:\ProgramFiles\DirectX9 June\Include\d3d11.h(920,1): warning C4005: 'D3D11_ERROR_DEFERRED_CONTEXT_MAP_WITHOUT_INITIAL_DISCARD': マクロが再定義されました。
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\winerror.h(56331): message : 'D3D11_ERROR_DEFERRED_CONTEXT_MAP_WITHOUT_INITIAL_DISCARD' の以前の定義を確認してください
+D:\ProgramFiles\DirectX9 June\Include\d3d10.h(608,1): warning C4005: 'D3D10_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS': マクロが再定義されました。
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\winerror.h(56279): message : 'D3D10_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS' の以前の定義を確認してください
+D:\ProgramFiles\DirectX9 June\Include\d3d10.h(609,1): warning C4005: 'D3D10_ERROR_FILE_NOT_FOUND': マクロが再定義されました。
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\winerror.h(56288): message : 'D3D10_ERROR_FILE_NOT_FOUND' の以前の定義を確認してください
+  imgui_impl_win32.cpp
+  imgui_widgets.cpp
+  ImSequencer.cpp
+  input.cpp
+D:\HAL\3\Pikatan\GM-1\input.cpp(36,32): warning C4244: '引数': 'LONG' から 'float' への変換です。データが失われる可能性があります。
+D:\HAL\3\Pikatan\GM-1\input.cpp(36,25): warning C4244: '引数': 'LONG' から 'float' への変換です。データが失われる可能性があります。
+  Inspector.cpp
+  Item.cpp
+  ItemController.cpp
+  LevelLoader.cpp
+  main.cpp
+  コードを生成中...
+  コンパイル中...
+  MainGameManager.cpp
+  manager.cpp
+  MeshCollider.cpp
+  MeshField.cpp
+D:\HAL\3\Pikatan\GM-1\MeshField.cpp(22,37): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+D:\HAL\3\Pikatan\GM-1\MeshField.cpp(22,34): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+  Morphing.cpp
+  ObjectPooler.cpp
+  PerlinNoise.cpp
+  Plane.cpp
+  Player.cpp
+  renderer.cpp
+  ResultManager.cpp
+  RigidBody.cpp
+  SaveLoadManager.cpp
+  Scene.cpp
+  SceneManager.cpp
+  SkyDorm.cpp
+  SphereCollider.cpp
+  Spring.cpp
+  Texture.cpp
+  TitleManager.cpp
+  コードを生成中...
+  コンパイル中...
+  TitleText.cpp
+  Transform.cpp
+  TutorialManager.cpp
+  WoodBox.cpp
+  コードを生成中...
+  GM-1.vcxproj -> D:\HAL\3\Pikatan\Debug\GM-1.exe

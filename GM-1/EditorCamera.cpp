@@ -91,7 +91,7 @@ void EditorCamera::Dolly()
 		m_position.y = y;
 		m_position.z = z;
 		//CalcUp();
-		DebugLogRotation();
+		DebugLogPosition();
 	}
 	if (m_rotation.x< 0)
 	{
