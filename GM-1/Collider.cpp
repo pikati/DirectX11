@@ -38,6 +38,15 @@ void Collider::Finalize()
 
 }
 
+void Collider::FinalizeCollider()
+{
+	for (Collider* c : m_colliders)
+	{
+		SAFE_DELETE(c);
+	}
+	m_colliders.erase(m_colliders.begin(), m_colliders.end());
+}
+
 bool Collider::IsCollision()
 {
 	return m_isCollision;
@@ -327,19 +336,19 @@ void Collider::AABB2AABB(Collider* c1, Collider* c2)
 		RigidBody* rb2 = c2->gameObject->GetComponent<RigidBody>();
 		if (rb1 != nullptr && rb2 != nullptr)
 		{
-			Vector3 force = rb1->GetForce();
-			force.x = 0;
-			rb1->SetForce(force);
-			force = rb2->GetForce();
-			force.x = 0;
-			rb2->SetForce(force);
+			Vector3 velocity = rb1->GetVelocity();
+			velocity.x = 0;
+			rb1->SetVelocity(velocity);
+			velocity = rb2->GetVelocity();
+			velocity.x = 0;
+			rb2->SetVelocity(velocity);
 		}
 	}
 	else if (fabsf(dy) <= fabsf(dx) && fabsf(dy) <= fabsf(dz))
 	{
 		if (a1Kinematic)
 		{
-			pos2.y -= dy + 0.01f;
+			pos2.y -= dy;
 		}
 		else if (a2Kinematic)
 		{
@@ -352,14 +361,17 @@ void Collider::AABB2AABB(Collider* c1, Collider* c2)
 		}
 		RigidBody* rb1 = c1->gameObject->GetComponent<RigidBody>();
 		RigidBody* rb2 = c2->gameObject->GetComponent<RigidBody>();
-		if (rb1 != nullptr && rb2 != nullptr)
+		if (rb1 != nullptr)
 		{
-			Vector3 force = rb1->GetForce();
-			force.y = 0;
-			rb1->SetForce(force);
-			force = rb2->GetForce();
-			force.y = 0;
-			rb2->SetForce(force);
+			Vector3 velocity = rb1->GetVelocity();
+			velocity.y = 0;
+			rb1->SetVelocity(velocity);
+		}
+		if (rb2 != nullptr)
+		{
+			Vector3 velocity = rb2->GetVelocity();
+			velocity.y = 0;
+			rb2->SetVelocity(velocity);
 		}
 	}
 	else
@@ -381,12 +393,12 @@ void Collider::AABB2AABB(Collider* c1, Collider* c2)
 		RigidBody* rb2 = c2->gameObject->GetComponent<RigidBody>();
 		if (rb1 != nullptr && rb2 != nullptr)
 		{
-			Vector3 force = rb1->GetForce();
-			force.z = 0;
-			rb1->SetForce(force);
-			force = rb2->GetForce();
-			force.z= 0;
-			rb2->SetForce(force);
+			Vector3 velocity = rb1->GetVelocity();
+			velocity.z = 0;
+			rb1->SetVelocity(velocity);
+			velocity = rb2->GetVelocity();
+			velocity.z= 0;
+			rb2->SetVelocity(velocity);
 		}
 	}
 	c1->gameObject->transform->position = pos1;

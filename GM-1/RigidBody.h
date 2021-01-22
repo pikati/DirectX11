@@ -26,6 +26,7 @@ public:
 	float GetGrabity();
 	void AddForce(Vector3 force, FORCE_MODE forceMode = FORCE_MODE::FORCE);
 	void SetForce(Vector3 force);
+	void SetVelocity(Vector3 velocity);
 	Vector3 GetForce();
 	Vector3 GetVelocity();
 

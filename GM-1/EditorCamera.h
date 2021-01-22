@@ -13,7 +13,8 @@ private:
 	Vector2 m_moveValue;
 	Vector2 m_oldMoveValue;
 	Vector3 m_up;
-	float m_distance = 0;
+	Vector3 m_offset = { 0, 10.0f, -10.0f };
+	float m_distance = 10;
 	D3DXMATRIX m_viewMatrix;
 	D3DXMATRIX m_projectionMatrix;
 	bool m_isMoveVertical = false;

@@ -10,6 +10,7 @@
 #include <DirectXMath.h>
 #include <math.h>
 #include "imGui/imgui.h"
+#include "Inspector.h"
 
 void Plane::SystemInitialize()
 {
@@ -233,6 +234,14 @@ void Plane::DrawInformation()
 	int itemCurrent = (int)m_shaderType;
 	ImGui::Combo("shader", &itemCurrent, items, IM_ARRAYSIZE(items));
 	m_shaderType = (SHADER_TYPE)itemCurrent;
+
+	if (ImGui::Button("Delete"))
+	{
+		this->SystemFinalize();
+		gameObject->DeleteComponent<Plane>();
+		Inspector::DeleteInformation();
+	}
+
 	ImGui::End();
 
 	ImGui::PopStyleColor();

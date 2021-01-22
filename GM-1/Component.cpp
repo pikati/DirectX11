@@ -1,6 +1,7 @@
 #include "Component.h"
 #include "LevelLoader.h"
 #include "imGui/imgui.h"
+#include "Inspector.h"
 
 void Component::Initialize()
 {
@@ -70,6 +71,13 @@ void Component::DrawInformation()
 	ImGui::SetNextWindowPos(ImVec2(1000, 20), ImGuiCond_Once);
 	ImGui::SetNextWindowSize(ImVec2(400, 300), ImGuiCond_Once);
 	ImGui::Begin(name.substr(6).c_str());
+
+	if (ImGui::Button("Delete"))
+	{
+		this->SystemFinalize();
+		gameObject->DeleteComponent(name.substr(6));
+		Inspector::DeleteInformation();
+	}
 
 	ImGui::End();
 

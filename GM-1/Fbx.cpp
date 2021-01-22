@@ -10,6 +10,7 @@
 #include <DirectXMath.h>
 #include "ObjectPooler.h"
 #include "BoundingBox.h"
+#include "Inspector.h"
 
 #define FRAME 0.0166666666666667
 
@@ -1299,6 +1300,14 @@ void Fbx::DrawInformation()
 		Finalize();
 		Initialize();
 	}
+
+	if (ImGui::Button("Delete"))
+	{
+		this->SystemFinalize();
+		gameObject->DeleteComponent<Fbx>();
+		Inspector::DeleteInformation();
+	}
+
 	ImGui::End();
 
 	ImGui::PopStyleColor();

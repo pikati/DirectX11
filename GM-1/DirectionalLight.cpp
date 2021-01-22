@@ -1,6 +1,7 @@
 #include "DirectionalLight.h"
 #include "imGui/imgui.h"
 #include "LevelLoader.h"
+#include "Inspector.h"
 
 void DirectionalLight::SystemInitialize()
 {
@@ -52,6 +53,14 @@ void DirectionalLight::DrawInformation()
 	
 	ImGui::Checkbox("Enable", &enable);
 	m_light.Enable = enable;
+
+	if (ImGui::Button("Delete"))
+	{
+		this->SystemFinalize();
+		gameObject->DeleteComponent<DirectionalLight>();
+		Inspector::DeleteInformation();
+	}
+
 	ImGui::End();
 
 	ImGui::PopStyleColor();

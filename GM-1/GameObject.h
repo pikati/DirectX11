@@ -58,6 +58,8 @@ public:
 	Vector3 GetRight();
 	Vector3 GetUp();
 
+	bool DeleteComponent(std::string className);
+
 	void IsDraw(bool isDraw);
 	void SetBoundingBox(BoundingBox* bb);
 	BoundingBox* GetBoundingBox();
@@ -106,7 +108,9 @@ public:
 		{
 			if (typeid(*component) == typeid(T))
 			{
-				components.remove_if(DeleteComponent(component));
+				components.remove(component);
+				DeleteComponent(component);
+				return;
 			}
 		}
 	}

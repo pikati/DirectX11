@@ -48,6 +48,7 @@ public:
 	virtual void Update();
 	virtual void Draw();
 	virtual void Finalize();
+	static void FinalizeCollider();
 	virtual Vector3 GetPosition() = 0;
 	virtual float GetRadius();
 	virtual void LoadProperties(const rapidjson::Value& inProp);

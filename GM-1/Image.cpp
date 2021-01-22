@@ -5,6 +5,7 @@
 #include "LevelLoader.h"
 #include "Transform.h"
 #include "imGui/imgui.h"
+#include "Inspector.h"
 
 void Image::SystemInitialize()
 {
@@ -175,6 +176,14 @@ void Image::DrawInformation()
 		Finalize();
 		Initialize();
 	}
+
+	if (ImGui::Button("Delete"))
+	{
+		this->SystemFinalize();
+		gameObject->DeleteComponent<Image>();
+		Inspector::DeleteInformation();
+	}
+
 	ImGui::End();
 
 	ImGui::PopStyleColor();

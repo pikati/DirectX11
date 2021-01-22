@@ -239,6 +239,7 @@ void Scene::LoadScene(std::string path)
 	Finalize();
 	ObjectPooler::Finalize();
 	Editor::Finalize();
+	Collider::FinalizeCollider();
 	LevelLoader::LoadLevel(this, path.c_str());
 	m_currentSceneName = path;
 	Hierarchy::SetDefaultPath(m_currentSceneName);
@@ -334,6 +335,7 @@ void Scene::ErasePossessedObject()
 				if (object->isDestroy)
 				{
 					object->Finalize();
+					object->SystemFinalize();
 					delete object;
 					return true;
 				}

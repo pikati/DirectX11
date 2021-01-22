@@ -19,7 +19,7 @@ void EditorCamera::Initialize()
 	m_viewPort.TopLeftY = 0;
 	m_viewPort.MinDepth = 0.0f;
 	m_viewPort.MaxDepth = 1.0f;
-	m_distance = 0;
+	m_distance = 10;
 }
 
 void EditorCamera::Update()
@@ -81,10 +81,10 @@ void EditorCamera::Dolly()
 		float z = cosf(XMConvertToRadians(m_rotation.y)) * distance * cosf(XMConvertToRadians(m_rotation.x)) + m_target.z;*/
 		float rotx = XMConvertToRadians(-m_rotation.x);
 		float roty = XMConvertToRadians(-m_rotation.y);
-		/*float x = (cosf(roty) + sinf(roty)) * distance + m_target.x;
-		float y = (-sinf(rotx) * -sinf(roty) + cosf(rotx) + -sinf(rotx) * cosf(roty)) * distance + m_target.y;
-		float z = (cosf(rotx) * -sinf(roty) + sinf(rotx) + cosf(rotx) * cosf(roty)) * distance + m_target.z;*/
-		float x = sinf(roty) * m_distance + m_target.x;
+		/*float x = (cosf(roty) + sinf(roty)) * m_distance + m_target.x;
+		float y = (-sinf(rotx) * -sinf(roty) + cosf(rotx) + -sinf(rotx) * cosf(roty)) * m_distance + m_target.y;
+		float z = (cosf(rotx) * -sinf(roty) + sinf(rotx) + cosf(rotx) * cosf(roty)) * m_distance + m_target.z;*/
+		float x = -sinf(roty) * m_distance + m_target.x;
 		float y = m_distance + m_target.y;
 		float z = cosf(roty) * m_distance + m_target.z;
 		m_position.x = x;
@@ -130,7 +130,7 @@ void EditorCamera::Scroll()
 	}
 	if (CInput::GetMouseDown(2))
 	{
-		float x = m_moveValue.x * cosf(XMConvertToRadians(m_rotation.y)) * MOVE_SPEED;
+		float x = -m_moveValue.x * cosf(XMConvertToRadians(m_rotation.y)) * MOVE_SPEED;
 		float y = m_moveValue.y * cosf(XMConvertToRadians(m_rotation.x)) * MOVE_SPEED;
 		if (m_isMoveVertical)
 		{
@@ -196,6 +196,6 @@ void EditorCamera::DebugLogRotation()
 void EditorCamera::DebugLogPosition()
 {
 	std::string str;
-	str = "rx:" + std::to_string(m_position.x) + " ry:" + std::to_string(m_position.y) + " rz:" + std::to_string(m_position.z) + "\n";
+	str = "position rx:" + std::to_string(m_position.x) + " ry:" + std::to_string(m_position.y) + " rz:" + std::to_string(m_position.z) + "\n";
 	OutputDebugString(str.c_str());
 }

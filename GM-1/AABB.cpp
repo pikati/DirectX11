@@ -7,6 +7,7 @@
 #include "rapidjson/document.h"
 #include <DirectXMath.h>
 #include "imGui/imgui.h"
+#include "Inspector.h"
 
 AABB::AABB()
 {
@@ -451,6 +452,12 @@ void AABB::DrawInformation()
 	ImGui::Checkbox("DrawCollider", &m_isDraw);
 	m_max = { max[0], max[1], max[2] };
 	m_min = { min[0], min[1], min[2] };
+	if (ImGui::Button("Delete"))
+	{
+		this->SystemFinalize();
+		gameObject->DeleteComponent<AABB>();
+		Inspector::DeleteInformation();
+	}
 
 	ImGui::End();
 

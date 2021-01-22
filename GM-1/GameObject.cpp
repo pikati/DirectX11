@@ -182,6 +182,22 @@ Vector3 GameObject::GetUp()
 	return Vector3::Normalize(Vector3::Cross(GetForward(), GetRight()));
 }
 
+bool GameObject::DeleteComponent(std::string className)
+{
+	for (Component* c : components)
+	{
+		std::string name = typeid(*c).name();
+		if (name.substr(6) == className)
+		{
+			components.remove(c);
+			DeleteComponent(c);
+			return true;
+		}
+	}
+	
+	return false;
+}
+
 BoundingBox* GameObject::GetBoundingBox()
 {
 	if (m_bb != nullptr)

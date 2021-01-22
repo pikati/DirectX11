@@ -4,6 +4,7 @@
 #include "FPS.h"
 #include "imgui/imgui.h"
 #include "Editor.h"
+#include "Inspector.h"
 
 void RigidBody::SystemInitialize()
 {
@@ -62,6 +63,11 @@ void RigidBody::SetForce(Vector3 force)
 	m_force = force;
 }
 
+void RigidBody::SetVelocity(Vector3 velocity)
+{
+	m_velocity = velocity;
+}
+
 Vector3 RigidBody::GetForce()
 {
 	return m_force;
@@ -88,7 +94,12 @@ void RigidBody::DrawInformation()
 	ImGui::InputFloat("y", &m_velocity.y, 1, 10);
 	ImGui::InputFloat("z", &m_velocity.z, 1, 10);
 	
-	
+	if (ImGui::Button("Delete"))
+	{
+		this->SystemFinalize();
+		gameObject->DeleteComponent<RigidBody>();
+		Inspector::DeleteInformation();
+	}
 	ImGui::End();
 
 	ImGui::PopStyleColor();

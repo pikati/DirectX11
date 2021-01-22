@@ -11,6 +11,7 @@
 ActiveObjInfo* Inspector::m_object = nullptr;
 std::vector<bool> Inspector::m_isDrawInfo;
 bool Inspector::m_isComponent = false;
+bool Inspector::m_isDeleted = false;
 
 void Inspector::Initialize()
 {
@@ -70,8 +71,8 @@ void Inspector::Finalize()
 
 void Inspector::DispObjectInformation()
 {
-	
 	char name[256];
+	m_isDeleted = false;
 	strcpy_s(name, 256, m_object->obj->name.c_str());
 	ImGui::InputText("name", name, 256);
 	m_object->obj->name = name;
@@ -104,6 +105,7 @@ void Inspector::DispObjectInformation()
 		if (m_isDrawInfo[count])
 		{
 			c->DrawInformation();
+			if (m_isDeleted) return;
 		}
 		count++;
 	}
@@ -159,6 +161,7 @@ void Inspector::DispAddComponentWindow()
 			Component* c = ClassDictionary::AddComponent(str, m_object->obj);
 			c->SystemInitialize();
 			m_isDrawInfo.push_back(false);
+			m_isComponent = false;
 		}
 	}
 	ImGui::End();
@@ -194,4 +197,17 @@ void Inspector::DeleteObject()
 	CManager::GetScene()->DeleteObject(m_object->layer, m_object->index);
 	m_object->obj->SetActiveGizmo(false);
 	m_object->obj = nullptr;
+}
+
+void Inspector::DeleteInformation()
+{
+	for (int i = 1; i < m_isDrawInfo.size(); i++)
+	{
+		if (m_isDrawInfo[i] == true)
+		{
+			m_isDrawInfo.erase(m_isDrawInfo.begin() + i);
+			m_isDeleted = true;
+			return;
+		}
+	}
 }

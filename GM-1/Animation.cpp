@@ -1,6 +1,7 @@
 #include "Animation.h"
 #include "LevelLoader.h"
 #include "imGui/imgui.h"
+#include "Inspector.h"
 
 Animation::Animation()
 {
@@ -168,6 +169,14 @@ void Animation::DrawInformation()
 			ImGui::TreePop();
 		}
 	}
+
+	if (ImGui::Button("Delete"))
+	{
+		this->SystemFinalize();
+		gameObject->DeleteComponent<Animation>();
+		Inspector::DeleteInformation();
+	}
+
 	ImGui::End();
 
 	ImGui::PopStyleColor();

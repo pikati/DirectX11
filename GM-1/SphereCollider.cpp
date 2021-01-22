@@ -6,6 +6,7 @@
 #include "renderer.h"
 #include <DirectXMath.h>
 #include "imGui/imgui.h"
+#include "Inspector.h"
 
 static const int num = 192;
 
@@ -186,7 +187,12 @@ void SphereCollider::DrawInformation()
 	//ImGui::Checkbox("isKinematic", &m_isKinematic);
 	ImGui::Checkbox("DrawCollider", &m_isDraw);
 	m_center = { center[0], center[1], center[2] };
-
+	if (ImGui::Button("Delete"))
+	{
+		this->SystemFinalize();
+		gameObject->DeleteComponent<SphereCollider>();
+		Inspector::DeleteInformation();
+	}
 	ImGui::End();
 
 	ImGui::PopStyleColor();

@@ -6,6 +6,8 @@
 #include "renderer.h"
 #include <DirectXMath.h>
 #include "imGui/imgui.h"
+#include "BoxCollider.h"
+#include "Inspector.h"
 
 BoxCollider::BoxCollider()
 {
@@ -247,6 +249,12 @@ void BoxCollider::DrawInformation()
 	ImGui::Checkbox("DrawCollider", &m_isDraw);
 	m_max = { max[0], max[1], max[2] };
 	m_min = { min[0], min[1], min[2] };
+	if (ImGui::Button("Delete"))
+	{
+		this->SystemFinalize();
+		gameObject->DeleteComponent<BoxCollider>();
+		Inspector::DeleteInformation();
+	}
 
 	ImGui::End();
 
