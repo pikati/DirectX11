@@ -10,7 +10,7 @@
 #include "LevelLoader.h"
 #include <DirectXMath.h>
 
-void Morphing::Initialize()
+void Morphing::SystemInitialize()
 {
 	Scene* s = CManager::GetScene();
 	Fbx* f1 = s->Find("BackDog1")->GetComponent<Fbx>();
@@ -152,7 +152,7 @@ void Morphing::Draw()
 	vtx = nullptr;
 }
 
-void Morphing::Finalize()
+void Morphing::SystemFinalize()
 {
 	SAFE_RELEASE(pIB);
 	SAFE_RELEASE(pVB);

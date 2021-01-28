@@ -1,11 +1,13 @@
 #pragma once
 #include "Component.h"
-enum class FORCE_MODE : int
+
+enum class ForceMode : int
 {
 	FORCE,
 	IMPULSE,
 	MAX
 };
+
 class RigidBody : public Component
 {
 private:
@@ -24,7 +26,7 @@ public:
 
 	void SetGravity(float gravity);
 	float GetGrabity();
-	void AddForce(Vector3 force, FORCE_MODE forceMode = FORCE_MODE::FORCE);
+	void AddForce(Vector3 force, ForceMode forceMode = ForceMode::FORCE);
 	void SetForce(Vector3 force);
 	void SetVelocity(Vector3 velocity);
 	Vector3 GetForce();

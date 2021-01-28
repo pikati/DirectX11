@@ -25,6 +25,11 @@ void Animation::SystemInitialize()
 
 void Animation::Update()
 {
+	if (this == nullptr)
+	{
+		OutputDebugString("Animation Is null");
+		return;
+	}
 	UpdateFrame();
 }
 
@@ -103,16 +108,31 @@ void Animation::SetAnimationData(const char* name, int state, bool isLoop, int s
 
 int Animation::GetTime()
 {
+	if (this == nullptr)
+	{
+		OutputDebugString("GetTime method not executed becouse Animation is null");
+		return -1;
+	}
 	return m_frame;
 }
 
 int Animation::GetState()
 {
+	if (this == nullptr)
+	{
+		OutputDebugString("GetState method not executed becouse Animation is null");
+		return -1;
+	}
 	return m_state;
 }
 
 void Animation::SetState(int state)
 {
+	if (this == nullptr)
+	{
+		OutputDebugString("SetState method not executed becouse Animation is null");
+		return;
+	}
 	if (m_state == state) return;
 	if (!m_animationData[m_state]->isLoop)
 	{
@@ -128,11 +148,21 @@ void Animation::SetState(int state)
 
 void Animation::SetDefaultState(int state)
 {
+	if (this == nullptr)
+	{
+		OutputDebugString("SetDefaultState method not executed becouse Animation is null");
+		return;
+	}
 	m_defaultState = state;
 }
 
 void Animation::SetSpeed(int state, int speed)
 {
+	if (this == nullptr)
+	{
+		OutputDebugString("SetSpeed method not executed becouse Animation is null");
+		return;
+	}
 	m_animationData[state]->speed = speed;
 }
 

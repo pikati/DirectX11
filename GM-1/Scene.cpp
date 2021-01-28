@@ -36,7 +36,7 @@ Scene::~Scene()
 void Scene::Initialize()
 {
 	AudioManager::SetVolume(0);
-	m_currentSceneName = "Asset/Scene/stage1.scene";
+	m_currentSceneName = "Asset/Scene/gokon.scene";
 	LevelLoader::LoadLevel(this, m_currentSceneName.c_str());
 	Hierarchy::SetDefaultPath(m_currentSceneName);
 }
@@ -180,9 +180,10 @@ void Scene::ChangeScene()
 	m_isChange = true;
 }
 
-GameObject* Scene::AddGameObject()
+GameObject* Scene::AddGameObject(int layer)
 {
 	GameObject* obj = new GameObject();
+	obj->layer = layer;
 	m_gameObject[obj->layer].emplace_back(obj);
 	return obj;
 }
@@ -236,6 +237,11 @@ std::string Scene::SetDefaultName(int i)
 
 void Scene::LoadScene(std::string path)
 {
+	if (!LevelLoader::ExistSceneFile(path))
+	{
+		MessageBox(NULL, "failed to load level", NULL, MB_OK);
+		return;
+	}
 	Finalize();
 	ObjectPooler::Finalize();
 	Editor::Finalize();
@@ -356,11 +362,11 @@ void Scene::CreateScene()
 	ObjectPooler::Finalize();
 	Editor::Finalize();
 	m_currentSceneName = "Asset/Scene/sampleScene.scene";
-	GameObject* obj2 = AddGameObject();
+	GameObject* obj2 = AddGameObject(0);
 	Camera* c = obj2->AddComponent<Camera>();
 	D3D11_VIEWPORT v;
-	v.Width = 1920;
-	v.Height = 1080;
+	v.Width = SCREEN_WIDTH;
+	v.Height = SCREEN_HEIGHT;
 	v.TopLeftX = 0;
 	v.TopLeftY = 0;
 	c->SetViwePort(v);
@@ -368,13 +374,13 @@ void Scene::CreateScene()
 	obj2->name = "MainCamera";
 	obj2->tag = "MainCamera";
 	obj2->transform->position.Set(0, 10.0f, -10.0f);
-	obj2->Initialize();
-	GameObject* obj = CreateGameObject();
+	obj2->SystemInitialize();
+	GameObject* obj = AddGameObject(0);
 	obj->AddComponent<DirectionalLight>();
 	obj->name = "DirectionalLight";
 	obj->tag = "Light";
 	obj->transform->position.Set(10.0f, 10.0f, 10.0f);
-	obj->Initialize();
+	obj->SystemInitialize();
 }
 
 void Scene::PlayInitialize()

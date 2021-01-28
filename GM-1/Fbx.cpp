@@ -1297,8 +1297,8 @@ void Fbx::DrawInformation()
 	
 	if (ImGui::Button("Reload"))
 	{
-		Finalize();
-		Initialize();
+		SystemFinalize();
+		SystemInitialize();
 	}
 
 	if (ImGui::Button("Delete"))

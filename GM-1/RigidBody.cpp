@@ -46,13 +46,13 @@ float RigidBody::GetGrabity()
 	return m_gravity;
 }
 
-void RigidBody::AddForce(Vector3 force, FORCE_MODE forceMode)
+void RigidBody::AddForce(Vector3 force, ForceMode forceMode)
 {
-	if (forceMode == FORCE_MODE::FORCE)
+	if (forceMode == ForceMode::FORCE)
 	{
 		m_force += force;
 	}
-	else if (forceMode == FORCE_MODE::IMPULSE)
+	else if (forceMode == ForceMode::IMPULSE)
 	{
 		m_velocity += force;
 	}

@@ -16,7 +16,7 @@ private:
 	static int m_nowRenderNum;
 	static std::string m_currentSceneName;
 
-	GameObject* AddGameObject();
+	GameObject* AddGameObject(int layer);
 	std::string SetDefaultName(int i);
 	void UpdateGameObject();
 	void MoveTmpObject();

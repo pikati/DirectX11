@@ -201,7 +201,7 @@ void Inspector::DeleteObject()
 
 void Inspector::DeleteInformation()
 {
-	for (int i = 1; i < m_isDrawInfo.size(); i++)
+	for (unsigned int i = 1; i < m_isDrawInfo.size(); i++)
 	{
 		if (m_isDrawInfo[i] == true)
 		{

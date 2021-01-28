@@ -45,7 +45,7 @@ Player::~Player()
 void Player::Initialize()
 {
 	m_collider = gameObject->GetComponent<AABB>();
-	m_animation = gameObject->GetComponent<Animation>();
+	//m_animation = gameObject->GetComponent<Animation>();
 	m_itemController = gameObject->GetComponent<ItemController>();
 	m_camera = CManager::GetScene()->Find("MainCamera")->GetComponent<CameraController>();
 

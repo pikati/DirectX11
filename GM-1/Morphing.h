@@ -19,10 +19,10 @@ private:
 	float m_morphSpeed = 0.2f;
 
 public:
-	void Initialize() override;
+	void SystemInitialize() override;
 	void Update() override;
 	void Draw() override;
-	void Finalize() override;
+	void SystemFinalize() override;
 
 	void DrawInformation() override;
 

@@ -283,6 +283,28 @@ void LevelLoader::SavePrefab(GameObject* gameObject, const char* fileName)
 	}
 }
 
+bool LevelLoader::ExistSceneFile(const std::string fileName)
+{
+	rapidjson::Document doc;
+	if (!LoadJSON(fileName.c_str(), doc))
+	{
+		MessageBox(NULL, "failed to load level", NULL, MB_OK);
+		return false;
+	}
+	return true;
+}
+
+bool LevelLoader::ExistSceneFile(const char* fileName)
+{
+	rapidjson::Document doc;
+	if (!LoadJSON(fileName, doc))
+	{
+		MessageBox(NULL, "failed to load level", NULL, MB_OK);
+		return false;
+	}
+	return true;
+}
+
 #pragma region Helper
 bool JsonHelper::GetInt(const rapidjson::Value& inObject, const char* inProperty, int& outInt)
 {

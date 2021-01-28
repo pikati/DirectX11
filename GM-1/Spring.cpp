@@ -43,7 +43,7 @@ void Spring::Bound()
 	float a = m_reflectionCoe * (-gameObject->transform->position.y);
 	float v = m_rigidBody->GetVelocity().y;
 	float y = a - m_rigidBody->GetVelocity().y * m_attenuationCoe;
-	m_rigidBody->AddForce(Vector3(x, y, z), FORCE_MODE::IMPULSE);
+	m_rigidBody->AddForce(Vector3(x, y, z), ForceMode::IMPULSE);
 	m_boundCount++;
 
 }
