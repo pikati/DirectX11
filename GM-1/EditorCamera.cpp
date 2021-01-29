@@ -13,8 +13,8 @@ void EditorCamera::Initialize()
 	m_position = { 0, 10, -10 };
 	m_rotation = { 0, 180, 0 };
 	m_up = { 0, 1, 0 };
-	m_viewPort.Height = 720;
-	m_viewPort.Width = 1280;
+	m_viewPort.Height = SCREEN_HEIGHT;
+	m_viewPort.Width = SCREEN_WIDTH;
 	m_viewPort.TopLeftX = 0;
 	m_viewPort.TopLeftY = 0;
 	m_viewPort.MinDepth = 0.0f;

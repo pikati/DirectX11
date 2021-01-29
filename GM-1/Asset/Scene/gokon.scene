@@ -26,8 +26,8 @@
             "component": [
                 {
                     "type": "Camera",
-                    "viewWidth": 1280,
-                    "viewHeight": 720,
+                    "viewWidth": 1920,
+                    "viewHeight": 1080,
                     "topLeftX": 0,
                     "topLeftY": 0,
                     "renderNum": 0,
@@ -152,6 +152,9 @@
                 },
                 {
                     "type": "RigidBody",
+                    "mass": 1,
+                    "gravity": -9.8,
+                    "kinematic": false,
                     "id": -1
                 },
                 {
@@ -192,6 +195,9 @@
                 },
                 {
                     "type": "RigidBody",
+                    "mass": 1,
+                    "gravity": -9.8,
+                    "kinematic": false,
                     "id": -1
                 },
                 {
@@ -232,6 +238,9 @@
                 },
                 {
                     "type": "RigidBody",
+                    "mass": 1,
+                    "gravity": -9.8,
+                    "kinematic": false,
                     "id": -1
                 },
                 {
@@ -272,6 +281,9 @@
                 },
                 {
                     "type": "RigidBody",
+                    "mass": 1,
+                    "gravity": -9.8,
+                    "kinematic": false,
                     "id": -1
                 },
                 {
@@ -312,6 +324,9 @@
                 },
                 {
                     "type": "RigidBody",
+                    "mass": 1,
+                    "gravity": -9.8,
+                    "kinematic": false,
                     "id": -1
                 },
                 {
@@ -352,6 +367,9 @@
                 },
                 {
                     "type": "RigidBody",
+                    "mass": 1,
+                    "gravity": -9.8,
+                    "kinematic": false,
                     "id": -1
                 },
                 {
@@ -392,6 +410,9 @@
                 },
                 {
                     "type": "RigidBody",
+                    "mass": 1,
+                    "gravity": -9.8,
+                    "kinematic": false,
                     "id": -1
                 },
                 {
@@ -432,6 +453,9 @@
                 },
                 {
                     "type": "RigidBody",
+                    "mass": 1,
+                    "gravity": -9.8,
+                    "kinematic": false,
                     "id": -1
                 },
                 {
@@ -472,6 +496,9 @@
                 },
                 {
                     "type": "RigidBody",
+                    "mass": 1,
+                    "gravity": -9.8,
+                    "kinematic": false,
                     "id": -1
                 },
                 {
@@ -512,6 +539,9 @@
                 },
                 {
                     "type": "RigidBody",
+                    "mass": 1,
+                    "gravity": -9.8,
+                    "kinematic": false,
                     "id": -1
                 },
                 {

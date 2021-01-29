@@ -45,6 +45,7 @@ public:
 	void Initialize();
 	void SystemInitialize();
 	void Update();
+	void FixedUpdate();
 	void SystemUpdate();
 	void Draw();
 	void Finalize();

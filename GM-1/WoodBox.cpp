@@ -12,17 +12,9 @@ void WoodBox::Initialize()
 
 void WoodBox::Update()
 {
-	m_velocity.y += -m_gravity * FPS::deltaTime * 0.125f;
-	gameObject->transform->position += m_velocity;
-	if (m_isGrounded)
-	{
-		m_velocity.y = 0;
-	}
-	gameObject->transform->position += m_velocity;
 	if (gameObject->transform->position.y < -20)
 	{
 		gameObject->transform->position = m_startPosition;
-		m_velocity.y = 0;
 	}
 }
 

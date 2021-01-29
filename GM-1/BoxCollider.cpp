@@ -226,11 +226,6 @@ Vector3 BoxCollider::GetAxis(int i)
 
 }
 
-bool BoxCollider::IsKinematic()
-{
-	return m_isKinematic;
-}
-
 void BoxCollider::DrawInformation()
 {
 	std::string name = typeid(*this).name();
@@ -245,7 +240,6 @@ void BoxCollider::DrawInformation()
 	float min[3] = { m_min.x, m_min.y, m_min.z };
 	ImGui::InputFloat3("maxPosition", max);
 	ImGui::InputFloat3("minPosition", min);
-	ImGui::Checkbox("isKinematic", &m_isKinematic);
 	ImGui::Checkbox("DrawCollider", &m_isDraw);
 	m_max = { max[0], max[1], max[2] };
 	m_min = { min[0], min[1], min[2] };
@@ -269,7 +263,6 @@ void BoxCollider::LoadProperties(const rapidjson::Value& inProp)
 	JsonHelper::GetVector3(inProp, "position", m_transform->position);
 	JsonHelper::GetVector3(inProp, "rotation", m_transform->rotation);
 	JsonHelper::GetVector3(inProp, "scale", m_transform->scale);
-	JsonHelper::GetBool(inProp, "kinematic", m_isKinematic);
 }
 
 void BoxCollider::SaveProperties(rapidjson::Document::AllocatorType& alloc, rapidjson::Value& inProp)
@@ -281,5 +274,4 @@ void BoxCollider::SaveProperties(rapidjson::Document::AllocatorType& alloc, rapi
 	JsonHelper::AddVector3(alloc, inProp, "position", m_transform->position);
 	JsonHelper::AddVector3(alloc, inProp, "rotation", m_transform->rotation);
 	JsonHelper::AddVector3(alloc, inProp, "scale", m_transform->scale);
-	JsonHelper::AddBool(alloc, inProp, "kinematic", m_isKinematic);
 }

@@ -36,13 +36,21 @@ Scene::~Scene()
 void Scene::Initialize()
 {
 	AudioManager::SetVolume(0);
-	m_currentSceneName = "Asset/Scene/gokon.scene";
+	m_currentSceneName = "Asset/Scene/Stage1.scene";
 	LevelLoader::LoadLevel(this, m_currentSceneName.c_str());
 	Hierarchy::SetDefaultPath(m_currentSceneName);
 }
 
 void Scene::Update()
 {
+	for (int i = 0; i < LAYER_MAX; i++)
+	{
+		for (GameObject* object : m_gameObject[i])
+		{
+			object->FixedUpdate();
+		}
+	}
+
 	UpdateGameObject();
 
 	MoveTmpObject();
@@ -92,9 +100,9 @@ void Scene::Draw()
 			o->Draw();
 		}
 		obj.clear();*/
-		std::string str;
+		/*std::string str;
 		str = std::to_string(m_nowRenderNum) + "\n";
-		OutputDebugString(str.c_str());
+		OutputDebugString(str.c_str());*/
 	}
 	m_nowRenderNum = 0;
 }
@@ -117,7 +125,7 @@ void Scene::Finalize()
 		}
 		m_tempObject.clear();
 	}
-	
+	Collider::FinalizeCollider();
 }
 
 GameObject* Scene::CreateGameObject()

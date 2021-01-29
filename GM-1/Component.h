@@ -13,6 +13,7 @@ public:
 	virtual void Initialize();
 	virtual void SystemInitialize();
 	virtual void Update();
+	virtual void FixedUpdate();
 	virtual void SystemUpdate();
 	virtual void Draw();
 	virtual void Finalize();

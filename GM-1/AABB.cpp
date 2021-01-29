@@ -425,16 +425,6 @@ float AABB::GetHeight()
 	return m_max.y - m_min.y;
 }
 
-void AABB::SetKinematic(bool on)
-{
-	m_isKinematic = on;
-}
-
-bool AABB::IsKinematic()
-{
-	return m_isKinematic;
-}
-
 void AABB::DrawInformation()
 {
 	std::string name = typeid(*this).name();
@@ -448,7 +438,6 @@ void AABB::DrawInformation()
 	float min[3] = { m_min.x, m_min.y, m_min.z };
 	ImGui::InputFloat3("maxPosition", max);
 	ImGui::InputFloat3("minPosition", min);
-	ImGui::Checkbox("isKinematic", &m_isKinematic);
 	ImGui::Checkbox("DrawCollider", &m_isDraw);
 	m_max = { max[0], max[1], max[2] };
 	m_min = { min[0], min[1], min[2] };
@@ -469,7 +458,6 @@ void AABB::LoadProperties(const rapidjson::Value& inProp)
 {
 	JsonHelper::GetVector3(inProp, "max", m_max);
 	JsonHelper::GetVector3(inProp, "min", m_min);
-	JsonHelper::GetBool(inProp, "kinematic", m_isKinematic);
 }
 
 void AABB::SaveProperties(rapidjson::Document::AllocatorType& alloc, rapidjson::Value& inProp)
@@ -478,5 +466,4 @@ void AABB::SaveProperties(rapidjson::Document::AllocatorType& alloc, rapidjson::
 	JsonHelper::AddString(alloc, inProp, "type", name.substr(6).c_str());
 	JsonHelper::AddVector3(alloc, inProp, "max", m_max);
 	JsonHelper::AddVector3(alloc, inProp, "min", m_min);
-	JsonHelper::AddBool(alloc, inProp, "kinematic", m_isKinematic);
 }

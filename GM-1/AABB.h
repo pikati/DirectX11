@@ -17,7 +17,6 @@ private:
 	ID3D11Buffer* m_vb2 = nullptr;
 	LINE_VERTEX m_v[14];
 	Texture* m_texture;
-	bool m_isKinematic = false;
 public:
 	AABB();
 	~AABB();
@@ -34,8 +33,6 @@ public:
 	Vector3 GetMin();
 	Vector3 GetPosition();
 	float GetHeight();
-	void SetKinematic(bool on);
-	bool IsKinematic();
 	void DrawInformation() override;
 
 	void LoadProperties(const rapidjson::Value& inProp) override;

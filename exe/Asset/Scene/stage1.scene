@@ -8,9 +8,9 @@
                 "isDestroy": false,
                 "layer": 0,
                 "position": [
-                    0.02999947965145111,
+                    -5.0,
                     5.010000228881836,
-                    -13.590002059936524
+                    -10.0
                 ],
                 "rotation": [
                     0.0,
@@ -41,11 +41,11 @@
         },
         {
             "properties": {
-                "name": "Fade",
+                "name": "DirectionalLight",
                 "tag": "untagged",
-                "activeSelf": false,
+                "activeSelf": true,
                 "isDestroy": false,
-                "layer": 2,
+                "layer": 0,
                 "position": [
                     0.0,
                     0.0,
@@ -53,7 +53,7 @@
                 ],
                 "rotation": [
                     0.0,
-                    0.0,
+                    -0.0,
                     0.0
                 ],
                 "scale": [
@@ -64,14 +64,26 @@
             },
             "component": [
                 {
-                    "type": "Image",
-                    "fileName": "Asset/Texture/Fade.png",
-                    "width": 960.0,
-                    "height": 540.0,
-                    "id": -1
-                },
-                {
-                    "type": "Fade",
+                    "type": "DirectionalLight",
+                    "diffuse": [
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0
+                    ],
+                    "ambient": [
+                        0.10000000149011612,
+                        0.10000000149011612,
+                        0.10000000149011612,
+                        1.0
+                    ],
+                    "direction": [
+                        0.5773502588272095,
+                        -0.5773502588272095,
+                        0.5773502588272095,
+                        0.0
+                    ],
+                    "enable": 1,
                     "id": -1
                 }
             ]
@@ -115,18 +127,18 @@
                 "layer": 1,
                 "position": [
                     -5.0,
-                    0.1,
+                    -0.0104166679084301,
                     0.0
                 ],
                 "rotation": [
-                    0.0,
-                    0.0,
+                    -0.0,
+                    -89.99995422363281,
                     0.0
                 ],
                 "scale": [
+                    0.9999997019767761,
                     1.0,
-                    1.0,
-                    1.0
+                    0.9999997019767761
                 ]
             },
             "component": [
@@ -144,36 +156,36 @@
                     "loop2": false,
                     "start2": 63,
                     "end2": 94,
-                    "lstart2": -1,
-                    "lend2": -1,
+                    "lstart2": 63,
+                    "lend2": 94,
                     "speed2": 1,
                     "name3": "stab",
                     "loop3": false,
                     "start3": 95,
                     "end3": 135,
-                    "lstart3": -1,
-                    "lend3": -1,
+                    "lstart3": 95,
+                    "lend3": 135,
                     "speed3": 1,
                     "name4": "shoot",
                     "loop4": false,
                     "start4": 136,
                     "end4": 171,
-                    "lstart4": -1,
-                    "lend4": -1,
+                    "lstart4": 136,
+                    "lend4": 171,
                     "speed4": 1,
                     "name5": "damage",
                     "loop5": false,
                     "start5": 172,
                     "end5": 212,
-                    "lstart5": -1,
-                    "lend5": -1,
+                    "lstart5": 172,
+                    "lend5": 212,
                     "speed5": 1,
                     "name6": "idol",
                     "loop6": false,
                     "start6": 0,
                     "end6": 0,
-                    "lstart6": -1,
-                    "lend6": -1,
+                    "lstart6": 0,
+                    "lend6": 0,
                     "speed6": 1
                 },
                 {
@@ -185,14 +197,14 @@
                 {
                     "type": "AABB",
                     "max": [
-                        0.4,
+                        0.4000000059604645,
                         1.5,
-                        0.4
+                        0.4000000059604645
                     ],
                     "min": [
-                        -0.4,
+                        -0.4000000059604645,
                         0.0,
-                        -0.4
+                        -0.4000000059604645
                     ],
                     "kinematic": false
                 },
@@ -202,6 +214,10 @@
                 },
                 {
                     "type": "ItemController",
+                    "id": -1
+                },
+                {
+                    "type": "RigidBody",
                     "id": -1
                 }
             ]
@@ -1365,7 +1381,7 @@
                 "layer": 1,
                 "position": [
                     6.0,
-                    -3.0,
+                    -2.03041672706604,
                     -2.0
                 ],
                 "rotation": [
@@ -1406,7 +1422,8 @@
                         6.0,
                         -3.0,
                         -2.0
-                    ]
+                    ],
+                    "id": -1
                 }
             ]
         },
@@ -1419,7 +1436,7 @@
                 "layer": 1,
                 "position": [
                     62.5,
-                    0.0,
+                    -0.030416667461395265,
                     -11.5
                 ],
                 "rotation": [
@@ -1460,7 +1477,8 @@
                         62.5,
                         0.0,
                         -11.5
-                    ]
+                    ],
+                    "id": -1
                 }
             ]
         },
@@ -1478,7 +1496,7 @@
                 ],
                 "rotation": [
                     0.0,
-                    109.81684112548828,
+                    89.09712982177735,
                     0.0
                 ],
                 "scale": [
@@ -1514,7 +1532,7 @@
                 ],
                 "rotation": [
                     -90.0,
-                    -0.1264801025390625,
+                    76.29303741455078,
                     0.0
                 ],
                 "scale": [
@@ -1551,6 +1569,7 @@
                 {
                     "type": "Plane",
                     "fileName": "Asset/Texture/Item/apple.png",
+                    "shader": 1,
                     "id": -1
                 },
                 {
@@ -1577,7 +1596,7 @@
                 ],
                 "rotation": [
                     -90.0,
-                    -36.42890167236328,
+                    -267.9174499511719,
                     0.0
                 ],
                 "scale": [
@@ -1614,6 +1633,7 @@
                 {
                     "type": "Plane",
                     "fileName": "Asset/Texture/Item/strawberry.png",
+                    "shader": 1,
                     "id": -1
                 },
                 {
@@ -1640,7 +1660,7 @@
                 ],
                 "rotation": [
                     -90.0,
-                    36.26479721069336,
+                    -254.66671752929688,
                     0.0
                 ],
                 "scale": [
@@ -1677,6 +1697,7 @@
                 {
                     "type": "Plane",
                     "fileName": "Asset/Texture/Item/banana.png",
+                    "shader": 1,
                     "id": -1
                 },
                 {

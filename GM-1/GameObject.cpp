@@ -90,6 +90,15 @@ void GameObject::Update()
 	}
 }
 
+void GameObject::FixedUpdate()
+{
+	if (!activeSelf) return;
+	for (Component* c : components)
+	{
+		c->FixedUpdate();
+	}
+}
+
 void GameObject::SystemUpdate()
 {
 	transform->SystemUpdate();

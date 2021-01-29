@@ -294,8 +294,18 @@ void Collider::AABB2AABB(Collider* c1, Collider* c2)
 	c1->m_collisionObject = c2->gameObject;
 	c2->m_collisionObject = c1->gameObject;
 
-	bool a1Kinematic = a1->IsKinematic();
-	bool a2Kinematic = a2->IsKinematic();
+	RigidBody* rb1 = a1->gameObject->GetComponent<RigidBody>();
+	RigidBody* rb2 = a2->gameObject->GetComponent<RigidBody>();
+	bool a1Kinematic = false;
+	bool a2Kinematic = false;
+	if (rb1 != nullptr)
+	{
+		a1Kinematic = rb1->IsKinematic();
+	}
+	if (rb2 != nullptr)
+	{
+		a2Kinematic = rb2->IsKinematic();
+	}
 	if (a1Kinematic && a2Kinematic) return;
 	
 	Vector3 pos1 = c1->gameObject->transform->position;
@@ -319,72 +329,84 @@ void Collider::AABB2AABB(Collider* c1, Collider* c2)
 
 	if (fabsf(dx) <= fabsf(dy) && fabsf(dx) <= fabsf(dz))
 	{
-		if (a1Kinematic)
+		if (!a1Kinematic && rb2)
 		{
 			pos2.x -= dx + 0.01f;
 		}
-		else if (a2Kinematic)
+		else if (!a2Kinematic && rb1)
 		{
 			pos1.x += dx + 0.01f;
 		}
-		else if(!a1Kinematic && !a2Kinematic)
+		else if(!a1Kinematic && !a2Kinematic && rb1 && rb2)
 		{
 			pos1.x += dx / 2.0f + 0.01f;
 			pos2.x -= dx / 2.0f + 0.01f;
 		}
-		RigidBody* rb1 = c1->gameObject->GetComponent<RigidBody>();
-		RigidBody* rb2 = c2->gameObject->GetComponent<RigidBody>();
-		if (rb1 != nullptr && rb2 != nullptr)
+		if (rb1 != nullptr)
 		{
 			Vector3 velocity = rb1->GetVelocity();
 			velocity.x = 0;
 			rb1->SetVelocity(velocity);
-			velocity = rb2->GetVelocity();
+			Vector3 force = rb1->GetForce();
+			force.x = 0;
+			rb1->SetForce(force);
+			
+		}
+		if (rb2 != nullptr)
+		{
+			Vector3 velocity = rb2->GetVelocity();
 			velocity.x = 0;
 			rb2->SetVelocity(velocity);
+			Vector3 force = rb2->GetForce();
+			force.x = 0;
+			rb2->SetForce(force);
 		}
 	}
 	else if (fabsf(dy) <= fabsf(dx) && fabsf(dy) <= fabsf(dz))
 	{
-		if (a1Kinematic)
+		if (!a1Kinematic && rb2)
 		{
 			pos2.y -= dy;
 		}
-		else if (a2Kinematic)
+		else if (!a2Kinematic && rb1)
 		{
 			pos1.y += dy + 0.01f;
 		}
-		else if (!a1Kinematic && !a2Kinematic)
+		else if (!a1Kinematic && !a2Kinematic && rb1 && rb2)
 		{
 			pos1.y += dy / 2.0f + 0.01f;
 			pos2.y -= dy / 2.0f + 0.01f;
 		}
-		RigidBody* rb1 = c1->gameObject->GetComponent<RigidBody>();
-		RigidBody* rb2 = c2->gameObject->GetComponent<RigidBody>();
 		if (rb1 != nullptr)
 		{
 			Vector3 velocity = rb1->GetVelocity();
 			velocity.y = 0;
 			rb1->SetVelocity(velocity);
+			Vector3 force = rb1->GetForce();
+			force.y = 0;
+			rb1->SetForce(force);
 		}
 		if (rb2 != nullptr)
 		{
 			Vector3 velocity = rb2->GetVelocity();
 			velocity.y = 0;
 			rb2->SetVelocity(velocity);
+			Vector3 force = rb2->GetForce();
+			force.y = 0;
+			rb2->SetForce(force);
 		}
 	}
 	else
 	{
-		if (a1Kinematic)
+		if (!a1Kinematic && rb2)
 		{
 			pos2.z -= dz + 0.01f;
 		}
-		else if (a2Kinematic)
+		else if (!a2Kinematic && rb1)
 		{
 			pos1.z += dz + 0.01f;
 		}
-		else if (!a1Kinematic && !a2Kinematic)
+		else if (!a1Kinematic && !a2Kinematic && rb1 && rb2)
 		{
 			pos1.z += dz / 2.0f + 0.01f;
 			pos2.z -= dz / 2.0f + 0.01f;

@@ -14,6 +14,7 @@
 #include "Item.h"
 #include "ItemController.h"
 #include "AudioManager.h"
+#include "RigidBody.h"
 
 enum AnimationName
 {
@@ -45,10 +46,10 @@ Player::~Player()
 void Player::Initialize()
 {
 	m_collider = gameObject->GetComponent<AABB>();
-	//m_animation = gameObject->GetComponent<Animation>();
+	m_animation = gameObject->GetComponent<Animation>();
 	m_itemController = gameObject->GetComponent<ItemController>();
 	m_camera = CManager::GetScene()->Find("MainCamera")->GetComponent<CameraController>();
-
+	m_rigidBody = gameObject->GetComponent<RigidBody>();
 	m_animation->SetSpeed(WALK, 2);
 }
 
@@ -79,16 +80,13 @@ void Player::Update()
 	}
 	Move();
 
-	if (m_isGrounded)
-	{
-		m_velocity.y = 0;
-	}
 	gameObject->transform->position += m_velocity;
 	if (gameObject->transform->position.y < -20)
 	{
 		gameObject->transform->position = m_startPosition;
-		m_velocity.y = 0;
+		
 	}
+	
 }
 
 void Player::Move()
@@ -190,7 +188,7 @@ void Player::Jump()
 	if (m_isGrounded)
 	{
 		AudioManager::PlaySound(SE_JUMP);
-		m_velocity.y += 0.25f;
+		m_rigidBody->AddForce({ 0, 100, 0 }, ForceMode::IMPULSE);
 		m_isGrounded = false;
 	}
 }

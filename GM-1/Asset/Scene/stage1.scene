@@ -26,8 +26,8 @@
             "component": [
                 {
                     "type": "Camera",
-                    "viewWidth": 1280,
-                    "viewHeight": 720,
+                    "viewWidth": 1920,
+                    "viewHeight": 1080,
                     "topLeftX": 0,
                     "topLeftY": 0,
                     "renderNum": 0,
@@ -78,9 +78,9 @@
                         1.0
                     ],
                     "direction": [
-                        0.5773503184318543,
-                        -0.5773503184318543,
-                        0.5773503184318543,
+                        0.5773502588272095,
+                        -0.5773502588272095,
+                        0.5773502588272095,
                         0.0
                     ],
                     "enable": 1,
@@ -90,7 +90,7 @@
         },
         {
             "properties": {
-                "name": "unname",
+                "name": "MainGameManager",
                 "tag": "untagged",
                 "activeSelf": true,
                 "isDestroy": false,
@@ -102,7 +102,7 @@
                 ],
                 "rotation": [
                     0.0,
-                    0.0,
+                    -0.0,
                     0.0
                 ],
                 "scale": [
@@ -131,14 +131,14 @@
                     0.0
                 ],
                 "rotation": [
-                    0.0,
-                    270.0,
+                    -0.0,
+                    -89.99995422363281,
                     0.0
                 ],
                 "scale": [
+                    0.9999997019767761,
                     1.0,
-                    1.0,
-                    1.0
+                    0.9999997019767761
                 ]
             },
             "component": [
@@ -205,8 +205,7 @@
                         -0.4000000059604645,
                         0.0,
                         -0.4000000059604645
-                    ],
-                    "kinematic": false
+                    ]
                 },
                 {
                     "type": "Player",
@@ -215,12 +214,18 @@
                 {
                     "type": "ItemController",
                     "id": -1
+                },
+                {
+                    "type": "RigidBody",
+                    "mass": 1.0,
+                    "gravity": -9.800000190734864,
+                    "kinematic": false
                 }
             ]
         },
         {
             "properties": {
-                "name": "ground10x10_1",
+                "name": "ground10x10",
                 "tag": "Ground",
                 "activeSelf": true,
                 "isDestroy": false,
@@ -232,7 +237,7 @@
                 ],
                 "rotation": [
                     0.0,
-                    0.0,
+                    -0.0,
                     0.0
                 ],
                 "scale": [
@@ -259,14 +264,13 @@
                         -5.0,
                         0.0,
                         -5.0
-                    ],
-                    "kinematic": true
+                    ]
                 }
             ]
         },
         {
             "properties": {
-                "name": "ground1x10_1",
+                "name": "ground1x10",
                 "tag": "Ground",
                 "activeSelf": true,
                 "isDestroy": false,
@@ -278,13 +282,13 @@
                 ],
                 "rotation": [
                     0.0,
-                    90.0,
+                    89.99995422363281,
                     0.0
                 ],
                 "scale": [
+                    0.9999997019767761,
                     1.0,
-                    1.0,
-                    1.0
+                    0.9999997019767761
                 ]
             },
             "component": [
@@ -305,14 +309,13 @@
                         -5.0,
                         0.0,
                         -1.0
-                    ],
-                    "kinematic": true
+                    ]
                 }
             ]
         },
         {
             "properties": {
-                "name": "ground1x10_1",
+                "name": "ground1x10_2",
                 "tag": "Ground",
                 "activeSelf": true,
                 "isDestroy": false,
@@ -324,7 +327,7 @@
                 ],
                 "rotation": [
                     0.0,
-                    0.0,
+                    -0.0,
                     0.0
                 ],
                 "scale": [
@@ -351,14 +354,13 @@
                         -1.0,
                         0.0,
                         -5.0
-                    ],
-                    "kinematic": true
+                    ]
                 }
             ]
         },
         {
             "properties": {
-                "name": "ground1x10_1",
+                "name": "ground1x10_3",
                 "tag": "Ground",
                 "activeSelf": true,
                 "isDestroy": false,
@@ -370,7 +372,7 @@
                 ],
                 "rotation": [
                     0.0,
-                    0.0,
+                    -0.0,
                     0.0
                 ],
                 "scale": [
@@ -397,14 +399,13 @@
                         -1.0,
                         0.0,
                         -5.0
-                    ],
-                    "kinematic": true
+                    ]
                 }
             ]
         },
         {
             "properties": {
-                "name": "ground10x10_1",
+                "name": "ground10x10",
                 "tag": "Ground",
                 "activeSelf": true,
                 "isDestroy": false,
@@ -416,7 +417,7 @@
                 ],
                 "rotation": [
                     0.0,
-                    0.0,
+                    -0.0,
                     0.0
                 ],
                 "scale": [
@@ -443,14 +444,13 @@
                         -5.0,
                         0.0,
                         -5.0
-                    ],
-                    "kinematic": true
+                    ]
                 }
             ]
         },
         {
             "properties": {
-                "name": "ground10x10_1",
+                "name": "ground10x10_2",
                 "tag": "Ground",
                 "activeSelf": true,
                 "isDestroy": false,
@@ -462,7 +462,7 @@
                 ],
                 "rotation": [
                     0.0,
-                    0.0,
+                    -0.0,
                     0.0
                 ],
                 "scale": [
@@ -489,14 +489,13 @@
                         -5.0,
                         0.0,
                         -5.0
-                    ],
-                    "kinematic": true
+                    ]
                 }
             ]
         },
         {
             "properties": {
-                "name": "ground10x10_1",
+                "name": "ground10x10_3",
                 "tag": "Ground",
                 "activeSelf": true,
                 "isDestroy": false,
@@ -508,7 +507,7 @@
                 ],
                 "rotation": [
                     0.0,
-                    0.0,
+                    -0.0,
                     0.0
                 ],
                 "scale": [
@@ -535,14 +534,13 @@
                         -5.0,
                         0.0,
                         -5.0
-                    ],
-                    "kinematic": true
+                    ]
                 }
             ]
         },
         {
             "properties": {
-                "name": "ground10x10_1",
+                "name": "ground10x10_4",
                 "tag": "Ground",
                 "activeSelf": true,
                 "isDestroy": false,
@@ -554,7 +552,7 @@
                 ],
                 "rotation": [
                     0.0,
-                    0.0,
+                    -0.0,
                     0.0
                 ],
                 "scale": [
@@ -581,14 +579,13 @@
                         -5.0,
                         0.0,
                         -5.0
-                    ],
-                    "kinematic": true
+                    ]
                 }
             ]
         },
         {
             "properties": {
-                "name": "ground10x10_1",
+                "name": "ground10x10_5",
                 "tag": "Ground",
                 "activeSelf": true,
                 "isDestroy": false,
@@ -600,7 +597,7 @@
                 ],
                 "rotation": [
                     0.0,
-                    0.0,
+                    -0.0,
                     0.0
                 ],
                 "scale": [
@@ -627,14 +624,13 @@
                         -5.0,
                         0.0,
                         -5.0
-                    ],
-                    "kinematic": true
+                    ]
                 }
             ]
         },
         {
             "properties": {
-                "name": "ground10x10_1",
+                "name": "ground10x10_6",
                 "tag": "Ground",
                 "activeSelf": true,
                 "isDestroy": false,
@@ -646,7 +642,7 @@
                 ],
                 "rotation": [
                     0.0,
-                    0.0,
+                    -0.0,
                     0.0
                 ],
                 "scale": [
@@ -673,14 +669,13 @@
                         -5.0,
                         0.0,
                         -5.0
-                    ],
-                    "kinematic": true
+                    ]
                 }
             ]
         },
         {
             "properties": {
-                "name": "MetalBox",
+                "name": "MetalBox1",
                 "tag": "Ground",
                 "activeSelf": true,
                 "isDestroy": false,
@@ -692,7 +687,7 @@
                 ],
                 "rotation": [
                     0.0,
-                    0.0,
+                    -0.0,
                     0.0
                 ],
                 "scale": [
@@ -719,14 +714,13 @@
                         -1.0,
                         0.0,
                         -1.0
-                    ],
-                    "kinematic": true
+                    ]
                 }
             ]
         },
         {
             "properties": {
-                "name": "MetalBox",
+                "name": "MetalBox2",
                 "tag": "Ground",
                 "activeSelf": true,
                 "isDestroy": false,
@@ -738,7 +732,7 @@
                 ],
                 "rotation": [
                     0.0,
-                    0.0,
+                    -0.0,
                     0.0
                 ],
                 "scale": [
@@ -765,14 +759,13 @@
                         -1.0,
                         0.0,
                         -1.0
-                    ],
-                    "kinematic": true
+                    ]
                 }
             ]
         },
         {
             "properties": {
-                "name": "MetalBox",
+                "name": "MetalBox3",
                 "tag": "Ground",
                 "activeSelf": true,
                 "isDestroy": false,
@@ -784,7 +777,7 @@
                 ],
                 "rotation": [
                     0.0,
-                    0.0,
+                    -0.0,
                     0.0
                 ],
                 "scale": [
@@ -811,14 +804,13 @@
                         -1.0,
                         0.0,
                         -1.0
-                    ],
-                    "kinematic": true
+                    ]
                 }
             ]
         },
         {
             "properties": {
-                "name": "MetalBox",
+                "name": "MetalBox4",
                 "tag": "Ground",
                 "activeSelf": true,
                 "isDestroy": false,
@@ -830,7 +822,7 @@
                 ],
                 "rotation": [
                     0.0,
-                    0.0,
+                    -0.0,
                     0.0
                 ],
                 "scale": [
@@ -857,14 +849,13 @@
                         -1.0,
                         0.0,
                         -1.0
-                    ],
-                    "kinematic": true
+                    ]
                 }
             ]
         },
         {
             "properties": {
-                "name": "MetalBox",
+                "name": "MetalBox5",
                 "tag": "Ground",
                 "activeSelf": true,
                 "isDestroy": false,
@@ -876,7 +867,7 @@
                 ],
                 "rotation": [
                     0.0,
-                    0.0,
+                    -0.0,
                     0.0
                 ],
                 "scale": [
@@ -903,14 +894,13 @@
                         -1.0,
                         0.0,
                         -1.0
-                    ],
-                    "kinematic": true
+                    ]
                 }
             ]
         },
         {
             "properties": {
-                "name": "MetalBox",
+                "name": "MetalBox6",
                 "tag": "Ground",
                 "activeSelf": true,
                 "isDestroy": false,
@@ -922,7 +912,7 @@
                 ],
                 "rotation": [
                     0.0,
-                    0.0,
+                    -0.0,
                     0.0
                 ],
                 "scale": [
@@ -949,14 +939,13 @@
                         -1.0,
                         0.0,
                         -1.0
-                    ],
-                    "kinematic": true
+                    ]
                 }
             ]
         },
         {
             "properties": {
-                "name": "MetalBox",
+                "name": "MetalBox7",
                 "tag": "Ground",
                 "activeSelf": true,
                 "isDestroy": false,
@@ -968,7 +957,7 @@
                 ],
                 "rotation": [
                     0.0,
-                    0.0,
+                    -0.0,
                     0.0
                 ],
                 "scale": [
@@ -995,14 +984,13 @@
                         -1.0,
                         0.0,
                         -1.0
-                    ],
-                    "kinematic": true
+                    ]
                 }
             ]
         },
         {
             "properties": {
-                "name": "MetalBox",
+                "name": "MetalBox8",
                 "tag": "Ground",
                 "activeSelf": true,
                 "isDestroy": false,
@@ -1014,7 +1002,7 @@
                 ],
                 "rotation": [
                     0.0,
-                    0.0,
+                    -0.0,
                     0.0
                 ],
                 "scale": [
@@ -1041,14 +1029,13 @@
                         -1.0,
                         0.0,
                         -1.0
-                    ],
-                    "kinematic": true
+                    ]
                 }
             ]
         },
         {
             "properties": {
-                "name": "MetalBox",
+                "name": "MetalBox9",
                 "tag": "Ground",
                 "activeSelf": true,
                 "isDestroy": false,
@@ -1060,7 +1047,7 @@
                 ],
                 "rotation": [
                     0.0,
-                    0.0,
+                    -0.0,
                     0.0
                 ],
                 "scale": [
@@ -1087,14 +1074,13 @@
                         -1.0,
                         0.0,
                         -1.0
-                    ],
-                    "kinematic": true
+                    ]
                 }
             ]
         },
         {
             "properties": {
-                "name": "MetalBox",
+                "name": "MetalBox10",
                 "tag": "Ground",
                 "activeSelf": true,
                 "isDestroy": false,
@@ -1106,7 +1092,7 @@
                 ],
                 "rotation": [
                     0.0,
-                    0.0,
+                    -0.0,
                     0.0
                 ],
                 "scale": [
@@ -1133,14 +1119,13 @@
                         -1.0,
                         0.0,
                         -1.0
-                    ],
-                    "kinematic": true
+                    ]
                 }
             ]
         },
         {
             "properties": {
-                "name": "MetalBox",
+                "name": "MetalBox11",
                 "tag": "Ground",
                 "activeSelf": true,
                 "isDestroy": false,
@@ -1152,7 +1137,7 @@
                 ],
                 "rotation": [
                     0.0,
-                    0.0,
+                    -0.0,
                     0.0
                 ],
                 "scale": [
@@ -1179,14 +1164,13 @@
                         -1.0,
                         0.0,
                         -1.0
-                    ],
-                    "kinematic": true
+                    ]
                 }
             ]
         },
         {
             "properties": {
-                "name": "MetalBox",
+                "name": "MetalBox12",
                 "tag": "Ground",
                 "activeSelf": true,
                 "isDestroy": false,
@@ -1198,7 +1182,7 @@
                 ],
                 "rotation": [
                     0.0,
-                    0.0,
+                    -0.0,
                     0.0
                 ],
                 "scale": [
@@ -1225,14 +1209,13 @@
                         -1.0,
                         0.0,
                         -1.0
-                    ],
-                    "kinematic": true
+                    ]
                 }
             ]
         },
         {
             "properties": {
-                "name": "MetalBox",
+                "name": "MetalBox13",
                 "tag": "Ground",
                 "activeSelf": true,
                 "isDestroy": false,
@@ -1244,7 +1227,7 @@
                 ],
                 "rotation": [
                     0.0,
-                    0.0,
+                    -0.0,
                     0.0
                 ],
                 "scale": [
@@ -1271,14 +1254,13 @@
                         -1.0,
                         0.0,
                         -1.0
-                    ],
-                    "kinematic": true
+                    ]
                 }
             ]
         },
         {
             "properties": {
-                "name": "MetalBox",
+                "name": "MetalBox14",
                 "tag": "Ground",
                 "activeSelf": true,
                 "isDestroy": false,
@@ -1290,7 +1272,7 @@
                 ],
                 "rotation": [
                     0.0,
-                    0.0,
+                    -0.0,
                     0.0
                 ],
                 "scale": [
@@ -1317,14 +1299,13 @@
                         -1.0,
                         0.0,
                         -1.0
-                    ],
-                    "kinematic": true
+                    ]
                 }
             ]
         },
         {
             "properties": {
-                "name": "MetalBox",
+                "name": "MetalBox15",
                 "tag": "Ground",
                 "activeSelf": true,
                 "isDestroy": false,
@@ -1336,7 +1317,7 @@
                 ],
                 "rotation": [
                     0.0,
-                    0.0,
+                    -0.0,
                     0.0
                 ],
                 "scale": [
@@ -1363,14 +1344,13 @@
                         -1.0,
                         0.0,
                         -1.0
-                    ],
-                    "kinematic": true
+                    ]
                 }
             ]
         },
         {
             "properties": {
-                "name": "WoodBox",
+                "name": "WoodBox1",
                 "tag": "Ground",
                 "activeSelf": true,
                 "isDestroy": false,
@@ -1382,7 +1362,7 @@
                 ],
                 "rotation": [
                     0.0,
-                    0.0,
+                    -0.0,
                     0.0
                 ],
                 "scale": [
@@ -1409,8 +1389,7 @@
                         -1.0,
                         0.0,
                         -1.0
-                    ],
-                    "kinematic": false
+                    ]
                 },
                 {
                     "type": "WoodBox",
@@ -1425,7 +1404,7 @@
         },
         {
             "properties": {
-                "name": "WoodBox",
+                "name": "WoodBox2",
                 "tag": "Ground",
                 "activeSelf": true,
                 "isDestroy": false,
@@ -1437,7 +1416,7 @@
                 ],
                 "rotation": [
                     0.0,
-                    0.0,
+                    -0.0,
                     0.0
                 ],
                 "scale": [
@@ -1464,8 +1443,7 @@
                         -1.0,
                         0.0,
                         -1.0
-                    ],
-                    "kinematic": false
+                    ]
                 },
                 {
                     "type": "WoodBox",
@@ -1480,7 +1458,7 @@
         },
         {
             "properties": {
-                "name": "unname",
+                "name": "SkyDorm",
                 "tag": "untagged",
                 "activeSelf": true,
                 "isDestroy": false,
@@ -1492,7 +1470,7 @@
                 ],
                 "rotation": [
                     0.0,
-                    89.09712982177735,
+                    89.09709930419922,
                     0.0
                 ],
                 "scale": [
@@ -1527,14 +1505,14 @@
                     0.0
                 ],
                 "rotation": [
-                    -90.0,
-                    76.29303741455078,
-                    0.0
+                    -89.99967956542969,
+                    76.29293823242188,
+                    0.000007206123882497195
                 ],
                 "scale": [
-                    1.0,
-                    1.0,
-                    1.0
+                    0.9999991059303284,
+                    0.999998927116394,
+                    1.0000044107437134
                 ]
             },
             "component": [

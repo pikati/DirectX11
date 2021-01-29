@@ -5,6 +5,7 @@
 #include "imgui/imgui.h"
 #include "Editor.h"
 #include "Inspector.h"
+#include "LevelLoader.h"
 
 void RigidBody::SystemInitialize()
 {
@@ -13,15 +14,10 @@ void RigidBody::SystemInitialize()
 	m_oldForce = { 0,0,0 };
 }
 
-void RigidBody::Update()
-{
-	
-}
-
-void RigidBody::Draw()
+void RigidBody::FixedUpdate()
 {
 	if (!Editor::IsPlay()) return;
-	m_force.y = m_gravity;
+	m_force.y += m_gravity * FPS::deltaTime;
 	m_force += m_impulseForce;
 	Vector3 a = m_force / m_mass;
 	m_velocity += a * FPS::deltaTime;
@@ -50,7 +46,7 @@ void RigidBody::AddForce(Vector3 force, ForceMode forceMode)
 {
 	if (forceMode == ForceMode::FORCE)
 	{
-		m_force += force;
+		m_force += force * FPS::deltaTime;
 	}
 	else if (forceMode == ForceMode::IMPULSE)
 	{
@@ -78,6 +74,16 @@ Vector3 RigidBody::GetVelocity()
 	return m_velocity;
 }
 
+void RigidBody::SetKinematic(bool on)
+{
+	m_isKinematic = on;
+}
+
+bool RigidBody::IsKinematic()
+{
+	return m_isKinematic;
+}
+
 void RigidBody::DrawInformation()
 {
 	std::string name = typeid(*this).name();
@@ -90,10 +96,14 @@ void RigidBody::DrawInformation()
 
 	ImGui::InputFloat("mass", &m_mass, 1, 10);
 	ImGui::InputFloat("gravity", &m_gravity, 1, 10);
-	ImGui::InputFloat("x", &m_velocity.x, 1, 10);
-	ImGui::InputFloat("y", &m_velocity.y, 1, 10);
-	ImGui::InputFloat("z", &m_velocity.z, 1, 10);
-	
+	ImGui::InputFloat("fx", &m_force.x, 1, 10);
+	ImGui::InputFloat("fy", &m_force.y, 1, 10);
+	ImGui::InputFloat("fz", &m_force.z, 1, 10);
+	ImGui::InputFloat("vx", &m_velocity.x, 1, 10);
+	ImGui::InputFloat("vy", &m_velocity.y, 1, 10);
+	ImGui::InputFloat("vz", &m_velocity.z, 1, 10);
+	ImGui::Checkbox("isKinematic", &m_isKinematic);
+
 	if (ImGui::Button("Delete"))
 	{
 		this->SystemFinalize();
@@ -104,4 +114,20 @@ void RigidBody::DrawInformation()
 
 	ImGui::PopStyleColor();
 	ImGui::PopStyleColor();
+}
+
+void RigidBody::LoadProperties(const rapidjson::Value& inProp)
+{
+	JsonHelper::GetFloat(inProp, "mass", m_mass);
+	JsonHelper::GetFloat(inProp, "gravity", m_gravity);
+	JsonHelper::GetBool(inProp, "kinematic", m_isKinematic);
+}
+
+void RigidBody::SaveProperties(rapidjson::Document::AllocatorType& alloc, rapidjson::Value& inProp)
+{
+	std::string name = typeid(*this).name();
+	JsonHelper::AddString(alloc, inProp, "type", name.substr(6).c_str());
+	JsonHelper::AddFloat(alloc, inProp, "mass", m_mass);
+	JsonHelper::AddFloat(alloc, inProp, "gravity", m_gravity);
+	JsonHelper::AddBool(alloc, inProp, "kinematic", m_isKinematic);
 }

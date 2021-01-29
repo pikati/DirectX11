@@ -17,11 +17,11 @@ private:
 	float m_gravity = -9.8f;
 	Vector3 m_velocity = { 0,0,0 };
 	Vector3 m_impulseForce = { 0,0,0 };
+	bool m_isKinematic = false;
 public:
 
 	void SystemInitialize() override;
-	void Update() override;
-	void Draw() override;
+	void FixedUpdate() override;
 	void Finalize() override;
 
 	void SetGravity(float gravity);
@@ -31,7 +31,11 @@ public:
 	void SetVelocity(Vector3 velocity);
 	Vector3 GetForce();
 	Vector3 GetVelocity();
-
+	void SetKinematic(bool on);
+	bool IsKinematic();
 	void DrawInformation() override;
+
+	void LoadProperties(const rapidjson::Value& inProp) override;
+	void SaveProperties(rapidjson::Document::AllocatorType& alloc, rapidjson::Value& inProp) override;
 };
 
