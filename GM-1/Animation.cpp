@@ -10,6 +10,26 @@ Animation::Animation()
 	m_state = 0;
 }
 
+Animation::Animation(const Animation& animation)
+{
+	m_dataNum = animation.m_dataNum;
+	m_defaultState = animation.m_defaultState;
+	m_frame = animation.m_frame;
+	m_id = animation.m_id;
+	int size = animation.m_animationData.size();
+	for (int i = 0; i < size; i++)
+	{
+		AnimationData* a = new AnimationData();
+		a->animationName = animation.m_animationData[i]->animationName;
+		a->endTime = animation.m_animationData[i]->endTime;
+		a->isLoop = animation.m_animationData[i]->isLoop;
+		a->loopEndTime = animation.m_animationData[i]->loopEndTime;
+		a->loopStartTime = animation.m_animationData[i]->loopStartTime;
+		a->speed = animation.m_animationData[i]->speed;
+		a->startTime = animation.m_animationData[i]->startTime;
+	}
+}
+
 void Animation::SystemInitialize()
 {
 	m_defaultState = 0;

@@ -24,6 +24,7 @@ private:
 	void UpdateFrame();
 public:
 	Animation();
+	Animation(const Animation& animation);
 	void SystemInitialize() override;
 	void Update() override;
 	void SystemFinalize() override;

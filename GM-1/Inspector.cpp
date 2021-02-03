@@ -36,6 +36,11 @@ void Inspector::Update()
 		m_isComponent = !m_isComponent;
 	}
 
+	if (ImGui::Button("Copy"))
+	{
+		Copy();
+	}
+
 	if (ImGui::Button("Delete"))
 	{
 		DeleteObject();
@@ -210,4 +215,11 @@ void Inspector::DeleteInformation()
 			return;
 		}
 	}
+}
+
+void Inspector::Copy()
+{
+	if (!m_object->obj) return;
+	GameObject* obj = new GameObject(*m_object->obj);
+	CManager::GetScene()->AddGameObject(obj, false);
 }

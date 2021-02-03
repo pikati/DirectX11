@@ -36,7 +36,7 @@ Scene::~Scene()
 void Scene::Initialize()
 {
 	AudioManager::SetVolume(0);
-	m_currentSceneName = "Asset/Scene/Stage1.scene";
+	m_currentSceneName = "Asset/Scene/gokonBattle.scene";
 	LevelLoader::LoadLevel(this, m_currentSceneName.c_str());
 	Hierarchy::SetDefaultPath(m_currentSceneName);
 }

@@ -1314,6 +1314,12 @@ void Fbx::DrawInformation()
 	ImGui::PopStyleColor();
 }
 
+void Fbx::SetProperties(Component* c)
+{
+	Fbx* b = dynamic_cast<Fbx*>(c);
+	b->m_animation = m_animation;
+
+}
 
 void Fbx::LoadProperties(const rapidjson::Value& inProp)
 {

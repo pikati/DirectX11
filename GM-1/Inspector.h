@@ -28,5 +28,6 @@ public:
 
 	static void SetGameObject(GameObject* obj, int layer, int index);
 	static void DeleteInformation();
+	static void Copy();
 };
 
