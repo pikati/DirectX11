@@ -59,9 +59,9 @@ class Fbx : public Component
 private:
 	Animation* m_animation;
 	//!fbxのマネージャ
-	FbxManager* m_manager = NULL;
+	FbxManager* m_manager;
 	//!fbxのシーン
-	FbxScene* m_scene = NULL;
+	FbxScene* m_scene;
 	//!fbxの情報
 	FbxInfo		m_fbxInfo;
 	//!メッシュの情報
@@ -86,14 +86,14 @@ private:
 	int m_count;
 	//アニメーション管理に使用
 	int m_frame;
-	bool isPlay = false;
+	bool m_isPlay;
 	static int m_maxID;
 
 	std::string m_textureName;
 	std::string m_fileName;
 	ID3D11ShaderResourceView* texture;
-	bool m_isCopy = false;
-	BoundingBox* m_bb = nullptr;
+	bool m_isCopy;
+	BoundingBox* m_bb;
 
 	void LoadFBX(const char* fileName);
 	void InitializeFBX();
@@ -129,6 +129,8 @@ private:
 	void DrawAnimationFrame();
 	void DrawNormal();
 public:
+	Fbx();
+	Fbx(const Fbx& fbx);
 	void SystemInitialize();
 	void Update();
 	void Draw();

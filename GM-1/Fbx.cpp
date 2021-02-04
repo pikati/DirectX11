@@ -16,6 +16,109 @@
 
 int Fbx::m_maxID = -1;
 
+Fbx::Fbx()
+	:m_animation(nullptr),
+	m_manager(nullptr),
+	m_scene(nullptr),
+	m_meshInfo(nullptr),
+	m_isAnim(false),
+	m_animationStackNumber(0),
+	m_frameTime(0),
+	m_timeCount(0),
+	m_start(0),
+	m_stop(0),
+	m_device(nullptr),
+	m_animationVertex(nullptr),
+	m_count(0),
+	m_frame(0),
+	m_isPlay(false),
+	m_textureName(""),
+	m_fileName(""),
+	texture(nullptr),
+	m_isCopy(false),
+	m_bb(nullptr)
+{
+
+}
+
+Fbx::Fbx(const Fbx& fbx)
+	:m_manager(nullptr),
+	m_scene(nullptr),
+	m_isAnim(fbx.m_isAnim),
+	m_animationStackNumber(fbx.m_animationStackNumber),
+	m_frameTime(fbx.m_frameTime),
+	m_timeCount(fbx.m_timeCount),
+	m_start(fbx.m_start),
+	m_stop(fbx.m_stop),
+	m_device(fbx.m_device),
+	m_count(fbx.m_count),
+	m_frame(fbx.m_frame),
+	m_isPlay(fbx.m_isPlay),
+	m_textureName(fbx.m_textureName),
+	m_fileName(fbx.m_fileName),
+	texture(fbx.texture),
+	m_isCopy(false)
+{
+	m_animation = new Animation(*fbx.m_animation);
+	m_fbxInfo = fbx.m_fbxInfo;
+	m_meshInfo = new MeshInfo[m_fbxInfo.meshCount];
+	for (int i = 0; i < m_fbxInfo.meshCount; i++)
+	{
+		m_meshInfo[i].index = fbx.m_meshInfo[i].index;
+		m_meshInfo[i].indexCount = fbx.m_meshInfo[i].indexCount;
+		m_meshInfo[i].pIB = fbx.m_meshInfo[i].pIB;
+		m_meshInfo[i].polygonCount = fbx.m_meshInfo[i].polygonCount;
+		m_meshInfo[i].pVB = fbx.m_meshInfo[i].pVB;
+		m_meshInfo[i].texture = fbx.m_meshInfo[i].texture;
+		m_meshInfo[i].texturePath = fbx.m_meshInfo[i].texturePath;
+		m_meshInfo[i].uvSetCount = fbx.m_meshInfo[i].uvSetCount;
+		m_meshInfo[i].uvSetName = fbx.m_meshInfo[i].uvSetName;
+		m_meshInfo[i].vertex = fbx.m_meshInfo[i].vertex;
+		m_meshInfo[i].vertexCount = fbx.m_meshInfo[i].vertexCount;
+	}
+	m_bb = new BoundingBox();
+	m_bb = fbx.m_bb;
+
+	//アニメーション関係
+	{
+		if (m_animationStackNumber == 0)
+		{
+			return;
+		}
+		double animationTime = m_start.GetSecondDouble();
+		double stopTime = m_stop.GetSecondDouble();
+		int count = 0;
+		m_animationVertex = new Vector3 * *[m_fbxInfo.meshCount];
+		while (animationTime <= stopTime)
+		{
+			count++;
+			animationTime += FRAME;
+		}
+
+		m_count = count;
+
+		for (int i = 0; i < m_fbxInfo.meshCount; i++)
+		{
+			//m_animVertex[i].resize(count);
+			m_animationVertex[i] = new Vector3 * [count];
+			for (int j = 0; j < count; j++)
+			{
+				//m_animVertex[i][j].resize(m_meshInfo[i].vertexCount);
+				m_animationVertex[i][j] = new Vector3[m_meshInfo[i].vertexCount];
+			}
+		}
+		for (int i = 0; i < m_fbxInfo.meshCount; i++)
+		{
+			for (int j = 0; j < count; j++)
+			{
+				for (int k = 0; k < m_meshInfo[i].vertexCount; j++)
+				{
+					m_animationVertex[i][j][k] = fbx.m_animationVertex[i][j][k];
+				}
+			}
+		}
+	}
+}
 
 void Fbx::SystemInitialize()
 {
@@ -95,7 +198,7 @@ void Fbx::SystemFinalize()
 			}
 		}
 		for (int i = m_fbxInfo.meshCount - 1; i >= 0; i--)
-		{;
+		{
 			m_meshInfo[i].pVB = nullptr;
 			m_meshInfo[i].pIB = nullptr;
 		}
@@ -1092,7 +1195,7 @@ void Fbx::UpdateTime()
 	{
 		return;
 	}
-	if (isPlay)
+	if (m_isPlay)
 	{
 		//アニメーションの時間更新
 		m_timeCount += m_frameTime;
@@ -1237,7 +1340,7 @@ void Fbx::DrawAnimationFrame()
 
 void Fbx::PlayAnimation()
 {
-	isPlay = !isPlay;
+	m_isPlay = !m_isPlay;
 }
 
 void Fbx::SetFileName(const char* fileName)
@@ -1317,7 +1420,7 @@ void Fbx::DrawInformation()
 void Fbx::SetProperties(Component* c)
 {
 	Fbx* b = dynamic_cast<Fbx*>(c);
-	b->m_animation = m_animation;
+	m_animation = new Animation(*b->m_animation);
 
 }
 

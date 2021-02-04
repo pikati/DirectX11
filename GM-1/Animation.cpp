@@ -8,6 +8,7 @@ Animation::Animation()
 	m_dataNum = 0;
 	m_frame = 0;
 	m_state = 0;
+	m_defaultState = 0;
 }
 
 Animation::Animation(const Animation& animation)
@@ -16,6 +17,7 @@ Animation::Animation(const Animation& animation)
 	m_defaultState = animation.m_defaultState;
 	m_frame = animation.m_frame;
 	m_id = animation.m_id;
+	m_state = animation.m_state;
 	int size = animation.m_animationData.size();
 	for (int i = 0; i < size; i++)
 	{
@@ -27,6 +29,7 @@ Animation::Animation(const Animation& animation)
 		a->loopStartTime = animation.m_animationData[i]->loopStartTime;
 		a->speed = animation.m_animationData[i]->speed;
 		a->startTime = animation.m_animationData[i]->startTime;
+		m_animationData.push_back(a);
 	}
 }
 
