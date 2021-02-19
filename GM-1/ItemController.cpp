@@ -14,7 +14,7 @@ void ItemController::Initialize()
 
 void ItemController::Update()
 {
-	if (m_isGetApple && m_isGetStrawberry && m_isGetBanana && !m_isChangeScene)
+	if (m_isGetApple/* && m_isGetStrawberry && m_isGetBanana*/ && !m_isChangeScene)
 	{
 		//m_fade->FadeIn();
 		m_isChangeScene = true;

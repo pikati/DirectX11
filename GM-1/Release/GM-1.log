@@ -1,81 +1,84 @@
-﻿  AABB.cpp
+﻿  compilation object save succeeded; see D:\HAL\3\GM\Directx11\Release\ColorPS.cso
+  compilation object save succeeded; see D:\HAL\3\GM\Directx11\Release\ColorVS.cso
+  compilation object save succeeded; see D:\HAL\3\GM\Directx11\Release\MorphingPS.cso
+  compilation object save succeeded; see D:\HAL\3\GM\Directx11\Release\unlitTexturePS.cso
+D:\HAL\3\GM\Directx11\GM-1\unlitTextureVS.hlsl(3,34-36): warning X3578: 'main': Top-level output parameter 'Out' not completely initialized
+  
+  compilation object save succeeded; see D:\HAL\3\GM\Directx11\Release\unlitTextureVS.cso
+  AABB.cpp
   Animation.cpp
   AudioManager.cpp
   Billboard.cpp
   BoundingBox.cpp
   BoxCollider.cpp
-D:\HAL\3\GM\DirectX11\GM-1\BoxCollider.cpp(180,34): warning C4244: 'return': 'double' から 'float' への変換です。データが失われる可能性があります。
-D:\HAL\3\GM\DirectX11\GM-1\BoxCollider.cpp(184,34): warning C4244: 'return': 'double' から 'float' への変換です。データが失われる可能性があります。
-D:\HAL\3\GM\DirectX11\GM-1\BoxCollider.cpp(188,34): warning C4244: 'return': 'double' から 'float' への変換です。データが失われる可能性があります。
   Bullet.cpp
   Camera.cpp
-D:\HAL\3\GM\DirectX11\GM-1\Camera.cpp(32,21): warning C4244: '=': 'int' から 'FLOAT' への変換です。データが失われる可能性があります。
-D:\HAL\3\GM\DirectX11\GM-1\Camera.cpp(33,22): warning C4244: '=': 'int' から 'FLOAT' への変換です。データが失われる可能性があります。
-D:\HAL\3\GM\DirectX11\GM-1\Camera.cpp(36,24): warning C4244: '=': 'int' から 'FLOAT' への変換です。データが失われる可能性があります。
-D:\HAL\3\GM\DirectX11\GM-1\Camera.cpp(37,24): warning C4244: '=': 'int' から 'FLOAT' への変換です。データが失われる可能性があります。
-D:\HAL\3\GM\DirectX11\GM-1\Camera.cpp(184,29): warning C4244: '=': 'FLOAT' から 'int' への変換です。データが失われる可能性があります。
-D:\HAL\3\GM\DirectX11\GM-1\Camera.cpp(185,28): warning C4244: '=': 'FLOAT' から 'int' への変換です。データが失われる可能性があります。
-D:\HAL\3\GM\DirectX11\GM-1\Camera.cpp(186,31): warning C4244: '=': 'FLOAT' から 'int' への変換です。データが失われる可能性があります。
-D:\HAL\3\GM\DirectX11\GM-1\Camera.cpp(187,31): warning C4244: '=': 'FLOAT' から 'int' への変換です。データが失われる可能性があります。
   CameraController.cpp
   ClassDictionary.cpp
   Collider.cpp
-D:\HAL\3\GM\DirectX11\GM-1\Collider.cpp(541,14): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
   Component.cpp
+  EditorCamera.cpp
+  EditorController.cpp
   DirectionalLight.cpp
   Editor.cpp
-  EditorController.cpp
-  FPS.cpp
+  Engine.cpp
   Fade.cpp
   Fbx.cpp
-D:\HAL\3\GM\DirectX11\GM-1\Fbx.cpp(633,93): warning C4244: '=': 'T' から 'FLOAT' への変換です。データが失われる可能性があります。
+D:\HAL\3\GM\Directx11\GM-1\Fbx.cpp(737,93): warning C4244: '=': 'T' から 'FLOAT' への変換です。データが失われる可能性があります。
           with
           [
               T=fbxsdk::FbxDouble
           ]
-D:\HAL\3\GM\DirectX11\GM-1\Fbx.cpp(634,87): warning C4244: '=': 'T' から 'FLOAT' への変換です。データが失われる可能性があります。
+D:\HAL\3\GM\Directx11\GM-1\Fbx.cpp(738,87): warning C4244: '=': 'T' から 'FLOAT' への変換です。データが失われる可能性があります。
           with
           [
               T=fbxsdk::FbxDouble
           ]
+  FPS.cpp
+  コンパイル中...
   GameObject.cpp
   Hierarchy.cpp
-  コンパイル中...
   Image.cpp
   ImguiManager.cpp
+  input.cpp
+D:\HAL\3\GM\Directx11\GM-1\input.cpp(36,32): warning C4244: '引数': 'LONG' から 'float' への変換です。データが失われる可能性があります。
+D:\HAL\3\GM\Directx11\GM-1\input.cpp(36,25): warning C4244: '引数': 'LONG' から 'float' への変換です。データが失われる可能性があります。
   Inspector.cpp
   Item.cpp
   ItemController.cpp
   LevelLoader.cpp
+  main.cpp
   MainGameManager.cpp
+  manager.cpp
   MeshCollider.cpp
   MeshField.cpp
-D:\HAL\3\GM\DirectX11\GM-1\MeshField.cpp(22,37): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
-D:\HAL\3\GM\DirectX11\GM-1\MeshField.cpp(22,34): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+D:\HAL\3\GM\Directx11\GM-1\MeshField.cpp(22,37): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
+D:\HAL\3\GM\Directx11\GM-1\MeshField.cpp(22,34): warning C4244: '引数': 'int' から 'float' への変換です。データが失われる可能性があります。
   Morphing.cpp
   ObjectPooler.cpp
   Plane.cpp
-D:\HAL\3\GM\DirectX11\GM-1\Plane.cpp(149,27): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-D:\HAL\3\GM\DirectX11\GM-1\Plane.cpp(150,27): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-D:\HAL\3\GM\DirectX11\GM-1\Plane.cpp(152,27): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-D:\HAL\3\GM\DirectX11\GM-1\Plane.cpp(153,27): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-D:\HAL\3\GM\DirectX11\GM-1\Plane.cpp(155,27): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
-D:\HAL\3\GM\DirectX11\GM-1\Plane.cpp(156,27): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+D:\HAL\3\GM\Directx11\GM-1\Plane.cpp(150,27): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+D:\HAL\3\GM\Directx11\GM-1\Plane.cpp(151,27): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+D:\HAL\3\GM\Directx11\GM-1\Plane.cpp(153,27): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+D:\HAL\3\GM\Directx11\GM-1\Plane.cpp(154,27): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+D:\HAL\3\GM\Directx11\GM-1\Plane.cpp(156,27): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
+D:\HAL\3\GM\Directx11\GM-1\Plane.cpp(157,27): warning C4244: '引数': 'double' から 'float' への変換です。データが失われる可能性があります。
   Player.cpp
+  renderer.cpp
   ResultManager.cpp
+  コンパイル中...
   RigidBody.cpp
   SaveLoadManager.cpp
   Scene.cpp
   SceneManager.cpp
   SkyDorm.cpp
   SphereCollider.cpp
-D:\HAL\3\GM\DirectX11\GM-1\SphereCollider.cpp(47,30): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
-D:\HAL\3\GM\DirectX11\GM-1\SphereCollider.cpp(48,30): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
-D:\HAL\3\GM\DirectX11\GM-1\SphereCollider.cpp(57,30): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
-D:\HAL\3\GM\DirectX11\GM-1\SphereCollider.cpp(58,30): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
-D:\HAL\3\GM\DirectX11\GM-1\SphereCollider.cpp(65,30): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
-D:\HAL\3\GM\DirectX11\GM-1\SphereCollider.cpp(67,30): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
-  コンパイル中...
+D:\HAL\3\GM\Directx11\GM-1\SphereCollider.cpp(49,30): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+D:\HAL\3\GM\Directx11\GM-1\SphereCollider.cpp(50,30): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+D:\HAL\3\GM\Directx11\GM-1\SphereCollider.cpp(59,30): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+D:\HAL\3\GM\Directx11\GM-1\SphereCollider.cpp(60,30): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+D:\HAL\3\GM\Directx11\GM-1\SphereCollider.cpp(67,30): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+D:\HAL\3\GM\Directx11\GM-1\SphereCollider.cpp(69,30): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
   Spring.cpp
   Texture.cpp
   TitleManager.cpp
@@ -83,13 +86,9 @@ D:\HAL\3\GM\DirectX11\GM-1\SphereCollider.cpp(67,30): warning C4244: '=': 'doubl
   Transform.cpp
   TutorialManager.cpp
   WoodBox.cpp
-  input.cpp
-  main.cpp
-  manager.cpp
-  renderer.cpp
   コード生成しています。
-  7 of 3964 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    52 functions had inline decision re-evaluated but remain unchanged
+  1561 of 4113 functions (38.0%) were compiled, the rest were copied from previous compilation.
+    174 functions were new in current compilation
+    223 functions had inline decision re-evaluated but remain unchanged
   コード生成が終了しました。
-  GM-1.vcxproj -> D:\HAL\3\GM\DirectX11\Release\GM-1.exe
+  GM-1.vcxproj -> D:\HAL\3\GM\Directx11\Release\GM-1.exe

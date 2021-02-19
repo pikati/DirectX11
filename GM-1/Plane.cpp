@@ -226,7 +226,9 @@ void Plane::DrawInformation()
 	m_textureName = fname;
 	if (ImGui::Button("Reload"))
 	{
+		SystemFinalize();
 		Finalize();
+		SystemInitialize();
 		Initialize();
 	}
 

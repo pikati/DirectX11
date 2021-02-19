@@ -18,7 +18,6 @@ private:
 	static void DispObjectInformation();
 	static void DispTransform();
 	static void DispAddComponentWindow();
-	static void DeleteObject();
 	static bool m_isDeleted;
 public:
 	static void Initialize();
@@ -26,6 +25,7 @@ public:
 	static void Draw();
 	static void Finalize();
 
+	static void DeleteObject();
 	static void SetGameObject(GameObject* obj, int layer, int index);
 	static void DeleteInformation();
 	static void Copy();

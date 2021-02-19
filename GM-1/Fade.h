@@ -14,8 +14,10 @@ private:
 	void UpdateFadeIn();
 	void UpdateFadeOut();
 public:
+	void SystemInitialize() override;
 	void Initialize();
 	void Update();
+	void Finalize() override;
 
 	void SetFadeTime(float time);
 	void FadeIn();

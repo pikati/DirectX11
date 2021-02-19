@@ -22,7 +22,7 @@ public:
 	ItemType GetItemType();
 	void SetItemType(ItemType type);
 	void OnCollisionEnter(GameObject* obj) override;
-
+	void DrawInformation() override;
 	void LoadProperties(const rapidjson::Value& inProp) override;
 	void SaveProperties(rapidjson::Document::AllocatorType& alloc, rapidjson::Value& inProp) override;
 };

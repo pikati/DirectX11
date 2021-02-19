@@ -70,6 +70,7 @@ void Hierarchy::Update()
             {
                 GameObject* obj = CManager::GetScene()->CreateGameObject();
                 obj->AddComponent<Plane>();
+                obj->SystemInitialize();
                 obj->Initialize();
                 Inspector::SetGameObject(obj, 1, m_layerMax[1]);
             }

@@ -25,6 +25,7 @@ private:
 	ImGuizmo::OPERATION m_currentOperation = ImGuizmo::TRANSLATE;
 	ImGuizmo::MODE m_currentMode = ImGuizmo::LOCAL;
 	bool m_isSnap = false;
+	Transform* m_initialTransform;
 
 	bool DeleteComponent(Component* component);
 	void ImGuizmoUpdate();

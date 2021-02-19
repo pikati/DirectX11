@@ -22,7 +22,7 @@ GameObject::GameObject()
 
 GameObject::GameObject(const GameObject& obj)
 {
-	transform = new Transform();
+	transform = new Transform(*obj.transform);
 	std::list<Component*> c2;
 	this->name = obj.name;
 	this->tag = obj.tag;
@@ -44,6 +44,7 @@ GameObject::GameObject(const GameObject& obj)
 		c2.push_back(c);
 		c->SetGameObject(this);
 		c->SetID(component->GetID());
+		c->SystemInitialize();
 	}
 	this->components = c2;
 }
@@ -77,6 +78,7 @@ void GameObject::SystemInitialize()
 		c->SystemInitialize();
 		c->SetGameObject(this);
 	}
+	m_initialTransform = new Transform(*transform);
 }
 
 void GameObject::Update()
@@ -132,12 +134,16 @@ void GameObject::Finalize()
 		c->Finalize();
 	}
 	m_camera = nullptr;
+	SAFE_DELETE(transform);
+	transform = new Transform(*m_initialTransform);
+	SAFE_DELETE(m_initialTransform);
 }
 
 void GameObject::SystemFinalize()
 {
 	transform->Finalize();
 	SAFE_DELETE(transform);
+	SAFE_DELETE(m_initialTransform);
 	for (Component* c : components)
 	{
 		c->SystemFinalize();
@@ -281,66 +287,66 @@ void GameObject::SetSortingNum(int sortingNum)
 void GameObject::ImGuizmoUpdate()
 {
 	if (Editor::IsPlay()) return;
-	if (m_isActiveGizmo)
-	{
-		float snap[3] = { 1.f, 1.f, 1.f };
-		float matrix[16];
-		float cameraView[16];
-		float cameraProjection[16];
-		float identityMatrix[16];
-		D3DXMATRIX mat;
-		D3DXMATRIX vmat = Editor::GetEditorCameraViewMatrix();
-		D3DXMATRIX wmat = Editor::GetEditorCameraProjectionMatrix();
-		D3DXMATRIX imat;
-		D3DXMatrixIdentity(&imat);
-		CalcMatrix(mat);
-		SetGizmoMatrix(matrix, mat);
-		SetGizmoMatrix(cameraView, vmat);
-		SetGizmoMatrix(cameraProjection, wmat);
-		SetGizmoMatrix(identityMatrix, imat);
-		ImGuizmo::DrawGrid(cameraView, cameraProjection, identityMatrix, 100.f);
-		ImGuizmo::SetID(0);
-		ImGui::Begin("GizmoInfo");
-		//if (CInput::GetKeyTrigger('W'))
-		//	m_currentOperation = ImGuizmo::TRANSLATE;
-		//if (CInput::GetKeyTrigger('E'))
-		//	m_currentOperation = ImGuizmo::ROTATE;
-		//if (CInput::GetKeyTrigger('R')) // r Key
-		//	m_currentOperation = ImGuizmo::SCALE;
-		if (ImGui::RadioButton("Translate", m_currentOperation == ImGuizmo::TRANSLATE))
-			m_currentOperation = ImGuizmo::TRANSLATE;
-		ImGui::SameLine();
-		if (ImGui::RadioButton("Rotate", m_currentOperation == ImGuizmo::ROTATE))
-			m_currentOperation = ImGuizmo::ROTATE;
-		ImGui::SameLine();
-		if (ImGui::RadioButton("Scale", m_currentOperation == ImGuizmo::SCALE))
-			m_currentOperation = ImGuizmo::SCALE;
-		float matT[3], matR[3], matS[3];
-		ImGuizmo::DecomposeMatrixToComponents(matrix, matT, matR, matS);
-		ImGui::InputFloat3("Tr", matT);
-		ImGui::InputFloat3("Rt", matR);
-		ImGui::InputFloat3("Sc", matS);
-		ImGuizmo::RecomposeMatrixFromComponents(matT, matR, matS, matrix);
-		transform->position.Set(matT[0], matT[1], matT[2]);
-		transform->rotation.Set(matR[0], matR[1], matR[2]);
-		transform->scale.Set(matS[0], matS[1], matS[2]);
+	//if (m_isActiveGizmo)
+	//{
+	//	float snap[3] = { 1.f, 1.f, 1.f };
+	//	float matrix[16];
+	//	float cameraView[16];
+	//	float cameraProjection[16];
+	//	float identityMatrix[16];
+	//	D3DXMATRIX mat;
+	//	D3DXMATRIX vmat = Editor::GetEditorCameraViewMatrix();
+	//	D3DXMATRIX wmat = Editor::GetEditorCameraProjectionMatrix();
+	//	D3DXMATRIX imat;
+	//	D3DXMatrixIdentity(&imat);
+	//	CalcMatrix(mat);
+	//	SetGizmoMatrix(matrix, mat);
+	//	SetGizmoMatrix(cameraView, vmat);
+	//	SetGizmoMatrix(cameraProjection, wmat);
+	//	SetGizmoMatrix(identityMatrix, imat);
+	//	ImGuizmo::DrawGrid(cameraView, cameraProjection, identityMatrix, 100.f);
+	//	ImGuizmo::SetID(0);
+	//	ImGui::Begin("GizmoInfo");
+	//	//if (CInput::GetKeyTrigger('W'))
+	//	//	m_currentOperation = ImGuizmo::TRANSLATE;
+	//	//if (CInput::GetKeyTrigger('E'))
+	//	//	m_currentOperation = ImGuizmo::ROTATE;
+	//	//if (CInput::GetKeyTrigger('R')) // r Key
+	//	//	m_currentOperation = ImGuizmo::SCALE;
+	//	if (ImGui::RadioButton("Translate", m_currentOperation == ImGuizmo::TRANSLATE))
+	//		m_currentOperation = ImGuizmo::TRANSLATE;
+	//	ImGui::SameLine();
+	//	if (ImGui::RadioButton("Rotate", m_currentOperation == ImGuizmo::ROTATE))
+	//		m_currentOperation = ImGuizmo::ROTATE;
+	//	ImGui::SameLine();
+	//	if (ImGui::RadioButton("Scale", m_currentOperation == ImGuizmo::SCALE))
+	//		m_currentOperation = ImGuizmo::SCALE;
+	//	float matT[3], matR[3], matS[3];
+	//	ImGuizmo::DecomposeMatrixToComponents(matrix, matT, matR, matS);
+	//	ImGui::InputFloat3("Tr", matT);
+	//	ImGui::InputFloat3("Rt", matR);
+	//	ImGui::InputFloat3("Sc", matS);
+	//	ImGuizmo::RecomposeMatrixFromComponents(matT, matR, matS, matrix);
+	//	transform->position.Set(matT[0], matT[1], matT[2]);
+	//	transform->rotation.Set(matR[0], matR[1], matR[2]);
+	//	transform->scale.Set(matS[0], matS[1], matS[2]);
 
-		if (m_currentOperation != ImGuizmo::SCALE)
-		{
-			if (ImGui::RadioButton("Local", m_currentMode == ImGuizmo::LOCAL))
-				m_currentMode = ImGuizmo::LOCAL;
-			ImGui::SameLine();
-			if (ImGui::RadioButton("World", m_currentMode == ImGuizmo::WORLD))
-				m_currentMode = ImGuizmo::WORLD;
-		}
-		/*if (CInput::GetKeyTrigger('S'))
-			m_isSnap = !m_isSnap;*/
-		ImGuiIO& io = ImGui::GetIO();
-		float camDistance = Editor::GetEditorCameraDistance();
-		ImGuizmo::SetRect(0, 0, io.DisplaySize.x, io.DisplaySize.y);
-		ImGuizmo::Manipulate(cameraView, cameraProjection, m_currentOperation, m_currentMode, matrix, NULL, m_isSnap ? &snap[0] : NULL);
-		ImGui::End();
-	}
+	//	if (m_currentOperation != ImGuizmo::SCALE)
+	//	{
+	//		if (ImGui::RadioButton("Local", m_currentMode == ImGuizmo::LOCAL))
+	//			m_currentMode = ImGuizmo::LOCAL;
+	//		ImGui::SameLine();
+	//		if (ImGui::RadioButton("World", m_currentMode == ImGuizmo::WORLD))
+	//			m_currentMode = ImGuizmo::WORLD;
+	//	}
+	//	/*if (CInput::GetKeyTrigger('S'))
+	//		m_isSnap = !m_isSnap;*/
+	//	ImGuiIO& io = ImGui::GetIO();
+	//	float camDistance = Editor::GetEditorCameraDistance();
+	//	ImGuizmo::SetRect(0, 0, io.DisplaySize.x, io.DisplaySize.y);
+	//	ImGuizmo::Manipulate(cameraView, cameraProjection, m_currentOperation, m_currentMode, matrix, NULL, m_isSnap ? &snap[0] : NULL);
+	//	ImGui::End();
+	//}
 }
 
 void GameObject::SetActiveGizmo(bool active)

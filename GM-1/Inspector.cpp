@@ -76,12 +76,24 @@ void Inspector::Finalize()
 
 void Inspector::DispObjectInformation()
 {
+	if (m_object->obj == nullptr) return;
 	char name[256];
+	char tag[64];
+	int layer;
 	m_isDeleted = false;
 	strcpy_s(name, 256, m_object->obj->name.c_str());
 	ImGui::InputText("name", name, 256);
 	m_object->obj->name = name;
-	ImGui::InputInt("layer", &m_object->obj->layer);
+	strcpy_s(tag, 64, m_object->obj->tag.c_str());
+	ImGui::InputText("tag", tag, 64);
+	m_object->obj->tag = tag;
+	layer = m_object->obj->layer;
+	ImGui::InputInt("layer", &layer);
+	if (layer >= LAYER_MAX)
+	{
+		layer = LAYER_MAX - 1;
+	}
+	m_object->obj->layer = layer;
 
 	if (ImGui::Button("Transform"))
 	{
@@ -222,4 +234,5 @@ void Inspector::Copy()
 	if (!m_object->obj) return;
 	GameObject* obj = new GameObject(*m_object->obj);
 	CManager::GetScene()->AddGameObject(obj, false);
+	m_object->obj = obj;
 }

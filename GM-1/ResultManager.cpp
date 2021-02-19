@@ -11,20 +11,20 @@ void ResultManager::Initialize()
 {
 	AudioManager::StopSound();
 	AudioManager::PlaySound(BGM_RESULT);
-	m_fade = CManager::GetScene()->Find("Fade")->GetComponent<Fade>();
-	m_fade->FadeOut();
+	/*m_fade = CManager::GetScene()->Find("Fade")->GetComponent<Fade>();
+	m_fade->FadeOut();*/
 }
 
 void ResultManager::Update()
 {
 	if (CInput::GetKeyTrigger(VK_SPACE))
 	{
-		m_fade->FadeIn();
+		//m_fade->FadeIn();
 		m_isChangeScene = true;
 		AudioManager::PlaySound(SE_DECIDE);
-	}
-	if (m_isChangeScene && !m_fade->IsFading())
-	{
 		SceneManager::LoadScene("Asset/Scene/title.scene");
 	}
+	/*if (m_isChangeScene && !m_fade->IsFading())
+	{
+	}*/
 }

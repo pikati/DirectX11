@@ -39,7 +39,6 @@ void BoxCollider::Draw()
 {
 	if (!m_isDraw) return;
 	VERTEX_LINE v[8];
-	Vector3 pos = gameObject->transform->position;
 	v[0].Position = Vector3(m_min.x, m_max.y, m_min.z);
 	v[1].Position = Vector3(m_max.x, m_max.y, m_min.z);
 	v[2].Position = Vector3(m_min.x, m_min.y, m_min.z);

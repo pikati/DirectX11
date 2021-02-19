@@ -13,6 +13,7 @@ private:
 	bool m_isChangeScale;
 public:
 	Transform();
+	Transform(const Transform& transform);
 	~Transform();
 	Vector3 position;
 	Vector3 rotation;

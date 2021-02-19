@@ -26,8 +26,6 @@ void ObjectPooler::Initialize()
 		GameObject* obj = LevelLoader::LoadPrefab(fileName.c_str());
 		m_object.emplace_back(obj);
 	} while (FindNextFile(h, &data));
-
-
 }
 
 void ObjectPooler::Finalize()

@@ -1420,8 +1420,93 @@ void Fbx::DrawInformation()
 void Fbx::SetProperties(Component* c)
 {
 	Fbx* b = dynamic_cast<Fbx*>(c);
-	m_animation = new Animation(*b->m_animation);
+	if(b->m_animation)
+	{
+		m_animation = new Animation(*b->m_animation);
+	}
+	m_fbxInfo.material = b->m_fbxInfo.material;
+	m_fbxInfo.materialCount = b->m_fbxInfo.materialCount;
+	m_fbxInfo.materialInfo = b->m_fbxInfo.materialInfo;
+	m_fbxInfo.meshCount = b->m_fbxInfo.meshCount;
+	m_fbxInfo.meshes = b->m_fbxInfo.meshes;
+	m_fbxInfo.uvSetCount = b->m_fbxInfo.uvSetCount;
+	m_fbxInfo.uvSetName = b->m_fbxInfo.uvSetName;
+	m_meshInfo = new MeshInfo[m_fbxInfo.meshCount];
+	for (int i = 0; i < m_fbxInfo.meshCount; i++)
+	{
+		m_meshInfo[i].index = b->m_meshInfo[i].index;
+		m_meshInfo[i].indexCount = b->m_meshInfo[i].indexCount;
+		m_meshInfo[i].pIB = b->m_meshInfo[i].pIB;
+		m_meshInfo[i].polygonCount = b->m_meshInfo[i].polygonCount;
+		m_meshInfo[i].pVB = b->m_meshInfo[i].pVB;
+		m_meshInfo[i].texture = b->m_meshInfo[i].texture;
+		m_meshInfo[i].texturePath = b->m_meshInfo[i].texturePath;
+		m_meshInfo[i].uvSetCount = b->m_meshInfo[i].uvSetCount;
+		m_meshInfo[i].uvSetName = b->m_meshInfo[i].uvSetName;
+		m_meshInfo[i].vertex = new VERTEX_3D[b->m_meshInfo[i].vertexCount];
+		for (int n = 0; n < b->m_meshInfo[i].vertexCount; n++)
+		{
+			m_meshInfo[i].vertex[n] = b->m_meshInfo[i].vertex[n];
+		}
+		m_meshInfo[i].vertexCount = b->m_meshInfo[i].vertexCount;
+	}
+	m_bb = new BoundingBox();
+	m_bb = b->m_bb;
 
+	m_isAnim = b->m_isAnim;
+	m_animationStackNumber = b->m_animationStackNumber;
+	m_frameTime = b->m_frameTime;
+	m_timeCount = b->m_timeCount;
+	m_start = b->m_start;
+	m_stop = b->m_stop;
+	m_device = b->m_device;
+	m_count = b->m_count;
+	m_frame = b->m_frame;
+	m_isPlay = b->m_isPlay;
+	m_textureName = b->m_textureName;
+	m_fileName = b->m_fileName;
+	texture = b->texture;
+	m_isCopy = false;
+
+	//アニメーション関係
+	{
+		if (m_animationStackNumber == 0)
+		{
+			return;
+		}
+		double animationTime = m_start.GetSecondDouble();
+		double stopTime = m_stop.GetSecondDouble();
+		int count = 0;
+		m_animationVertex = new Vector3 * *[m_fbxInfo.meshCount];
+		while (animationTime <= stopTime)
+		{
+			count++;
+			animationTime += FRAME;
+		}
+
+		m_count = count;
+
+		for (int i = 0; i < m_fbxInfo.meshCount; i++)
+		{
+			//m_animVertex[i].resize(count);
+			m_animationVertex[i] = new Vector3 * [count];
+			for (int j = 0; j < count; j++)
+			{
+				//m_animVertex[i][j].resize(m_meshInfo[i].vertexCount);
+				m_animationVertex[i][j] = new Vector3[m_meshInfo[i].vertexCount];
+			}
+		}
+		for (int i = 0; i < m_fbxInfo.meshCount; i++)
+		{
+			for (int j = 0; j < count; j++)
+			{
+				for (int k = 0; k < m_meshInfo[i].vertexCount; j++)
+				{
+					m_animationVertex[i][j][k] = b->m_animationVertex[i][j][k];
+				}
+			}
+		}
+	}
 }
 
 void Fbx::LoadProperties(const rapidjson::Value& inProp)

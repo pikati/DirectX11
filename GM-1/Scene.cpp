@@ -36,7 +36,7 @@ Scene::~Scene()
 void Scene::Initialize()
 {
 	AudioManager::SetVolume(0);
-	m_currentSceneName = "Asset/Scene/gokonBattle.scene";
+	m_currentSceneName = "Asset/Scene/title.scene";
 	LevelLoader::LoadLevel(this, m_currentSceneName.c_str());
 	Hierarchy::SetDefaultPath(m_currentSceneName);
 }
@@ -131,7 +131,7 @@ void Scene::Finalize()
 GameObject* Scene::CreateGameObject()
 {
 	GameObject* obj = new GameObject();
-	obj->name = SetDefaultName(0);
+	obj->name = SetDefaultName(0, "unname", "unname");
 	m_tempObject.emplace_back(obj);
 	obj->Initialize();
 	return obj;
@@ -139,6 +139,7 @@ GameObject* Scene::CreateGameObject()
 
 void Scene::AddGameObject(GameObject* obj, bool isTemp)
 {
+	obj->name  = SetDefaultName(0, obj->name, obj->name);
 	if (isTemp)
 	{
 		m_tempObject.emplace_back(obj);
@@ -211,13 +212,13 @@ int Scene::GetRenderNum()
 	return m_nowRenderNum;
 }
 
-std::string Scene::SetDefaultName(int i)
+std::string Scene::SetDefaultName(int i, std::string name, std::string firstName)
 {
-	std::string name = "unname";
+	std::string newName = firstName;
 	if (i != 0)
 	{
 		std::string num = std::to_string(i);
-		name += num;
+		newName += num;
 	}
 	for (int j = 0; j < LAYER_MAX; j++)
 	{
@@ -225,9 +226,9 @@ std::string Scene::SetDefaultName(int i)
 		{
 			if (i == 0)
 			{
-				if (obj->name == "unname")
+				if (obj->name == firstName)
 				{
-					name = SetDefaultName(1);
+					name = SetDefaultName(1, newName, firstName);
 				}
 			}
 			else
@@ -235,7 +236,7 @@ std::string Scene::SetDefaultName(int i)
 				
 				if (obj->name == name)
 				{
-					name = SetDefaultName(i + 1);
+					name = SetDefaultName(i + 1, newName, firstName);
 				}
 			}
 		}
@@ -271,6 +272,10 @@ void Scene::ObjectInitialize()
 		for (GameObject* obj : m_gameObject[j])
 		{
 			obj->SystemInitialize();
+			if (Editor::IsPlay)
+			{
+				obj->Initialize();
+			}
 		}
 	}
 }

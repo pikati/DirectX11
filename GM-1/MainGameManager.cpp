@@ -14,5 +14,4 @@ void MainGameManager::Initialize()
 		m_fade = obj->GetComponent<Fade>();
 		m_fade->FadeOut();
 	}
-	
 }

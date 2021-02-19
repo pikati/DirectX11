@@ -57,5 +57,6 @@ void Spring::Reset()
 	gameObject->transform->position.Set(x, y, z);
 	m_rotationValue.Set(x, y, z);
 	m_boundCount = 0;
-	m_rigidBody->Initialize();
+	m_rigidBody->SetVelocity({0, 0, 0});
+	m_rigidBody->SetForce({ 0,0,0 });
 }

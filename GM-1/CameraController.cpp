@@ -73,7 +73,10 @@ void CameraController::Update()
 			m_target.y += -0.4f;
 		}
 	}*/
-	m_camera->SetLookAt(m_target);
+	if (m_camera)
+	{
+		m_camera->SetLookAt(m_target);
+	}
 }
 
 Vector3 CameraController::GetTarget()

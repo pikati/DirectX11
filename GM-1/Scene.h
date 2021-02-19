@@ -17,7 +17,7 @@ private:
 	static std::string m_currentSceneName;
 
 	GameObject* AddGameObject(int layer);
-	std::string SetDefaultName(int i);
+	std::string SetDefaultName(int i, std::string name, std::string firstName);
 	void UpdateGameObject();
 	void MoveTmpObject();
 	void ChangeLayer();

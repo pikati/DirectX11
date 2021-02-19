@@ -13,6 +13,17 @@ Transform::Transform()
 	m_sortingOrder = 0;
 }
 
+Transform::Transform(const Transform& transform)
+{
+	position = transform.position;
+	rotation = transform.rotation;
+	scale = transform.scale;
+	m_oldPosition = transform.m_oldPosition;
+	m_oldRotation = transform.m_oldRotation;
+	m_oldScale = transform.m_oldScale;
+	m_sortingOrder = transform.m_sortingOrder;
+}
+
 Transform::~Transform()
 {
 

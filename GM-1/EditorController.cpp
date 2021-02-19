@@ -1,4 +1,5 @@
 #include "EditorController.h"
+#include "Inspector.h"
 #include "imgui/imgui.h"
 #include "manager.h"
 #include "Scene.h"
@@ -29,6 +30,7 @@ void EditorController::Update()
 	if (!isOldIsPlay && m_isPlay)
 	{
 		CManager::GetScene()->PlayInitialize();
+		//Inspector::DeleteObject();
 	}
 	else if (isOldIsPlay && !m_isPlay)
 	{

@@ -3,6 +3,11 @@
 #include "GameObject.h"
 #include "Image.h"
 
+void Fade::SystemInitialize()
+{
+
+}
+
 void Fade::Initialize()
 {
 	m_image = gameObject->GetComponent<Image>();
@@ -13,6 +18,11 @@ void Fade::Update()
 {
 	if (m_isFadeIn) UpdateFadeIn();
 	else if (m_isFadeOut) UpdateFadeOut();
+}
+
+void Fade::Finalize()
+{
+	
 }
 
 void Fade::SetFadeTime(float time)

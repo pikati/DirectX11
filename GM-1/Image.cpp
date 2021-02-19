@@ -174,6 +174,8 @@ void Image::DrawInformation()
 	if (ImGui::Button("Reload"))
 	{
 		Finalize();
+		SystemFinalize();
+		SystemInitialize();
 		Initialize();
 	}
 

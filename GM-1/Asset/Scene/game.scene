@@ -8,9 +8,9 @@
                 "isDestroy": false,
                 "layer": 0,
                 "position": [
-                    0.16666659712791444,
-                    6.974151611328125,
-                    -9.916666030883789
+                    -2.1855695919725805e-8,
+                    7.00745964050293,
+                    -9.833333015441895
                 ],
                 "rotation": [
                     0.0,
@@ -26,8 +26,8 @@
             "component": [
                 {
                     "type": "Camera",
-                    "viewWidth": 1280,
-                    "viewHeight": 720,
+                    "viewWidth": 1920,
+                    "viewHeight": 1080,
                     "topLeftX": 0,
                     "topLeftY": 0,
                     "renderNum": 0,
@@ -96,9 +96,9 @@
                 "isDestroy": false,
                 "layer": 1,
                 "position": [
-                    0.16666659712791444,
-                    1.974151611328125,
-                    0.08333352953195572
+                    -2.1855695919725805e-8,
+                    2.0074594020843508,
+                    0.1666666716337204
                 ],
                 "rotation": [
                     0.0,
@@ -106,15 +106,15 @@
                     0.0
                 ],
                 "scale": [
+                    0.9999994039535523,
                     1.0,
-                    1.0,
-                    1.0
+                    0.9999994039535523
                 ]
             },
             "component": [
                 {
                     "type": "Fbx",
-                    "fileName": "Asset/Models/Player/Cat.fbx",
+                    "fileName": "Asset/Models/Player/CatComp.fbx",
                     "textureName": "Asset/Texture/Player/Cat.png",
                     "id": -1
                 },
@@ -131,14 +131,14 @@
                 {
                     "type": "AABB",
                     "max": [
-                        1.0,
-                        1.0,
-                        1.0
+                        0.5,
+                        1.5,
+                        0.25
                     ],
                     "min": [
-                        -1.0,
-                        -1.0,
-                        -1.0
+                        -0.5,
+                        0.0,
+                        -0.25
                     ]
                 }
             ]
@@ -152,7 +152,7 @@
                 "layer": 1,
                 "position": [
                     0.0,
-                    -0.025848388671875,
+                    0.0,
                     0.0
                 ],
                 "rotation": [
@@ -174,21 +174,15 @@
                     "id": -1
                 },
                 {
-                    "type": "RigidBody",
-                    "mass": 1.0,
-                    "gravity": 0.0,
-                    "kinematic": true
-                },
-                {
                     "type": "AABB",
                     "max": [
                         1.0,
-                        1.0,
+                        2.0,
                         1.0
                     ],
                     "min": [
                         -1.0,
-                        -1.0,
+                        0.0,
                         -1.0
                     ]
                 }

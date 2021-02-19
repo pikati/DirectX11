@@ -2,6 +2,41 @@
     "GameObject": [
         {
             "properties": {
+                "name": "MainCamera",
+                "tag": "MainCamera",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 0,
+                "position": [
+                    0.0,
+                    0.0,
+                    -10.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Camera",
+                    "viewWidth": 1920,
+                    "viewHeight": 1080,
+                    "topLeftX": 0,
+                    "topLeftY": 0,
+                    "renderNum": 0,
+                    "id": -1
+                }
+            ]
+        },
+        {
+            "properties": {
                 "name": "TitleImage",
                 "tag": "untagged",
                 "activeSelf": true,
@@ -26,53 +61,16 @@
             "component": [
                 {
                     "type": "Image",
-                    "fileName": "Asset/Texture/result.png",
-                    "width": 960.0,
-                    "height": 540.0,
+                    "fileName": "Asset/Texture/result2.png",
+                    "width": 1920.0,
+                    "height": 1080.0,
                     "id": -1
                 }
             ]
         },
         {
             "properties": {
-                "name": "Fade",
-                "tag": "untagged",
-                "activeSelf": false,
-                "isDestroy": false,
-                "layer": 1,
-                "position": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "rotation": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "component": [
-                {
-                    "type": "Image",
-                    "fileName": "Asset/Texture/Fade.png",
-                    "width": 960.0,
-                    "height": 540.0,
-                    "id": -1
-                },
-                {
-                    "type": "Fade",
-                    "id": -1
-                }
-            ]
-        },
-        {
-            "properties": {
-                "name": "TitleImage",
+                "name": "TitleImage1",
                 "tag": "untagged",
                 "activeSelf": true,
                 "isDestroy": false,
