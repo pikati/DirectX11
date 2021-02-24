@@ -1,0 +1,192 @@
+{
+    "GameObject": [
+        {
+            "properties": {
+                "name": "MainCamera",
+                "tag": "MainCamera",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 0,
+                "position": [
+                    -2.1855695919725805e-8,
+                    7.00745964050293,
+                    -9.833333015441895
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Camera",
+                    "viewWidth": 1920,
+                    "viewHeight": 1080,
+                    "topLeftX": 0,
+                    "topLeftY": 0,
+                    "renderNum": 0,
+                    "id": -1
+                },
+                {
+                    "type": "CameraController",
+                    "id": -1
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "DirectionalLight",
+                "tag": "Light",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 0,
+                "position": [
+                    10.0,
+                    10.0,
+                    10.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "DirectionalLight",
+                    "diffuse": [
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0
+                    ],
+                    "ambient": [
+                        0.10000000149011612,
+                        0.10000000149011612,
+                        0.10000000149011612,
+                        1.0
+                    ],
+                    "direction": [
+                        0.5773503184318543,
+                        -0.5773503184318543,
+                        0.5773503184318543,
+                        0.0
+                    ],
+                    "enable": 1,
+                    "id": -1
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "Player",
+                "tag": "untagged",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    -2.1855695919725805e-8,
+                    2.0074594020843508,
+                    0.1666666716337204
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    0.9999994039535523,
+                    1.0,
+                    0.9999994039535523
+                ]
+            },
+            "component": [
+                {
+                    "type": "Fbx",
+                    "fileName": "Asset/Models/Player/CatComp.fbx",
+                    "textureName": "Asset/Texture/Player/Cat.png",
+                    "id": -1
+                },
+                {
+                    "type": "Player",
+                    "id": -1
+                },
+                {
+                    "type": "RigidBody",
+                    "mass": 1.0,
+                    "gravity": -9.800000190734864,
+                    "kinematic": false
+                },
+                {
+                    "type": "AABB",
+                    "max": [
+                        0.5,
+                        1.5,
+                        0.25
+                    ],
+                    "min": [
+                        -0.5,
+                        0.0,
+                        -0.25
+                    ]
+                }
+            ]
+        },
+        {
+            "properties": {
+                "name": "Stage",
+                "tag": "untagged",
+                "activeSelf": true,
+                "isDestroy": false,
+                "layer": 1,
+                "position": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "component": [
+                {
+                    "type": "Fbx",
+                    "fileName": "Asset/Models/Stage/Ground1x1.fbx",
+                    "textureName": "Asset/Texture/Stage/Ground1x1.png",
+                    "id": -1
+                },
+                {
+                    "type": "AABB",
+                    "max": [
+                        1.0,
+                        2.0,
+                        1.0
+                    ],
+                    "min": [
+                        -1.0,
+                        0.0,
+                        -1.0
+                    ]
+                }
+            ]
+        }
+    ]
+}

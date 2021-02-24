@@ -135,13 +135,15 @@ void GameObject::Finalize()
 	}
 	m_camera = nullptr;
 	SAFE_DELETE(transform);
-	transform = new Transform(*m_initialTransform);
 	SAFE_DELETE(m_initialTransform);
 }
 
 void GameObject::SystemFinalize()
 {
-	transform->Finalize();
+	if (transform != nullptr)
+	{
+		transform->Finalize();
+	}
 	SAFE_DELETE(transform);
 	SAFE_DELETE(m_initialTransform);
 	for (Component* c : components)

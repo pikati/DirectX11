@@ -176,11 +176,11 @@ void Player::Move()
 
 void Player::Shot()
 {
-	GameObject* obj;
+	/*GameObject* obj;
 	obj = ObjectPooler::CreatePrefab("Bullet");
 	obj->transform->position = gameObject->transform->position;
 	obj->transform->position.y += 0.5f;
-	m_animation->SetState(SHOOT);
+	m_animation->SetState(SHOOT);*/
 }
  
 void Player::Jump()

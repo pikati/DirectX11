@@ -29,6 +29,7 @@
 #include "DirectionalLight.h"
 #include "Spring.h"
 #include "Morphing.h"
+#include "Cat.h"
 
 std::map<std::string, Component*> ClassDictionary::dictionary;
 BuilderFromString ClassDictionary::builderfromstring;
@@ -64,6 +65,7 @@ void ClassDictionary::Initialize()
 	builderfromstring.Register(REGISTER_ARGS(DirectionalLight));
 	builderfromstring.Register(REGISTER_ARGS(Spring));
 	builderfromstring.Register(REGISTER_ARGS(Morphing));
+	builderfromstring.Register(REGISTER_ARGS(Cat));
 	componentName.push_back("Camera");
 	componentName.push_back("Player");
 	componentName.push_back("SphereCollider");
@@ -91,6 +93,7 @@ void ClassDictionary::Initialize()
 	componentName.push_back("DirectionalLight");
 	componentName.push_back("Spring");
 	componentName.push_back("Morphing");
+	componentName.push_back("Cat");
 	std::sort(componentName.begin(), componentName.end());
 }
 

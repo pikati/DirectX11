@@ -162,6 +162,7 @@
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CameraController.cpp" />
+    <ClCompile Include="Cat.cpp" />
     <ClCompile Include="ClassDictionary.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Component.cpp" />
@@ -212,6 +213,7 @@
     <ClCompile Include="SphereCollider.cpp" />
     <ClCompile Include="Spring.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="Timer.cpp" />
     <ClCompile Include="TitleManager.cpp" />
     <ClCompile Include="TitleText.cpp" />
     <ClCompile Include="Transform.cpp" />
@@ -228,6 +230,7 @@
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraController.h" />
+    <ClInclude Include="Cat.h" />
     <ClInclude Include="ClassDictionary.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="Component.h" />
@@ -282,6 +285,7 @@
     <ClInclude Include="SphereCollider.h" />
     <ClInclude Include="Spring.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="Timer.h" />
     <ClInclude Include="TitleManager.h" />
     <ClInclude Include="TitleText.h" />
     <ClInclude Include="Transform.h" />

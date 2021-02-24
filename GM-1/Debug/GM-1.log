@@ -1,2 +1,4 @@
-﻿  GameObject.cpp
-  GM-1.vcxproj -> D:\HAL\3\GM\DirectX11\Debug\GM-1.exe
+﻿  Cat.cpp
+D:\HAL\3\GM\Directx11\GM-1\Cat.cpp(161,25): error C2065: 'IDOL': 定義されていない識別子です。
+  ClassDictionary.cpp
+  コードを生成中...
